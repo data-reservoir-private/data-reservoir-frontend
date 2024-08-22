@@ -65,6 +65,7 @@ export default function HaydayClientPage() {
             <Picker options={Object.entries(HaydayTab).map(([k, v]) => ({ label: v, value: k }))} onClickCategory={onClickCategory} singleOption selected={state.pickedTab} className="!grid-cols-1"/>
           </Paper>
         </div>
+        
 
         {/* Layer 2 : Table dan Treemap */}
         <div className='min-h-[100vh]'>
