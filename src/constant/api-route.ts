@@ -33,6 +33,10 @@ export const API_SHORTHAND = Object.freeze({
     TOOL: 'tool',
     FRIED_RICE: 'fried-rice',
     UPGRADE: 'upgrade'
+  },
+  TRANSJAKARTA: {
+    CORRIDOR: 'corridor',
+    BUS_STOP: 'bus-stop'
   }
 } as const)
 /**
@@ -67,5 +71,9 @@ export const API_ROUTE = Object.freeze({
     TOOL: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.TOOL}`,
     FRIED_RICE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.FRIED_RICE}`,
     UPGRADE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.UPGRADE}`
+  },
+  TRANSJAKARTA: {
+    CORRIDOR: `${HOST}/transjakarta${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
+    BUS_STOP: `${HOST}/transjakarta${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`
   }
 } as const)
