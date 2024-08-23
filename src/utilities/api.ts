@@ -1,4 +1,5 @@
 import { BasePaginationResponse, BaseResponse } from "@/model/response/base";
+import { NextResponse } from "next/server";
 
 export function newResponse<T>(data: T, message: string = ""): BaseResponse<T> {
   return ({
@@ -17,4 +18,8 @@ export function newPaginationResponse<T>(data: T[], pageSize: number, currentPag
     pageSize: pageSize,
     data: data
   })
+}
+
+export function badRequestResponse(message: string) {
+  return NextResponse.json(newResponse(message), { status: 400 })
 }

@@ -3,7 +3,7 @@
 import React from 'react'
 import './map.css'
 
-import { Circle, CircleMarker, LayerGroup, MapContainer, Marker, Popup, TileLayer, Tooltip } from 'react-leaflet'
+import { Circle, LayerGroup, MapContainer, TileLayer, Tooltip } from 'react-leaflet'
 import { TransjakartaBusStopResponse } from '@/model/response/transjakarta';
 import { useQuery } from '@tanstack/react-query';
 import { API_ROUTE } from '@/constant/api-route';
@@ -18,7 +18,6 @@ export default function TransjakartaBusStopMap(props: TransjakartaBusStopMapProp
 
   const { isLoading, data } = useQuery({
     queryKey: ["transjakarta-bus-stop-map"],
-    
     queryFn: async () => {
       let j = await request<TransjakartaBusStopResponse[], {}>({
         method: "GET",
@@ -31,11 +30,11 @@ export default function TransjakartaBusStopMap(props: TransjakartaBusStopMapProp
   if (isLoading || !data) return <Loading/>
 
   return (
-    <div className=''>
+    <div>
       <MapContainer
         center={[-6.185360791659521, 106.8196775099512]}
         maxBounds={[[-6.022210769601403, 106.53503856901193], [-6.646795566017102, 107.05886415852537]]}
-        className='h-[700px] z-[2]'
+        className='z-[2]'
         zoom={13}
         minZoom={13}
         maxZoom={17}
