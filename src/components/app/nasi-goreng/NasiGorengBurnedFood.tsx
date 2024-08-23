@@ -9,7 +9,7 @@ import { createColumnHelper } from '@tanstack/react-table';
 import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { NasiGorengBurnedFoodResponse } from '@/model/response/nasi-goreng';
 
-export default function BurnedFood() {
+export default function NasiGorengBurnedFood() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-burned-food'],
     queryFn: async () => {
@@ -27,16 +27,20 @@ export default function BurnedFood() {
       id: 'index',
       header: "#",
       cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-      // cell: p => (<div className='text-center font-bold'>{p.row.index + 1}</div>),
     }),
     colHelper.display({
       id: 'image',
       header: 'Image',
       cell: p => (
-        <div className='flex justify-center w-16 h-16'>
-          <img className='w-16 h-16 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
+        <div className='flex justify-center w-full'>
+          <img className='h-24 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
         </div>
-      )
+      ),
+      meta: {
+        classes: {
+          td: "flex justify-center"
+        }
+      }
     }),
     colHelper.accessor('name', {
       cell: p => p.getValue(),

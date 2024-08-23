@@ -51,28 +51,29 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                     let sortSymbol =
                       !header.column.getIsSorted() ? '⏸' : 
                         header.column.getIsSorted() === 'asc' ? '🔼' : '🔽';
-                    
                     const v = header.column.columnDef.meta?.filterVariant
                     const hasFilter = header.column.getCanFilter() && !!v;
                     return (
-                      <th key={header.id} className='p-2'>
-                        <div className={classNames('flex flex-col', {
-                          'min-w-32 gap-2': hasFilter
-                        })}>
-                          <div className='flex justify-center gap-2'>
-                            {flexRender(header.column.columnDef.header, header.getContext())}
-                            {
-                              header.column.columnDef.enableSorting && (
-                                <div title='Hold shift while clicking for multisort' className='cursor-pointer hover:bg-slate-700 rounded-sm content-center' onClick={header.column.getToggleSortingHandler()}>
-                                  {sortSymbol}
-                                </div>
-                              )
-                            }
+                      <th key={header.id} className='p-2' colSpan={header.colSpan}>
+                        {
+                          header.isPlaceholder ? null : <div className={classNames('flex flex-col', {
+                            'min-w-32 gap-2': hasFilter
+                          })}>
+                            <div className='flex justify-center gap-2'>
+                              {flexRender(header.column.columnDef.header, header.getContext())}
+                              {
+                                header.column.columnDef.enableSorting && (
+                                  <div title='Hold shift while clicking for multisort' className='cursor-pointer hover:bg-slate-700 rounded-sm content-center' onClick={header.column.getToggleSortingHandler()}>
+                                    {sortSymbol}
+                                  </div>
+                                )
+                              }
+                            </div>
+                            <div>
+                              {(hasFilter) && <BasicTableFilter column={header.column}/>}
+                            </div>
                           </div>
-                          <div>
-                            {(hasFilter) && <BasicTableFilter column={header.column}/>}
-                          </div>
-                        </div>
+                        }
                       </th>
                     )
                   })
@@ -88,10 +89,10 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                 <tr>
                   {
                     row.getVisibleCells().map(cell => (
-                      <td key={cell.id} className={classNames('px-2 py-2', {
+                      <td key={cell.id} className={classNames('px-2 py-2', cell.column.columnDef.meta?.classes?.td ?? "", {
                         'text-center': (typeof cell.getValue() === 'number')
                       })}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        { cell.getIsPlaceholder() ? null : flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </td>
                     ))
                   }

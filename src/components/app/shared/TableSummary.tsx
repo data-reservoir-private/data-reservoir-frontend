@@ -62,8 +62,6 @@ export default function TableSummary<T extends TablePickerType>(props: TableSumm
     setState(produce(s => {
       let choice = enabled ? pickedTable : null;
       s.pickedTab = choice as Draft<T>
-
-      // props.hasPicker && props.onPickCategory(choice as T | null)
     }))
   }
 

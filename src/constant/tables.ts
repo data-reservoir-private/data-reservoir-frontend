@@ -40,10 +40,18 @@ export const FarmFrenzyTableLabel: {[key in FarmFrenzyTableType]: string } = {
 export type NasiGorengTableType =
   "nasi_goreng_burned_food" |
   "nasi_goreng_plate" |
-  "nasi_goreng_ingredient"
+  "nasi_goreng_ingredient" | 
+  "nasi_goreng_relic" | 
+  "nasi_goreng_tool" |
+  "nasi_goreng_fried_rice" |
+  "nasi_goreng_upgrade"
 
 export const NasiGorengTableLabel: {[key in NasiGorengTableType]: string} = {
   'nasi_goreng_burned_food': 'Burned Food',
   'nasi_goreng_ingredient': 'Ingredient',
-  'nasi_goreng_plate': 'Plate'
+  'nasi_goreng_plate': 'Plate',
+  'nasi_goreng_relic': 'Relic',
+  'nasi_goreng_tool': 'Tool',
+  'nasi_goreng_fried_rice': 'Fried Rice',
+  'nasi_goreng_upgrade': 'Upgrade'
 }

@@ -11,6 +11,9 @@ declare global {
 declare module '@tanstack/react-table' {
   interface ColumnMeta<TData extends RowData, TValue> {
     filterVariant?: 'range' | 'select' | 'search',
+    classes?: {
+      td?: string
+    }
   }
 }
 

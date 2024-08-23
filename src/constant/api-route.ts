@@ -28,7 +28,11 @@ export const API_SHORTHAND = Object.freeze({
   NASI_GORENG: {
     BURNED_FOOD: 'burned-food',
     INGREDIENT: 'ingredient',
-    PLATE: 'plate'
+    PLATE: 'plate',
+    RELIC: 'relic',
+    TOOL: 'tool',
+    FRIED_RICE: 'fried-rice',
+    UPGRADE: 'upgrade'
   }
 } as const)
 /**
@@ -58,6 +62,10 @@ export const API_ROUTE = Object.freeze({
   NASI_GORENG: {
     BURNED_FOOD: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.BURNED_FOOD}`,
     INGREDIENT: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.INGREDIENT}`,
-    PLATE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.PLATE}`
+    PLATE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.PLATE}`,
+    RELIC: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.RELIC}`,
+    TOOL: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.TOOL}`,
+    FRIED_RICE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.FRIED_RICE}`,
+    UPGRADE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.UPGRADE}`
   }
 } as const)

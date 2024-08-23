@@ -11,8 +11,14 @@ import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import { produce } from 'immer';
 import React, { useState } from 'react'
-import BurnedFood from './BurnedFood';
+import NasiGorengBurnedFood from './NasiGorengBurnedFood';
 import TableSummary from '../shared/TableSummary';
+import NasiGorengIngredient from './NasiGorengIngredient';
+import NasiGorengPlate from './NasiGorengPlate';
+import NasiGorengTool from './NasiGorengTool';
+import NasiGorengRelic from './NasiGorengRelic';
+import NasiGorengFriedRice from './NasiGorengFriedRice';
+import NasiGorengUpgrade from './NasiGorengUpgrade';
 
 export default function NasiGorengClientPage() {
   const [state, setState] = useState<NasiGorengTableType | null>('nasi_goreng_burned_food');
@@ -25,6 +31,15 @@ export default function NasiGorengClientPage() {
         onPickCategory={e => setState(e)}
         pickerOption={NasiGorengTableLabel}
       />
+      <div className='min-h-[100vh]'>
+        { state === 'nasi_goreng_burned_food' && <NasiGorengBurnedFood/> }
+        { state === 'nasi_goreng_ingredient' && <NasiGorengIngredient/> }
+        { state === 'nasi_goreng_plate' && <NasiGorengPlate/> }
+        { state === 'nasi_goreng_tool' && <NasiGorengTool/> }
+        { state === 'nasi_goreng_relic' && <NasiGorengRelic/> }
+        { state === 'nasi_goreng_fried_rice' && <NasiGorengFriedRice/> }
+        { state === 'nasi_goreng_upgrade' && <NasiGorengUpgrade/> }
+      </div>
     </div>
   )
 }

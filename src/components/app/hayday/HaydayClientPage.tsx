@@ -10,7 +10,6 @@ export default function HaydayClientPage() {
   const [tab, setTab] = useState<HaydayMenu | null>(null);
   return (
     <div className='flex flex-col gap-4 text-white'>
-      {/* Layer 1 : Angka2 dan filter */}
       <TableSummary<HaydayMenu> hasPicker
         onPickCategory={(e) => { setTab(e) }}
         category="hayday"

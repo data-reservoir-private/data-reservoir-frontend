@@ -15,6 +15,6 @@ export function secondToTimespan(p: number): string {
 
   s %= 60;
   let ns = s.toString().padStart(2, "0")
-  if (d > 0) return `${d}:${h}:${m}:${ns}`;
-  else return `${h}:${m}:${ns}`;
+
+  return d > 0 ? `${d}:${h}:${m}:${ns}` : `${h}:${m}:${ns}`;
 }

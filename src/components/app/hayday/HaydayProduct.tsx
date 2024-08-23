@@ -207,8 +207,6 @@ function ExpandMe(props : ExpandMeProps) {
                       </div>
                     )
                   }
-                  <div title='Used by'>
-                  </div>
                 </div>
               </>
             )}
