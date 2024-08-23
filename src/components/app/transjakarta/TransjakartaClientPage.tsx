@@ -1,5 +1,9 @@
+'use client'
+
 import React from 'react'
 import TableSummary from '../shared/TableSummary'
+import TransjakartaBusStopMap from './TransjakartaBusStopMap'
+import Paper from '@/components/common/paper/Paper'
 
 export default function TransjakartaClientPage() {
   return (
@@ -11,7 +15,9 @@ export default function TransjakartaClientPage() {
 
         </div>
         <div>
-          
+          <Paper className='p-4'>
+            <TransjakartaBusStopMap selectedID={[]}/>
+          </Paper>
         </div>
       </div>
     </div>

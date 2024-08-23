@@ -9,7 +9,7 @@ import { ROUTES } from '@/constant/route';
 export default function BottomNavigation() {
   const path = usePathname();
   return (
-    <div className='fixed bottom-0 left-0 bg-bluish-200 text-white py-4 w-full m-auto'>
+    <div className='fixed bottom-0 left-0 bg-bluish-200 text-white py-4 w-full m-auto z-50'>
       <div className='flex gap-5 w-full overflow-x-scroll overflow-y-hidden px-5 scrollbar-none'>
         {
           ROUTES.map(route => (

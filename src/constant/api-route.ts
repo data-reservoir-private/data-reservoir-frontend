@@ -73,7 +73,7 @@ export const API_ROUTE = Object.freeze({
     UPGRADE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.UPGRADE}`
   },
   TRANSJAKARTA: {
-    CORRIDOR: `${HOST}/transjakarta${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
-    BUS_STOP: `${HOST}/transjakarta${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`
+    CORRIDOR: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
+    BUS_STOP: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`
   }
 } as const)

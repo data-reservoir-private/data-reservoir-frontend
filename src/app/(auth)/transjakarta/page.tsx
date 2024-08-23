@@ -1,5 +1,4 @@
-import ComingSoon from '@/components/common/coming-soon/ComingSoon'
-import Paper from '@/components/common/paper/Paper'
+import TransjakartaClientPage from '@/components/app/transjakarta/TransjakartaClientPage'
 import { Metadata } from 'next'
 import React from 'react'
 
@@ -8,11 +7,5 @@ export const metadata: Metadata = {
 }
 
 export default function TransjakartaPage() {
-  return (
-    <div>
-      <Paper className='h-full p-4 min-h-[82svh]'>
-        <ComingSoon message='Transjakarta Dashboard'/>
-      </Paper>
-    </div>
-  )
+  return (<TransjakartaClientPage />);
 }
