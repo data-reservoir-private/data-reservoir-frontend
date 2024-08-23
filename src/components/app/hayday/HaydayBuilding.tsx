@@ -141,6 +141,7 @@ function ExpandMe(props : ExpandMeProps) {
                 <hr className="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700" />
                 <div title='Used by'>
                   { ((data.produces.length) > 0) && <h3 className='font-bold mb-4'>Produces</h3> }
+                  <div className='grid gap-x-5 grid-cols-2 max-lg:grid-cols-1 xl:grid-cols-3 grid-flow-dense'>
                   {
                     data.produces.map(used => (
                       <div className='flex items-center gap-3' key={used.name} title={used.name}>
@@ -152,6 +153,7 @@ function ExpandMe(props : ExpandMeProps) {
                       </div>
                     ))
                   }
+                  </div>
                 </div>
               </>
             )}
