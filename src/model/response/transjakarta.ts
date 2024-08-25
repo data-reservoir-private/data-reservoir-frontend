@@ -13,6 +13,8 @@ export type TransjakartaCorridorDetailResponse = {
   code: string,
   name: string,
   color: string,
-  busStopID: number[],
+  busStopCode: number[],
+  northName: string,
+  southName: string,
   schedule: Omit<InferSelectModel<typeof transjakartaScheduleDetail>, 'link' | 'isDeleted' | 'effectiveDate' | 'image' | 'id' | 'code'>[]
 }

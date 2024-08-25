@@ -7,19 +7,13 @@ import { request } from '@/utilities/http';
 import { multiSelectFilter } from '@/utilities/table';
 import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import TransjakartaCode from './TransjakartaCode';
+import { useAppStore } from '@/store/store';
 
-export type TransjakartaCorridorProps = {
-  onClickCorridor: (code: string) => void
-}
 
-export default function TransjakartaCorridor(props: TransjakartaCorridorProps) {
-  const [code, setCode] = useState("");
-
-  useEffect(() => {
-    props.onClickCorridor(code);
-  }, [code, props])
+export default function TransjakartaCorridorTable() {
+  const [setCorridor, clearCorridor, corridorCode] = useAppStore(x => [x.transjakarta.setCorridorCode, x.transjakarta.clearCorridor, x.transjakarta.corridorCode]);
 
   const { isLoading, data } = useQuery({
     queryKey: ["transjakarta-corridor"],
@@ -32,12 +26,17 @@ export default function TransjakartaCorridor(props: TransjakartaCorridorProps) {
     }
   });
 
+  const handleOnClickCorridor = (code: string) => {
+    if (code === corridorCode) clearCorridor();
+    else setCorridor(code);
+  }
+
   const colHelper = createColumnHelper<TransjakartaCorridorResponse>();
   const columns = [
     colHelper.display({
       id: 'code',
       header: "#",
-      cell: p => (<TransjakartaCode code={p.row.original.code} color={p.row.original.color} onClickCode={e => { setCode(e) }}/>)
+      cell: p => (<TransjakartaCode code={p.row.original.code} color={p.row.original.color} onClickCode={handleOnClickCorridor}/>)
     }),
     colHelper.accessor('name', {
       cell: p => p.getValue(),

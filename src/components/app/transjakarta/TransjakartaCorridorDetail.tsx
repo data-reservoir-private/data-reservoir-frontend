@@ -7,21 +7,21 @@ import classNames from 'classnames';
 import { PT_Sans } from 'next/font/google';
 import React from 'react'
 import TransjakartaScheduleIcon from './TransjakartaScheduleIcon';
+import { useAppStore } from '@/store/store';
 
 const ptSans = PT_Sans({ weight: '700', subsets: ['latin'] });
-export type TransjakartaCorridorDetailProps = {
-  code: string
-}
 
-export default function TransjakartaCorridorDetail(props: TransjakartaCorridorDetailProps) {
+export default function TransjakartaCorridorDetail() {
+  const [code, setCorridorBusStops] = useAppStore(x => [x.transjakarta.corridorCode, x.transjakarta.setCorridorBusStops]);
   const { isLoading, data } = useQuery({
-    queryKey: [`transjakarta-code-detail`, props.code],
-    enabled: !!props.code && props.code.length > 0,
+    queryKey: [`transjakarta-code-detail`, code],
+    enabled: !!code && code.length > 0,
     queryFn: async () => {
       let j = await request<TransjakartaCorridorDetailResponse, {}>({
         method: "GET",
-        url: API_ROUTE.TRANSJAKARTA.CORRIDOR + `/${props.code}`,
+        url: API_ROUTE.TRANSJAKARTA.CORRIDOR + `/${code}`,
       });
+      setCorridorBusStops(j?.data?.busStopCode ?? []);
       return (j?.data);
     }
   });

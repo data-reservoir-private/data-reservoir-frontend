@@ -16,7 +16,7 @@ export async function GET() {
       code: transjakartaBusStop.code
     })
     .from(transjakartaBusStop)
-    .where(eq(transjakartaBusStop.brt, true))
+    // .where(eq(transjakartaBusStop.brt, true))
 
   return NextResponse.json(newResponse<TransjakartaBusStopResponse[]>(data));
 }

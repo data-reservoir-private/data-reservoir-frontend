@@ -10,7 +10,6 @@ export type TransjakartaCodeProps = {
 }
 
 export default function TransjakartaCode(props: TransjakartaCodeProps) {
-
   let codeSplit = [];
   
   // JAK dan MJAK

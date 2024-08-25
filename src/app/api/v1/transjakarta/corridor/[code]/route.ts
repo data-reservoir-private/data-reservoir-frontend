@@ -1,8 +1,9 @@
+import { TRANSJAKARTA_DIRECTION } from "@/constant/enums";
 import { DB } from "@/database/client";
-import { transjakartaBusRoute, transjakartaCorridor, transjakartaCorridorStyle, transjakartaScheduleDetail, transjakartaScheduleHeader } from "@/database/schema";
+import { transjakartaBusRoute, transjakartaBusStop, transjakartaCorridor, transjakartaCorridorStyle, transjakartaScheduleDetail, transjakartaScheduleHeader } from "@/database/schema";
 import { TransjakartaCorridorDetailResponse } from "@/model/response/transjakarta";
 import { badRequestResponse, newResponse } from "@/utilities/api";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, or } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function GET(_: Request, { params }: { params: { code: string } }) {
@@ -20,7 +21,15 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
       desc(transjakartaScheduleDetail.weekday),
       desc(transjakartaScheduleDetail.day),
       desc(transjakartaScheduleDetail.peakDay),
-    );
+  );
+  
+  let northSouth = await DB.select()
+    .from(transjakartaBusRoute)
+    .innerJoin(transjakartaBusStop, eq(transjakartaBusRoute.busStopCode, transjakartaBusStop.code))
+    .where(and(
+      eq(transjakartaBusRoute.corridorCode, code),
+      eq(transjakartaBusRoute.order, 1)
+    ));
   
   let color = (await DB.select()
     .from(transjakartaCorridorStyle)
@@ -34,7 +43,9 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
     code: main.code,
     name: main.name,
     color: `#${color}`,
+    northName: northSouth.find(x => x.transjakarta_bus_route.direction === TRANSJAKARTA_DIRECTION.NORTH_SOUTH)?.transjakarta_bus_stop.name ?? "",
+    southName: northSouth.find(x => x.transjakarta_bus_route.direction === TRANSJAKARTA_DIRECTION.SOUTH_NORTH)?.transjakarta_bus_stop.name ?? "",
     schedule: scheduleDetail.map(({ id, isDeleted, effectiveDate, code, ...rest }) => ({ ...rest })),
-    busStopID: roadIDs.map(x => x.id)
+    busStopCode: roadIDs.map(x => x.id)
   }))
 }
