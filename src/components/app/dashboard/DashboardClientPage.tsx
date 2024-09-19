@@ -1,12 +1,10 @@
-'use client'
+'use client';
 
 import { DashboardResponse } from '@/model/response/dashboard';
-import { useQuery } from '@tanstack/react-query'
-import React, { useState } from 'react'
-import _ from 'lodash';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
 import { produce } from 'immer';
 import Paper from '@/components/common/paper/Paper';
-import ComingSoon from '@/components/common/coming-soon/ComingSoon';
 import TableBarChart from '@/components/app/dashboard/TableBarChart';
 import TableTreeMap from '@/components/app/dashboard/TableTreeMap';
 import Loading from '@/components/common/loading/Loading';
@@ -14,6 +12,7 @@ import { API_ROUTE } from '@/constant/api-route';
 import Picker from '@/components/common/picker/Picker';
 import { request } from '@/utilities/http';
 import TableCategoryCount from '@/components/app/dashboard/TableCategoryCount';
+import TablePieChart from './TablePieChart';
 
 interface DashboardClientPageState {
   pickedCategories: string[]
@@ -31,11 +30,11 @@ export default function DashboardClientPage() {
         method: "GET",
         url: API_ROUTE.DASHBOARD,
       });
-      return j.data
+      return j.data;
     }
   });
 
-  if (isLoading || !data) return (<Loading/>)
+  if (isLoading || !data) return (<Loading/>);
   else {
     let cleanData = data.filter(x => state.pickedCategories.length === 0 || state.pickedCategories.includes(x.category));
     let categories = data.map(x => x.category);
@@ -45,15 +44,15 @@ export default function DashboardClientPage() {
     let categorySummary = cleanData.map(x => ({
       category: x.category,
       rowCount: x.tables.reduce((prev, current) => prev + current.rowCount, 0)
-    }))
+    }));
 
     // Data yang diambil harus berdasarkan kategori yang diambil
     let onClickCategory = (category: string, enabled: boolean) => {
       setState(produce(s => {
         if (enabled) s.pickedCategories.push(category);
         else s.pickedCategories = s.pickedCategories.filter(x => x !== category);
-      }))
-    }
+      }));
+    };
 
     return (
       <div className='flex flex-col gap-4 text-white'>
@@ -96,7 +95,8 @@ export default function DashboardClientPage() {
         <div className='grid grid-cols-2 grid-rows-1 gap-4 max-md:grid-rows-2 max-md:grid-cols-1 min-h-80'>
           <div className='overflow-y-auto overflow-x-hidden rounded-md'>
             <Paper className='h-full p-4'>
-              <ComingSoon message='Pie Chart (Category Record)'/>
+              {/* <ComingSoon message='Pie Chart (Category Record)'/> */}
+              <TablePieChart data={categorySummary}/>
             </Paper>
           </div>
           <div>
@@ -106,6 +106,6 @@ export default function DashboardClientPage() {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

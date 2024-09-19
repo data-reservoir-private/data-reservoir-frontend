@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { DB } from "@/database/client";
-import { transjakartaCorridor, transjakartaCorridorStyle } from "@/database/schema";
+import { transjakartaBusRoute, transjakartaBusStop, transjakartaCorridor, transjakartaCorridorStyle } from "@/database/schema";
 import { newResponse } from '@/utilities/api';
-import { and, eq, max, not } from 'drizzle-orm';
+import { and, count, eq, max, not, or } from 'drizzle-orm';
 import { TransjakartaCorridorResponse } from '@/model/response/transjakarta';
 
 export async function GET() {
@@ -15,6 +15,15 @@ export async function GET() {
     .groupBy(transjakartaCorridor.code)
     .as('maxDate')
   
+  const problematicRoute = await DB.select({
+    code: transjakartaCorridor.code,
+    problemCount: count()
+  })
+    .from(transjakartaCorridor)
+    .innerJoin(transjakartaBusRoute, eq(transjakartaCorridor.code, transjakartaBusRoute.corridorCode))
+    .innerJoin(transjakartaBusStop, eq(transjakartaBusRoute.busStopCode, transjakartaBusStop.code))
+    .where(or(eq(transjakartaBusStop.latitude, 0), eq(transjakartaBusStop.permanentlyClosed, true)))
+    .groupBy(transjakartaCorridor.code)
 
   const data = await DB
     .select()
@@ -31,6 +40,7 @@ export async function GET() {
     name: x.transjakarta_corridor.name,
     code: x.transjakarta_corridor.code,
     category: x.transjakarta_corridor.category,
-    color: '#' + x.transjakarta_corridor_style.hexColor
+    color: '#' + x.transjakarta_corridor_style.hexColor,
+    problem: problematicRoute.find(y => y.code === x.transjakarta_corridor.code)?.problemCount ?? 0
   }))));
 }

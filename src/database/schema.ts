@@ -373,50 +373,6 @@ export const transjakartaBusRouteHistory = pgTable("transjakarta_bus_route_histo
 	isDeleted: boolean("is_deleted").notNull(),
 });
 
-export const transjakartaBusStop = pgTable("transjakarta_bus_stop", {
-	id: uuid("id").primaryKey().notNull(),
-	code: integer("code").notNull(),
-	name: varchar("name", { length: 4000 }).notNull(),
-	brt: boolean("brt").notNull(),
-	latitude: doublePrecision("latitude").notNull(),
-	longitude: doublePrecision("longitude").notNull(),
-	link: text("link").notNull(),
-	effectiveDate: date("effective_date").notNull(),
-	isDeleted: boolean("is_deleted").notNull(),
-},
-(table) => {
-	return {
-		ixTransjakartaBusStopCode: uniqueIndex("IX_transjakarta_bus_stop_code").using("btree", table.code),
-	}
-});
-
-export const transjakartaBusStopHistory = pgTable("transjakarta_bus_stop_history", {
-	id: uuid("id").primaryKey().notNull(),
-	code: integer("code").notNull(),
-	name: varchar("name", { length: 4000 }).notNull(),
-	brt: boolean("brt").notNull(),
-	latitude: doublePrecision("latitude").notNull(),
-	longitude: doublePrecision("longitude").notNull(),
-	link: text("link").notNull(),
-	effectiveDate: date("effective_date").notNull(),
-	isDeleted: boolean("is_deleted").notNull(),
-});
-
-export const transjakartaCorridor = pgTable("transjakarta_corridor", {
-	id: uuid("id").primaryKey().notNull(),
-	code: varchar("code", { length: 32 }).notNull(),
-	category: varchar("category", { length: 255 }).notNull(),
-	name: varchar("name", { length: 4000 }).notNull(),
-	image: text("image").notNull(),
-	effectiveDate: date("effective_date").notNull(),
-	isDeleted: boolean("is_deleted").notNull(),
-},
-(table) => {
-	return {
-		ixTransjakartaCorridorCode: uniqueIndex("IX_transjakarta_corridor_code").using("btree", table.code),
-	}
-});
-
 export const transjakartaCorridorHistory = pgTable("transjakarta_corridor_history", {
 	id: uuid("id").primaryKey().notNull(),
 	code: varchar("code", { length: 32 }).notNull(),
@@ -507,6 +463,53 @@ export const transjakartaScheduleHeader = pgTable("transjakarta_schedule_header"
 	return {
 		ixTransjakartaScheduleHeaderCode: uniqueIndex("IX_transjakarta_schedule_header_code").using("btree", table.code),
 	}
+});
+
+export const transjakartaCorridor = pgTable("transjakarta_corridor", {
+	id: uuid("id").primaryKey().notNull(),
+	code: varchar("code", { length: 32 }).notNull(),
+	category: varchar("category", { length: 255 }).notNull(),
+	name: varchar("name", { length: 4000 }).notNull(),
+	image: text("image").notNull(),
+	effectiveDate: date("effective_date").notNull(),
+	isDeleted: boolean("is_deleted").notNull(),
+	pictureEffectiveDate: date("picture_effective_date").default('-infinity').notNull(),
+},
+(table) => {
+	return {
+		ixTransjakartaCorridorCode: uniqueIndex("IX_transjakarta_corridor_code").using("btree", table.code),
+	}
+});
+
+export const transjakartaBusStop = pgTable("transjakarta_bus_stop", {
+	id: uuid("id").primaryKey().notNull(),
+	code: integer("code").notNull(),
+	name: varchar("name", { length: 4000 }).notNull(),
+	brt: boolean("brt").notNull(),
+	latitude: doublePrecision("latitude").notNull(),
+	longitude: doublePrecision("longitude").notNull(),
+	link: text("link").notNull(),
+	effectiveDate: date("effective_date").notNull(),
+	isDeleted: boolean("is_deleted").notNull(),
+	permanentlyClosed: boolean("permanently_closed").default(false).notNull(),
+},
+(table) => {
+	return {
+		ixTransjakartaBusStopCode: uniqueIndex("IX_transjakarta_bus_stop_code").using("btree", table.code),
+	}
+});
+
+export const transjakartaBusStopHistory = pgTable("transjakarta_bus_stop_history", {
+	id: uuid("id").primaryKey().notNull(),
+	code: integer("code").notNull(),
+	name: varchar("name", { length: 4000 }).notNull(),
+	brt: boolean("brt").notNull(),
+	latitude: doublePrecision("latitude").notNull(),
+	longitude: doublePrecision("longitude").notNull(),
+	link: text("link").notNull(),
+	effectiveDate: date("effective_date").notNull(),
+	isDeleted: boolean("is_deleted").notNull(),
+	permanentlyClosed: boolean("permanently_closed").default(false).notNull(),
 });
 
 export const transjakartaScheduleHeaderHistory = pgTable("transjakarta_schedule_header_history", {

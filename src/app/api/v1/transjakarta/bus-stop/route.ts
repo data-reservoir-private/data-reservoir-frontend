@@ -13,7 +13,8 @@ export async function GET() {
       latitude: transjakartaBusStop.latitude,
       longitude: transjakartaBusStop.longitude,
       name: transjakartaBusStop.name,
-      code: transjakartaBusStop.code
+      code: transjakartaBusStop.code,
+      permanentlyClosed: transjakartaBusStop.permanentlyClosed
     })
     .from(transjakartaBusStop)
     // .where(eq(transjakartaBusStop.brt, true))

@@ -8,6 +8,7 @@ import { PT_Sans } from 'next/font/google';
 import React from 'react'
 import TransjakartaScheduleIcon from './TransjakartaScheduleIcon';
 import { useAppStore } from '@/store/store';
+import { PiWarningFill } from 'react-icons/pi';
 
 const ptSans = PT_Sans({ weight: '700', subsets: ['latin'] });
 
@@ -33,7 +34,18 @@ export default function TransjakartaCorridorDetail() {
   return (
     <>
       <div className='grid grid-cols-[7fr_3fr]'>
-        <h1 className={classNames('text-4xl font-bold p-3 flex items-center', ptSans.className)}>{data.name}</h1>
+        <h1 className={classNames('text-4xl font-bold p-3 flex items-center', ptSans.className)}>
+          {
+            data.problem > 0 &&
+            <span className='pr-4' title={`This route has ${data.problem} problematic stop(s)`}>
+              <PiWarningFill className={classNames({
+                'text-yellow-300': 1 <= data.problem && data.problem <= 5,
+                'text-red-500': data.problem > 5
+              })} />
+            </span>
+          }
+          <span>{data.name}</span>
+        </h1>
         <h1 className={classNames('text-6xl font-bold p-3 text-center align-middle flex items-center justify-center', ptSans.className)} style={{ backgroundColor: data.color }}>{data.code}</h1>
       </div>
       <hr />

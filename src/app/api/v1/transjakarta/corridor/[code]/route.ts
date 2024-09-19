@@ -3,7 +3,7 @@ import { DB } from "@/database/client";
 import { transjakartaBusRoute, transjakartaBusStop, transjakartaCorridor, transjakartaCorridorStyle, transjakartaScheduleDetail, transjakartaScheduleHeader } from "@/database/schema";
 import { TransjakartaCorridorDetailResponse } from "@/model/response/transjakarta";
 import { badRequestResponse, newResponse } from "@/utilities/api";
-import { and, desc, eq, or } from "drizzle-orm";
+import { and, count, desc, eq, or } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
 export async function GET(_: Request, { params }: { params: { code: string } }) {
@@ -39,6 +39,21 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
     .from(transjakartaBusRoute)
     .where(eq(transjakartaBusRoute.corridorCode, code));
   
+  const problematicRoute = (await DB.select({
+    code: transjakartaCorridor.code,
+    problemCount: count()
+  })
+    .from(transjakartaCorridor)
+    .innerJoin(transjakartaBusRoute, eq(transjakartaCorridor.code, transjakartaBusRoute.corridorCode))
+    .innerJoin(transjakartaBusStop, eq(transjakartaBusRoute.busStopCode, transjakartaBusStop.code))
+    .where(
+      and(
+        eq(transjakartaCorridor.code, code),
+        or(eq(transjakartaBusStop.latitude, 0), eq(transjakartaBusStop.permanentlyClosed, true))
+      )
+    )
+    .groupBy(transjakartaCorridor.code))?.[0]?.problemCount ?? 0
+  
   return NextResponse.json(newResponse<TransjakartaCorridorDetailResponse>({
     code: main.code,
     name: main.name,
@@ -46,6 +61,7 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
     northName: northSouth.find(x => x.transjakarta_bus_route.direction === TRANSJAKARTA_DIRECTION.NORTH_SOUTH)?.transjakarta_bus_stop.name ?? "",
     southName: northSouth.find(x => x.transjakarta_bus_route.direction === TRANSJAKARTA_DIRECTION.SOUTH_NORTH)?.transjakarta_bus_stop.name ?? "",
     schedule: scheduleDetail.map(({ id, isDeleted, effectiveDate, code, ...rest }) => ({ ...rest })),
-    busStopCode: roadIDs.map(x => x.id)
+    busStopCode: roadIDs.map(x => x.id),
+    problem: problematicRoute
   }))
 }

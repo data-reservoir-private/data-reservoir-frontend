@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { EChartsOption } from 'echarts';
 import { getCategoryColorHex } from '@/utilities/color';
@@ -55,7 +55,7 @@ export default function TableBarChart(props : TableBarChartProps) {
     grid: {
       top: 20
     }
-  }
+  };
 
   return (
     <div className='overflow-x-scroll h-full'>
@@ -64,5 +64,5 @@ export default function TableBarChart(props : TableBarChartProps) {
         className='h-full'
       />
     </div>
-  )
+  );
 }

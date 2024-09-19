@@ -5,8 +5,9 @@ export type TransjakartaBusStopResponse = Omit<InferSelectModel<typeof transjaka
   'link' | 'isDeleted' | 'effectiveDate'>
 
 export type TransjakartaCorridorResponse = Omit<InferSelectModel<typeof transjakartaCorridor>,
-  'link' | 'isDeleted' | 'effectiveDate' | 'image'> & {
-    'color': string,
+  'link' | 'isDeleted' | 'effectiveDate' | 'image' | 'pictureEffectiveDate'> & {
+  'color': string,
+  'problem': number
 }
 
 export type TransjakartaCorridorDetailResponse = {
@@ -16,5 +17,6 @@ export type TransjakartaCorridorDetailResponse = {
   busStopCode: number[],
   northName: string,
   southName: string,
+  problem: number,
   schedule: Omit<InferSelectModel<typeof transjakartaScheduleDetail>, 'link' | 'isDeleted' | 'effectiveDate' | 'image' | 'id' | 'code'>[]
 }
