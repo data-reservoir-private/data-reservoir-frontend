@@ -2,7 +2,9 @@ import { transjakartaBusStop, transjakartaCorridor, transjakartaScheduleDetail }
 import { InferSelectModel } from "drizzle-orm";
 
 export type TransjakartaBusStopResponse = Omit<InferSelectModel<typeof transjakartaBusStop>,
-  'link' | 'isDeleted' | 'effectiveDate'>
+  'link' | 'isDeleted' | 'effectiveDate'> & {
+    corridors: string[]
+  }
 
 export type TransjakartaCorridorResponse = Omit<InferSelectModel<typeof transjakartaCorridor>,
   'link' | 'isDeleted' | 'effectiveDate' | 'image' | 'pictureEffectiveDate'> & {
