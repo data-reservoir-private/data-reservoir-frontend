@@ -18,6 +18,7 @@ export default function TableTreeMap(props : TableTreeMapProps) {
           min: 1.2,
           max: 4
         },
+        zoom: 1.2,
         data: props.data.map(x => ({
           name: x.category,
           color: x.tables.map(o => getCategoryColorHex(x.category)),

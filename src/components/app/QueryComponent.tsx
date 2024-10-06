@@ -9,7 +9,8 @@ export default function QueryComponent({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = useAppStore(x => x.query.queryClient);
+  const [queryClient] = useAppStore(x => [x.query.queryClient]);
+
   return (
     <QueryClientProvider client={queryClient}>
       {children}

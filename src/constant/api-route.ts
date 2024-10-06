@@ -36,7 +36,8 @@ export const API_SHORTHAND = Object.freeze({
   },
   TRANSJAKARTA: {
     CORRIDOR: 'corridor',
-    BUS_STOP: 'bus-stop'
+    BUS_STOP: 'bus-stop',
+    STYLE: 'style'
   }
 } as const)
 /**
@@ -74,6 +75,7 @@ export const API_ROUTE = Object.freeze({
   },
   TRANSJAKARTA: {
     CORRIDOR: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
-    BUS_STOP: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`
+    BUS_STOP: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,
+    STYLE: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}/${API_SHORTHAND.TRANSJAKARTA.STYLE}`
   }
 } as const)
