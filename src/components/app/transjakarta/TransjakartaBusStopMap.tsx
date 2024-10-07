@@ -17,7 +17,7 @@ import { Label, ToggleSwitch } from 'flowbite-react';
 import './map.css';
 
 const DEFAULT_CENTER_LATLNT = [-6.185360791659521, 106.8196775099512];
-const MAP_BOUNDARY = [[-6.030836457013818, 106.58502824971715], [-6.355781203491121, 107.1454522445448]];
+const MAP_BOUNDARY = [[-5.961622687240897, 106.25797317146241], [-6.472351625803001, 107.1415468426288]];
 
 interface TransjakartaBusStopMapState {
   permanentlyClosed: boolean
@@ -70,7 +70,7 @@ export default function TransjakartaBusStopMap() {
         ref={mapRef}
         center={DEFAULT_CENTER_LATLNT as LatLngExpression}
         maxBounds={MAP_BOUNDARY as LatLngBoundsExpression}
-        className='z-[2] w-auto min-h-[300px] h-full'
+        className='z-[2] w-auto min-h-[450px] h-full'
         zoom={13}
         minZoom={11}
         maxZoom={17}
@@ -83,15 +83,10 @@ export default function TransjakartaBusStopMap() {
         /> 
         <LayerGroup>
           {/* Normal */}
-          {data.map(x => {
+          {data.filter(x => !x.permanentlyClosed || state.permanentlyClosed).map(x => {
             const sizeCircle = (x.brt ? 8 : 5);
             const eventHandler: LeafletEventHandlerFnMap = { click: _ => handleOnClickDot(x.code) };
-            if (x.permanentlyClosed && state.permanentlyClosed) return (
-              <Marker eventHandlers={eventHandler} key={x.code} icon={<PiWarningFill className='text-yellow-400 text-lg' />} position={[x.latitude, x.longitude]}>
-                <Tooltip>{x.name}</Tooltip>
-              </Marker>
-            )
-            else return (
+            return (
               <Circle eventHandlers={eventHandler} key={x.code} center={[x.latitude, x.longitude]} radius={sizeCircle} color={x.brt ? '#1a62ba' : x.permanentlyClosed ? '#fffa8cc7' : '#801c1c9e'} >
                 <Tooltip>{x.name}</Tooltip>
               </Circle>

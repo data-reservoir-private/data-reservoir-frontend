@@ -29,7 +29,7 @@ export default function TransjakartaBusStopDetail() {
   else if (!data) return (<p>No data</p>);
 
   return (
-    <Paper className='p-4 min-h-[300px]'>
+    <Paper className='p-4 min-h-[450px]'>
       <div className='h-full flex flex-col gap-4'>
         <div className='flex items-center gap-2'>
           <h3 className='text-lg font-bold flex-grow'>{data.name}</h3>

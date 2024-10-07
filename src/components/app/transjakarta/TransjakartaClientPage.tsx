@@ -17,7 +17,7 @@ const DynamicMap = dynamic(() => import("./TransjakartaBusStopMap"), { ssr: fals
 export default function TransjakartaClientPage() {
   const [busStopCode, corridorColors, setCorridorColors] = useAppStore(x => [x.newTransjakarta.busStopCode, x.newTransjakarta.corridorColors, x.newTransjakarta.setCorridorStyle]);
 
-  const { isLoading, isFetching } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ['PERSIST'],
     queryFn: async () => {
       let j = await request<TransjakartaCorridorStyleResponse[], {}>({

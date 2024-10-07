@@ -40,7 +40,8 @@ export const useAppStore = create<AppStore>()(
         queryClient: new QueryClient({
           defaultOptions: {
             queries: {
-              gcTime: 3600 * 24
+              gcTime: 3600 * 24,
+              refetchOnWindowFocus: false
             }
           }
         })
