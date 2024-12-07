@@ -32,7 +32,7 @@ export default function FarmFrenzyOneProduct() {
       id: "image",
       cell: p => (
         <div className='flex justify-center'>
-          <img className='w-24 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
+          <img className='w-10 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
         </div>
       ),
       header: "Image"

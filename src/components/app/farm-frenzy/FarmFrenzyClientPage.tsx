@@ -69,7 +69,7 @@ export default function FarmFrenzyClientPage() {
         </div>
 
         {/* Layer 2 : Table dan Treemap */}
-        <div className='min-h-[100vh]'>
+        <div className=''>
           { state.pickedTable === "farm_frenzy_one_product" && <FarmFrenzyOneProduct/> }
           { state.pickedTable === "farm_frenzy_two_product" && <FarmFrenzyTwoProduct/> }
           { state.pickedTable === "farm_frenzy_two_pizza_product" && <FarmFrenzyTwoPizzaProduct/> }

@@ -1,6 +1,6 @@
 import { API_SHORTHAND } from "@/constant/api-route"
-import { DB } from "@/database/client";
-import { farmFrenzyOneProduct, farmFrenzyThreeProduct, farmFrenzyTwoPizzaProduct, farmFrenzyTwoProduct } from "@/database/schema";
+import { ID_AGGR, MONGODB } from "@/database/mongodb/db";
+import { FarmFrenzyOneProductResponse, FarmFrenzyThreeProductResponse, FarmFrenzyTwoPizzaProductResponse, FarmFrenzyTwoProductResponse } from "@/model/response/farm-frenzy";
 import { newResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -16,12 +16,20 @@ export async function GET(_: NextRequest, { params } : { params : { table: strin
 
   switch (params.table as RouteEndpoint) {
     case 'one-product':
-      return NextResponse.json(newResponse(await DB.select().from(farmFrenzyOneProduct)))
+      return NextResponse.json(newResponse(
+        await MONGODB.farm_frenzy.one_product.aggregate<FarmFrenzyOneProductResponse[]>(ID_AGGR).toArray()
+      ));
     case 'two-product':
-      return NextResponse.json(newResponse(await DB.select().from(farmFrenzyTwoProduct)))
+      return NextResponse.json(newResponse(
+        await MONGODB.farm_frenzy.two_product.aggregate<FarmFrenzyTwoProductResponse[]>(ID_AGGR).toArray()
+      ));
     case 'two-pizza-product':
-      return NextResponse.json(newResponse(await DB.select().from(farmFrenzyTwoPizzaProduct)))
+      return NextResponse.json(newResponse(
+        await MONGODB.farm_frenzy.two_pizza_product.aggregate<FarmFrenzyTwoPizzaProductResponse[]>(ID_AGGR).toArray()
+      ));
     case 'three-product':
-      return NextResponse.json(newResponse(await DB.select().from(farmFrenzyThreeProduct)))
+      return NextResponse.json(newResponse(
+        await MONGODB.farm_frenzy.three_product.aggregate<FarmFrenzyThreeProductResponse[]>(ID_AGGR).toArray()
+      ));
   }
 }

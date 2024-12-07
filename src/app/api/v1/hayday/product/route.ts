@@ -1,39 +1,15 @@
-import { DB } from "@/database/client";
-import { haydayProduct } from "@/database/schema";
 import { NextResponse } from "next/server";
 import { newResponse } from "@/utilities/api";
+import { ID_AGGR, MONGODB } from "@/database/mongodb/db";
 
 export async function GET() {
   return NextResponse.json(newResponse(
-    await DB.select()
-      .from(haydayProduct)
+    await MONGODB.hayday.product.aggregate([...ID_AGGR, {
+      $unset: [
+        'ingredients.ingredient_id', 'ingredients.product_id', 'ingredients.id',
+        'producer.building_id', 'producer.product_id', 'producer.id',
+        'usage.product_id', 'usage.id'
+      ]
+    }]).toArray()
   ));
-  // try
-  // {
-  //   let data = PaginationRequestSchema.validateSync(params);
-  //   let resp = await DB.select()
-  //     .from(haydayProduct)
-  //     .orderBy(asc(haydayProduct.id))
-  //     .limit(data.pageSize)
-  //     .offset((data.currentPage - 1) * data.pageSize);
-    
-  //   let total = await DB.select({count: count()})
-  //     .from(haydayProduct)
-    
-  //   return NextResponse.json(newPaginationResponse(
-  //     resp, params.pageSize, params.currentPage, total[0].count
-  //   ))
-    
-  // }
-  // catch (e) {
-  //   if (e instanceof ValidationError)
-  //   {
-  //     return NextResponse.json(newResponse("", e.errors[0]), {
-  //       status: 400
-  //     })
-  //   }
-  // }
-
-
-
 }

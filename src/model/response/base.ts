@@ -1,3 +1,6 @@
+import { BaseSchema } from "@/database/mongodb/schema/base"
+import { UUID } from "crypto"
+
 export interface BaseResponse<T> {
   date: Date,
   message: string,
@@ -13,3 +16,9 @@ export interface BasePaginationResponse<T> {
   totalPage: number,
   data: T[]
 }
+
+export interface HasID { 
+  id: UUID
+}
+
+export interface BaseMongoResponseData extends Omit<BaseSchema, '_id'>, HasID { }
