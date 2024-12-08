@@ -22,7 +22,7 @@ interface FarmFrenzyClientPageState {
 
 export default function FarmFrenzyClientPage() {
   const [state, setState] = useState<FarmFrenzyClientPageState>({
-    pickedTable: 'farm_frenzy_one_product'
+    pickedTable: 'farm_frenzy_three_product'
   });
 
   let { isLoading, data: summaryData } = useQuery({
@@ -53,21 +53,6 @@ export default function FarmFrenzyClientPage() {
 
     return (
       <div className='flex flex-col gap-4 text-white'>
-        {/* Layer 1 : Angka2 dan filter */}
-        <div className='grid grid-cols-4 gap-4 max-lg:grid-cols-2 max-lg:grid-rows-2'>
-          <Paper className='px-6'>
-            <p className='xl:text-xl lg:text-lg max-lg:text-xl max-sm:text-sm'>Tables</p>
-            <h1 className='xl:text-5xl lg:text-3xl max-lg:text-4xl max-sm:text-2xl text font-bold'>{totalTable}</h1>
-          </Paper>
-          <Paper className='px-6'>
-            <p className='xl:text-xl lg:text-lg max-lg:text-xl max-sm:text-sm'>Records</p>
-            <h1 className='xl:text-5xl lg:text-3xl max-lg:text-4xl max-sm:text-2xl text font-bold'>{totalData}</h1>
-          </Paper>
-          <Paper className='px-4 col-span-2 p-4 text-xs max-lg:col-span-2'>
-            <Picker className='!grid-cols-2 !grid-rows-2' options={Object.entries(FarmFrenzyTableLabel).map(([k, v]) => ({ label: v, value: k }))} onClickCategory={onClickCategory} singleOption selected={state.pickedTable} />
-          </Paper>
-        </div>
-
         {/* Layer 2 : Table dan Treemap */}
         <div className=''>
           { state.pickedTable === "farm_frenzy_one_product" && <FarmFrenzyOneProduct/> }

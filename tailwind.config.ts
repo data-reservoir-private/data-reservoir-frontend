@@ -51,7 +51,8 @@ const config: Config = {
   },
   plugins: [
     require('tailwind-scrollbar'),
-    flowbite.plugin()
+    flowbite.plugin(),
+    require('tailwindcss-image-rendering')()
   ],
 };
 export default config;
