@@ -19,6 +19,8 @@ const config: Config = {
         "bluish": '#373A45',
         "bluish-200": '#17191f',
         "blackish": '#282B34',
+        "blackish-200": '#1F2129',
+        "blackish-300": '#14161C',
         "category": {
           "transjakarta": '#184CA1',
           "hayday": '#5A9E15',

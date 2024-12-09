@@ -1,5 +1,5 @@
-import BottomNavigation from '@/components/app/bottom-nav/BottomNavigation';
 import QueryComponent from '@/components/app/QueryComponent';
+import SideNavigation from '@/components/app/side-nav/SideNavigation';
 import React from 'react'
 
 export default function MainLayout({
@@ -8,15 +8,14 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className='w-full h-full min-h-[100svh] p-4 bg-bluish pb-24'>
-      <QueryComponent>
-        <div className='w-full flex justify-center overflow-scroll scrollbar-none'>
-          <div className='max-w-[1100px] '>
-            {children}
-          </div>
+    <QueryComponent>
+      <div className='w-full flex justify-center overflow-scroll scrollbar-none box-border h-[100dvh]'>
+        <SideNavigation />
+        <div className='flex-grow p-4'>
+          {children}
         </div>
-        <BottomNavigation/>
-      </QueryComponent>
-    </div>
+      </div>
+      {/* <BottomNavigation/> */}
+    </QueryComponent>
   )
 }

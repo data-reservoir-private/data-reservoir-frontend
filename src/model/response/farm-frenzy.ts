@@ -6,7 +6,15 @@ import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwo
 // export type FarmFrenzyTwoPizzaProductResponse = InferSelectModel<typeof farmFrenzyTwoPizzaProduct>
 // export type FarmFrenzyThreeProductResponse = InferSelectModel<typeof farmFrenzyThreeProduct>
 
+// More common example
 export interface FarmFrenzyOneProductResponse extends Omit<FarmFrenzyOneProductSchema & HasID, '_id'> {}
 export interface FarmFrenzyTwoProductResponse extends Omit<FarmFrenzyTwoProductSchema & HasID, '_id'> {}
 export interface FarmFrenzyTwoPizzaProductResponse extends Omit<FarmFrenzyTwoPizzaProductSchema & HasID, '_id'> {}
 export interface FarmFrenzyThreeProductResponse extends Omit<FarmFrenzyThreeProductSchema & HasID, '_id'> { }
+
+export interface FarmFrenzyProductResponse extends HasID {
+  name: string,
+  image: string,
+  price: number
+}
+

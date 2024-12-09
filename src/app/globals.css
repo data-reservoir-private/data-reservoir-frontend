@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    background-color: #373A45;
+}
+
 .category-transjakarta {
     background-color: #184CA1;
     &.category-table {

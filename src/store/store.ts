@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import { create } from 'zustand'
-import { createJSONStorage, devtools, persist } from 'zustand/middleware'
+import { devtools } from 'zustand/middleware'
 import { produce } from 'immer'
 
 export interface QueryClientStore {
