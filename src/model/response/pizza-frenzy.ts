@@ -1,9 +1,12 @@
-import { haydayBuilding, haydayProduct, pizzaFrenzyTopping, pizzaFrenzyToppingUpgrade } from "@/database/schema";
-import { InferSelectModel } from "drizzle-orm";
+import { HasID } from "./base";
 
-export type PizzaFrenzyToppingResponse = InferSelectModel<typeof pizzaFrenzyTopping>
-export type PizzaFrenzyToppingUpgradeResponse = InferSelectModel<typeof pizzaFrenzyToppingUpgrade>
-
-export type PizzaFrenzyToppingDetailResponse = PizzaFrenzyToppingResponse & {
-  upgrades: PizzaFrenzyToppingUpgradeResponse[]
+export interface PizzaFrenzyToppingResponse extends HasID {
+  general_name: string,
+  image: string,
+  upgrades: {
+    name: string,
+    level: number,
+    price: number,
+    description: string
+  }[]
 }

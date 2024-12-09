@@ -1,15 +1,39 @@
-import { haydayBuilding, haydayProduct } from "@/database/schema";
-import { InferSelectModel } from "drizzle-orm";
+import { HasID } from "./base";
 
-export type HayDayProductResponse = InferSelectModel<typeof haydayProduct>
-export type HayDayBuildingResponse = InferSelectModel<typeof haydayBuilding>
-
-export type HayDayProductDetailResponse = HayDayProductResponse & {
-  ingredient: (Pick<HayDayProductResponse, 'image' | 'name' | 'category'> & { quantity: number })[],
-  usedBy: (Pick<HayDayProductResponse, 'image' | 'name' | 'category'> & { quantity: number })[],
-  producer?: Pick<HayDayBuildingResponse, 'name' | 'id' | 'image'>
+export interface HayDayProductResponse extends HasID {
+  category: string,
+  image: string,
+  is_raw: boolean,
+  level: number,
+  name: string,
+  price: number,
+  time: number,
+  xp: number,
+  ingredients: {
+    ingredient_name: string,
+    ingredient_image: string,
+    quantity: number,
+  }[],
+  usage: {
+    product_name: string,
+    product_image: string,
+    quantity: number,
+  }[],
+  producer: {
+    building_name: string,
+    building_image: string
+  }
 }
 
-export type HayDayBuildingDetailResponse = HayDayBuildingResponse & {
-  produces: (Pick<HayDayProductResponse, 'image' | 'name' | 'category' | 'level'>)[],
+export interface HayDayBuildingResponse extends HasID {
+  image: string
+  level: number
+  name: string
+  price: number
+  time: number
+  xp: number
+  produces: {
+    product_image: string
+    product_name: string
+  }[]
 }

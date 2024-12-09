@@ -6,6 +6,7 @@ import { FarmFrenzyProductResponse } from '@/model/response/farm-frenzy';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import Paper from '@/components/common/paper/Paper';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
+import Image from 'next/image';
 
 export interface FarmFrenzyProductProps {
   url: string,
@@ -24,14 +25,10 @@ export default function FarmFrenzyProduct(props: FarmFrenzyProductProps) {
     }
   });
 
-  const displayGrid = (d: FarmFrenzyProductResponse) => (
-    <img src={d.image} alt={d.name} className='w-12 max-h-12 rendering-crisp-edges'></img>
-  );
-
   const displayDetail = (d: FarmFrenzyProductResponse) => (
     <div className='w-full gap-3 flex flex-col'>
       <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <img src={d.image} alt={d.name} className='w-[50%] h-auto'></img>
+        <Image src={d.image} width={256} height={256} alt={d.name} className='w-[50%] h-auto'/>
       </Paper>
       <div className='text-white text-lg font-bold'>
         { d.name }
@@ -45,5 +42,5 @@ export default function FarmFrenzyProduct(props: FarmFrenzyProductProps) {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} display={displayGrid} detail={displayDetail} />
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
 }

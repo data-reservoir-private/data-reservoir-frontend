@@ -1,26 +1,28 @@
 'use client'
 
-import HaydayProduct from "@/components/app/hayday/HaydayProduct";
-import { HaydayMenu, HaydayTab } from "@/constant/tables";
+import { HaydayMenu } from "@/constant/tables";
 import { useState } from "react";
+import HaydayProduct from "./HaydayProduct";
+import SimpleListbox from "@/components/common/simple-listbox/SimpleListbox";
+import Paper from "@/components/common/paper/Paper";
 import HaydayBuilding from "./HaydayBuilding";
-import TableSummary from "../shared/TableSummary";
 
 export default function HaydayClientPage() {
-  const [tab, setTab] = useState<HaydayMenu | null>(null);
-  return (
-    <div className='flex flex-col gap-4 text-white'>
-      <TableSummary<HaydayMenu> hasPicker
-        onPickCategory={(e) => { setTab(e) }}
-        category="hayday"
-        pickerOption={HaydayTab}
-        initialTab="building"
-      />
+  const [tab, setTab] = useState<HaydayMenu | null>('building');
 
-      <div className='min-h-[100vh]'>
-        { tab === 'product' && <HaydayProduct/> }
-        { tab === 'building' && <HaydayBuilding/> }
-      </div>
+  const opt = {
+    'product': 'Hayday Product',
+    'building': 'Hayday Building'
+  };
+
+  return (
+    <div className='flex flex-col flex-grow gap-4 text-white h-modal'>
+      <Paper className="p-2">
+        <SimpleListbox onChange={e => setTab(e as HaydayMenu)} options={opt} value={tab} />
+      </Paper>
+
+      { tab === 'product' && <HaydayProduct/> }
+      { tab === 'building' && <HaydayBuilding/> }
     </div>
   )
 }

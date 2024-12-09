@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwoPizzaProductSchema, FarmFrenzyTwoProductSchema } from './schema/farm-frenzy';
 import { HaydayBuildingSchema, HaydayProductSchema } from './schema/hayday';
+import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
 
 const client = new MongoClient(process.env.DATABASE_URL)
 const db = client.db('apify')
@@ -17,8 +18,11 @@ export const MONGODB = {
   hayday: {
     product: db.collection<HaydayProductSchema>('hayday_product'),
     building: db.collection<HaydayBuildingSchema>('hayday_building')
+  },
+
+  pizza_frenzy: {
+    topping: db.collection<PizzaFrenzyToppingSchema>('pizza_frenzy_topping')
   }
-  
 } as const
 
 export const ID_AGGR = [{ $replaceRoot: { newRoot: { $mergeObjects: [ { id: '$_id' }, '$$ROOT' ]} } }, { $unset: ['_id'] }];

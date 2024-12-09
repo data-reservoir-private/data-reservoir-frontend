@@ -1,4 +1,4 @@
-import { PiFarm } from 'react-icons/pi';
+import { PiBarn, PiFarm } from 'react-icons/pi';
 import { TransjakartaIcon } from "@/components/icon/icons";
 import { IconType } from "react-icons";
 import { BiSolidHome } from "react-icons/bi";
@@ -42,7 +42,7 @@ export const ROUTES: ROUTE_TYPE[] = [
   {
     id: 'farm-frenzy',
     name: 'Farm Frenzy',
-    icon: PiFarm,
+    icon: PiBarn,
     link: '/farm-frenzy'
   },
   {

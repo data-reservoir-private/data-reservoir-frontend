@@ -13,6 +13,7 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import classNames from 'classnames';
 import { BsChevronDown } from 'react-icons/bs';
 import FarmFrenzyProduct from './FarmFrenzyProduct';
+import SimpleListbox from '@/components/common/simple-listbox/SimpleListbox';
 
 interface FarmFrenzyClientPageState {
   pickedTable: FarmFrenzyTableType | null
@@ -37,47 +38,20 @@ export default function FarmFrenzyClientPage() {
     }
   });
 
+  const keyLabels = FarmFrenzyTableTypeOptions.reduce((obj, currValue) => ({ ...obj, [currValue]: currValue }), {});
+
 
   if (isLoading || !summaryData) return (<Loading />)
   else {
     return (
-      <div className='flex flex-col gap-4 text-white w-full'>
-        <Paper className='relative w-full p-2'>
-          <Listbox
-            onChange={e => setState({ pickedTable: e as FarmFrenzyTableType })}
-          >
-            <ListboxButton
-              className={classNames("w-full overflow-hidden rounded-lg border disabled:cursor-not-allowed disabled:opacity-50", 
-                "inline-flex items-center rounded-sm border-2 px-3 py-1 text-sm border-gray-500 bg-gray-600 text-white outline-none"
-              )}
-            >
-              <div className='flex justify-between w-full items-center'>
-                {state.pickedTable}
-                <BsChevronDown/>
-              </div>
-            </ListboxButton>
-            <ListboxOptions
-              anchor="bottom"
-              className={classNames("w-[var(--button-width)] flex flex-col gap-2 overflow-hidden rounded-sm disabled:cursor-not-allowed disabled:opacity-50 outline-0 cursor-pointer",
-                "border-gray-500 bg-gray-600 text-white text-sm border-2 border-t-0 rounded-t-none"
-              )}
-            >
-              {
-                FarmFrenzyTableTypeOptions.map(opt => (
-                  <ListboxOption value={opt} key={opt} className='p-0.5 px-2.5 hover:bg-gray-700'>
-                    { opt.replaceAll("_", " ") }
-                  </ListboxOption>
-                ))
-              }
-            </ListboxOptions>
-          </Listbox>
+      <div className='flex flex-col gap-4 text-white w-full h-modal'>
+        <Paper className='p-2'>
+          <SimpleListbox onChange={e => setState({ pickedTable: e as FarmFrenzyTableType })} options={keyLabels} value={state.pickedTable}/>
         </Paper>
-        <div className='flex-grow'>
-          { state.pickedTable === "farm_frenzy_one_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.ONE_PRODUCT}/> }
-          { state.pickedTable === "farm_frenzy_two_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PRODUCT}/> }
-          { state.pickedTable === "farm_frenzy_two_pizza_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT}/> }
-          { state.pickedTable === "farm_frenzy_three_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/> }
-        </div>
+        { state.pickedTable === "farm_frenzy_one_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.ONE_PRODUCT}/> }
+        { state.pickedTable === "farm_frenzy_two_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PRODUCT}/> }
+        { state.pickedTable === "farm_frenzy_two_pizza_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT}/> }
+        { state.pickedTable === "farm_frenzy_three_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/> }
       </div>
     )
   }
