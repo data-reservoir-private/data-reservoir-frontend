@@ -1,4 +1,4 @@
-import { PiBarn, PiFarm } from 'react-icons/pi';
+import { PiBarn } from 'react-icons/pi';
 import { TransjakartaIcon } from "@/components/icon/icons";
 import { IconType } from "react-icons";
 import { BiSolidHome } from "react-icons/bi";
@@ -6,11 +6,13 @@ import { BsFillSuitDiamondFill } from "react-icons/bs";
 import { CiWheat } from "react-icons/ci";
 import { FaBowlFood, FaPizzaSlice } from "react-icons/fa6";
 import { IoIosDocument } from "react-icons/io";
+import { GiCrystalGrowth, GiPolarStar } from "react-icons/gi";
+import { GrTransaction } from "react-icons/gr";
 
 export type ROUTE =
   "dashboard" | "transjakarta" | "hayday" |
   "the-sims" | "pizza-frenzy" | "farm-frenzy" |
-  "nasi-goreng" | "docs";
+  "nasi-goreng" | "quartz" | "cygnus" | "transaction" | "docs";
 
 export type ROUTE_TYPE = {
   id: ROUTE,
@@ -62,6 +64,26 @@ export const ROUTES: ROUTE_TYPE[] = [
     name: 'Nasi Goreng',
     icon: FaBowlFood,
     link: '/nasi-goreng'
+  },
+  {
+    id: 'cygnus',
+    name: 'Cygnus',
+    icon: GiPolarStar,
+    link: '/cygnus',
+    inactive: true
+  },
+  {
+    id: 'quartz',
+    name: 'Quartz',
+    icon: GiCrystalGrowth,
+    link: '/quartz'
+  },
+  {
+    id: 'transaction',
+    name: 'Transaction',
+    icon: GrTransaction,
+    link: '/transaction',
+    inactive: true
   },
   {
     id: 'docs',

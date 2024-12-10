@@ -4,6 +4,7 @@ import { HaydayBuildingSchema, HaydayProductSchema } from './schema/hayday';
 import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
 import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from './schema/the-sims';
 import { NasiGorengBurnedFoodSchema, NasiGorengFriedRiceSchema, NasiGorengIngredientSchema, NasiGorengPlateSchema, NasiGorengRelicSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from './schema/nasi-goreng';
+import { QuartzRecipeSchema, QuartzShippableSchema, QuartzUtensilSchema } from '@/model/response/quartz';
 
 const client = new MongoClient(process.env.DATABASE_URL)
 const db = client.db('apify')
@@ -43,6 +44,12 @@ export const MONGODB = {
     tool: db.collection<NasiGorengToolSchema>('nasi_goreng_tool'),
     ingredient: db.collection<NasiGorengIngredientSchema>('nasi_goreng_ingredient'),
     fried_rice: db.collection<NasiGorengFriedRiceSchema>('nasi_goreng_fried_rice'),
+  },
+
+  quartz: {
+    shippable: db.collection<QuartzShippableSchema>('quartz_shippable'),
+    utensil: db.collection<QuartzUtensilSchema>('quartz_utensil'),
+    recipe: db.collection<QuartzRecipeSchema>('quartz_recipe'),
   }
 
 } as const

@@ -1,7 +1,5 @@
 import { API_SHORTHAND } from "@/constant/api-route";
-import { DB } from "@/database/client";
 import { ID_AGGR, MONGODB } from "@/database/mongodb/db";
-import { theSimsBustinOutCareer, theSimsCastawayProduct, theSimsFourPcHarvestable, theSimsTwoConsoleCareer, theSimsTwoPetsConsoleCareer, theSimsTwoPetsConsoleProduct } from "@/database/schema";
 import { newResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 

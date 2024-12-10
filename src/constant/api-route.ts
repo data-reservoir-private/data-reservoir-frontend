@@ -38,6 +38,11 @@ export const API_SHORTHAND = Object.freeze({
     CORRIDOR: 'corridor',
     BUS_STOP: 'bus-stop',
     STYLE: 'style'
+  },
+  QUARTZ: {
+    SHIPPABLE: 'shippable',
+    RECIPE: 'recipe',
+    UTENSIL: 'utensil'
   }
 } as const)
 /**
@@ -77,5 +82,10 @@ export const API_ROUTE = Object.freeze({
     CORRIDOR: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
     BUS_STOP: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,
     STYLE: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}/${API_SHORTHAND.TRANSJAKARTA.STYLE}`
+  },
+  QUARTZ: {
+    SHIPPABLE: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.SHIPPABLE}`,
+    RECIPE: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.RECIPE}`,
+    UTENSIL: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.UTENSIL}`
   }
 } as const)
