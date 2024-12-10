@@ -1,5 +1,5 @@
-import { pgTable, varchar, uuid, text, integer, boolean, doublePrecision, index, foreignKey, uniqueIndex, time, date } from "drizzle-orm/pg-core"
-  import { sql } from "drizzle-orm"
+import { pgTable, varchar, uuid, text, integer, boolean, doublePrecision, index, foreignKey, uniqueIndex, time, date } from "drizzle-orm/pg-core";
+  import { sql } from "drizzle-orm";
 
 
 
@@ -77,7 +77,7 @@ export const haydayIngredient = pgTable("hayday_ingredient", {
 	return {
 		ixHaydayIngredientIngredientId: index("IX_hayday_ingredient_ingredient_id").using("btree", table.ingredientId),
 		ixHaydayIngredientProductId: index("IX_hayday_ingredient_product_id").using("btree", table.productId),
-	}
+	};
 });
 
 export const haydayBuilding = pgTable("hayday_building", {
@@ -99,7 +99,7 @@ export const haydayProducer = pgTable("hayday_producer", {
 	return {
 		ixHaydayProducerBuildingId: index("IX_hayday_producer_building_id").using("btree", table.buildingId),
 		ixHaydayProducerProductId: uniqueIndex("IX_hayday_producer_product_id").using("btree", table.productId),
-	}
+	};
 });
 
 export const nasiGorengIngredient = pgTable("nasi_goreng_ingredient", {
@@ -121,7 +121,7 @@ export const nasiGorengIngredientRecipe = pgTable("nasi_goreng_ingredient_recipe
 	return {
 		ixNasiGorengIngredientRecipeIngredientNeededId: index("IX_nasi_goreng_ingredient_recipe_ingredient_needed_id").using("btree", table.ingredientNeededId),
 		ixNasiGorengIngredientRecipeResultId: index("IX_nasi_goreng_ingredient_recipe_result_id").using("btree", table.resultId),
-	}
+	};
 });
 
 export const nasiGorengPlate = pgTable("nasi_goreng_plate", {
@@ -146,7 +146,7 @@ export const nasiGorengFriedRice = pgTable("nasi_goreng_fried_rice", {
 	return {
 		ixNasiGorengFriedRicePlateId: index("IX_nasi_goreng_fried_rice_plate_id").using("btree", table.plateId),
 		ixNasiGorengFriedRiceToolId: index("IX_nasi_goreng_fried_rice_tool_id").using("btree", table.toolId),
-	}
+	};
 });
 
 export const nasiGorengTool = pgTable("nasi_goreng_tool", {
@@ -167,7 +167,7 @@ export const nasiGorengIngredientTool = pgTable("nasi_goreng_ingredient_tool", {
 	return {
 		ixNasiGorengIngredientToolResultId: uniqueIndex("IX_nasi_goreng_ingredient_tool_result_id").using("btree", table.resultId),
 		ixNasiGorengIngredientToolToolId: index("IX_nasi_goreng_ingredient_tool_tool_id").using("btree", table.toolId),
-	}
+	};
 });
 
 export const nasiGorengRelic = pgTable("nasi_goreng_relic", {
@@ -179,7 +179,7 @@ export const nasiGorengRelic = pgTable("nasi_goreng_relic", {
 (table) => {
 	return {
 		ixNasiGorengRelicToolId: index("IX_nasi_goreng_relic_tool_id").using("btree", table.toolId),
-	}
+	};
 });
 
 export const pizzaFrenzyTopping = pgTable("pizza_frenzy_topping", {
@@ -199,7 +199,7 @@ export const pizzaFrenzyToppingUpgrade = pgTable("pizza_frenzy_topping_upgrade",
 (table) => {
 	return {
 		ixPizzaFrenzyToppingUpgradeToppingId: index("IX_pizza_frenzy_topping_upgrade_topping_id").using("btree", table.toppingId),
-	}
+	};
 });
 
 export const nasiGorengFriedRiceLevel = pgTable("nasi_goreng_fried_rice_level", {
@@ -212,7 +212,7 @@ export const nasiGorengFriedRiceLevel = pgTable("nasi_goreng_fried_rice_level", 
 (table) => {
 	return {
 		ixNasiGorengFriedRiceLevelFriedRiceId: index("IX_nasi_goreng_fried_rice_level_fried_rice_id").using("btree", table.friedRiceId),
-	}
+	};
 });
 
 export const nasiGorengFriedRiceLevelDetail = pgTable("nasi_goreng_fried_rice_level_detail", {
@@ -228,7 +228,7 @@ export const nasiGorengFriedRiceLevelDetail = pgTable("nasi_goreng_fried_rice_le
 	return {
 		ixNasiGorengFriedRiceLevelDetailFriedRiceLevelId: index("IX_nasi_goreng_fried_rice_level_detail_fried_rice_level_id").using("btree", table.friedRiceLevelId),
 		ixNasiGorengFriedRiceLevelDetailUpgradeId: index("IX_nasi_goreng_fried_rice_level_detail_upgrade_id").using("btree", table.upgradeId),
-	}
+	};
 });
 
 export const nasiGorengUpgrade = pgTable("nasi_goreng_upgrade", {
@@ -247,7 +247,7 @@ export const nasiGorengFriedRiceLevelRecipe = pgTable("nasi_goreng_fried_rice_le
 	return {
 		ixNasiGorengFriedRiceLevelRecipeFriedRiceLevelId: index("IX_nasi_goreng_fried_rice_level_recipe_fried_rice_level_id").using("btree", table.friedRiceLevelId),
 		ixNasiGorengFriedRiceLevelRecipeIngredientId: index("IX_nasi_goreng_fried_rice_level_recipe_ingredient_id").using("btree", table.ingredientId),
-	}
+	};
 });
 
 export const nasiGorengFriedRiceRecipe = pgTable("nasi_goreng_fried_rice_recipe", {
@@ -259,7 +259,7 @@ export const nasiGorengFriedRiceRecipe = pgTable("nasi_goreng_fried_rice_recipe"
 	return {
 		ixNasiGorengFriedRiceRecipeFriedRiceId: index("IX_nasi_goreng_fried_rice_recipe_fried_rice_id").using("btree", table.friedRiceId),
 		ixNasiGorengFriedRiceRecipeIngredientId: index("IX_nasi_goreng_fried_rice_recipe_ingredient_id").using("btree", table.ingredientId),
-	}
+	};
 });
 
 export const theSimsBustinOutCareer = pgTable("the_sims_bustin_out_career", {
@@ -394,7 +394,7 @@ export const transjakartaCorridorStyle = pgTable("transjakarta_corridor_style", 
 (table) => {
 	return {
 		ixTransjakartaCorridorStyleCode: uniqueIndex("IX_transjakarta_corridor_style_code").using("btree", table.code),
-	}
+	};
 });
 
 export const transjakartaCorridorStyleHistory = pgTable("transjakarta_corridor_style_history", {
@@ -425,7 +425,7 @@ export const transjakartaScheduleDetail = pgTable("transjakarta_schedule_detail"
 (table) => {
 	return {
 		ixTransjakartaScheduleDetailCode: index("IX_transjakarta_schedule_detail_code").using("btree", table.code),
-	}
+	};
 });
 
 export const transjakartaScheduleDetailHistory = pgTable("transjakarta_schedule_detail_history", {
@@ -462,7 +462,7 @@ export const transjakartaScheduleHeader = pgTable("transjakarta_schedule_header"
 (table) => {
 	return {
 		ixTransjakartaScheduleHeaderCode: uniqueIndex("IX_transjakarta_schedule_header_code").using("btree", table.code),
-	}
+	};
 });
 
 export const transjakartaCorridor = pgTable("transjakarta_corridor", {
@@ -478,7 +478,7 @@ export const transjakartaCorridor = pgTable("transjakarta_corridor", {
 (table) => {
 	return {
 		ixTransjakartaCorridorCode: uniqueIndex("IX_transjakarta_corridor_code").using("btree", table.code),
-	}
+	};
 });
 
 export const transjakartaBusStop = pgTable("transjakarta_bus_stop", {
@@ -496,7 +496,7 @@ export const transjakartaBusStop = pgTable("transjakarta_bus_stop", {
 (table) => {
 	return {
 		ixTransjakartaBusStopCode: uniqueIndex("IX_transjakarta_bus_stop_code").using("btree", table.code),
-	}
+	};
 });
 
 export const transjakartaBusStopHistory = pgTable("transjakarta_bus_stop_history", {

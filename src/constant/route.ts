@@ -92,4 +92,4 @@ export const ROUTES: ROUTE_TYPE[] = [
     link: '/docs',
     inactive: true
   },
-]
+];

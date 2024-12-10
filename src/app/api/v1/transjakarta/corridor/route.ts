@@ -14,7 +14,7 @@ export async function GET() {
     .innerJoin(transjakartaBusRoute, eq(transjakartaCorridor.code, transjakartaBusRoute.corridorCode))
     .innerJoin(transjakartaBusStop, eq(transjakartaBusRoute.busStopCode, transjakartaBusStop.code))
     .where(or(eq(transjakartaBusStop.latitude, 0), eq(transjakartaBusStop.permanentlyClosed, true)))
-    .groupBy(transjakartaCorridor.code)
+    .groupBy(transjakartaCorridor.code);
 
   const data = await DB
     .select()

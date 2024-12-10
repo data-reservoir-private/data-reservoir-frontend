@@ -1,5 +1,5 @@
-import classNames from 'classnames'
-import React from 'react'
+import classNames from 'classnames';
+import React from 'react';
 import { Spinner } from "flowbite-react";
 
 export interface LoadingProps {
@@ -15,5 +15,5 @@ export default function Loading(props: LoadingProps) {
       </div>
       <p className='text-white'>{props.message ?? "Loading..."}</p>
     </div>
-  )
+  );
 }

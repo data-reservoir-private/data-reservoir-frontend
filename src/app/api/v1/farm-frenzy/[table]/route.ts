@@ -1,4 +1,4 @@
-import { API_SHORTHAND } from "@/constant/api-route"
+import { API_SHORTHAND } from "@/constant/api-route";
 import { ID_AGGR, MONGODB } from "@/database/mongodb/db";
 import { FarmFrenzyOneProductResponse, FarmFrenzyThreeProductResponse, FarmFrenzyTwoPizzaProductResponse, FarmFrenzyTwoProductResponse } from "@/model/response/farm-frenzy";
 import { newResponse } from "@/utilities/api";

@@ -16,7 +16,7 @@ export const TheSimsTableLabel: {[key in TheSimsTableType]: string } = {
   "the_sims_two_pets_console_career": "Pets Console Career",
   "the_sims_four_pc_harvestable": "Four PC Harvestable",
   "the_sims_two_pets_console_product": "Two Pets Console Product"
-}
+};
 
 export type HaydayMenu = "product" | "building"; 
 export const HaydayTab: { [key in HaydayMenu]: string } = {
@@ -40,7 +40,7 @@ export const FarmFrenzyTableLabel: {[key in FarmFrenzyTableType]: string } = {
   "farm_frenzy_two_product": "Two Product",
   "farm_frenzy_two_pizza_product": "Two Pizza Product",
   "farm_frenzy_three_product": "Three Product"
-}
+};
 
 export type QuartzTableType =
   "shippable" |
@@ -51,4 +51,23 @@ export const QuartzTableLabel: {[key in QuartzTableType]: string} = {
   'shippable': 'Shippable',
   'recipe': 'Recipe',
   'utensil': 'Utensil'
-}
+};
+
+export type NasiGorengTableType =
+  "nasi_goreng_burned_food" |
+  "nasi_goreng_plate" |
+  "nasi_goreng_ingredient" | 
+  "nasi_goreng_relic" | 
+  "nasi_goreng_tool" |
+  "nasi_goreng_fried_rice" |
+  "nasi_goreng_upgrade"
+
+export const NasiGorengTableLabel: {[key in NasiGorengTableType]: string} = {
+  'nasi_goreng_burned_food': 'Burned Food',
+  'nasi_goreng_ingredient': 'Ingredient',
+  'nasi_goreng_plate': 'Plate',
+  'nasi_goreng_relic': 'Relic',
+  'nasi_goreng_tool': 'Tool',
+  'nasi_goreng_fried_rice': 'Fried Rice',
+  'nasi_goreng_upgrade': 'Upgrade'
+};

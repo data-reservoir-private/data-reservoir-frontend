@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { EChartsOption } from 'echarts';
 import { getCategoryColorHex } from '@/utilities/color';
@@ -56,7 +56,7 @@ export default function TablePieChart(props : TablePieChartProps) {
     grid: {
       top: 20
     }
-  }
+  };
 
   return (
     <div className='h-full'>
@@ -65,5 +65,5 @@ export default function TablePieChart(props : TablePieChartProps) {
         className='h-full'
       />
     </div>
-  )
+  );
 }

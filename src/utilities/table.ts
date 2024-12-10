@@ -14,5 +14,5 @@ export function multiSelectFilter<TData>(row: Row<TData>, columnId: string, sele
 }
 
 export function getStaticIndex<TData>(row: Row<TData>, table: Table<TData>) {
-  return (table.getSortedRowModel()?.flatRows?.findIndex((flatRow) => flatRow.id === row.id) || 0) + 1
+  return (table.getSortedRowModel()?.flatRows?.findIndex((flatRow) => flatRow.id === row.id) || 0) + 1;
 }

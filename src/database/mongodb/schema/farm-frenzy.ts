@@ -1,4 +1,4 @@
-import { BaseSchema } from "./base"
+import { BaseSchema } from "./base";
 
 export interface FarmFrenzyOneProductSchema extends BaseSchema {
   name: string,

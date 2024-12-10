@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import BustinOutCareer from "@/components/app/the-sims/BustinOutCareer";
 import CastawayProduct from "@/components/app/the-sims/CastawayProduct";
@@ -35,5 +35,5 @@ export default function TheSimsClientPage() {
       { state === "the_sims_two_pets_console_career" && <TwoPetsConsoleCareer/> }
       { state === "the_sims_two_pets_console_product" && <TwoPetsConsoleProduct/> }
     </div>
-  )
+  );
 }

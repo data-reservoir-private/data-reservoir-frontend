@@ -20,7 +20,7 @@ export async function GET() {
       // eq(transjakartaBusStop.permanentlyClosed, false),
       ne(transjakartaBusStop.latitude, 0),
       ne(transjakartaBusStop.longitude, 0),
-    ))
+    ));
     // .limit(1000);
 
   return NextResponse.json(newResponse<TransjakartaBusStopResponse[]>(data));

@@ -1,8 +1,8 @@
-import { FarmFrenzyTableType, FarmFrenzyTableTypeOptions } from '@/constant/tables'
-import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react'
-import classNames from 'classnames'
-import React from 'react'
-import { BsChevronDown } from 'react-icons/bs'
+import { FarmFrenzyTableType, FarmFrenzyTableTypeOptions } from '@/constant/tables';
+import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react';
+import classNames from 'classnames';
+import React from 'react';
+import { BsChevronDown } from 'react-icons/bs';
 
 export interface SimpleListboxProps {
   onChange: (v: string) => void,
@@ -49,5 +49,5 @@ export default function SimpleListbox(props: SimpleListboxProps) {
         }
       </ListboxOptions>
     </Listbox>
-  )
+  );
 }

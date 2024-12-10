@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
 import { useAppStore } from '@/store/store';
 import { QueryClientProvider } from '@tanstack/react-query';
-import React from 'react'
+import React from 'react';
 
 export default function QueryComponent({
   children,
@@ -15,5 +15,5 @@ export default function QueryComponent({
     <QueryClientProvider client={queryClient}>
       {children}
     </QueryClientProvider>
-  )
+  );
 }

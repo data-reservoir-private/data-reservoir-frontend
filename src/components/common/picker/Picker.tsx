@@ -1,5 +1,5 @@
-import classNames from 'classnames'
-import React from 'react'
+import classNames from 'classnames';
+import React from 'react';
 
 export type PickerProps = {
   singleOption: false,
@@ -34,9 +34,9 @@ export default function Picker(props: PickerProps) {
             >
               {l}
             </div>
-          )
+          );
         })
       }
     </div>
-  )
+  );
 }

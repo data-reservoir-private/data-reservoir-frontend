@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { HaydayMenu } from "@/constant/tables";
 import { useState } from "react";
@@ -24,5 +24,5 @@ export default function HaydayClientPage() {
       { tab === 'product' && <HaydayProduct/> }
       { tab === 'building' && <HaydayBuilding/> }
     </div>
-  )
+  );
 }

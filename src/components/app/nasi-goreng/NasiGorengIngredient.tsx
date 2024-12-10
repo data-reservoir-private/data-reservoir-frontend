@@ -1,17 +1,14 @@
-import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
-import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { NasiGorengIngredientResponse } from '@/model/response/nasi-goreng';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import Image from 'next/image';
 import { Checkbox } from 'flowbite-react';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 
 export default function NasiGorengIngredient() {
   const { isLoading, data } = useQuery({
@@ -71,5 +68,5 @@ export default function NasiGorengIngredient() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
 }

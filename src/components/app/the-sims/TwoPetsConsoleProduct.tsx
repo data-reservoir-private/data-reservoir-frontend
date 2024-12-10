@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { TheSimsTwoPetsConsoleProductResponse } from '@/model/response/the-sims';
 import { request } from '@/utilities/http';
@@ -44,5 +44,5 @@ export default function TwoPetsConsoleProduct() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
 }

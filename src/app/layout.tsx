@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat, PT_Sans } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import "./post.css";
 import { Flowbite } from "flowbite-react";

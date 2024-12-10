@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import ReactECharts from 'echarts-for-react';
 import { EChartsOption } from 'echarts';
 import { getCategoryColorHex } from '@/utilities/color';
@@ -59,7 +59,7 @@ export default function TableTreeMap(props : TableTreeMapProps) {
       right: 5,
       bottom: 5
     }
-  }
+  };
 
   return (
     <div className='overflow-x-scroll !h-full'>
@@ -68,5 +68,5 @@ export default function TableTreeMap(props : TableTreeMapProps) {
         className='!h-full'
       />
     </div>
-  )
+  );
 }

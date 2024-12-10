@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { BiSolidTrafficBarrier } from 'react-icons/bi';
 
 export default function ComingSoon(props: { message: string }) {
@@ -8,5 +8,5 @@ export default function ComingSoon(props: { message: string }) {
       <h1 className='font-bold text-3xl'>Under Construction</h1>
       <p className='italic font-light'>{props.message}</p>
     </div>
-  )
+  );
 }

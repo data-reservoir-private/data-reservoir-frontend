@@ -1,6 +1,6 @@
-import React, { Fragment, useMemo, useState } from 'react'
-import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, RowData, useReactTable } from '@tanstack/react-table'
-import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
+import React, { Fragment, useMemo, useState } from 'react';
+import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, RowData, useReactTable } from '@tanstack/react-table';
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
 import { TextInput } from 'flowbite-react';
@@ -51,7 +51,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                     let sortSymbol =
                       !header.column.getIsSorted() ? '⏸' : 
                         header.column.getIsSorted() === 'asc' ? '🔼' : '🔽';
-                    const v = header.column.columnDef.meta?.filterVariant
+                    const v = header.column.columnDef.meta?.filterVariant;
                     const hasFilter = header.column.getCanFilter() && !!v;
                     return (
                       <th key={header.id} className='p-2' colSpan={header.colSpan}>
@@ -75,7 +75,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                           </div>
                         }
                       </th>
-                    )
+                    );
                   })
                 }
               </tr>
@@ -115,7 +115,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
 interface BasicTableFilterProps<T> {
@@ -132,7 +132,7 @@ function BasicTableFilterSelect<T>(props: BasicTableFilterProps<T>)
 
   // Memoize biar bisa dirender
   const uniqueValues = useMemo(() => {
-    return Array.from<string | number>(uniq.keys()).sort((a, b) => a > b ? 1 : a < b ? -1 : 0)
+    return Array.from<string | number>(uniq.keys()).sort((a, b) => a > b ? 1 : a < b ? -1 : 0);
   }, [uniq]);
 
   if (uniqueValues.length === 0) return (<></>);
@@ -159,7 +159,7 @@ function BasicTableFilterSelect<T>(props: BasicTableFilterProps<T>)
         </ListboxOptions>
       </div>
     </Listbox>
-  )
+  );
 }
 
 function BasicTableFilterSearch<T>(props: BasicTableFilterProps<T>) {
@@ -172,15 +172,15 @@ function BasicTableFilterSearch<T>(props: BasicTableFilterProps<T>) {
       <input
         className='text-sm font-normal bg-gray-700 rounded-sm w-full outline-none py-1 px-2 focus:ring-2 focus:ring-cyan-700'
         value={inputedQuery}
-        onChange={e => {props.column.setFilterValue(e.target.value)}}
+        onChange={e => {props.column.setFilterValue(e.target.value);}}
       />
     </div>
-  )
+  );
 }
 
 function BasicTableFilter<T>(props: BasicTableFilterProps<T>) {
   const filterVariant = props.column.columnDef.meta?.filterVariant;
-  if (filterVariant === 'select') return (<BasicTableFilterSelect {...props}/>)
-  else if (filterVariant === 'search') return (<BasicTableFilterSearch {...props}/>)
-  else return (<></>)
+  if (filterVariant === 'select') return (<BasicTableFilterSelect {...props}/>);
+  else if (filterVariant === 'search') return (<BasicTableFilterSearch {...props}/>);
+  else return (<></>);
 }

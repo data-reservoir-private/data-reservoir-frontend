@@ -3,7 +3,7 @@ import { getCategoryColorClass } from '@/utilities/color';
 import { getStaticIndex } from '@/utilities/table';
 import { createColumnHelper } from '@tanstack/react-table';
 import classNames from 'classnames';
-import React, { useMemo } from 'react'
+import React, { useMemo } from 'react';
 
 export interface TableCategoryCountProps {
   data: { category: string, rowCount: number }[]
@@ -38,11 +38,11 @@ export default function TableCategoryCount(props: TableCategoryCountProps) {
       enableColumnFilter: false,
       enableSorting: true
     })
-  ]
+  ];
 
   return (
     <div>
       <BasicTable data={data} columns={column}/>
     </div>
-  )
+  );
 }

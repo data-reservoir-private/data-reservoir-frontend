@@ -4,7 +4,7 @@ import { newResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 
 type RouteEndpoint = typeof API_SHORTHAND.THE_SIMS[keyof typeof API_SHORTHAND.THE_SIMS]
-const routeEndpoint = (Object.values(API_SHORTHAND.THE_SIMS))
+const routeEndpoint = (Object.values(API_SHORTHAND.THE_SIMS));
 
 export async function GET(_: NextRequest, { params } : { params : { table: string } }){
 

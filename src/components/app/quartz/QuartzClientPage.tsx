@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 import Paper from '@/components/common/paper/Paper';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import SimpleListbox from '@/components/common/simple-listbox/SimpleListbox';
 import { QuartzTableLabel, QuartzTableType } from '@/constant/tables';
 import QuartzShippable from './QuartzShippable';

@@ -1,3 +1,4 @@
+import React from 'react';
 import BasicTable from '@/components/common/basic-table/BasicTable';
 import Loading from '@/components/common/loading/Loading';
 import Paper from '@/components/common/paper/Paper';
@@ -7,7 +8,6 @@ import { request } from '@/utilities/http';
 import { multiSelectFilter } from '@/utilities/table';
 import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
-import React from 'react'
 import TransjakartaCode from './TransjakartaCode';
 import { useAppStore } from '@/store/store';
 import { PiWarningFill } from 'react-icons/pi';
@@ -32,11 +32,11 @@ export default function TransjakartaCorridorTable() {
   const handleOnClickCorridor = (code: string) => {
     if (code === corridorCode) clearCorridor();
     else setCorridor(code);
-  }
+  };
 
   const handleOnResetCorridor = () => { 
     clearCorridor();
-  }
+  };
 
   const colHelper = createColumnHelper<TransjakartaCorridorResponse>();
   const columns = [
@@ -54,7 +54,7 @@ export default function TransjakartaCorridorTable() {
         return total > 0 ? (<PiWarningFill className={classNames('text-lg', {
           'text-yellow-300': 1 <= total && total <= 5,
           'text-red-500': total > 5
-        })} title={`This route has ${total} problematic stop(s)`}/>) : ("")
+        })} title={`This route has ${total} problematic stop(s)`}/>) : ("");
       }
     }),
     colHelper.accessor('name', {
@@ -94,5 +94,5 @@ export default function TransjakartaCorridorTable() {
         }
       </div>
     </Paper>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import { HasID } from '@/model/response/base'
-import React, { useState } from 'react'
-import Paper from '../paper/Paper'
-import classNames from 'classnames'
-import Image from 'next/image'
+import { HasID } from '@/model/response/base';
+import React, { useState } from 'react';
+import Paper from '../paper/Paper';
+import classNames from 'classnames';
+import Image from 'next/image';
 
 export interface BasicGridProps<TData> {
   data: TData[]
@@ -57,5 +57,5 @@ export default function BasicGrid<TData extends HasID>(props: BasicGridProps<TDa
         }
       </Paper>
     </div>
-  )
+  );
 }

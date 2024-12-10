@@ -1,4 +1,4 @@
-import { InferType, number, object } from "yup"
+import { InferType, number, object } from "yup";
 
 export const PaginationRequestSchema = object({
   currentPage: number().required().min(0),

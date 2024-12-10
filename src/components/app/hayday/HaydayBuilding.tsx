@@ -60,5 +60,5 @@ export default function HaydayProduct() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />;
 }

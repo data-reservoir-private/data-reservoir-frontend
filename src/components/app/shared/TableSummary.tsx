@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Loading from "@/components/common/loading/Loading";
 import Paper from "@/components/common/paper/Paper";
@@ -61,9 +61,9 @@ export default function TableSummary<T extends TablePickerType>(props: TableSumm
   let onClickCategory = (pickedTable: string, enabled: boolean) => {
     setState(produce(s => {
       let choice = enabled ? pickedTable : null;
-      s.pickedTab = choice as Draft<T>
-    }))
-  }
+      s.pickedTab = choice as Draft<T>;
+    }));
+  };
 
   return (
     <div className='flex flex-col gap-4 text-white'>
@@ -97,5 +97,5 @@ export default function TableSummary<T extends TablePickerType>(props: TableSumm
         }
       </div>
     </div>
-  )
+  );
 }

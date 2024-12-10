@@ -10,5 +10,5 @@ export async function GET() {
     corridorCode: transjakartaCorridorStyle.code
   }).from(transjakartaCorridorStyle);
 
-  return NextResponse.json(newResponse<TransjakartaCorridorStyleResponse[]>(rawData))
+  return NextResponse.json(newResponse<TransjakartaCorridorStyleResponse[]>(rawData));
 }

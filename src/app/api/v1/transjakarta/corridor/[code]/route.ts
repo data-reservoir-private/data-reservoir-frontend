@@ -52,7 +52,7 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
         or(eq(transjakartaBusStop.latitude, 0), eq(transjakartaBusStop.permanentlyClosed, true))
       )
     )
-    .groupBy(transjakartaCorridor.code))?.[0]?.problemCount ?? 0
+    .groupBy(transjakartaCorridor.code))?.[0]?.problemCount ?? 0;
   
   return NextResponse.json(newResponse<TransjakartaCorridorDetailResponse>({
     code: main.code,
@@ -63,5 +63,5 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
     schedule: scheduleDetail.map(({ id, isDeleted, effectiveDate, code, ...rest }) => ({ ...rest })),
     busStopCode: roadIDs.map(x => x.id),
     problem: problematicRoute
-  }))
+  }));
 }

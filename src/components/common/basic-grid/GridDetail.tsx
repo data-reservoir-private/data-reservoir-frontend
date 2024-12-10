@@ -1,5 +1,5 @@
-import { HasID } from '@/model/response/base'
-import React from 'react'
+import { HasID } from '@/model/response/base';
+import React from 'react';
 
 interface GridDetailProps {
   data: { [key: string]: React.ReactNode }
@@ -19,5 +19,5 @@ export default function GridDetail(props: GridDetailProps) {
         }
       </tbody>
     </table>
-  )
+  );
 }

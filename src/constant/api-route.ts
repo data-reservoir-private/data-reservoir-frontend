@@ -1,7 +1,7 @@
 
 // https://stackoverflow.com/questions/68657274/create-type-using-objects-value
 
-const HOST = process.env.NEXT_PUBLIC_API
+const HOST = process.env.NEXT_PUBLIC_API;
 /**
  * Shorthand2 untuk validasi API route
  */
@@ -43,8 +43,13 @@ export const API_SHORTHAND = Object.freeze({
     SHIPPABLE: 'shippable',
     RECIPE: 'recipe',
     UTENSIL: 'utensil'
+  },
+  CYGNUS: {
+    ARTIFACT: 'artifact',
+    MINERAL: 'mineral'
   }
-} as const)
+} as const);
+
 /**
  * Untuk link fetching
  */
@@ -87,5 +92,9 @@ export const API_ROUTE = Object.freeze({
     SHIPPABLE: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.SHIPPABLE}`,
     RECIPE: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.RECIPE}`,
     UTENSIL: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.UTENSIL}`
+  },
+  CYGNUS: {
+    ARTIFACT: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.ARTIFACT}`,
+    MINERAL: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.MINERAL}`,
   }
-} as const)
+} as const);

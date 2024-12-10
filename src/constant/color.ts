@@ -6,7 +6,7 @@ export const COLOR_CLASS = {
   "The Sims": 'category-thesims',
   "Nasi Goreng": 'category-nasigoreng',
   "Default": 'category-default'
-}
+};
 export const COLOR_HEX = {
   "Transjakarta": '#184CA1',
   "Hayday": '#5A9E15',
@@ -15,4 +15,4 @@ export const COLOR_HEX = {
   "The Sims": '#258018',
   "Nasi Goreng": '#DFD3AF',
   "Default": '#5B7AD7'
-}
+};

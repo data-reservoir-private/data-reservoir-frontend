@@ -1,5 +1,5 @@
-import { BaseSchema } from "@/database/mongodb/schema/base"
-import { UUID } from "crypto"
+import { BaseSchema } from "@/database/mongodb/schema/base";
+import { UUID } from "crypto";
 
 export interface BaseResponse<T> {
   date: Date,

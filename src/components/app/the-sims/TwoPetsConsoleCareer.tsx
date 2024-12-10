@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import BasicTable from '@/components/common/basic-table/BasicTable';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { TheSimsTwoPetsConsoleCareerResponse } from '@/model/response/the-sims';
 import { request } from '@/utilities/http';
@@ -129,5 +129,5 @@ export default function TwoPetsConsoleCareer() {
       { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
       </div>
     </Paper>
-  )
+  );
 }

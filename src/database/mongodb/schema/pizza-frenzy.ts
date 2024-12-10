@@ -1,5 +1,5 @@
-import { UUID } from "mongodb"
-import { BaseSchema } from "./base"
+import { UUID } from "mongodb";
+import { BaseSchema } from "./base";
 
 export interface PizzaFrenzyToppingSchema extends BaseSchema {
   general_name: string,

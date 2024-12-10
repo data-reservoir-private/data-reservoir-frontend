@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import React, { useEffect, useRef, useState } from 'react'
-import { Circle, LayerGroup, MapContainer, TileLayer, Tooltip } from 'react-leaflet'
+import React, { useEffect, useRef, useState } from 'react';
+import { Circle, LayerGroup, MapContainer, TileLayer, Tooltip } from 'react-leaflet';
 import { Marker } from '@adamscybot/react-leaflet-component-marker';
-import { LatLngBoundsExpression, LeafletEventHandlerFnMap, Map as LeafletMap } from 'leaflet'
+import { LatLngBoundsExpression, LeafletEventHandlerFnMap, Map as LeafletMap } from 'leaflet';
 import { TransjakartaBusStopResponse } from '@/model/response/transjakarta';
 import { useQuery } from '@tanstack/react-query';
 import { API_ROUTE } from '@/constant/api-route';
@@ -11,7 +11,7 @@ import { request } from '@/utilities/http';
 import Loading from '@/components/common/loading/Loading';
 import { useAppStore } from '@/store/store';
 import { LatLngExpression } from 'leaflet';
-import { PiWarningFill } from 'react-icons/pi'
+import { PiWarningFill } from 'react-icons/pi';
 import { Label, ToggleSwitch } from 'flowbite-react';
 
 import './map.css';
@@ -24,7 +24,7 @@ interface TransjakartaBusStopMapState {
 }   
 
 export default function TransjakartaBusStopMap() {
-  const [setBusStop] = useAppStore(x => [x.newTransjakarta.setBusStop])
+  const [setBusStop] = useAppStore(x => [x.newTransjakarta.setBusStop]);
   const mapRef = useRef<LeafletMap>(null);
   const [state, setState] = useState<TransjakartaBusStopMapState>({
     permanentlyClosed: false
@@ -55,7 +55,7 @@ export default function TransjakartaBusStopMap() {
 
   }, [data]);
 
-  if (isLoading || !data) return <Loading />
+  if (isLoading || !data) return <Loading />;
 
   const handleOnClickDot = (busStopCode: number) => setBusStop(busStopCode);
   return (
@@ -63,7 +63,7 @@ export default function TransjakartaBusStopMap() {
       <div className='w-full'>
         <div className='flex flex-col gap-2'>
           <Label>Permanently Closed</Label>
-          <ToggleSwitch checked={state.permanentlyClosed} onChange={e => { setState({ ...state, permanentlyClosed: e }) }}/>
+          <ToggleSwitch checked={state.permanentlyClosed} onChange={e => { setState({ ...state, permanentlyClosed: e }); }}/>
         </div>
       </div>
       <MapContainer
@@ -90,10 +90,10 @@ export default function TransjakartaBusStopMap() {
               <Circle eventHandlers={eventHandler} key={x.code} center={[x.latitude, x.longitude]} radius={sizeCircle} color={x.brt ? '#1a62ba' : x.permanentlyClosed ? '#fffa8cc7' : '#801c1c9e'} >
                 <Tooltip>{x.name}</Tooltip>
               </Circle>
-            )
+            );
           })}
         </LayerGroup>
       </MapContainer>
     </div>
-  )
+  );
 }

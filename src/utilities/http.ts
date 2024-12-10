@@ -10,14 +10,14 @@ export async function request<TResponse, TRequest extends Record<string, any> | 
     let arrayParams = Object.entries(omitBy(request.data ?? {}, isNil))
       .flatMap(([k, v]) => {
         if (Array.isArray(v)) return v.map(x => ([k, x]));
-        else return [[k, v]]
+        else return [[k, v]];
       });
     url = url + "?" + new URLSearchParams(arrayParams);
   }
 
   let conf: RequestInit = {
     method: request.method
-  }
+  };
 
   // Jika kita kirim data pakai form, maka kita masukkan ke formData
   if (request.method !== "GET" && request.method !== "DELETE"){

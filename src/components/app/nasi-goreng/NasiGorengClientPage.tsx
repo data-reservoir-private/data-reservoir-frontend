@@ -1,18 +1,9 @@
-'use client'
+'use client';
 
-import Loading from '@/components/common/loading/Loading';
 import Paper from '@/components/common/paper/Paper';
-import Picker from '@/components/common/picker/Picker';
-import { API_ROUTE } from '@/constant/api-route';
 import { NasiGorengTableLabel, NasiGorengTableType } from '@/constant/tables';
-import { DashboardRequest } from '@/model/request/dashboard';
-import { DashboardResponse } from '@/model/response/dashboard';
-import { request } from '@/utilities/http';
-import { useQuery } from '@tanstack/react-query';
-import { produce } from 'immer';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import NasiGorengBurnedFood from './NasiGorengBurnedFood';
-import TableSummary from '../shared/TableSummary';
 import NasiGorengIngredient from './NasiGorengIngredient';
 import NasiGorengPlate from './NasiGorengPlate';
 import NasiGorengTool from './NasiGorengTool';
@@ -36,5 +27,5 @@ export default function NasiGorengClientPage() {
       { state === 'nasi_goreng_fried_rice' && <NasiGorengFriedRice/> }
       { state === 'nasi_goreng_upgrade' && <NasiGorengUpgrade/> }
     </div>
-  )
+  );
 }

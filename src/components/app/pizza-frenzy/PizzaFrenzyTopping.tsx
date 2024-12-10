@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react'
-import Paper from '@/components/common/paper/Paper'
+import React, { Suspense } from 'react';
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
@@ -23,7 +23,7 @@ export default function PizzaFrenzyTable() {
 
   const displayFunc = (d: PizzaFrenzyToppingResponse) => (
     <Image src={d.image} alt={d.general_name} width={80} height={80} className='w-20 max-h-20 rendering-crisp-edges'/>
-  )
+  );
 
   const displayDetail = (d: PizzaFrenzyToppingResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
@@ -50,7 +50,7 @@ export default function PizzaFrenzyTable() {
         }
       </div>
     </div>
-  )
+  );
 
-  return (isLoading || !data) ? <Loading/> : <BasicGrid data={data} display={displayFunc} imageSrc={d => d.image} imageAlt={d => d.general_name} detail={displayDetail}/>
+  return (isLoading || !data) ? <Loading/> : <BasicGrid data={data} display={displayFunc} imageSrc={d => d.image} imageAlt={d => d.general_name} detail={displayDetail}/>;
 }

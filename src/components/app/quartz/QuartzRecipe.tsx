@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
@@ -44,5 +44,5 @@ export default function QuartzRecipe() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
 }

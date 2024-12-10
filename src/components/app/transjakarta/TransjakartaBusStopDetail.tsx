@@ -2,10 +2,10 @@ import Loading from '@/components/common/loading/Loading';
 import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { TransjakartaBusStopDetailResponse } from '@/model/response/transjakarta';
-import { useAppStore } from '@/store/store'
+import { useAppStore } from '@/store/store';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react'
+import React from 'react';
 import { FaBus } from "react-icons/fa";
 import { TbBusStop } from "react-icons/tb";
 import TransjakartaCode from './TransjakartaCode';
@@ -25,7 +25,7 @@ export default function TransjakartaBusStopDetail() {
     }
   });
 
-  if (isLoading || isFetching) return (<Loading />)
+  if (isLoading || isFetching) return (<Loading />);
   else if (!data) return (<p>No data</p>);
 
   return (
@@ -43,5 +43,5 @@ export default function TransjakartaBusStopDetail() {
         </div>
       </div>
     </Paper>
-  )
+  );
 }

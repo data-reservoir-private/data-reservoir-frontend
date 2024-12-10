@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import React from 'react'
+import Link from 'next/link';
+import React from 'react';
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
 import { ROUTES } from '@/constant/route';
@@ -26,5 +26,5 @@ export default function SideNavigation() {
         }
       </div>
     </div>
-  )
+  );
 }

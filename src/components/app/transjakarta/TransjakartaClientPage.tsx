@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import React from 'react'
-import Paper from '@/components/common/paper/Paper'
-import { useAppStore } from '@/store/store'
-import classNames from 'classnames'
-import dynamic from 'next/dynamic'
-import TransjakartaBusStopDetail from './TransjakartaBusStopDetail'
-import { useQuery } from '@tanstack/react-query'
-import { request } from '@/utilities/http'
-import { TransjakartaCorridorStyleResponse } from '@/model/response/transjakarta'
-import { API_ROUTE } from '@/constant/api-route'
-import Loading from '@/components/common/loading/Loading'
+import React from 'react';
+import Paper from '@/components/common/paper/Paper';
+import { useAppStore } from '@/store/store';
+import classNames from 'classnames';
+import dynamic from 'next/dynamic';
+import TransjakartaBusStopDetail from './TransjakartaBusStopDetail';
+import { useQuery } from '@tanstack/react-query';
+import { request } from '@/utilities/http';
+import { TransjakartaCorridorStyleResponse } from '@/model/response/transjakarta';
+import { API_ROUTE } from '@/constant/api-route';
+import Loading from '@/components/common/loading/Loading';
 
-const DynamicMap = dynamic(() => import("./TransjakartaBusStopMap"), { ssr: false })
+const DynamicMap = dynamic(() => import("./TransjakartaBusStopMap"), { ssr: false });
 
 export default function TransjakartaClientPage() {
   const [busStopCode, corridorColors, setCorridorColors] = useAppStore(x => [x.newTransjakarta.busStopCode, x.newTransjakarta.corridorColors, x.newTransjakarta.setCorridorStyle]);
@@ -31,7 +31,7 @@ export default function TransjakartaClientPage() {
       return j.data;
     }
   });
-  if (isLoading || Object.keys(corridorColors).length === 0) return <Loading/>
+  if (isLoading || Object.keys(corridorColors).length === 0) return <Loading/>;
 
   return (
     <div className='flex flex-col gap-4'>
@@ -46,7 +46,7 @@ export default function TransjakartaClientPage() {
         }
       </div>
     </div>
-  )
+  );
   // return (
   //   <div className='flex flex-col gap-4 text-white'>
   //     {

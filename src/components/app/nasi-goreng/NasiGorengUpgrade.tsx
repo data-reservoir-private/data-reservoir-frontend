@@ -1,12 +1,9 @@
-import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
-import { getStaticIndex } from '@/utilities/table';
 import { NasiGorengUpgradeResponse } from '@/model/response/nasi-goreng';
 import Image from 'next/image';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
@@ -37,5 +34,5 @@ export default function NasiGorengUpgrade() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
 }

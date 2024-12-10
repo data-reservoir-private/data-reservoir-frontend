@@ -1,14 +1,9 @@
-'use client'
+'use client';
 
-import Loading from '@/components/common/loading/Loading';
 import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
-import { FarmFrenzyTableType, FarmFrenzyTableTypeOptions } from '@/constant/tables'
-import { DashboardRequest } from '@/model/request/dashboard';
-import { DashboardResponse } from '@/model/response/dashboard';
-import { request } from '@/utilities/http';
-import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react'
+import { FarmFrenzyTableType, FarmFrenzyTableTypeOptions } from '@/constant/tables';
+import React, { useState } from 'react';
 import FarmFrenzyProduct from './FarmFrenzyProduct';
 import SimpleListbox from '@/components/common/simple-listbox/SimpleListbox';
 
@@ -32,5 +27,5 @@ export default function FarmFrenzyClientPage() {
       { state.pickedTable === "farm_frenzy_two_pizza_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT}/> }
       { state.pickedTable === "farm_frenzy_three_product" && <FarmFrenzyProduct key={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/> }
     </div>
-  )
+  );
 }

@@ -5,7 +5,7 @@ import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { PT_Sans } from 'next/font/google';
-import React from 'react'
+import React from 'react';
 import TransjakartaScheduleIcon from './TransjakartaScheduleIcon';
 import { useAppStore } from '@/store/store';
 import { PiWarningFill } from 'react-icons/pi';
@@ -29,7 +29,7 @@ export default function TransjakartaCorridorDetail() {
 
   if (isLoading || !data) return (
     <div className='p-4'><Loading/></div>
-  )
+  );
 
   return (
     <>
@@ -77,5 +77,5 @@ export default function TransjakartaCorridorDetail() {
         }
       </div>
     </>
-  )
+  );
 }

@@ -5,9 +5,10 @@ import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
 import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from './schema/the-sims';
 import { NasiGorengBurnedFoodSchema, NasiGorengFriedRiceSchema, NasiGorengIngredientSchema, NasiGorengPlateSchema, NasiGorengRelicSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from './schema/nasi-goreng';
 import { QuartzRecipeSchema, QuartzShippableSchema, QuartzUtensilSchema } from '@/model/response/quartz';
+import { CygnusArtifactSchema, CygnusMineralSchema } from './schema/cygnus';
 
-const client = new MongoClient(process.env.DATABASE_URL)
-const db = client.db('apify')
+const client = new MongoClient(process.env.DATABASE_URL);
+const db = client.db('apify');
 export const MONGODB = {
   client: client,
 
@@ -50,12 +51,17 @@ export const MONGODB = {
     shippable: db.collection<QuartzShippableSchema>('quartz_shippable'),
     utensil: db.collection<QuartzUtensilSchema>('quartz_utensil'),
     recipe: db.collection<QuartzRecipeSchema>('quartz_recipe'),
+  },
+
+  cygnus: {
+    mineral: db.collection<CygnusMineralSchema>('cygnus_mineral'),
+    artifact: db.collection<CygnusArtifactSchema>('cygnus_artifact'),
   }
 
-} as const
+} as const;
 
 export const ID_AGGR = [{ $replaceRoot: { newRoot: { $mergeObjects: [ { id: '$_id' }, '$$ROOT' ]} } }, { $unset: ['_id'] }];
 export const PAGINATION_AGGR = ({ currentPage, pageSize } : { currentPage: number, pageSize: number }) => [
   { $skip: pageSize * (currentPage - 1) },
   { $limit: pageSize }
-]
+];

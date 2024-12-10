@@ -29,7 +29,7 @@ export async function GET(_: Request, { params }: { params: { code: number } }) 
       corridors: sql<string[]>`${subQueryRoute.corridors}`
     })
     .from(transjakartaBusStop)
-    .innerJoin(subQueryRoute, eq(transjakartaBusStop.code, subQueryRoute.busStopCode))
+    .innerJoin(subQueryRoute, eq(transjakartaBusStop.code, subQueryRoute.busStopCode));
 
   return NextResponse.json(newResponse<TransjakartaBusStopDetailResponse>(data[0] ?? {}));
 }
