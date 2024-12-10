@@ -1,13 +1,13 @@
 import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
 import Loading from '@/components/common/loading/Loading';
 import Paper from '@/components/common/paper/Paper'
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
-import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { NasiGorengPlateResponse } from '@/model/response/nasi-goreng';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
+import Image from 'next/image';
 
 export default function NasiGorengPlate() {
   const { isLoading, data } = useQuery({
@@ -21,29 +21,18 @@ export default function NasiGorengPlate() {
     }
   });
 
-  const colHelper = createColumnHelper<NasiGorengPlateResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-    }),
-    colHelper.display({
-      id: 'image',
-      header: 'Image',
-      cell: p => (
-        <div className='flex justify-center w-full'>
-          <img className='h-32 rounded-md' src={p.row.original.image} alt="Plate"></img>
-        </div>
-      )
-    })
-  ];
+  const displayDetail = (d: NasiGorengPlateResponse) => (
+    <div className='w-full gap-3 flex flex-col'>
+      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
+        <Image src={d.image} width={256} height={256} alt={d.index.toString()} className='w-[50%] h-auto'/>
+      </Paper>
+      <GridDetail data={{
+        ID: d.id,
+        Index: d.index,
+        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>)
+      }}/>
+    </div>
+  );
 
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
-      </div>
-    </Paper>
-  )
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.index.toString()} detail={displayDetail} />
 }

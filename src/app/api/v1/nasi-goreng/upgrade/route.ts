@@ -1,11 +1,9 @@
-import { DB } from "@/database/client";
-import { nasiGorengUpgrade } from "@/database/schema";
+import { MONGODB, ID_AGGR } from "@/database/mongodb/db";
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   return NextResponse.json(newResponse(
-    await DB.select()
-      .from(nasiGorengUpgrade))
-  )
+    await MONGODB.nasi_goreng.upgrade.aggregate(ID_AGGR).toArray()
+  ));
 }

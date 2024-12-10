@@ -8,6 +8,9 @@ import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { getStaticIndex } from '@/utilities/table';
 import { NasiGorengUpgradeResponse } from '@/model/response/nasi-goreng';
+import Image from 'next/image';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
 
 export default function NasiGorengUpgrade() {
   const { isLoading, data } = useQuery({
@@ -21,37 +24,18 @@ export default function NasiGorengUpgrade() {
     }
   });
 
-  const colHelper = createColumnHelper<NasiGorengUpgradeResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-    }),
-    colHelper.display({
-      id: 'image',
-      header: 'Image',
-      cell: p => (
-        <div className='flex justify-center w-full'>
-          <img className='h-16 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
-        </div>
-      )
-    }),
-    colHelper.accessor('name', {
-      cell: p => p.getValue(),
-      header: "Name",
-      filterFn: 'includesString',
-      meta: {
-        filterVariant: 'search'
-      }
-    })
-  ];
+  const displayDetail = (d: NasiGorengUpgradeResponse) => (
+    <div className='w-full gap-3 flex flex-col'>
+      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
+        <Image src={d.image} width={256} height={256} alt={d.name} className='w-[50%] h-auto'/>
+      </Paper>
+      <GridDetail data={{
+        ID: d.id,
+        Name: d.name,
+        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>)
+      }}/>
+    </div>
+  );
 
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
-      </div>
-    </Paper>
-  )
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
 }

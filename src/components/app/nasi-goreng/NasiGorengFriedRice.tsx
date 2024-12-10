@@ -1,13 +1,13 @@
 import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
 import Loading from '@/components/common/loading/Loading';
 import Paper from '@/components/common/paper/Paper'
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
-import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { NasiGorengFriedRiceResponse } from '@/model/response/nasi-goreng';
+import Image from 'next/image';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
 
 export default function NasiGorengFriedRice() {
   const { isLoading, data } = useQuery({
@@ -21,62 +21,63 @@ export default function NasiGorengFriedRice() {
     }
   });
 
-  const colHelper = createColumnHelper<NasiGorengFriedRiceResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-    }),
-    colHelper.group({
-      header: 'Image',
-      columns: [
-        colHelper.display({
-          id: 'image-1',
-          header: 'Image Level 1',
-          cell: p => (
-            <div className='flex justify-center w-full'>
-              <img className='h-16 rounded-md' src={p.row.original.level1Image} alt={p.row.original.name}></img>
-            </div>
-          )
-        }),
-        colHelper.display({
-          id: 'image-6',
-          header: 'Image Level 6',
-          cell: p => (
-            <div className='flex justify-center w-full'>
-              <img className='h-16 rounded-md' src={p.row.original.level6Image} alt={p.row.original.name}></img>
-            </div>
-          )
-        }),
-      ]
-    }),
-    colHelper.accessor('name', {
-      cell: p => p.getValue(),
-      header: "Name",
-      filterFn: 'includesString',
-      meta: {
-        filterVariant: 'search'
-      }
-    }),
-    colHelper.accessor('price', {
-      cell: p => `${p.getValue()}`,
-      header: "Price",
-      enableSorting: true,
-    }),
-    colHelper.accessor('description', {
-      cell: p => (
-        <span title={p.getValue()} className='text-xs text-justify line-clamp-4'>{p.getValue()}</span>
-      ),
-      header: "Description"
-    }),
-  ];
-
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
-      </div>
-    </Paper>
+  const displayGrid = (d: NasiGorengFriedRiceResponse) => (
+    <Image src={d.levels[0].image} alt={d.name} width={64} height={64} className='w-16 max-h-16 rendering-crisp-edges'/>
   )
+
+  const displayDetail = (d: NasiGorengFriedRiceResponse) => (
+    <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
+      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
+        <Image src={d.levels[0].image} width={128} height={128} alt={d.name} className='w-[50%] h-auto'/>
+        <Image src={d.levels[5].image} width={128} height={128} alt={d.name} className='w-[50%] h-auto'/>
+      </Paper>
+      <div className='text-white text-lg font-bold'>
+        { d.name }
+      </div>
+      <GridDetail data={{
+        ID: d.id,
+        Name: d.name,
+        Image: (<a href={d.levels[0].image} className='text-blue-300 underline'>Link</a>),
+        Price: d.price,
+        Description: d.description,
+        Plate: (
+          <>
+            <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
+              <div className='relative min-h-12 w-12'>
+                <Image src={d.plate.image} alt="Plate" fill objectFit='contain' />
+              </div>
+            </div>
+          </>
+        ),
+        Tool: (
+          <>
+            <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
+              <div className='relative min-h-6 w-6'>
+                <Image src={d.tool_image} alt={d.tool_name} fill objectFit='contain' />
+              </div>
+              <span>{d.tool_name}</span>
+            </div>
+          </>
+        ),
+        Recipe: d.recipe.length > 0 ? (
+          <ul className='gap-2 flex flex-col'>
+            {
+              d.recipe.map(i => (
+                <li key={i.ingredient_name}>
+                  <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
+                    <div className='relative min-h-6 w-6'>
+                      <Image src={i.ingredient_image} alt={i.ingredient_name} fill objectFit='contain' />
+                    </div>
+                    <span>{i.ingredient_name}</span>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        ) : "-",
+      }}/>
+    </div>
+  );
+
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.levels[0].image} imageAlt={d => d.name} detail={displayDetail} display={displayGrid} />
 }

@@ -3,6 +3,7 @@ import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwo
 import { HaydayBuildingSchema, HaydayProductSchema } from './schema/hayday';
 import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
 import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from './schema/the-sims';
+import { NasiGorengBurnedFoodSchema, NasiGorengFriedRiceSchema, NasiGorengIngredientSchema, NasiGorengPlateSchema, NasiGorengRelicSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from './schema/nasi-goreng';
 
 const client = new MongoClient(process.env.DATABASE_URL)
 const db = client.db('apify')
@@ -32,7 +33,18 @@ export const MONGODB = {
     the_sims_bustin_out_career: db.collection<TheSimsBustinOutCareerSchema>('the_sims_bustin_out_career'),
     two_pets_console_career: db.collection<TheSimsTwoPetsConsoleCareerSchema>('the_sims_two_pets_console_career'),
     two_console_career: db.collection<TheSimsTwoConsoleCareerSchema>('the_sims_two_console_career'),
+  },
+
+  nasi_goreng: {
+    burned_food: db.collection<NasiGorengBurnedFoodSchema>('nasi_goreng_burned_food'),
+    relic: db.collection<NasiGorengRelicSchema>('nasi_goreng_relic'),
+    plate: db.collection<NasiGorengPlateSchema>('nasi_goreng_plate'),
+    upgrade: db.collection<NasiGorengUpgradeSchema>('nasi_goreng_upgrade'),
+    tool: db.collection<NasiGorengToolSchema>('nasi_goreng_tool'),
+    ingredient: db.collection<NasiGorengIngredientSchema>('nasi_goreng_ingredient'),
+    fried_rice: db.collection<NasiGorengFriedRiceSchema>('nasi_goreng_fried_rice'),
   }
+
 } as const
 
 export const ID_AGGR = [{ $replaceRoot: { newRoot: { $mergeObjects: [ { id: '$_id' }, '$$ROOT' ]} } }, { $unset: ['_id'] }];

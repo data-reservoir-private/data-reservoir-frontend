@@ -35,7 +35,7 @@ export default function BasicGrid<TData extends HasID>(props: BasicGridProps<TDa
               <div
                 key={d.id}
                 onClick={() => handleOnClick(d)}
-                className={classNames('bg-blackish border-slate-600 border-solid border-2 p-2 rounded w-16 h-16 text-center hover:bg-slate-800 origin-center cursor-pointer', {
+                className={classNames('bg-blackish border-slate-600 border-solid border-2 p-2 rounded min-w-16 min-h-16 text-center hover:bg-slate-800 origin-center cursor-pointer', {
                   'bg-slate-900': d.id === state.data?.id
                 })}
               >
