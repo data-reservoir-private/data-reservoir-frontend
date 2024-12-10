@@ -16,7 +16,7 @@ export default function HaydayClientPage() {
   };
 
   return (
-    <div className='flex flex-col flex-grow gap-4 text-white h-modal'>
+    <div className='flex flex-col flex-grow gap-4 text-white h-full'>
       <Paper className="p-2">
         <SimpleListbox onChange={e => setTab(e as HaydayMenu)} options={opt} value={tab} />
       </Paper>

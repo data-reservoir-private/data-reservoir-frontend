@@ -44,7 +44,7 @@ export default function FarmFrenzyClientPage() {
   if (isLoading || !summaryData) return (<Loading />)
   else {
     return (
-      <div className='flex flex-col gap-4 text-white w-full h-modal'>
+      <div className='flex flex-col gap-4 text-white w-full h-full'>
         <Paper className='p-2'>
           <SimpleListbox onChange={e => setState({ pickedTable: e as FarmFrenzyTableType })} options={keyLabels} value={state.pickedTable}/>
         </Paper>
