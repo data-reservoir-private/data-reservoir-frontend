@@ -34,7 +34,7 @@ export interface AppStore {
 }
 
 export const useAppStore = create<AppStore>()(
-  devtools(set => (
+  (set => (
     {
       query: {
         queryClient: new QueryClient({

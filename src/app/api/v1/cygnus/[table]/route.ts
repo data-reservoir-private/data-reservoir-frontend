@@ -6,7 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 type RouteEndpoint = typeof API_SHORTHAND.QUARTZ[keyof typeof API_SHORTHAND.QUARTZ]
 const routeEndpoint = (Object.values(API_SHORTHAND.QUARTZ));
 
-export async function GET(_: NextRequest, { params } : { params : { table: string } }){
+export async function GET(_: NextRequest, props: { params : Promise<{ table: string }> }) {
+  const params = await props.params;
   if (!routeEndpoint.includes(params.table as RouteEndpoint)) return new NextResponse(null, {
     status: 404
   });

@@ -1,8 +1,5 @@
-import { pgTable, varchar, uuid, text, integer, boolean, doublePrecision, index, foreignKey, uniqueIndex, time, date } from "drizzle-orm/pg-core";
-  import { sql } from "drizzle-orm";
-
-
-
+import { pgTable, varchar, uuid, text, integer, boolean, doublePrecision, index, uniqueIndex, time, date } from "drizzle-orm/pg-core";
+  
 export const efMigrationsHistory = pgTable("__EFMigrationsHistory", {
 	migrationId: varchar("MigrationId", { length: 150 }).primaryKey().notNull(),
 	productVersion: varchar("ProductVersion", { length: 32 }).notNull(),

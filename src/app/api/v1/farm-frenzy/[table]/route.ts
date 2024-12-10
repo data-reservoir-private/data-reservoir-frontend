@@ -7,7 +7,8 @@ import { NextRequest, NextResponse } from "next/server";
 type RouteEndpoint = typeof API_SHORTHAND.FARM_FRENZY[keyof typeof API_SHORTHAND.FARM_FRENZY]
 const routeEndpoint = (Object.values(API_SHORTHAND.FARM_FRENZY));
 
-export async function GET(_: NextRequest, { params } : { params : { table: string } }){
+export async function GET(_: NextRequest, props: { params : Promise<{ table: string }> }) {
+  const params = await props.params;
 
   // Cek apakah table masuk dalam type
   if (!routeEndpoint.includes(params.table as RouteEndpoint)) return new NextResponse(null, {

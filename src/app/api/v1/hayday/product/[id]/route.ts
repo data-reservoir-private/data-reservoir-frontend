@@ -3,7 +3,8 @@ import { newResponse } from "@/utilities/api";
 import { UUID } from "mongodb";
 import { NextResponse } from "next/server";
 
-export async function GET(_: Request, { params } : { params : { id: string }}) {
+export async function GET(_: Request, props: { params : Promise<{ id: string }>}) {
+  const params = await props.params;
   const id = UUID.createFromHexString(params.id);
 
   return NextResponse.json(newResponse(
@@ -24,7 +25,7 @@ export async function GET(_: Request, { params } : { params : { id: string }}) {
   //   .from(haydayProduct)
   //   .where(eq(haydayProduct.id, id))
   //   .limit(1);
-  
+
   // if (product.length === 0) return NextResponse.json({
   //   "message": "not found"
   // }, {
@@ -50,9 +51,9 @@ export async function GET(_: Request, { params } : { params : { id: string }}) {
   //   .innerJoin(haydayBuilding, eq(haydayProducer.buildingId, haydayBuilding.id))
   //   .where(eq(haydayProducer.productId, id))
   //   .limit(1);
-  
+
   // let actualProducer = producer?.[0];
-  
+
   // return NextResponse.json(newResponse<HayDayProductDetailResponse>({
   //   ...actualProduct,
   //   ingredient: ingredient.map(x => ({

@@ -7,23 +7,25 @@ import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import Paper from '@/components/common/paper/Paper';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import Image from 'next/image';
+import { useAppStore } from '@/store/store';
 
 export interface FarmFrenzyProductProps {
   url: string,
-  key: string
+  queryKey: string
 }
 
 export default function FarmFrenzyProduct(props: FarmFrenzyProductProps) {
+  const client = useAppStore(x => x.query.queryClient)
   const { isLoading, data } = useQuery({
-    queryKey: [props.key],
+    queryKey: [props.queryKey],
     queryFn: async () => {
       let j = await request<FarmFrenzyProductResponse[], {}>({
         method: "GET",
         url: props.url,
       });
       return (j?.data ?? []);
-    }
-  });
+    },
+  }, client);
 
   const displayDetail = (d: FarmFrenzyProductResponse) => (
     <div className='w-full gap-3 flex flex-col'>

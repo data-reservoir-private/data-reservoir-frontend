@@ -5,7 +5,8 @@ import { transjakartaBusRoute, transjakartaBusStop, transjakartaCorridor, transj
 import { newResponse } from '@/utilities/api';
 import { TransjakartaBusStopDetailResponse } from '@/model/response/transjakarta';
 
-export async function GET(_: Request, { params }: { params: { code: number } }) {
+export async function GET(_: Request, props: { params: Promise<{ code: number }> }) {
+  const params = await props.params;
 
   const subQueryRoute = DB.select({
     busStopCode: transjakartaBusRoute.busStopCode,

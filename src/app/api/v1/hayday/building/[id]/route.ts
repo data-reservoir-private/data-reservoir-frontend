@@ -3,7 +3,8 @@ import { newResponse } from "@/utilities/api";
 import { UUID } from "mongodb";
 import { NextResponse } from "next/server";
 
-export async function GET(_: Request, { params } : { params : { id: string }}) {
+export async function GET(_: Request, props: { params : Promise<{ id: string }>}) {
+  const params = await props.params;
   const id = UUID.createFromHexString(params.id);
   return NextResponse.json(newResponse(
     await MONGODB.hayday.building.aggregate(
@@ -19,5 +20,4 @@ export async function GET(_: Request, { params } : { params : { id: string }}) {
       ]
     ).toArray()
   ));
-
 }

@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                hostname: "raw.githubusercontent.com",
-                protocol: "https",
-                pathname: "/apify-apps/apify-static-assets/**"
-            }
-        ]
-    }
+  images: {
+    remotePatterns: [
+      {
+        hostname: "raw.githubusercontent.com",
+        protocol: "https",
+        pathname: "/apify-apps/apify-static-assets/**"
+      }
+    ]
+  }
 };
 
 export default nextConfig;

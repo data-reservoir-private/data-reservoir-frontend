@@ -6,7 +6,8 @@ import { badRequestResponse, newResponse } from "@/utilities/api";
 import { and, count, desc, eq, or } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
-export async function GET(_: Request, { params }: { params: { code: string } }) {
+export async function GET(_: Request, props: { params: Promise<{ code: string }> }) {
+  const params = await props.params;
   let code = params.code;
 
   let main = (await DB.select()
@@ -22,7 +23,7 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
       desc(transjakartaScheduleDetail.day),
       desc(transjakartaScheduleDetail.peakDay),
   );
-  
+
   let northSouth = await DB.select()
     .from(transjakartaBusRoute)
     .innerJoin(transjakartaBusStop, eq(transjakartaBusRoute.busStopCode, transjakartaBusStop.code))
@@ -30,15 +31,15 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
       eq(transjakartaBusRoute.corridorCode, code),
       eq(transjakartaBusRoute.order, 1)
     ));
-  
+
   let color = (await DB.select()
     .from(transjakartaCorridorStyle)
     .where(eq(transjakartaCorridorStyle.code, code)))?.[0]?.hexColor ?? "000000";
-  
+
   let roadIDs = await DB.select({ id: transjakartaBusRoute.busStopCode })
     .from(transjakartaBusRoute)
     .where(eq(transjakartaBusRoute.corridorCode, code));
-  
+
   const problematicRoute = (await DB.select({
     code: transjakartaCorridor.code,
     problemCount: count()
@@ -53,7 +54,7 @@ export async function GET(_: Request, { params }: { params: { code: string } }) 
       )
     )
     .groupBy(transjakartaCorridor.code))?.[0]?.problemCount ?? 0;
-  
+
   return NextResponse.json(newResponse<TransjakartaCorridorDetailResponse>({
     code: main.code,
     name: main.name,
