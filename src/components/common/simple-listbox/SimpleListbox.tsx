@@ -37,7 +37,7 @@ export default function SimpleListbox(props: SimpleListboxProps) {
       <ListboxOptions
         anchor="bottom"
         className={classNames("w-[var(--button-width)] flex flex-col gap-2 overflow-hidden rounded-sm disabled:cursor-not-allowed disabled:opacity-50 outline-0 cursor-pointer",
-          "border-gray-500 bg-gray-600 text-white text-sm border-2 border-t-0 rounded-t-none"
+          "border-gray-500 bg-gray-600 text-white text-sm border-2 border-t-0 rounded-t-none z-50"
         )}
       >
         {

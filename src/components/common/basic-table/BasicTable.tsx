@@ -41,8 +41,8 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
 
   return (
     <div className='rounded-md relative'>
-      <table className='min-h-30 rounded-md min-w-full border-2 border-slate-700'>
-        <thead className='sticky top-0 bg-bluish-200 z-50'>
+      <table className='min-h-30 rounded-md min-w-full border-2 border-slate-700 border-collapse'>
+        <thead className='sticky top-0 bg-bluish-200 z-20'>
           {
             reactTable.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>

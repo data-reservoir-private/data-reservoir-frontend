@@ -9,6 +9,10 @@ import { useQuery } from '@tanstack/react-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import { Checkbox } from 'flowbite-react';
 import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
+import Image from 'next/image';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
+import { SIMOLEON_ICON } from '@/utilities/char';
 
 export default function CastawayProduct() {
   const { isLoading, data } = useQuery({
@@ -22,76 +26,27 @@ export default function CastawayProduct() {
     }
   });
 
-  const colHelper = createColumnHelper<TheSimsCastawayProductResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>),
-    }),
-    colHelper.display({
-      id: "image",
-      cell: p => (
-        <div className='flex justify-center w-16 h-16'>
-          <img className='w-16 h-16 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
-        </div>
-      ),
-      header: "Image"
-    }),
-    colHelper.accessor('name', {
-      cell: p => p.getValue(),
-      header: "Name",
-      filterFn: 'includesString',
-      meta: {
-        filterVariant: 'search'
-      }
-    }),
-    colHelper.accessor('category', {
-      cell: p => p.getValue(),
-      header: "Category",
-      filterFn: multiSelectFilter,
-      enableSorting: true,
-      meta: {
-        filterVariant: 'select'
-      }
-    }),
-    colHelper.accessor('bladder', {
-      cell: p => p.getValue(),
-      header: "Bladder",
-      enableSorting: true
-    }),
-    colHelper.accessor('energy', {
-      cell: p => p.getValue(),
-      header: "Energy",
-      enableSorting: true
-    }),
-    colHelper.accessor('hunger', {
-      cell: p => p.getValue(),
-      header: "Hunger",
-      enableSorting: true
-    }),
-    colHelper.accessor('eatenRaw', {
-      cell: p => (
-        <div className='flex justify-center'>
-          <Checkbox className='w-5 h-5' color='gray' disabled checked={p.getValue()}/>
-        </div>
-      ),
-      header: "Eaten Raw",
-      enableSorting: true
-    }),
-    colHelper.accessor('description', {
-      cell: p => (
-        <span title={p.getValue()} className='text-xs text-justify line-clamp-4'>{p.getValue()}</span>
-      ),
-      header: "Description"
-    }),
-  ];
-
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-        { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
+  const displayDetail = (d: TheSimsCastawayProductResponse) => (
+    <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
+      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
+        <Image src={d.image} width={256} height={256} alt={d.name} className='w-[50%] h-auto'/>
+      </Paper>
+      <div className='text-white text-lg font-bold'>
+        { d.name }
       </div>
-    </Paper>
-  )
+      <GridDetail data={{
+        ID: d.id,
+        Name: d.name,
+        Category: d.category,
+        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
+        Description: d.description,
+        Hunger: d.hunger,
+        Energy: d.energy,
+        Bladder: d.bladder,
+        "Eaten Raw": <Checkbox checked={d.eaten_raw} size={8} disabled />,
+      }}/>
+    </div>
+  );
+
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
 }

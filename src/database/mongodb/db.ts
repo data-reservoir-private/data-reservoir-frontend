@@ -2,6 +2,7 @@ import { MongoClient } from 'mongodb';
 import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwoPizzaProductSchema, FarmFrenzyTwoProductSchema } from './schema/farm-frenzy';
 import { HaydayBuildingSchema, HaydayProductSchema } from './schema/hayday';
 import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
+import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from './schema/the-sims';
 
 const client = new MongoClient(process.env.DATABASE_URL)
 const db = client.db('apify')
@@ -22,6 +23,15 @@ export const MONGODB = {
 
   pizza_frenzy: {
     topping: db.collection<PizzaFrenzyToppingSchema>('pizza_frenzy_topping')
+  },
+
+  the_sims: {
+    four_pc_harvestable: db.collection<TheSimsFourPCHarvestableSchema>('the_sims_four_pc_harvestable'),
+    castaway_product: db.collection<TheSimsCastawayProductSchema>('the_sims_castaway_product'),
+    two_pets_console_product: db.collection<TheSimsTwoPetsConsoleProductSchema>('the_sims_two_pets_console_product'),
+    the_sims_bustin_out_career: db.collection<TheSimsBustinOutCareerSchema>('the_sims_bustin_out_career'),
+    two_pets_console_career: db.collection<TheSimsTwoPetsConsoleCareerSchema>('the_sims_two_pets_console_career'),
+    two_console_career: db.collection<TheSimsTwoConsoleCareerSchema>('the_sims_two_console_career'),
   }
 } as const
 

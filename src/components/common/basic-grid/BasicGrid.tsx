@@ -48,7 +48,7 @@ export default function BasicGrid<TData extends HasID>(props: BasicGridProps<TDa
           }
         </div>
       </div>
-      <Paper className='min-w-80 flex-grow flex p-3 overflow-hidden'>
+      <Paper className='min-w-80 max-sm:w-40 flex-grow flex p-3 overflow-hidden'>
         {
           state.data ? props.detail(state.data) :
           <div className='flex justify-center items-center w-full italic text-white/50 text-sm'>

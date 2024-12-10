@@ -18,3 +18,13 @@ export function secondToTimespan(p: number): string {
 
   return d > 0 ? `${d}:${h}:${m}:${ns}` : `${h}:${m}:${ns}`;
 }
+
+export function ticksToTime(p: number): string {
+  let s = p / 10_000_000;
+  if (s === 0) return "00:00";
+
+  let h = s / 3600;
+  let m = s % 3600 / 60 
+  
+  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+}
