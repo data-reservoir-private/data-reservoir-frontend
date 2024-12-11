@@ -21,10 +21,6 @@ export default function NasiGorengFriedRice() {
     }
   });
 
-  const displayGrid = (d: NasiGorengFriedRiceResponse) => (
-    <Image src={d.levels[0].image} alt={d.name} width={64} height={64} className='w-16 max-h-16 rendering-crisp-edges'/>
-  );
-
   const displayDetail = (d: NasiGorengFriedRiceResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
       <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
@@ -79,5 +75,5 @@ export default function NasiGorengFriedRice() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.levels[0].image} imageAlt={d => d.name} detail={displayDetail} display={displayGrid} />;
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.levels[0].image} imageAlt={d => d.name} detail={displayDetail} />;
 }

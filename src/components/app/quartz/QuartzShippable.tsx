@@ -23,7 +23,7 @@ export default function QuartzShippable() {
 
   const displayDetail = (d: QuartzShippableResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
+      <Paper className='w-full h-full object-contain flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
         <Image src={d.image} width={64} height={64} alt={d.name} className='rendering-pixelated'/>
       </Paper>
       <div className='text-white text-lg font-bold'>
@@ -40,5 +40,5 @@ export default function QuartzShippable() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridImageUnoptimized />;
 }

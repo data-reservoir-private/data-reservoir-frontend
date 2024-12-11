@@ -22,7 +22,7 @@ export default function PizzaFrenzyTable() {
   });
 
   const displayFunc = (d: PizzaFrenzyToppingResponse) => (
-    <Image src={d.image} alt={d.general_name} width={80} height={80} className='w-20 max-h-20 rendering-crisp-edges'/>
+    <Image src={d.image} alt={d.general_name} width={0} height={0} unoptimized className='object-contain w-full h-full p-4'/>
   );
 
   const displayDetail = (d: PizzaFrenzyToppingResponse) => (
@@ -38,14 +38,14 @@ export default function PizzaFrenzyTable() {
       <div className='flex flex-col'>
         {
           d.upgrades.map(upg => (
-            <>
+            <div key={upg.name}>
               <p>Level {upg.level}</p>
               <GridDetail data={{
                 Name: upg.name,
                 Price: upg.price,
                 Description: upg.description,
               }}/>
-            </>
+            </div>
           ))
         }
       </div>

@@ -9,7 +9,16 @@ export interface BasicGridProps<TData> {
   display?: (d: TData) => React.ReactNode
   detail: (d: TData) => React.ReactNode
   imageSrc: (d: TData) => string,
-  imageAlt: (d: TData) => string
+  imageAlt: (d: TData) => string,
+  // gridOptions?: {
+  //   unoptimized: boolean,
+  //   gridContainerClasses: string,
+  //   gridImageClasses: string
+  // }
+
+  gridContainerClasses?: string,
+  gridImageClasses?: string,
+  gridImageUnoptimized?: boolean,
 }
 
 export interface BasicGridState<TData> {
@@ -35,20 +44,20 @@ export default function BasicGrid<TData extends HasID>(props: BasicGridProps<TDa
               <div
                 key={d.id}
                 onClick={() => handleOnClick(d)}
-                className={classNames('bg-blackish border-slate-600 border-solid border-2 p-2 rounded min-w-16 min-h-16 text-center hover:bg-slate-800 origin-center cursor-pointer', {
+                className={classNames('flex justify-center items-center bg-blackish border-slate-600 border-solid border-2 rounded w-16 h-16 text-center hover:bg-slate-800 origin-center cursor-pointer', props.gridContainerClasses ?? "", {
                   'bg-slate-900': d.id === state.data?.id
                 })}
               >
                 {
                   props.display ? props.display(d) :
-                    <Image src={props.imageSrc(d)} alt={props.imageAlt(d)} width={48} height={48} className='w-12 max-h-12 rendering-crisp-edges'/>
+                    <Image src={props.imageSrc(d)} alt={props.imageAlt(d)} width={0} height={0} objectFit='contain' unoptimized={props?.gridImageUnoptimized} className={classNames('inline-block object-contain w-full h-full p-3', props.gridImageClasses ?? "")}/>
                 }
                 </div>
             ))
           }
         </div>
       </div>
-      <Paper className='min-w-80 max-sm:w-40 flex-grow flex p-3 overflow-hidden'>
+      <Paper className='min-w-[300px] flex p-3'>
         {
           state.data ? props.detail(state.data) :
           <div className='flex justify-center items-center w-full italic text-white/50 text-sm'>
