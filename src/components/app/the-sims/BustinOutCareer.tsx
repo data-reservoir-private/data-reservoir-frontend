@@ -6,7 +6,7 @@ import { API_ROUTE } from '@/constant/api-route';
 import { TheSimsBustinOutCareerResponse } from '@/model/response/the-sims';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { SIMOLEON_ICON } from '@/utilities/char';
 import { ticksToTime } from '@/utilities/general';
@@ -25,7 +25,7 @@ export default function BustinOutCareer() {
   });
 
   const colHelper = createColumnHelper<TheSimsBustinOutCareerResponse>();
-  const columns = [
+  const columns: ColumnDef<TheSimsBustinOutCareerResponse, any>[] = [
     colHelper.display({
       id: 'index',
       header: "#",

@@ -1,7 +1,7 @@
 import BasicTable from '@/components/common/basic-table/BasicTable';
 import { getCategoryColorClass } from '@/utilities/color';
 import { getStaticIndex } from '@/utilities/table';
-import { createColumnHelper } from '@tanstack/react-table';
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
 
@@ -14,7 +14,7 @@ export default function TableCategoryCount(props: TableCategoryCountProps) {
   const data = useMemo(() => props.data, [props]);
   const columnHelper = createColumnHelper<{ category: string, rowCount: number }>();
 
-  const column = [
+  const column: ColumnDef<{ category: string, rowCount: number }, any>[] = [
     columnHelper.display({
       header: '#',
       cell: ({ row, table }) => <p className='text-center font-bold'>{getStaticIndex(row, table)}</p>

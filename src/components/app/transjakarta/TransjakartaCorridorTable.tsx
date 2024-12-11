@@ -7,7 +7,7 @@ import { TransjakartaCorridorResponse } from '@/model/response/transjakarta';
 import { request } from '@/utilities/http';
 import { multiSelectFilter } from '@/utilities/table';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import TransjakartaCode from './TransjakartaCode';
 import { useAppStore } from '@/store/store';
 import { PiWarningFill } from 'react-icons/pi';
@@ -39,7 +39,7 @@ export default function TransjakartaCorridorTable() {
   };
 
   const colHelper = createColumnHelper<TransjakartaCorridorResponse>();
-  const columns = [
+  const columns: ColumnDef<TransjakartaCorridorResponse, any>[] = [
     colHelper.accessor('code', {
       id: 'code',
       header: "#",
