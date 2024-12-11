@@ -21,5 +21,13 @@ export async function GET(_: NextRequest, props: { params : Promise<{ table: str
       return NextResponse.json(newResponse(
         await MONGODB.cygnus.mineral.aggregate(ID_AGGR).toArray()
       ));
+    case 'crop':
+      return NextResponse.json(newResponse(
+        await MONGODB.cygnus.crop.aggregate(ID_AGGR).toArray()
+      ));
+    case 'dish':
+      return NextResponse.json(newResponse(
+        await MONGODB.cygnus.dish.aggregate(ID_AGGR).toArray()
+      ));
   }
 }

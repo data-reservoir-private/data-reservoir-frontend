@@ -13,3 +13,17 @@ export enum FOUR_PC_HARVESTABLE_RARITY {
   UNCOMMON,
   RARE
 }
+
+export enum CYGNUS_GRADE_ID {
+  NORMAL = 1,
+  SILVER = 2,
+  GOLD = 3,
+  IRIDIUM = 4
+}
+
+export enum CYGNUS_GRADE_STR {
+  NORMAL = "normal",
+  SILVER = "silver",
+  GOLD = "gold",
+  IRIDIUM = "iridium"
+}

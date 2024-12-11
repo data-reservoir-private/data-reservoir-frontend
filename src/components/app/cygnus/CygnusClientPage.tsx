@@ -6,6 +6,8 @@ import SimpleListbox from '@/components/common/simple-listbox/SimpleListbox';
 import { CygnusTableLabel, CygnusTableType } from '@/constant/tables';
 import CygnusMineral from './CygnusMineral';
 import CygnusArtifact from './CygnusArtifact';
+import CygnusCrop from './CygnusCrop';
+import CygnusDish from './CygnusDish';
 
 interface CygnusClientPageState {
   pickedTable: CygnusTableType | null
@@ -22,6 +24,8 @@ export default function CygnusClientPage() {
       </Paper>
       {state.pickedTable === "mineral" && <CygnusMineral/>}
       {state.pickedTable === "artifact" && <CygnusArtifact/>}
+      {state.pickedTable === "crop" && <CygnusCrop/>}
+      {state.pickedTable === "dish" && <CygnusDish/>}
       {/* {state.pickedTable === "recipe" && <CygnusRecipe/>} */}
     </div>
   );

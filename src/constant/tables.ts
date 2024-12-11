@@ -55,11 +55,15 @@ export const QuartzTableLabel: {[key in QuartzTableType]: string} = {
 
 export type CygnusTableType =
   "mineral" |
-  "artifact"
+  "artifact" |
+  "crop" |
+  "dish"
 
 export const CygnusTableLabel: {[key in CygnusTableType]: string} = {
   'mineral': 'Mineral',
-  'artifact': 'Artifact'
+  'artifact': 'Artifact',
+  'crop': 'Crop',
+  'dish': 'Dish',
 };
 
 export type NasiGorengTableType =

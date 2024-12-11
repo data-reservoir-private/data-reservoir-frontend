@@ -4,7 +4,7 @@ import { HaydayBuildingSchema, HaydayProductSchema } from './schema/hayday';
 import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
 import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from './schema/the-sims';
 import { NasiGorengBurnedFoodSchema, NasiGorengFriedRiceSchema, NasiGorengIngredientSchema, NasiGorengPlateSchema, NasiGorengRelicSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from './schema/nasi-goreng';
-import { CygnusArtifactSchema, CygnusMineralSchema } from './schema/cygnus';
+import { CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema, CygnusMineralSchema } from './schema/cygnus';
 import { QuartzShippableSchema, QuartzUtensilSchema, QuartzRecipeSchema } from './schema/quartz';
 
 const client = new MongoClient(process.env.DATABASE_URL);
@@ -56,8 +56,9 @@ export const MONGODB = {
   cygnus: {
     mineral: db.collection<CygnusMineralSchema>('cygnus_mineral'),
     artifact: db.collection<CygnusArtifactSchema>('cygnus_artifact'),
+    dish: db.collection<CygnusDishSchema>('cygnus_dish'),
+    crop: db.collection<CygnusCropSchema>('cygnus_crop'),
   }
-
 } as const;
 
 export const ID_AGGR = [{ $replaceRoot: { newRoot: { $mergeObjects: [ { id: '$_id' }, '$$ROOT' ]} } }, { $unset: ['_id'] }];
