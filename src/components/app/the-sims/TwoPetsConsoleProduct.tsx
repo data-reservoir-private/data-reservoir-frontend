@@ -9,6 +9,7 @@ import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import Image from 'next/image';
 import { SIMOLEON_ICON } from '@/utilities/char';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function TwoPetsConsoleProduct() {
   const { isLoading, data } = useQuery({
@@ -24,9 +25,7 @@ export default function TwoPetsConsoleProduct() {
 
   const displayDetail = (d: TheSimsTwoPetsConsoleProductResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Image src={d.image} width={256} height={256} alt={d.name} className='w-[50%] h-auto'/>
-      </Paper>
+      <BasicGridDetailImage src={d.image} alt={d.name} unoptimized/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>

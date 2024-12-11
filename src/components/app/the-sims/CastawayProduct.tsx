@@ -9,6 +9,7 @@ import { Checkbox } from 'flowbite-react';
 import Image from 'next/image';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function CastawayProduct() {
   const { isLoading, data } = useQuery({
@@ -24,9 +25,7 @@ export default function CastawayProduct() {
 
   const displayDetail = (d: TheSimsCastawayProductResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Image src={d.image} width={256} height={256} alt={d.name} className='w-[50%] h-auto'/>
-      </Paper>
+      <BasicGridDetailImage src={d.image} alt={d.name} unoptimized/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>

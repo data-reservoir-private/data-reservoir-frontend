@@ -8,6 +8,7 @@ import { NasiGorengBurnedFoodResponse } from '@/model/response/nasi-goreng';
 import Image from 'next/image';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function NasiGorengBurnedFood() {
   const { isLoading, data } = useQuery({
@@ -23,9 +24,7 @@ export default function NasiGorengBurnedFood() {
 
   const displayDetail = (d: NasiGorengBurnedFoodResponse) => (
     <div className='w-full gap-3 flex flex-col'>
-      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Image src={d.image} width={256} height={256} alt={d.name} className='w-[50%] h-auto'/>
-      </Paper>
+      <BasicGridDetailImage src={d.image} width={256} height={256} alt={d.name} unoptimized/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>
@@ -38,5 +37,5 @@ export default function NasiGorengBurnedFood() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridImageUnoptimized />;
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />;
 }

@@ -39,7 +39,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
   });
 
   return (
-    <div className='rounded-md relative'>
+    <div className='rounded-md relative overflow-auto scrollbar-default'>
       <table className='min-h-30 rounded-md min-w-full border-2 border-slate-700 border-collapse'>
         <thead className='sticky top-0 bg-bluish-200 z-20'>
           {

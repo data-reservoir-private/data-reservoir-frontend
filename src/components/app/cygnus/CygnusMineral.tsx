@@ -4,39 +4,35 @@ import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
-import { QuartzRecipeResponse } from '@/model/response/quartz';
 import { API_ROUTE } from '@/constant/api-route';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import { CygnusMineralResponse } from '@/model/response/cygnus';
 
-export default function QuartzRecipe() {
+export default function CygnusMineral() {
   const { isLoading, data } = useQuery({
-    queryKey: ['quartz-recipe'],
+    queryKey: ['cygnus-mineral'],
     queryFn: async () => {
-      const j = await request<QuartzRecipeResponse[], {}>({
+      const j = await request<CygnusMineralResponse[], {}>({
         method: "GET",
-        url: API_ROUTE.QUARTZ.RECIPE,
+        url: API_ROUTE.CYGNUS.MINERAL,
       });
       return (j?.data ?? []);
     }
   });
 
-  const displayDetail = (d: QuartzRecipeResponse) => (
+  const displayDetail = (d: CygnusMineralResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <BasicGridDetailImage src={d.image} alt={d.name} className='rendering-pixelated'/>
+      <BasicGridDetailImage src={d.image} alt={d.name} className='rendering-pixelated' unoptimized/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>
       <GridDetail data={{
         ID: d.id,
+        Category: d.category,
         Name: d.name,
         Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
-        Recipe: (
-          <ul className='flex flex-col gap-2'>
-            {
-              d.recipe.map((x, idx) => (<li key={idx}>{x}</li>))
-            }
-          </ul>
-        )
+        Price: d.price,
+        Description: d.description
       }}/>
     </div>
   );

@@ -3,11 +3,10 @@ import Loading from '@/components/common/loading/Loading';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
-import Paper from '@/components/common/paper/Paper';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
-import Image from 'next/image';
 import { QuartzShippableResponse } from '@/model/response/quartz';
 import { API_ROUTE } from '@/constant/api-route';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function QuartzShippable() {
   const { isLoading, data } = useQuery({
@@ -23,9 +22,7 @@ export default function QuartzShippable() {
 
   const displayDetail = (d: QuartzShippableResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full h-full object-contain flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Image src={d.image} width={64} height={64} alt={d.name} className='rendering-pixelated'/>
-      </Paper>
+      <BasicGridDetailImage src={d.image} alt={d.name} className='rendering-pixelated'/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>

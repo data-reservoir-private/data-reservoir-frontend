@@ -3,8 +3,8 @@ import { ID_AGGR, MONGODB } from "@/database/mongodb/db";
 import { newResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 
-type RouteEndpoint = typeof API_SHORTHAND.QUARTZ[keyof typeof API_SHORTHAND.QUARTZ]
-const routeEndpoint = (Object.values(API_SHORTHAND.QUARTZ));
+type RouteEndpoint = typeof API_SHORTHAND.CYGNUS[keyof typeof API_SHORTHAND.CYGNUS]
+const routeEndpoint = (Object.values(API_SHORTHAND.CYGNUS));
 
 export async function GET(_: NextRequest, props: { params : Promise<{ table: string }> }) {
   const params = await props.params;
@@ -13,17 +13,13 @@ export async function GET(_: NextRequest, props: { params : Promise<{ table: str
   });
 
   switch (params.table as RouteEndpoint) {
-    case 'recipe':
+    case 'artifact':
       return NextResponse.json(newResponse(
-        await MONGODB.quartz.recipe.aggregate(ID_AGGR).toArray()
+        await MONGODB.cygnus.artifact.aggregate(ID_AGGR).toArray()
       ));
-    case 'shippable':
+    case 'mineral':
       return NextResponse.json(newResponse(
-        await MONGODB.quartz.shippable.aggregate(ID_AGGR).toArray()
-      ));
-    case 'utensil':
-      return NextResponse.json(newResponse(
-        await MONGODB.quartz.utensil.aggregate(ID_AGGR).toArray()
+        await MONGODB.cygnus.mineral.aggregate(ID_AGGR).toArray()
       ));
   }
 }

@@ -14,13 +14,17 @@ export default function SideNavigation() {
         {
           ROUTES.map(route => (
             <Link key={route.id} title={route.name} href={(path === route.link || route.inactive) ? '#' : route.link} className={classNames(
-              'm-auto h-full p-2 bg-bluish min-h-9 rounded-md text-2xl flex justify-center items-center text-white/60', {
+              'm-auto h-full bg-bluish min-h-9 rounded-md text-2xl flex justify-center items-center text-white/60 relative overflow-hidden', {
                 '!bg-slate-400 border-slate-500': path === route.link,
                 // 'hover:text-white/35': path !== route.link && !route.inactive,
                 'bg-bluish/50 !text-white/10 cursor-default': route.inactive,
                 'hover:bg-bluish/35': !route.inactive
             })}>
-              <route.icon/>
+              { route.beta && <div className='text-[8px] leading-[10px] p-0.5 absolute top-0 right-0 bg-orange-600 rounded-sm text-white'>Beta</div>}
+              { route.new && <div className='text-[8px] leading-[10px] p-0.5 absolute top-0 right-0 bg-yellow-400 rounded-sm text-white'>New</div>}
+              <div className='p-2'>
+                <route.icon/>
+              </div>
             </Link>
           ))
         }

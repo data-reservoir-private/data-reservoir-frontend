@@ -19,7 +19,9 @@ export type ROUTE_TYPE = {
   name: string,
   icon: IconType,
   link: string,
-  inactive?: boolean
+  inactive?: boolean,
+  beta?: boolean,
+  new?: boolean,
 };
 
 export const ROUTES: ROUTE_TYPE[] = [
@@ -30,53 +32,60 @@ export const ROUTES: ROUTE_TYPE[] = [
     link: '/dashboard'
   },
   {
-    id: 'transjakarta',
-    name: 'Transjakarta',
-    icon: TransjakartaIcon,
-    link: '/transjakarta',
-  },
-  {
     id: 'the-sims',
     name: 'The Sims',
     icon: BsFillSuitDiamondFill,
-    link: '/the-sims'
+    link: '/the-sims',
+    new: true
   },
   {
     id: 'farm-frenzy',
     name: 'Farm Frenzy',
     icon: PiBarn,
-    link: '/farm-frenzy'
+    link: '/farm-frenzy',
+    new: true
   },
   {
     id: 'hayday',
     name: 'Hayday',
     icon: CiWheat,
-    link: '/hayday'
+    link: '/hayday',
+    new: true
   },
   {
     id: 'pizza-frenzy',
     name: 'Pizza Frenzy',
     icon: FaPizzaSlice,
-    link: '/pizza-frenzy'
+    link: '/pizza-frenzy',
+    new: true
   },
   {
     id: 'nasi-goreng',
     name: 'Nasi Goreng',
     icon: FaBowlFood,
-    link: '/nasi-goreng'
+    link: '/nasi-goreng',
+    new: true
   },
   {
     id: 'cygnus',
     name: 'Cygnus',
     icon: GiPolarStar,
     link: '/cygnus',
-    inactive: true
+    beta: true
   },
   {
     id: 'quartz',
     name: 'Quartz',
     icon: GiCrystalGrowth,
-    link: '/quartz'
+    link: '/quartz',
+    new: true
+  },
+  {
+    id: 'transjakarta',
+    name: 'Transjakarta',
+    icon: TransjakartaIcon,
+    link: '/transjakarta',
+    inactive: true,
   },
   {
     id: 'transaction',

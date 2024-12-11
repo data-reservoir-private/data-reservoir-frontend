@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { Checkbox } from 'flowbite-react';
 import { secondToTimespan } from '@/utilities/general';
 import { Suspense } from 'react';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function HaydayProduct() {
   const { isLoading, data } = useQuery({
@@ -25,11 +26,7 @@ export default function HaydayProduct() {
 
   const displayDetail = (d: HayDayProductResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full p-2 relative flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Suspense fallback={<Loading/>}>
-          <Image src={d.image} width={256} height={256} alt={d.name} placeholder='empty'></Image>
-        </Suspense>
-      </Paper>
+      <BasicGridDetailImage src={d.image} alt={d.name} className='rendering-pixelated' unoptimized/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>

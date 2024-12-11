@@ -8,6 +8,7 @@ import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import Loading from '@/components/common/loading/Loading';
 import Image from 'next/image';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function PizzaFrenzyTable() {
   const { isLoading, data } = useQuery({
@@ -27,19 +28,15 @@ export default function PizzaFrenzyTable() {
 
   const displayDetail = (d: PizzaFrenzyToppingResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full p-2 relative flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Suspense fallback={<Loading/>}>
-          <Image src={d.image} width={256} height={256} alt={d.general_name} placeholder='empty'></Image>
-        </Suspense>
-      </Paper>
+      <BasicGridDetailImage src={d.image} alt={d.general_name} className='rendering-pixelated'/>
       <div className='text-white text-lg font-bold'>
         { d.general_name }
       </div>
-      <div className='flex flex-col'>
+      <div className='flex flex-col gap-3'>
         {
           d.upgrades.map(upg => (
             <div key={upg.name}>
-              <p>Level {upg.level}</p>
+              <p className='mb-1'>Level {upg.level}</p>
               <GridDetail data={{
                 Name: upg.name,
                 Price: upg.price,
@@ -52,5 +49,5 @@ export default function PizzaFrenzyTable() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading/> : <BasicGrid data={data} display={displayFunc} imageSrc={d => d.image} imageAlt={d => d.general_name} detail={displayDetail}/>;
+  return (isLoading || !data) ? <Loading/> : <BasicGrid data={data} display={displayFunc} imageSrc={d => d.image} imageAlt={d => d.general_name} detail={displayDetail} gridContainerClasses='w-24 h-24'/>;
 }

@@ -1,5 +1,3 @@
-'use client';
-
 import FarmFrenzyClientPage from '@/components/app/farm-frenzy/FarmFrenzyClientPage';
 import { Metadata } from 'next';
 import React from 'react';

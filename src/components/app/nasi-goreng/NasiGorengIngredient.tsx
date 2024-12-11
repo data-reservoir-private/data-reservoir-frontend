@@ -1,6 +1,5 @@
 import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +8,7 @@ import GridDetail from '@/components/common/basic-grid/GridDetail';
 import Image from 'next/image';
 import { Checkbox } from 'flowbite-react';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function NasiGorengIngredient() {
   const { isLoading, data } = useQuery({
@@ -24,9 +24,7 @@ export default function NasiGorengIngredient() {
 
   const displayDetail = (d: NasiGorengIngredientResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Image src={d.image} width={256} height={256} alt={d.name} className='w-[50%] h-auto'/>
-      </Paper>
+      <BasicGridDetailImage src={d.image} width={256} height={256} alt={d.name} unoptimized/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>

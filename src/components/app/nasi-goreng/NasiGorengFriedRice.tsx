@@ -75,5 +75,5 @@ export default function NasiGorengFriedRice() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.levels[0].image} imageAlt={d => d.name} detail={displayDetail} />;
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.levels[0].image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />;
 }

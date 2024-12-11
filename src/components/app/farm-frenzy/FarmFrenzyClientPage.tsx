@@ -22,12 +22,10 @@ export default function FarmFrenzyClientPage() {
       <Paper className='p-2'>
         <SimpleListbox onChange={e => setState({ pickedTable: e as FarmFrenzyTableType })} options={keyLabels} value={state.pickedTable}/>
       </Paper>
-      <div>
       { state.pickedTable === "farm_frenzy_one_product" && <FarmFrenzyProduct queryKey={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.ONE_PRODUCT}/> }
       { state.pickedTable === "farm_frenzy_two_product" && <FarmFrenzyProduct queryKey={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PRODUCT}/> }
       { state.pickedTable === "farm_frenzy_two_pizza_product" && <FarmFrenzyProduct queryKey={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT}/> }
       { state.pickedTable === "farm_frenzy_three_product" && <FarmFrenzyProduct queryKey={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/> }
-      </div>
     </div>
   );
 }

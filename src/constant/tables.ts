@@ -53,6 +53,15 @@ export const QuartzTableLabel: {[key in QuartzTableType]: string} = {
   'utensil': 'Utensil'
 };
 
+export type CygnusTableType =
+  "mineral" |
+  "artifact"
+
+export const CygnusTableLabel: {[key in CygnusTableType]: string} = {
+  'mineral': 'Mineral',
+  'artifact': 'Artifact'
+};
+
 export type NasiGorengTableType =
   "nasi_goreng_burned_food" |
   "nasi_goreng_plate" |

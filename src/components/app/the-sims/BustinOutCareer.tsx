@@ -119,10 +119,8 @@ export default function BustinOutCareer() {
   ];
 
   return (
-    <Paper className='overflow-auto rounded-md h-full'>
-      <div className='p-5 inline-block min-w-full'>
+    <Paper className='overflow-auto rounded-md h-full w-auto p-5'>
       { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
-      </div>
     </Paper>
   );
 }

@@ -1,13 +1,12 @@
 import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import { NasiGorengToolResponse } from '@/model/response/nasi-goreng';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function NasiGorengTool() {
   const { isLoading, data } = useQuery({
@@ -23,9 +22,7 @@ export default function NasiGorengTool() {
 
   const displayDetail = (d: NasiGorengToolResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Image src={d.image} width={256} height={256} alt={d.name} className='w-[50%] h-auto'/>
-      </Paper>
+      <BasicGridDetailImage src={d.image} width={256} height={256} alt={d.name}/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>
@@ -40,5 +37,5 @@ export default function NasiGorengTool() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />;
 }

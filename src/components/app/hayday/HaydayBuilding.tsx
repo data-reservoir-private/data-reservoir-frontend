@@ -9,6 +9,7 @@ import Loading from '@/components/common/loading/Loading';
 import Image from 'next/image';
 import { secondToTimespan } from '@/utilities/general';
 import { Suspense } from 'react';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function HaydayProduct() {
   const { isLoading, data } = useQuery({
@@ -24,11 +25,7 @@ export default function HaydayProduct() {
 
   const displayDetail = (d: HayDayBuildingResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
-      <Paper className='w-full p-2 relative flex justify-center items-center aspect-square bg-blackish-200 border-2 border-white/20'>
-        <Suspense fallback={<Loading/>}>
-          <Image src={d.image} width={256} height={256} alt={d.name} placeholder='empty'></Image>
-        </Suspense>
-      </Paper>
+      <BasicGridDetailImage src={d.image} alt={d.name} className='rendering-pixelated w-full h-full' unoptimized/>
       <div className='text-white text-lg font-bold'>
         { d.name }
       </div>
@@ -60,5 +57,5 @@ export default function HaydayProduct() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />;
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} gridContainerClasses='w-20 h-20' />;
 }

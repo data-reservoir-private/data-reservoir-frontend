@@ -124,10 +124,8 @@ export default function TwoPetsConsoleCareer() {
   ];
 
   return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
+    <Paper className='overflow-auto rounded-md h-full w-auto p-5'>
       { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
-      </div>
     </Paper>
   );
 }
