@@ -14,7 +14,7 @@ export default function CastawayProduct() {
   const { isLoading, data } = useQuery({
     queryKey: ["the-sims-castaway-product"],
     queryFn: async () => {
-      let j = await request<TheSimsCastawayProductResponse[], {}>({
+      const j = await request<TheSimsCastawayProductResponse[], {}>({
         method: "GET",
         url: API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT,
       });

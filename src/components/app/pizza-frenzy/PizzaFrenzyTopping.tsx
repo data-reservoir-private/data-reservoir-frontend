@@ -13,7 +13,7 @@ export default function PizzaFrenzyTable() {
   const { isLoading, data } = useQuery({
     queryKey: ["pizza-frenzy"],
     queryFn: async () => {
-      let j = await request <PizzaFrenzyToppingResponse[], {}>({
+      const j = await request <PizzaFrenzyToppingResponse[], {}>({
         method: "GET",
         url: API_ROUTE.PIZZA_FRENZY,
       });

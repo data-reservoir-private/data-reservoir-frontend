@@ -21,7 +21,7 @@ export default function TransjakartaCorridorTable() {
   const { isLoading, data } = useQuery({
     queryKey: ["transjakarta-corridor"],
     queryFn: async () => {
-      let j = await request<TransjakartaCorridorResponse[], {}>({
+      const j = await request<TransjakartaCorridorResponse[], {}>({
         method: "GET",
         url: API_ROUTE.TRANSJAKARTA.CORRIDOR,
       });
@@ -50,7 +50,7 @@ export default function TransjakartaCorridorTable() {
       id: 'status',
       header: '',
       cell: p => {
-        let total = p.row.original.problem;
+        const total = p.row.original.problem;
         return total > 0 ? (<PiWarningFill className={classNames('text-lg', {
           'text-yellow-300': 1 <= total && total <= 5,
           'text-red-500': total > 5

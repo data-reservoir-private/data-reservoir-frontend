@@ -8,14 +8,14 @@ import { NextResponse } from "next/server";
 
 export async function GET(_: Request, props: { params: Promise<{ code: string }> }) {
   const params = await props.params;
-  let code = params.code;
+  const code = params.code;
 
-  let main = (await DB.select()
+  const main = (await DB.select()
     .from(transjakartaCorridor)
     .where(eq(transjakartaCorridor.code, code)))?.[0];
   if (main === null) return badRequestResponse("Cannot find code");
 
-  let scheduleDetail = await DB.select()
+  const scheduleDetail = await DB.select()
     .from(transjakartaScheduleDetail)
     .where(eq(transjakartaScheduleDetail.code, code))
     .orderBy(
@@ -24,7 +24,7 @@ export async function GET(_: Request, props: { params: Promise<{ code: string }>
       desc(transjakartaScheduleDetail.peakDay),
   );
 
-  let northSouth = await DB.select()
+  const northSouth = await DB.select()
     .from(transjakartaBusRoute)
     .innerJoin(transjakartaBusStop, eq(transjakartaBusRoute.busStopCode, transjakartaBusStop.code))
     .where(and(
@@ -32,11 +32,11 @@ export async function GET(_: Request, props: { params: Promise<{ code: string }>
       eq(transjakartaBusRoute.order, 1)
     ));
 
-  let color = (await DB.select()
+  const color = (await DB.select()
     .from(transjakartaCorridorStyle)
     .where(eq(transjakartaCorridorStyle.code, code)))?.[0]?.hexColor ?? "000000";
 
-  let roadIDs = await DB.select({ id: transjakartaBusRoute.busStopCode })
+  const roadIDs = await DB.select({ id: transjakartaBusRoute.busStopCode })
     .from(transjakartaBusRoute)
     .where(eq(transjakartaBusRoute.corridorCode, code));
 

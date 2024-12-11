@@ -13,7 +13,7 @@ export default function NasiGorengPlate() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-plate'],
     queryFn: async () => {
-      let j = await request<NasiGorengPlateResponse[], {}>({
+      const j = await request<NasiGorengPlateResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.PLATE,
       });

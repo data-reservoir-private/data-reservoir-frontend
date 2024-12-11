@@ -13,7 +13,7 @@ export default function NasiGorengRelic() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-Relic'],
     queryFn: async () => {
-      let j = await request<NasiGorengRelicResponse[], {}>({
+      const j = await request<NasiGorengRelicResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.RELIC,
       });

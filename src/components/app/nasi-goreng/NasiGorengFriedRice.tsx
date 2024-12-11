@@ -13,7 +13,7 @@ export default function NasiGorengFriedRice() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-fried-rice'],
     queryFn: async () => {
-      let j = await request<NasiGorengFriedRiceResponse[], {}>({
+      const j = await request<NasiGorengFriedRiceResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.FRIED_RICE,
       });

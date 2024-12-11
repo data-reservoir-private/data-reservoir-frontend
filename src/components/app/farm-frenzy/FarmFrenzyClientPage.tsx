@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
@@ -27,7 +27,6 @@ export default function FarmFrenzyClientPage() {
       { state.pickedTable === "farm_frenzy_two_product" && <FarmFrenzyProduct queryKey={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PRODUCT}/> }
       { state.pickedTable === "farm_frenzy_two_pizza_product" && <FarmFrenzyProduct queryKey={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT}/> }
       { state.pickedTable === "farm_frenzy_three_product" && <FarmFrenzyProduct queryKey={state.pickedTable.replaceAll('_', '-')} url={API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/> }
-
       </div>
     </div>
   );

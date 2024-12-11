@@ -20,7 +20,7 @@ export default function TransjakartaClientPage() {
   const { isLoading } = useQuery({
     queryKey: ['PERSIST'],
     queryFn: async () => {
-      let j = await request<TransjakartaCorridorStyleResponse[], {}>({
+      const j = await request<TransjakartaCorridorStyleResponse[], {}>({
         method: "GET",
         url: API_ROUTE.TRANSJAKARTA.STYLE,
       });

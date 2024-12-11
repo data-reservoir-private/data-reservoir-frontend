@@ -18,7 +18,7 @@ export default function TransjakartaCorridorDetail() {
     queryKey: [`transjakarta-code-detail`, code],
     enabled: !!code && code.length > 0,
     queryFn: async () => {
-      let j = await request<TransjakartaCorridorDetailResponse, {}>({
+      const j = await request<TransjakartaCorridorDetailResponse, {}>({
         method: "GET",
         url: API_ROUTE.TRANSJAKARTA.CORRIDOR + `/${code}`,
       });

@@ -23,10 +23,10 @@ export default function DashboardClientPage() {
     pickedCategories: []
   });
 
-  let { isLoading, data } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ["dashboard"],
     queryFn: async () => {
-      let j = await request<DashboardResponse[], {}>({
+      const j = await request<DashboardResponse[], {}>({
         method: "GET",
         url: API_ROUTE.DASHBOARD,
       });
@@ -36,18 +36,18 @@ export default function DashboardClientPage() {
 
   if (isLoading || !data) return (<Loading/>);
   else {
-    let cleanData = data.filter(x => state.pickedCategories.length === 0 || state.pickedCategories.includes(x.category));
-    let categories = data.map(x => x.category);
-    let totalCategory = new Set(cleanData.map(x => x.category)).size;
-    let totalTable = cleanData.flatMap(x => x.tables).length;
-    let totalData = cleanData.flatMap(x => x.tables).reduce((prev, current) => prev + current.rowCount, 0);
-    let categorySummary = cleanData.map(x => ({
+    const cleanData = data.filter(x => state.pickedCategories.length === 0 || state.pickedCategories.includes(x.category));
+    const categories = data.map(x => x.category);
+    const totalCategory = new Set(cleanData.map(x => x.category)).size;
+    const totalTable = cleanData.flatMap(x => x.tables).length;
+    const totalData = cleanData.flatMap(x => x.tables).reduce((prev, current) => prev + current.rowCount, 0);
+    const categorySummary = cleanData.map(x => ({
       category: x.category,
       rowCount: x.tables.reduce((prev, current) => prev + current.rowCount, 0)
     }));
 
     // Data yang diambil harus berdasarkan kategori yang diambil
-    let onClickCategory = (category: string, enabled: boolean) => {
+    const onClickCategory = (category: string, enabled: boolean) => {
       setState(produce(s => {
         if (enabled) s.pickedCategories.push(category);
         else s.pickedCategories = s.pickedCategories.filter(x => x !== category);

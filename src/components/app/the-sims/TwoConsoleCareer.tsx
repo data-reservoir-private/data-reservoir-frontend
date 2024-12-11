@@ -16,7 +16,7 @@ export default function TwoConsoleCareer() {
   const { isLoading, data } = useQuery({
     queryKey: ["the-sims-two-console-career"],
     queryFn: async () => {
-      let j = await request<TheSimsTwoConsoleCareerResponse[], {}>({
+      const j = await request<TheSimsTwoConsoleCareerResponse[], {}>({
         method: "GET",
         url: API_ROUTE.THE_SIMS.TWO_CONSOLE_CAREER,
       });

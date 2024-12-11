@@ -27,7 +27,7 @@ export default function TransjakartaBusStopMap() {
   const { isLoading, data } = useQuery({
     queryKey: ["transjakarta-bus-stop-map"],
     queryFn: async () => {
-      let j = await request<TransjakartaBusStopResponse[], {}>({
+      const j = await request<TransjakartaBusStopResponse[], {}>({
         method: "GET",
         url: API_ROUTE.TRANSJAKARTA.BUS_STOP,
       });

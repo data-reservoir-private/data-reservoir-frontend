@@ -17,7 +17,7 @@ export default function FarmFrenzyProduct(props: FarmFrenzyProductProps) {
   const { isLoading, data } = useQuery({
     queryKey: [props.queryKey],
     queryFn: async () => {
-      let j = await request<FarmFrenzyProductResponse[], {}>({
+      const j = await request<FarmFrenzyProductResponse[], {}>({
         method: "GET",
         url: props.url,
       });

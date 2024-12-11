@@ -22,8 +22,8 @@ export default function Picker(props: PickerProps) {
       {
         props.options.map(c => {
 
-          let l = typeof c === "string" ? c : c.label;
-          let v = typeof c === "string" ? c : c.value;
+          const l = typeof c === "string" ? c : c.label;
+          const v = typeof c === "string" ? c : c.value;
 
           return (
             <div className={classNames('p-2 rounded-sm hover:bg-slate-800 border-gray-600 border-2 cursor-pointer', {

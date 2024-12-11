@@ -1,13 +1,12 @@
 import React, { Fragment, useMemo, useState } from 'react';
-import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, RowData, useReactTable } from '@tanstack/react-table';
-import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
+import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
-import { TextInput } from 'flowbite-react';
 
 export interface BasicTableProps<T> {
   data: T[],
-  columns: ColumnDef<T, any>[],
+  columns: ColumnDef<T, unknown>[],
   expandElement?: (row: Row<T>) => React.ReactNode
 }
 
@@ -16,8 +15,8 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
   // const helper = createColumnHelper<Test>();
 
   const cachedColumn = useMemo(() => props.columns, [props.columns]);
-  const [cachedData, _] = useState(props.data);
-  const [canExpand, __] = useState(!!props.expandElement);
+  const [cachedData, ] = useState(props.data);
+  const [canExpand, ] = useState(!!props.expandElement);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
   const reactTable = useReactTable({
@@ -48,7 +47,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
               <tr key={headerGroup.id}>
                 {
                   headerGroup.headers.map(header => {
-                    let sortSymbol =
+                    const sortSymbol =
                       !header.column.getIsSorted() ? '⏸' : 
                         header.column.getIsSorted() === 'asc' ? '🔼' : '🔽';
                     const v = header.column.columnDef.meta?.filterVariant;
@@ -119,7 +118,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
 }
 
 interface BasicTableFilterProps<T> {
-  column: Column<T, any>
+  column: Column<T, unknown>
 }
 
 function BasicTableFilterSelect<T>(props: BasicTableFilterProps<T>)

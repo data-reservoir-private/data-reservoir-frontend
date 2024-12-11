@@ -13,7 +13,7 @@ export default function NasiGorengUpgrade() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-Upgrade'],
     queryFn: async () => {
-      let j = await request<NasiGorengUpgradeResponse[], {}>({
+      const j = await request<NasiGorengUpgradeResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.UPGRADE,
       });

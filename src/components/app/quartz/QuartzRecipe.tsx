@@ -13,7 +13,7 @@ export default function QuartzRecipe() {
   const { isLoading, data } = useQuery({
     queryKey: ['quartz-recipe'],
     queryFn: async () => {
-      let j = await request<QuartzRecipeResponse[], {}>({
+      const j = await request<QuartzRecipeResponse[], {}>({
         method: "GET",
         url: API_ROUTE.QUARTZ.RECIPE,
       });

@@ -3,7 +3,7 @@
 import { useAppStore } from '@/store/store';
 import { QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
-import { useShallow } from 'zustand/react/shallow'
+import { useShallow } from 'zustand/react/shallow';
 
 
 export default function QueryComponent({

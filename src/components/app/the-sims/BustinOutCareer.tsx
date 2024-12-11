@@ -16,7 +16,7 @@ export default function BustinOutCareer() {
   const { isLoading, data } = useQuery({
     queryKey: ["the-sims-bustin-out-career"],
     queryFn: async () => {
-      let j = await request<TheSimsBustinOutCareerResponse[], {}>({
+      const j = await request<TheSimsBustinOutCareerResponse[], {}>({
         method: "GET",
         url: API_ROUTE.THE_SIMS.BUSTIN_OUT_CAREER,
       });

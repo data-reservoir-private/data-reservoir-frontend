@@ -14,7 +14,7 @@ export default function NasiGorengIngredient() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-ingredient'],
     queryFn: async () => {
-      let j = await request<NasiGorengIngredientResponse[], {}>({
+      const j = await request<NasiGorengIngredientResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.INGREDIENT,
       });

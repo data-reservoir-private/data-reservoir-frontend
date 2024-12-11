@@ -15,7 +15,7 @@ export default function FourPCHarvestable() {
   const { isLoading, data } = useQuery({
     queryKey: ["the-sims-four-pc-harvestable"],
     queryFn: async () => {
-      let j = await request<TheSimsFourPCHarvestableResponse[], {}>({
+      const j = await request<TheSimsFourPCHarvestableResponse[], {}>({
         method: "GET",
         url: API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE,
       });

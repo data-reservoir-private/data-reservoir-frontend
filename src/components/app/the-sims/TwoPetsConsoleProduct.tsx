@@ -14,7 +14,7 @@ export default function TwoPetsConsoleProduct() {
   const { isLoading, data } = useQuery({
     queryKey: ["the-sims-two-pets-console-product"],
     queryFn: async () => {
-      let j = await request<TheSimsTwoPetsConsoleProductResponse[], {}>({
+      const j = await request<TheSimsTwoPetsConsoleProductResponse[], {}>({
         method: "GET",
         url: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT,
       });

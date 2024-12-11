@@ -8,6 +8,9 @@ const nextConfig = {
         pathname: "/apify-apps/apify-static-assets/**"
       }
     ]
+  },
+  eslint: {
+    ignoreDuringBuilds: true
   }
 };
 

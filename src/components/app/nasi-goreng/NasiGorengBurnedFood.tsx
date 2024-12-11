@@ -13,7 +13,7 @@ export default function NasiGorengBurnedFood() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-burned-food'],
     queryFn: async () => {
-      let j = await request<NasiGorengBurnedFoodResponse[], {}>({
+      const j = await request<NasiGorengBurnedFoodResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.BURNED_FOOD,
       });

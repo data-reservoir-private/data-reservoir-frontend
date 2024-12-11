@@ -13,7 +13,7 @@ export default function QuartzUtensil() {
   const { isLoading, data } = useQuery({
     queryKey: ['quartz-utensil'],
     queryFn: async () => {
-      let j = await request<QuartzUtensilResponse[], {}>({
+      const j = await request<QuartzUtensilResponse[], {}>({
         method: "GET",
         url: API_ROUTE.QUARTZ.UTENSIL,
       });

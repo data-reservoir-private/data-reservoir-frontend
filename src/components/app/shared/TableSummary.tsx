@@ -44,10 +44,10 @@ export default function TableSummary<T extends TablePickerType>(props: TableSumm
     props.hasPicker && props.onPickCategory(state.pickedTab ?? null);
   }, [props, state.pickedTab]);
 
-  let { isLoading, data: summaryData } = useQuery({
+  const { isLoading, data: summaryData } = useQuery({
     queryKey: [props.category],
     queryFn: async () => {
-      let j = await request<DashboardResponse[], DashboardRequest>({
+      const j = await request<DashboardResponse[], DashboardRequest>({
         method: "GET",
         url: API_ROUTE.DASHBOARD,
         data: {
@@ -58,9 +58,9 @@ export default function TableSummary<T extends TablePickerType>(props: TableSumm
     }
   });
 
-  let onClickCategory = (pickedTable: string, enabled: boolean) => {
+  const onClickCategory = (pickedTable: string, enabled: boolean) => {
     setState(produce(s => {
-      let choice = enabled ? pickedTable : null;
+      const choice = enabled ? pickedTable : null;
       s.pickedTab = choice as Draft<T>;
     }));
   };

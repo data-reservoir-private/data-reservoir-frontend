@@ -13,7 +13,7 @@ export default function NasiGorengTool() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-tool'],
     queryFn: async () => {
-      let j = await request<NasiGorengToolResponse[], {}>({
+      const j = await request<NasiGorengToolResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.TOOL,
       });

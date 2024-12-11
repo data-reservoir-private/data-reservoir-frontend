@@ -7,8 +7,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  let category = searchParams.get('category') ?? "";
-  let result = (
+  const category = searchParams.get('category') ?? "";
+  const result = (
     await DB.execute<{
       category: string,
       owner: string,
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
     `)
   );
 
-  let conv = _.chain(result)
+  const conv = _.chain(result)
     .groupBy(x => x.category)
     .map((value, key) => ({
       category: key,

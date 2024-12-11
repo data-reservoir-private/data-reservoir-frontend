@@ -16,7 +16,7 @@ export default function TwoPetsConsoleCareer() {
   const { isLoading, data } = useQuery({
     queryKey: ["the-sims-two-pets-console-career"],
     queryFn: async () => {
-      let j = await request<TheSimsTwoPetsConsoleCareerResponse[], {}>({
+      const j = await request<TheSimsTwoPetsConsoleCareerResponse[], {}>({
         method: "GET",
         url: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_CAREER,
       });

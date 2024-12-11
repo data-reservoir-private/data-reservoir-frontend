@@ -15,7 +15,7 @@ export default function HaydayProduct() {
   const { isLoading, data } = useQuery({
     queryKey: ["hayday-product"],
     queryFn: async () => {
-      let j = await request<HayDayProductResponse[], {}>({
+      const j = await request<HayDayProductResponse[], {}>({
         method: "GET",
         url: API_ROUTE.HAY_DAY.PRODUCT,
       });

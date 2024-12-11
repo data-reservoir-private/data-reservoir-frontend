@@ -9,7 +9,7 @@ import { Row, Table } from "@tanstack/react-table";
  * @returns Boolean, apakah row ini mau dimasukkan atau nga
  */
 export function multiSelectFilter<TData>(row: Row<TData>, columnId: string, selectValue: (string | number)[]) {
-  let v = row.getValue(columnId);
+  const v = row.getValue(columnId);
   return selectValue.length === 0 || selectValue.includes(v as (string | number));
 }
 

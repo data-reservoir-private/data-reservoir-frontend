@@ -13,7 +13,7 @@ export default function QuartzShippable() {
   const { isLoading, data } = useQuery({
     queryKey: ['quartz-shippable'],
     queryFn: async () => {
-      let j = await request<QuartzShippableResponse[], {}>({
+      const j = await request<QuartzShippableResponse[], {}>({
         method: "GET",
         url: API_ROUTE.QUARTZ.SHIPPABLE,
       });
