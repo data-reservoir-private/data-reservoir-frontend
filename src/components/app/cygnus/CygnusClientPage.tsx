@@ -8,6 +8,7 @@ import CygnusMineral from './CygnusMineral';
 import CygnusArtifact from './CygnusArtifact';
 import CygnusCrop from './CygnusCrop';
 import CygnusDish from './CygnusDish';
+import CygnusNode from './CygnusNode';
 
 interface CygnusClientPageState {
   pickedTable: CygnusTableType | null
@@ -26,6 +27,7 @@ export default function CygnusClientPage() {
       {state.pickedTable === "artifact" && <CygnusArtifact/>}
       {state.pickedTable === "crop" && <CygnusCrop/>}
       {state.pickedTable === "dish" && <CygnusDish/>}
+      {state.pickedTable === "node" && <CygnusNode/>}
       {/* {state.pickedTable === "recipe" && <CygnusRecipe/>} */}
     </div>
   );

@@ -4,7 +4,7 @@ import { HaydayBuildingSchema, HaydayProductSchema } from './schema/hayday';
 import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
 import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from './schema/the-sims';
 import { NasiGorengBurnedFoodSchema, NasiGorengFriedRiceSchema, NasiGorengIngredientSchema, NasiGorengPlateSchema, NasiGorengRelicSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from './schema/nasi-goreng';
-import { CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema, CygnusMineralSchema } from './schema/cygnus';
+import { CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema, CygnusMineralSchema, CygnusNodeSchema } from './schema/cygnus';
 import { QuartzShippableSchema, QuartzUtensilSchema, QuartzRecipeSchema } from './schema/quartz';
 
 const client = new MongoClient(process.env.DATABASE_URL);
@@ -58,6 +58,7 @@ export const MONGODB = {
     artifact: db.collection<CygnusArtifactSchema>('cygnus_artifact'),
     dish: db.collection<CygnusDishSchema>('cygnus_dish'),
     crop: db.collection<CygnusCropSchema>('cygnus_crop'),
+    node: db.collection<CygnusNodeSchema>('cygnus_node'),
   }
 } as const;
 

@@ -48,7 +48,8 @@ export const API_SHORTHAND = Object.freeze({
     ARTIFACT: 'artifact',
     MINERAL: 'mineral',
     CROP: 'crop',
-    DISH: 'dish'
+    DISH: 'dish',
+    NODE: 'node'
   }
 } as const);
 
@@ -100,5 +101,6 @@ export const API_ROUTE = Object.freeze({
     MINERAL: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.MINERAL}`,
     CROP: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.CROP}`,
     DISH: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.DISH}`,
+    NODE: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.NODE}`
   }
 } as const);

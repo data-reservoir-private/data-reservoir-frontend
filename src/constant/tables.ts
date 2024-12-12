@@ -57,13 +57,15 @@ export type CygnusTableType =
   "mineral" |
   "artifact" |
   "crop" |
-  "dish"
+  "dish" |
+  "node"
 
 export const CygnusTableLabel: {[key in CygnusTableType]: string} = {
   'mineral': 'Mineral',
   'artifact': 'Artifact',
   'crop': 'Crop',
   'dish': 'Dish',
+  'node': "Mining Node"
 };
 
 export type NasiGorengTableType =

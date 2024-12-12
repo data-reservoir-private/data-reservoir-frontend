@@ -29,5 +29,9 @@ export async function GET(_: NextRequest, props: { params : Promise<{ table: str
       return NextResponse.json(newResponse(
         await MONGODB.cygnus.dish.aggregate(ID_AGGR).toArray()
       ));
+    case 'node':
+      return NextResponse.json(newResponse(
+        await MONGODB.cygnus.node.aggregate(ID_AGGR).toArray()
+      ));
   }
 }

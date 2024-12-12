@@ -1,6 +1,14 @@
 import { CYGNUS_GRADE_ID, CYGNUS_GRADE_STR } from "@/constant/enums";
 import { BaseSchema } from "./base";
 
+export interface CygnusNodeSchema extends BaseSchema {
+  name: string;
+  contains: string;
+  image: string[];
+  location_mines: string;
+  location_other: string;
+}
+
 export interface CygnusArtifactSchema extends BaseSchema {
   name: string;
   image: string;
