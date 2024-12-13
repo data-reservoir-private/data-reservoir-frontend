@@ -33,7 +33,6 @@ export default function NasiGorengFriedRice() {
       <GridDetail data={{
         ID: d.id,
         Name: d.name,
-        Image: (<a href={d.levels[0].image} className='text-blue-300 underline'>Link</a>),
         Price: d.price,
         Description: d.description,
         Plate: (

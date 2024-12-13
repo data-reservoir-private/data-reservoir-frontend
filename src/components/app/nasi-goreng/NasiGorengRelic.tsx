@@ -30,7 +30,6 @@ export default function NasiGorengRelic() {
       <GridDetail data={{
         ID: d.id,
         Name: d.name,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
         Tool: d.tool ? (
           <>
             <div className='grid grid-cols-[2fr_8fr] gap-x-2'>

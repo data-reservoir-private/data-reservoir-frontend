@@ -32,7 +32,6 @@ export default function NasiGorengIngredient() {
         ID: d.id,
         Name: d.name,
         Category: d.category,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
         Price: d.price,
         Processed: <Checkbox checked={d.is_processed} size={8} disabled />,
         Description: d.description,

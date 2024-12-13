@@ -29,7 +29,6 @@ export default function NasiGorengTool() {
       <GridDetail data={{
         ID: d.id,
         Name: d.name,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
         Price: d.price,
         "Short Description": d.short_description,
         "Long Description": d.long_description

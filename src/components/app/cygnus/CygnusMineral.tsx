@@ -30,7 +30,6 @@ export default function CygnusMineral() {
         ID: d.id,
         Category: d.category,
         Name: d.name,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
         Price: d.price,
         Description: d.description
       }}/>

@@ -26,7 +26,6 @@ export default function NasiGorengPlate() {
       <GridDetail data={{
         ID: d.id,
         Index: d.index,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>)
       }}/>
     </div>
   );

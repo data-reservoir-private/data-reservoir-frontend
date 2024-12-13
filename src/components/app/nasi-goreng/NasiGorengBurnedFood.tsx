@@ -32,7 +32,6 @@ export default function NasiGorengBurnedFood() {
         ID: d.id,
         Name: d.name,
         Category: d.category,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>)
       }}/>
     </div>
   );

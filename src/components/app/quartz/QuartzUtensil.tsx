@@ -29,7 +29,6 @@ export default function QuartzUtensil() {
       <GridDetail data={{
         ID: d.id,
         Name: d.name,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
         Price: d.price
       }}/>
     </div>

@@ -34,7 +34,6 @@ export default function HaydayProduct() {
         ID: d.id,
         Name: d.name,
         Category: d.category,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
         Price: d.price,
         Time: secondToTimespan(d.time),
         XP: d.xp,

@@ -33,7 +33,6 @@ export default function FourPCHarvestable() {
       <GridDetail data={{
         ID: d.id,
         Name: d.name,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
         Description: d.description,
         Rarity: d.rarity,
         "Vertical Garden": <Checkbox checked={d.vertical_garden} size={8} disabled />,

@@ -33,7 +33,6 @@ export default function CastawayProduct() {
         ID: d.id,
         Name: d.name,
         Category: d.category,
-        Image: (<a href={d.image} className='text-blue-300 underline'>Link</a>),
         Description: d.description,
         Hunger: d.hunger,
         Energy: d.energy,
