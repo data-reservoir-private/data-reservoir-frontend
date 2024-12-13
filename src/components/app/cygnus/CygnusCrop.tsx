@@ -31,7 +31,6 @@ export default function CygnusCrop() {
       <GridDetail data={{
         ID: d.id,
         Name: d.name,
-        Image: (<GridDetailImageLink href={d.image}>Link</GridDetailImageLink>),
         Description: d.description,
         Stages: (() => {
           const stage = d.stages.ongoing.map(x => ({ image: x.image, text: !x.duration_irrigated ? `${x.duration} days` : `${x.duration} days (💧${x.duration_irrigated} days)` }));
