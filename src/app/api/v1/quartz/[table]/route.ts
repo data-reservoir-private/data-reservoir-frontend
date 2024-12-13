@@ -1,5 +1,5 @@
 import { API_SHORTHAND } from "@/constant/api-route";
-import { ID_AGGR, MONGODB } from "@/database/mongodb/db";
+import { ID_AGGR, MONGODB } from "@/database/db";
 import { newResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 

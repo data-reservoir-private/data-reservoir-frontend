@@ -53,8 +53,7 @@ const config: Config = {
   },
   plugins: [
     require('tailwind-scrollbar'),
-    plugin(),
-    require('tailwindcss-image-rendering')()
+    plugin()
   ],
 };
 export default config;

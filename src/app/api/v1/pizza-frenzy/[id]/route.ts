@@ -1,7 +1,7 @@
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
 import { UUID } from 'mongodb';
-import { MONGODB, ID_AGGR } from '@/database/mongodb/db';
+import { MONGODB, ID_AGGR } from '@/database/db';
 
 export async function GET(_: Request, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;

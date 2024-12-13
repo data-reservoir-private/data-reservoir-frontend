@@ -66,7 +66,7 @@ export default function DashboardClientPage() {
             <h1 className='xl:text-5xl lg:text-3xl max-lg:text-4xl max-sm:text-2xl text font-bold'>{totalCategory}</h1>
           </Paper>
           <Paper className='px-6'>
-            <p className='xl:text-xl lg:text-lg max-lg:text-xl max-sm:text-sm'>Tables</p>
+            <p className='xl:text-xl lg:text-lg max-lg:text-xl max-sm:text-sm'>Collections</p>
             <h1 className='xl:text-5xl lg:text-3xl max-lg:text-4xl max-sm:text-2xl text font-bold'>{totalTable}</h1>
           </Paper>
           <Paper className='px-6'>
@@ -78,14 +78,14 @@ export default function DashboardClientPage() {
         {/* Layer 2 : Table dan Treemap */}
         <div className='grid grid-cols-2 grid-rows-1 gap-4 max-md:grid-rows-2 max-md:grid-cols-1 min-h-80'>
           <div className='overflow-y-auto overflow-x-hidden rounded-md'>
-            <Paper className='p-4 !justify-start min-w-full'>
+            <Paper className='p-4 !justify-start min-w-full scrollbar-default'>
               <div className='min-w-full'>
                 <TableCategoryCount data={categorySummary}/>
               </div>
             </Paper>
           </div>
           <div>
-            <Paper className='h-full p-4'>
+            <Paper className='h-full p-4 scrollbar-default'>
               <TableTreeMap data={cleanData}/>
             </Paper>
           </div>
@@ -94,13 +94,13 @@ export default function DashboardClientPage() {
         {/* Layer 3 : Pie Chart + Bar Chart */}
         <div className='grid grid-cols-2 grid-rows-1 gap-4 max-md:grid-rows-2 max-md:grid-cols-1 min-h-80'>
           <div className='overflow-y-auto overflow-x-hidden rounded-md'>
-            <Paper className='h-full p-4'>
+            <Paper className='h-full p-4 scrollbar-default'>
               {/* <ComingSoon message='Pie Chart (Category Record)'/> */}
               <TablePieChart data={categorySummary}/>
             </Paper>
           </div>
           <div>
-            <Paper className='h-full p-4'>
+            <Paper className='h-full p-4 scrollbar-default'>
               <TableBarChart data={cleanData.flatMap(x => x.tables.flatMap(y => ({...y, category: x.category})))}/>
             </Paper>
           </div>

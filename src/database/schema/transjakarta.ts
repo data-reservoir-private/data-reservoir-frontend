@@ -1,20 +1,19 @@
-import { HasID } from "./base";
+import { UUID } from "mongodb";
+import { BaseSchema } from "./base";
 
-export interface TransjakartaCorridorResponse extends HasID {
+export interface TransjakartaCorridorSchema extends BaseSchema {
   category: string;
   code: string;
-  name: string;
   color: string;
-  problems: number;
-}
-
-export interface TransjakartaCorridorDetailResponse extends HasID {
-  category: string;
-  code: string;
+  date_end: Date | null;
+  date_start: Date | null;
+  effective_date: Date
+  image: string;
+  is_deleted: boolean;
   name: string;
-  color: string;
-  problems: number;
+  picture_effective_date: Date;
   schedule: {
+    id: UUID;
     day: boolean
     end_north: number;
     end_south: number;
@@ -27,6 +26,7 @@ export interface TransjakartaCorridorDetailResponse extends HasID {
     weekend: boolean;
   }[];
   stops: {
+    id: UUID;
     brt: boolean;
     bus_stop_code: number;
     direction: string;
@@ -37,16 +37,7 @@ export interface TransjakartaCorridorDetailResponse extends HasID {
   }[]
 }
 
-export interface TransjakartaBusStopResponse extends HasID {
-  brt: boolean;
-  code: number;
-  latitude: number;
-  longitude: number;
-  name: string;
-  permanently_closed: boolean;
-} 
-
-export interface TransjakartaBusStopDetailResponse extends HasID {
+export interface TransjakartBusStopSchema extends BaseSchema {
   brt: boolean;
   code: number;
   effective_date: Date;
@@ -62,4 +53,4 @@ export interface TransjakartaBusStopDetailResponse extends HasID {
     color: string
     name: string
   }[];
-} 
+}

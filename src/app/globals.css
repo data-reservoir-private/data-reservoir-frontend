@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    .rendering-pixelated {
+        image-rendering: pixelated;
+    }
+}
+
 html {
     background-color: #373A45;
 }

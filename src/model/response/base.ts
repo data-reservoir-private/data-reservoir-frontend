@@ -1,4 +1,4 @@
-import { BaseSchema } from "@/database/mongodb/schema/base";
+import { BaseSchema } from "@/database/schema/base";
 import { UUID } from "crypto";
 
 export interface BaseResponse<T> {

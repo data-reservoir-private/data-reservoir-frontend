@@ -1,4 +1,4 @@
-import { QuartzRecipeSchema, QuartzShippableSchema, QuartzUtensilSchema } from "@/database/mongodb/schema/quartz";
+import { QuartzRecipeSchema, QuartzShippableSchema, QuartzUtensilSchema } from "@/database/schema/quartz";
 import { HasID } from "./base";
 
 export interface QuartzShippableResponse extends Omit<QuartzShippableSchema & HasID, '_id'> {}

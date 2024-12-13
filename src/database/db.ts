@@ -6,11 +6,14 @@ import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFour
 import { NasiGorengBurnedFoodSchema, NasiGorengFriedRiceSchema, NasiGorengIngredientSchema, NasiGorengPlateSchema, NasiGorengRelicSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from './schema/nasi-goreng';
 import { CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema, CygnusMineralSchema, CygnusNodeSchema } from './schema/cygnus';
 import { QuartzShippableSchema, QuartzUtensilSchema, QuartzRecipeSchema } from './schema/quartz';
+import { MasterCollectionCategorySchema } from './schema/master';
+import { TransjakartaCorridorSchema, TransjakartBusStopSchema } from './schema/transjakarta';
 
 const client = new MongoClient(process.env.DATABASE_URL);
 const db = client.db('apify');
 export const MONGODB = {
   client: client,
+  db: db,
 
   farm_frenzy: {
     one_product: db.collection<FarmFrenzyOneProductSchema>('farm_frenzy_1_product'),
@@ -59,6 +62,15 @@ export const MONGODB = {
     dish: db.collection<CygnusDishSchema>('cygnus_dish'),
     crop: db.collection<CygnusCropSchema>('cygnus_crop'),
     node: db.collection<CygnusNodeSchema>('cygnus_node'),
+  },
+
+  transjakarta: {
+    bus_stop: db.collection<TransjakartBusStopSchema>('transjakarta_bus_stop'),
+    corridor: db.collection<TransjakartaCorridorSchema>('transjakarta_corridor'),
+  },
+
+  master: {
+    collection_category: db.collection<MasterCollectionCategorySchema>('master_collection_category')
   }
 } as const;
 

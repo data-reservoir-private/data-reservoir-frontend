@@ -1,4 +1,4 @@
-import { NasiGorengBurnedFoodSchema, NasiGorengPlateSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from "@/database/mongodb/schema/nasi-goreng";
+import { NasiGorengBurnedFoodSchema, NasiGorengPlateSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from "@/database/schema/nasi-goreng";
 import { HasID } from "./base";
 
 export interface NasiGorengBurnedFoodResponse extends Omit<NasiGorengBurnedFoodSchema & HasID, '_id'> {};

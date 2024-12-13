@@ -1,6 +1,6 @@
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
-import { ID_AGGR, MONGODB } from '@/database/mongodb/db';
+import { ID_AGGR, MONGODB } from '@/database/db';
 
 export async function GET() {
   return NextResponse.json(newResponse(

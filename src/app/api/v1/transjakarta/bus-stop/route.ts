@@ -1,27 +1,18 @@
-import { and, eq, ne } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
-import { DB } from "@/database/client";
 import { newResponse } from '@/utilities/api';
-import { TransjakartaBusStopResponse } from '@/model/response/transjakarta';
-import { transjakartaBusStop } from '@/database/schema';
+import { ID_AGGR, MONGODB } from '@/database/db';
 
 export async function GET() {
-  const data = await DB
-    .select({
-      brt: transjakartaBusStop.brt,
-      latitude: transjakartaBusStop.latitude,
-      longitude: transjakartaBusStop.longitude,
-      name: transjakartaBusStop.name,
-      code: transjakartaBusStop.code,
-      permanentlyClosed: transjakartaBusStop.permanentlyClosed,
-    })
-    .from(transjakartaBusStop)
-    .where(and(
-      // eq(transjakartaBusStop.permanentlyClosed, false),
-      ne(transjakartaBusStop.latitude, 0),
-      ne(transjakartaBusStop.longitude, 0),
-    ));
-    // .limit(1000);
-
-  return NextResponse.json(newResponse<TransjakartaBusStopResponse[]>(data));
+  return NextResponse.json(newResponse(
+    await MONGODB.transjakarta.bus_stop.aggregate([...ID_AGGR, {
+      $project: {
+        'brt': true,
+        'latitude': true,
+        'longitude': true,
+        'name': true,
+        'code': true,
+        'permanentlyClosed': '$permanently_closed'
+      }
+    }]).toArray()
+  ));
 }

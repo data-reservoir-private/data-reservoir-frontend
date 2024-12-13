@@ -1,5 +1,5 @@
 import { HasID } from "./base";
-import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwoPizzaProductSchema, FarmFrenzyTwoProductSchema } from "@/database/mongodb/schema/farm-frenzy";
+import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwoPizzaProductSchema, FarmFrenzyTwoProductSchema } from "@/database/schema/farm-frenzy";
 
 export interface FarmFrenzyOneProductResponse extends Omit<FarmFrenzyOneProductSchema & HasID, '_id'> {}
 export interface FarmFrenzyTwoProductResponse extends Omit<FarmFrenzyTwoProductSchema & HasID, '_id'> {}

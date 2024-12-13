@@ -1,4 +1,4 @@
-import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from "@/database/mongodb/schema/the-sims";
+import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from "@/database/schema/the-sims";
 import { HasID } from "./base";
 
 export interface TheSimsCastawayProductResponse extends Omit<TheSimsCastawayProductSchema & HasID, '_id'> {}

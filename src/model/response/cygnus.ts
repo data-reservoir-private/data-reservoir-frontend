@@ -1,4 +1,4 @@
-import { CygnusMineralSchema, CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema, CygnusNodeSchema } from "@/database/mongodb/schema/cygnus";
+import { CygnusMineralSchema, CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema, CygnusNodeSchema } from "@/database/schema/cygnus";
 import { HasID } from "./base";
 
 export interface CygnusMineralResponse extends Omit<CygnusMineralSchema & HasID, '_id'> {}
