@@ -70,7 +70,60 @@ export default function NasiGorengFriedRice() {
             }
           </ul>
         ) : "-",
-      }}/>
+      }} />
+      
+      <h1 className='text-lg font-bold'>Details</h1>
+      <hr />
+      <div className='flex flex-col gap-2'>
+        {
+          d.levels.map(level => (
+            <div key={level.level}>
+              <h1>Level {level.level}</h1>
+              <GridDetail data={{
+                Image: (
+                  <div className='relative min-h-24 w-24 p-2'>
+                    <Image src={level.image} alt="Plate" fill objectFit='contain' />
+                  </div>
+                ),
+                "Fried Rices Needed": level.fried_rices_needed,
+                Recipe: level.recipe.length > 0 ? (
+                  <ul className='gap-2 flex flex-col'>
+                    {
+                      level.recipe.map(lr => (
+                        <li key={lr.ingredient_name}>
+                          <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
+                            <div className='relative min-h-6 w-6'>
+                              <Image src={lr.ingredient_image} alt={lr.ingredient_name} fill objectFit='contain' />
+                            </div>
+                            <span>{lr.ingredient_name} ({lr.quantity})</span>
+                          </div>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                ) : "-",
+                Detail: level.details.length > 0 ? (
+                  <ul className='gap-2 flex flex-col'>
+                    {
+                      level.details.map(ld => (
+                        <li key={ld.upgrade_name}>
+                          <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
+                            <div className='relative min-h-6 w-6'>
+                              <Image src={ld.upgrade_image} alt={ld.upgrade_name} fill objectFit='contain' />
+                            </div>
+                            <span>{ld.upgrade_name}</span>
+                          </div>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                ) : "-",
+              }}/>
+            </div>
+          ))
+        }
+      </div>
+
     </div>
   );
 

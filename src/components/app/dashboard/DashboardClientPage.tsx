@@ -77,7 +77,7 @@ export default function DashboardClientPage() {
 
         {/* Layer 2 : Table dan Treemap */}
         <div className='grid grid-cols-2 grid-rows-1 gap-4 max-md:grid-rows-2 max-md:grid-cols-1 min-h-80'>
-          <div className='overflow-y-auto overflow-x-hidden rounded-md'>
+          <div className='overflow-y-auto overflow-x-hidden rounded-md scrollbar-default'>
             <Paper className='p-4 !justify-start min-w-full scrollbar-default'>
               <div className='min-w-full'>
                 <TableCategoryCount data={categorySummary}/>
@@ -93,7 +93,7 @@ export default function DashboardClientPage() {
 
         {/* Layer 3 : Pie Chart + Bar Chart */}
         <div className='grid grid-cols-2 grid-rows-1 gap-4 max-md:grid-rows-2 max-md:grid-cols-1 min-h-80'>
-          <div className='overflow-y-auto overflow-x-hidden rounded-md'>
+          <div className='overflow-y-auto overflow-x-hidden rounded-md scrollbar-default'>
             <Paper className='h-full p-4 scrollbar-default'>
               {/* <ComingSoon message='Pie Chart (Category Record)'/> */}
               <TablePieChart data={categorySummary}/>

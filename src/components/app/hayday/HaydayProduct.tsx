@@ -11,6 +11,7 @@ import { Checkbox } from 'flowbite-react';
 import { secondToTimespan } from '@/utilities/general';
 import { Suspense } from 'react';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import HaydayIconHelper from './HaydayIconHelper';
 
 export default function HaydayProduct() {
   const { isLoading, data } = useQuery({
@@ -34,9 +35,9 @@ export default function HaydayProduct() {
         ID: d.id,
         Name: d.name,
         Category: d.category,
-        Price: d.price,
-        Time: secondToTimespan(d.time),
-        XP: d.xp,
+        Price: <div className='flex gap-1'>{d.price} <HaydayIconHelper type='coins'/> </div>,
+        Time: <div className='flex gap-1'>{secondToTimespan(d.time)} <HaydayIconHelper type='time'/> </div>,
+        XP: <div className='flex gap-1'>{d.xp} <HaydayIconHelper type='xp'/> </div>,
         Level: d.level,
         "Is Raw": (
           <Checkbox checked={d.is_raw} size={8} disabled/>

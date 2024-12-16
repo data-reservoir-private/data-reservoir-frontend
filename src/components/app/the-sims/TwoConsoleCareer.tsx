@@ -74,44 +74,36 @@ export default function TwoConsoleCareer() {
 
     colHelper.accessor('friends', {
       cell: p => p.getValue(),
-      header: _ => (<Image src={'/image/the_sims_skill/friends.png'} alt='Friends' title='Friends' width={50} height={50} className='p-0.5'/>),
-      enableSorting: true,
+      header: _ => (<Image src={'/image/the_sims_skill/friends.png'} alt='Friends' title='Friends' width={50} height={50} className='p-0.5'/>)
     }),
 
     colHelper.accessor('cooking', {
       cell: p => p.getValue(),
-      header: _ => (<Image src={'/image/the_sims_2_console_skill/cooking.png'} alt='Cooking' title='Cooking' width={20} height={20} className='p-0.5'/>),
-      enableSorting: true,
+      header: _ => (<Image src={'/image/the_sims_2_console_skill/cooking.png'} alt='Cooking' title='Cooking' width={200} height={200} className='p-0.5'/>)
     }),
     colHelper.accessor('mechanical', {
       cell: p => p.getValue(),
-      header: _ => (<Image src={'/image/the_sims_2_console_skill/mechanical.png'} alt='Mechanical' title='Mechanical' width={20} height={20} className='p-0.5'/>),
-      enableSorting: true,
+      header: _ => (<Image src={'/image/the_sims_2_console_skill/mechanical.png'} alt='Mechanical' title='Mechanical' width={200} height={200} className='p-0.5'/>)
     }),
     colHelper.accessor('charisma', {
       cell: p => p.getValue(),
-      header: _ => (<Image src={'/image/the_sims_2_console_skill/charisma.png'} alt='Charisma' title='Charisma' width={20} height={20} className='p-0.5'/>),
-      enableSorting: true,
+      header: _ => (<Image src={'/image/the_sims_2_console_skill/charisma.png'} alt='Charisma' title='Charisma' width={200} height={200} className='p-0.5'/>)
     }),
     colHelper.accessor('body', {
       cell: p => p.getValue(),
-      header: _ => (<Image src={'/image/the_sims_2_console_skill/body.png'} alt='Body' title='Body' width={20} height={20} className='p-0.5'/>),
-      enableSorting: true,
+      header: _ => (<Image src={'/image/the_sims_2_console_skill/body.png'} alt='Body' title='Body' width={200} height={200} className='p-0.5'/>)
     }),
     colHelper.accessor('creativity', {
       cell: p => p.getValue(),
-      header: _ => (<Image src={'/image/the_sims_2_console_skill/creativity.png'} alt='Creativity' title='Creativity' width={20} height={20} className='p-0.5'/>),
-      enableSorting: true,
+      header: _ => (<Image src={'/image/the_sims_2_console_skill/creativity.png'} alt='Creativity' title='Creativity' width={200} height={200} className='p-0.5'/>)
     }),
     colHelper.accessor('logic', {
       cell: p => p.getValue(),
-      header: _ => (<Image src={'/image/the_sims_2_console_skill/logic.png'} alt='Logic' title='Logic' width={20} height={20} className='p-0.5'/>),
-      enableSorting: true,
+      header: _ => (<Image src={'/image/the_sims_2_console_skill/logic.png'} alt='Logic' title='Logic' width={200} height={200} className='p-0.5'/>)
     }),
     colHelper.accessor('cleanliness', {
       cell: p => p.getValue(),
-      header: _ => (<Image src={'/image/the_sims_2_console_skill/cleaning.png'} alt='Cleaning' title='Cleaning' width={20} height={20} className='p-0.5'/>),
-      enableSorting: true,
+      header: _ => (<Image src={'/image/the_sims_2_console_skill/cleaning.png'} alt='Cleaning' title='Cleaning' width={200} height={200} className='p-0.5'/>)
     }),
 
     colHelper.accessor('description', {

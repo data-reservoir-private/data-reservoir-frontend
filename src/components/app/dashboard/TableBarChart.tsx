@@ -58,7 +58,7 @@ export default function TableBarChart(props : TableBarChartProps) {
   };
 
   return (
-    <div className='overflow-x-scroll h-full'>
+    <div className='overflow-x-scroll h-full scrollbar-default'>
       <ReactECharts
         option={option}
         className='h-full'

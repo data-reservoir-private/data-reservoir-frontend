@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { secondToTimespan } from '@/utilities/general';
 import { Suspense } from 'react';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import HaydayIconHelper from './HaydayIconHelper';
 
 export default function HaydayProduct() {
   const { isLoading, data } = useQuery({
@@ -32,9 +33,9 @@ export default function HaydayProduct() {
       <GridDetail data={{
         ID: d.id,
         Name: d.name,
-        Price: d.price,
-        Time: secondToTimespan(d.time),
-        XP: d.xp,
+        Price: <div className='flex gap-1'>{d.price} <HaydayIconHelper type='coins'/> </div>,
+        Time: <div className='flex gap-1'>{secondToTimespan(d.time)} <HaydayIconHelper type='time'/> </div>,
+        XP: <div className='flex gap-1'>{d.xp} <HaydayIconHelper type='xp'/> </div>,
         Level: d.level,
         Produces: d.produces.length > 0 ? (
           <ul className='gap-2 flex flex-col'>
