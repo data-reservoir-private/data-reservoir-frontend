@@ -16,7 +16,8 @@ export async function request<TResponse, TRequest extends Record<string, any> | 
   }
 
   const conf: RequestInit = {
-    method: request.method
+    method: request.method,
+    cache: 'default'
   };
 
   // Jika kita kirim data pakai form, maka kita masukkan ke formData

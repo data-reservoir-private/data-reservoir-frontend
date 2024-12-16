@@ -35,50 +35,50 @@ export const ROUTES: ROUTE_TYPE[] = [
     id: 'the-sims',
     name: 'The Sims',
     icon: BsFillSuitDiamondFill,
-    link: '/the-sims',
-    new: true
+    link: '/the-sims'
   },
   {
     id: 'farm-frenzy',
     name: 'Farm Frenzy',
     icon: PiBarn,
-    link: '/farm-frenzy',
-    new: true
+    link: '/farm-frenzy'
   },
   {
     id: 'hayday',
     name: 'Hayday',
     icon: CiWheat,
-    link: '/hayday',
-    new: true
+    link: '/hayday'
   },
   {
     id: 'pizza-frenzy',
     name: 'Pizza Frenzy',
     icon: FaPizzaSlice,
-    link: '/pizza-frenzy',
-    new: true
+    link: '/pizza-frenzy'
   },
   {
     id: 'nasi-goreng',
     name: 'Nasi Goreng',
     icon: FaBowlFood,
-    link: '/nasi-goreng',
-    new: true
+    link: '/nasi-goreng'
   },
   {
     id: 'cygnus',
     name: 'Cygnus',
     icon: GiPolarStar,
-    link: '/cygnus',
-    beta: true
+    link: '/cygnus'
   },
   {
     id: 'quartz',
     name: 'Quartz',
     icon: GiCrystalGrowth,
-    link: '/quartz',
-    new: true
+    link: '/quartz'
+  },
+  {
+    id: 'transaction',
+    name: 'Transaction',
+    icon: GrTransaction,
+    link: '/transaction',
+    beta: true
   },
   {
     id: 'transjakarta',
@@ -86,13 +86,6 @@ export const ROUTES: ROUTE_TYPE[] = [
     icon: TransjakartaIcon,
     link: '/transjakarta',
     inactive: true,
-  },
-  {
-    id: 'transaction',
-    name: 'Transaction',
-    icon: GrTransaction,
-    link: '/transaction',
-    inactive: true
   },
   {
     id: 'docs',

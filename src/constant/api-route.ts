@@ -50,7 +50,8 @@ export const API_SHORTHAND = Object.freeze({
     CROP: 'crop',
     DISH: 'dish',
     NODE: 'node'
-  }
+  },
+  TRANSACTION: ''
 } as const);
 
 /**
@@ -102,5 +103,6 @@ export const API_ROUTE = Object.freeze({
     CROP: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.CROP}`,
     DISH: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.DISH}`,
     NODE: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.NODE}`
-  }
+  },
+  TRANSACTION: `${HOST}/transaction`
 } as const);

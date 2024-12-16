@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
 import { UUID } from 'mongodb';

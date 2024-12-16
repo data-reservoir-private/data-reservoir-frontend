@@ -8,6 +8,7 @@ import { CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema, CygnusMineral
 import { QuartzShippableSchema, QuartzUtensilSchema, QuartzRecipeSchema } from './schema/quartz';
 import { MasterCollectionCategorySchema } from './schema/master';
 import { TransjakartaCorridorSchema, TransjakartBusStopSchema } from './schema/transjakarta';
+import { TransactionMasterSchema, TransactionTransportSchema } from './schema/transaction';
 
 const client = new MongoClient(process.env.DATABASE_URL);
 const db = client.db('apify');
@@ -67,6 +68,11 @@ export const MONGODB = {
   transjakarta: {
     bus_stop: db.collection<TransjakartBusStopSchema>('transjakarta_bus_stop'),
     corridor: db.collection<TransjakartaCorridorSchema>('transjakarta_corridor'),
+  },
+
+  transaction: {
+    master: db.collection<TransactionMasterSchema>('transaction_master'),
+    transport: db.collection<TransactionTransportSchema>('transaction_transport'),
   },
 
   master: {

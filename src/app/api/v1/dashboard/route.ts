@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 import { MONGODB } from "@/database/db";
 import { DashboardResponse, DashboardTableResponse } from "@/model/response/dashboard";
 import { newResponse } from "@/utilities/api";

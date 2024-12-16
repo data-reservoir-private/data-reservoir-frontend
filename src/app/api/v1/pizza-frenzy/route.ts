@@ -1,5 +1,6 @@
+export const dynamic = 'force-static';
+
 import { ID_AGGR, MONGODB } from "@/database/db";
-import { PaginationRequest } from "@/model/request/pagination";
 import { newResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 

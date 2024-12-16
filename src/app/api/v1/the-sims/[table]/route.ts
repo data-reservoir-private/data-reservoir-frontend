@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 import { API_SHORTHAND } from "@/constant/api-route";
 import { ID_AGGR, MONGODB } from "@/database/db";
 import { newResponse } from "@/utilities/api";
