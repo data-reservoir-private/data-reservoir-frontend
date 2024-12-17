@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   const category = searchParams.get('category') ?? "";
 
   const master = await MONGODB.master.collection_category.find().toArray();
-  const collections = (await MONGODB.db.listCollections({ name: { $not: { $regex: /master_\w+/g }}}).toArray()).map(x => x.name);
+  const collections = (await MONGODB.db.listCollections().toArray()).filter(x => !x.name.startsWith('master')).map(x => x.name);
 
   const docs = await Promise.all(master.map(async m => {
     return {

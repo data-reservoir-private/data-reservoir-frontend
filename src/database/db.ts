@@ -10,8 +10,8 @@ import { MasterCollectionCategorySchema } from './schema/master';
 import { TransjakartaCorridorSchema, TransjakartBusStopSchema } from './schema/transjakarta';
 import { TransactionMasterSchema, TransactionTransportSchema } from './schema/transaction';
 
-const client = new MongoClient(process.env.DATABASE_URL);
-const db = client.db('apify');
+const client = new MongoClient(process.env.DATABASE_URL, { maxConnecting: 2 });
+const db = client.db('bird-eye');
 export const MONGODB = {
   client: client,
   db: db,
