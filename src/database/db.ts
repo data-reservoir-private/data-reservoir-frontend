@@ -11,7 +11,7 @@ import { TransjakartaCorridorSchema, TransjakartBusStopSchema } from './schema/t
 import { TransactionMasterSchema, TransactionTransportSchema } from './schema/transaction';
 
 const client = new MongoClient(process.env.DATABASE_URL, { maxConnecting: 2 });
-const db = client.db('bird-eye');
+const db = client.db(process.env.DATABASE_NAME);
 export const MONGODB = {
   client: client,
   db: db,

@@ -4,6 +4,7 @@ declare global {
       POSTGRES: string,
       NEXT_PUBLIC_API: string,
       DATABASE_URL: string,
+      DATABASE_NAME: string,
       NEXT_PUBLIC_HOST: string,
       NEXT_PUBLIC_SUPABASE_HOST: string,
       NEXT_PUBLIC_SUPABASE_API_KEY: string
