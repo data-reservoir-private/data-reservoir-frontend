@@ -6,3 +6,24 @@ export enum TRANSJAKARTA_DIRECTION {
   NORTH_SOUTH = "NS",
   SOUTH_NORTH = "SN"
 }
+
+export enum FOUR_PC_HARVESTABLE_RARITY {
+  NO_RARITY,
+  COMMON,
+  UNCOMMON,
+  RARE
+}
+
+export enum CYGNUS_GRADE_ID {
+  NORMAL = 1,
+  SILVER = 2,
+  GOLD = 3,
+  IRIDIUM = 4
+}
+
+export enum CYGNUS_GRADE_STR {
+  NORMAL = "normal",
+  SILVER = "silver",
+  GOLD = "gold",
+  IRIDIUM = "iridium"
+}

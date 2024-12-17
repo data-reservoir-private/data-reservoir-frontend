@@ -1,31 +1,65 @@
-import { transjakartaBusStop, transjakartaCorridor, transjakartaScheduleDetail } from '@/database/schema';
-import { InferSelectModel } from "drizzle-orm";
+import { HasID } from "./base";
 
-export type TransjakartaBusStopResponse = Omit<InferSelectModel<typeof transjakartaBusStop>,
-  'link' | 'isDeleted' | 'effectiveDate' | 'id'>;
-export type TransjakartaBusStopDetailResponse = TransjakartaBusStopResponse & {
-  corridors: string[]
+export interface TransjakartaCorridorResponse extends HasID {
+  category: string;
+  code: string;
+  name: string;
+  color: string;
+  problems: number;
 }
 
-export type TransjakartaCorridorResponse = Omit<InferSelectModel<typeof transjakartaCorridor>,
-  'link' | 'isDeleted' | 'effectiveDate' | 'image' | 'pictureEffectiveDate'> & {
-  'color': string,
-  'problem': number,
-  'beroperasi': boolean
+export interface TransjakartaCorridorDetailResponse extends HasID {
+  category: string;
+  code: string;
+  name: string;
+  color: string;
+  problems: number;
+  schedule: {
+    day: boolean
+    end_north: number;
+    end_south: number;
+    night: boolean;
+    peak_day: boolean;
+    peak_evening: boolean;
+    start_north: number;
+    start_south: number;
+    weekday: boolean;
+    weekend: boolean;
+  }[];
+  stops: {
+    brt: boolean;
+    bus_stop_code: number;
+    direction: string;
+    latitude: number;
+    longitude: number;
+    order: number;
+    permanently_closed: boolean;
+  }[]
 }
 
-export type TransjakartaCorridorDetailResponse = {
-  code: string,
-  name: string,
-  color: string,
-  busStopCode: number[],
-  northName: string,
-  southName: string,
-  problem: number,
-  schedule: Omit<InferSelectModel<typeof transjakartaScheduleDetail>, 'link' | 'isDeleted' | 'effectiveDate' | 'image' | 'id' | 'code'>[]
-}
+export interface TransjakartaBusStopResponse extends HasID {
+  brt: boolean;
+  code: number;
+  latitude: number;
+  longitude: number;
+  name: string;
+  permanently_closed: boolean;
+} 
 
-export type TransjakartaCorridorStyleResponse = {
-  corridorCode: string,
-  corridorHexColor: string
-}
+export interface TransjakartaBusStopDetailResponse extends HasID {
+  brt: boolean;
+  code: number;
+  effective_date: Date;
+  is_deleted: boolean;
+  latitude: number;
+  link: string;
+  longitude: number;
+  name: string;
+  permanently_closed: boolean;
+  corridors: {
+    category: string
+    code: string
+    color: string
+    name: string
+  }[];
+} 

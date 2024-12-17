@@ -1,12 +1,15 @@
-import { DB } from "@/database/client";
-import { pizzaFrenzyTopping } from "@/database/schema";
-import { PaginationRequest } from "@/model/request/pagination";
+export const dynamic = 'force-static';
+
+import { ID_AGGR, MONGODB } from "@/database/db";
 import { newResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(_: NextRequest, params: PaginationRequest) {
+export async function GET(_: NextRequest) {
   return NextResponse.json(newResponse(
-    await DB.select()
-      .from(pizzaFrenzyTopping))
-  )
+    await MONGODB.pizza_frenzy.topping.aggregate([...ID_AGGR, {
+      $unset: [
+        'upgrades.topping_id', 'upgrades.id'
+      ]
+    }]).toArray()
+  ));
 }

@@ -1,19 +1,20 @@
-import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
-import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { NasiGorengIngredientResponse } from '@/model/response/nasi-goreng';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
+import Image from 'next/image';
+import { Checkbox } from 'flowbite-react';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function NasiGorengIngredient() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-ingredient'],
     queryFn: async () => {
-      let j = await request<NasiGorengIngredientResponse[], {}>({
+      const j = await request<NasiGorengIngredientResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.INGREDIENT,
       });
@@ -21,57 +22,48 @@ export default function NasiGorengIngredient() {
     }
   });
 
-  const colHelper = createColumnHelper<NasiGorengIngredientResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-    }),
-    colHelper.display({
-      id: 'image',
-      header: 'Image',
-      cell: p => (
-        <div className='flex justify-center w-full'>
-          <img className='h-16 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
-        </div>
-      )
-    }),
-    colHelper.accessor('name', {
-      cell: p => p.getValue(),
-      header: "Name",
-      filterFn: 'includesString',
-      meta: {
-        filterVariant: 'search'
-      }
-    }),
-    colHelper.accessor('category', {
-      cell: p => p.getValue(),
-      header: "Category",
-      filterFn: multiSelectFilter,
-      enableSorting: true,
-      meta: {
-        filterVariant: 'select'
-      }
-    }),
-    colHelper.accessor('price', {
-      cell: p => `${p.getValue()}`,
-      header: "Price",
-      enableSorting: true,
-    }),
-    colHelper.accessor('description', {
-      cell: p => (
-        <span title={p.getValue()} className='text-xs text-justify line-clamp-4'>{p.getValue()}</span>
-      ),
-      header: "Description"
-    }),
-  ];
-
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
+  const displayDetail = (d: NasiGorengIngredientResponse) => (
+    <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
+      <BasicGridDetailImage src={d.image} width={256} height={256} alt={d.name} unoptimized/>
+      <div className='text-white text-lg font-bold'>
+        { d.name }
       </div>
-    </Paper>
-  )
+      <GridDetail data={{
+        ID: d.id,
+        Name: d.name,
+        Category: d.category,
+        Price: d.price,
+        Processed: <Checkbox checked={d.is_processed} size={8} disabled />,
+        Description: d.description,
+        Tool: d.tool ? (
+          <>
+            <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
+            <div className='relative min-h-6 w-6'>
+              <Image src={d.tool.tool_image} alt={d.tool.tool_name} fill objectFit='contain' />
+            </div>
+              <span>{d.tool.tool_name}</span>
+            </div>
+          </>
+        ) : "-",
+        Recipe: d.recipe.length > 0 ? (
+          <ul className='gap-2 flex flex-col'>
+            {
+              d.recipe.map(i => (
+                <li key={i.ingredient_name}>
+                  <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
+                    <div className='relative min-h-6 w-6'>
+                      <Image src={i.ingredient_image} alt={i.ingredient_name} fill objectFit='contain' />
+                    </div>
+                    <span>{i.ingredient_name}</span>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        ) : "-",
+      }}/>
+    </div>
+  );
+
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
 }

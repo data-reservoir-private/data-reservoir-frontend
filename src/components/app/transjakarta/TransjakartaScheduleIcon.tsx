@@ -1,6 +1,6 @@
 import { ptSansBold } from '@/constant/font';
 import classNames from 'classnames';
-import React from 'react'
+import React from 'react';
 
 export type TransjakartaScheduleIconProps = {
   icon: 'weekday' | 'weekend' | 'peakday' | 'peakevening' | 'night' | 'day';
@@ -26,5 +26,5 @@ export default function TransjakartaScheduleIcon(props: TransjakartaScheduleIcon
         }
       </span>
     </div>
-  )
+  );
 }

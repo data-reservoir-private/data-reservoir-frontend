@@ -1,13 +1,15 @@
+export const dynamic = 'force-static';
+
 import { API_SHORTHAND } from "@/constant/api-route";
-import { DB } from "@/database/client";
-import { theSimsBustinOutCareer, theSimsCastawayProduct, theSimsFourPcHarvestable, theSimsTwoConsoleCareer, theSimsTwoPetsConsoleCareer, theSimsTwoPetsConsoleProduct } from "@/database/schema";
+import { ID_AGGR, MONGODB } from "@/database/db";
 import { newResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 
 type RouteEndpoint = typeof API_SHORTHAND.THE_SIMS[keyof typeof API_SHORTHAND.THE_SIMS]
-const routeEndpoint = (Object.values(API_SHORTHAND.THE_SIMS))
+const routeEndpoint = (Object.values(API_SHORTHAND.THE_SIMS));
 
-export async function GET(_: NextRequest, { params } : { params : { table: string } }){
+export async function GET(_: NextRequest, props: { params : Promise<{ table: string }> }) {
+  const params = await props.params;
 
   // Cek apakah table masuk dalam type
   if (!routeEndpoint.includes(params.table as RouteEndpoint)) return new NextResponse(null, {
@@ -16,16 +18,28 @@ export async function GET(_: NextRequest, { params } : { params : { table: strin
 
   switch (params.table as RouteEndpoint) {
     case 'castaway-product':
-      return NextResponse.json(newResponse(await DB.select().from(theSimsCastawayProduct)))
+      return NextResponse.json(newResponse(
+        await MONGODB.the_sims.castaway_product.aggregate(ID_AGGR).toArray()
+      ));
     case 'four-pc-harvestable':
-      return NextResponse.json(newResponse(await DB.select().from(theSimsFourPcHarvestable)))
+      return NextResponse.json(newResponse(
+        await MONGODB.the_sims.four_pc_harvestable.aggregate(ID_AGGR).toArray()
+      ));
     case 'two-pets-console-product':
-      return NextResponse.json(newResponse(await DB.select().from(theSimsTwoPetsConsoleProduct)))
+      return NextResponse.json(newResponse(
+        await MONGODB.the_sims.two_pets_console_product.aggregate(ID_AGGR).toArray()
+      ));
     case 'bustin-out-career':
-      return NextResponse.json(newResponse(await DB.select().from(theSimsBustinOutCareer)))
+      return NextResponse.json(newResponse(
+        await MONGODB.the_sims.the_sims_bustin_out_career.aggregate(ID_AGGR).toArray()
+      ));
     case 'two-console-career':
-      return NextResponse.json(newResponse(await DB.select().from(theSimsTwoConsoleCareer)))
+      return NextResponse.json(newResponse(
+        await MONGODB.the_sims.two_console_career.aggregate(ID_AGGR).toArray()
+      ));
     case 'two-pets-console-career':
-      return NextResponse.json(newResponse(await DB.select().from(theSimsTwoPetsConsoleCareer)))
+      return NextResponse.json(newResponse(
+        await MONGODB.the_sims.two_pets_console_career.aggregate(ID_AGGR).toArray()
+      ));
   }
 }

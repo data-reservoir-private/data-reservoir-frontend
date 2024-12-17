@@ -1,22 +1,18 @@
-import { asc, eq } from 'drizzle-orm';
-import { DB } from "@/database/client";
-import { pizzaFrenzyTopping, pizzaFrenzyToppingUpgrade } from "@/database/schema";
+export const dynamic = 'force-static';
+
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
-import { PizzaFrenzyToppingDetailResponse } from '@/model/response/pizza-frenzy';
+import { UUID } from 'mongodb';
+import { MONGODB, ID_AGGR } from '@/database/db';
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
-  let id = params.id;
-  let resp = await DB.select()
-    .from(pizzaFrenzyTopping)
-    .innerJoin(pizzaFrenzyToppingUpgrade, eq(pizzaFrenzyTopping.id, pizzaFrenzyToppingUpgrade.toppingId))
-    .where(eq(pizzaFrenzyTopping.id, id))
-    .orderBy(asc(pizzaFrenzyToppingUpgrade.level));
-
-  return NextResponse.json(newResponse<PizzaFrenzyToppingDetailResponse>(
-    {
-      ...resp[0].pizza_frenzy_topping,
-      upgrades: resp.map(x => x.pizza_frenzy_topping_upgrade)
-    }
+export async function GET(_: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
+  const id = UUID.createFromHexString(params.id);
+  return NextResponse.json(newResponse(
+    (await MONGODB.pizza_frenzy.topping.aggregate([...ID_AGGR, {
+      $unset: [
+        'upgrades.topping_id', 'upgrades.id'
+      ],
+    }, { $match: { id: id } }]).toArray()).find(_ => true)
   ));
 }

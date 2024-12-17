@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import classNames from 'classnames';
 import { ptSansBold } from '@/constant/font';
 
@@ -12,14 +12,14 @@ export default function TransjakartaCode(props: TransjakartaCodeProps) {
   let codeSplit = [];
   
   // JAK dan MJAK
-  if (props.code.startsWith("JAK")) codeSplit = ["JAK", props.code.replace("JAK", "")]
-  else if (props.code.startsWith("MJAK")) codeSplit = ["MJAK", props.code.replace("MJAK", "")]
+  if (props.code.startsWith("JAK")) codeSplit = ["JAK", props.code.replace("JAK", "")];
+  else if (props.code.startsWith("MJAK")) codeSplit = ["MJAK", props.code.replace("MJAK", "")];
 
   // FIBAWC kepanjangan
-  else if (props.code.startsWith("FIBAWC")) codeSplit = ["FIBAWC", "2023"]
+  else if (props.code.startsWith("FIBAWC")) codeSplit = ["FIBAWC", "2023"];
 
   // Ada yang pakai underscore (L13E_TRIAL)
-  else if (props.code.indexOf("_") !== -1) codeSplit = props.code.split("_")
+  else if (props.code.indexOf("_") !== -1) codeSplit = props.code.split("_");
   else codeSplit = [props.code];
 
   return (
@@ -34,5 +34,5 @@ export default function TransjakartaCode(props: TransjakartaCodeProps) {
         codeSplit.map((x, idx) => (<span key={idx}>{x}</span>))
       }
     </div>
-  )
+  );
 }

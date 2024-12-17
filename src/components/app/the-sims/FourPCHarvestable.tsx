@@ -1,20 +1,22 @@
-import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { TheSimsFourPCHarvestableResponse } from '@/model/response/the-sims';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
+import Image from 'next/image';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import { Checkbox } from 'flowbite-react';
-import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
+import { SIMOLEON_ICON } from '@/utilities/char';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function FourPCHarvestable() {
   const { isLoading, data } = useQuery({
     queryKey: ["the-sims-four-pc-harvestable"],
     queryFn: async () => {
-      let j = await request<TheSimsFourPCHarvestableResponse[], {}>({
+      const j = await request<TheSimsFourPCHarvestableResponse[], {}>({
         method: "GET",
         url: API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE,
       });
@@ -22,66 +24,24 @@ export default function FourPCHarvestable() {
     }
   });
 
-  const colHelper = createColumnHelper<TheSimsFourPCHarvestableResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>),
-    }),
-    colHelper.display({
-      id: "image",
-      cell: p => (
-        <div className='flex justify-center w-16 h-16'>
-          <img className='w-16 h-16 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
-        </div>
-      ),
-      header: "Image"
-    }),
-    colHelper.accessor('name', {
-      cell: p => p.getValue(),
-      header: "Name",
-      filterFn: 'includesString',
-      meta: {
-        filterVariant: 'search'
-      }
-    }),
-    colHelper.accessor('form', {
-      cell: p => p.getValue(),
-      header: "Form",
-      filterFn: multiSelectFilter,
-      enableSorting: true,
-      meta: {
-        filterVariant: 'select'
-      }
-    }),
-    colHelper.display({
-      cell: p => `${p.row.original.baseValue} - ${p.row.original.perfectValue}`,
-      header: "Base - Perfect Value",
-      enableSorting: true
-    }),
-    colHelper.accessor('verticalGarden', {
-      cell: p => (
-        <div className='flex justify-center'>
-          <Checkbox className='w-5 h-5' color='gray' disabled checked={p.getValue()}/>
-        </div>
-      ),
-      header: "Vertical Garden",
-      enableSorting: true
-    }),
-    colHelper.accessor('description', {
-      cell: p => (
-        <span title={p.getValue()} className='text-xs text-justify line-clamp-4'>{p.getValue()}</span>
-      ),
-      header: "Description"
-    }),
-  ];
-
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
+  const displayDetail = (d: TheSimsFourPCHarvestableResponse) => (
+    <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
+      <BasicGridDetailImage src={d.image} alt={d.name} unoptimized/>
+      <div className='text-white text-lg font-bold'>
+        { d.name }
       </div>
-    </Paper>
-  )
+      <GridDetail data={{
+        ID: d.id,
+        Name: d.name,
+        Description: d.description,
+        Rarity: d.rarity,
+        "Vertical Garden": <Checkbox checked={d.vertical_garden} size={8} disabled />,
+        "Base Value": SIMOLEON_ICON + " " + d.base_value,
+        "Perfect Value": SIMOLEON_ICON + " " + d.perfect_value,
+        "Growth Rate": d.growth_rate,
+      }}/>
+    </div>
+  );
+
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
 }

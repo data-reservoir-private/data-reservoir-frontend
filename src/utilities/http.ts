@@ -1,23 +1,25 @@
 import { BaseRequest } from "@/model/request/base";
 import { BaseResponse } from "@/model/response/base";
 import { isNil, omitBy } from "lodash";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function request<TResponse, TRequest extends Record<string, any> | never>(request: BaseRequest<TRequest>, useForm: boolean = true): Promise<BaseResponse<TResponse>> {
   // Kita pecah prosesnya biar GET dan DELETE punya proses sendiri biar nga mabuk
 
   let url = request.url;
   if (request.method === "GET" || request.method === "DELETE") {
-    let arrayParams = Object.entries(omitBy(request.data ?? {}, isNil))
+    const arrayParams = Object.entries(omitBy(request.data ?? {}, isNil))
       .flatMap(([k, v]) => {
         if (Array.isArray(v)) return v.map(x => ([k, x]));
-        else return [[k, v]]
+        else return [[k, v]];
       });
     url = url + "?" + new URLSearchParams(arrayParams);
   }
 
-  let conf: RequestInit = {
-    method: request.method
-  }
+  const conf: RequestInit = {
+    method: request.method,
+    cache: 'default'
+  };
 
   // Jika kita kirim data pakai form, maka kita masukkan ke formData
   if (request.method !== "GET" && request.method !== "DELETE"){
@@ -31,7 +33,7 @@ export async function request<TResponse, TRequest extends Record<string, any> | 
 export function toFormData(param: any): FormData{
   if (typeof param !== "object") return new FormData();
 
-  let formData = new FormData();
+  const formData = new FormData();
   Object.keys(param).forEach(key => {
     if (Array.isArray(param[key])) param[key].forEach(x => formData.append(key + '[]', x));
     else formData.append(key, param[key]);

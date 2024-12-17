@@ -1,7 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
-import { create } from 'zustand'
-import { createJSONStorage, devtools, persist } from 'zustand/middleware'
-import { produce } from 'immer'
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { produce } from 'immer';
 
 export interface QueryClientStore {
   queryClient: QueryClient
@@ -34,7 +34,7 @@ export interface AppStore {
 }
 
 export const useAppStore = create<AppStore>()(
-  devtools(set => (
+  (set => (
     {
       query: {
         queryClient: new QueryClient({

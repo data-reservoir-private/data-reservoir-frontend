@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Loading from "@/components/common/loading/Loading";
 import Paper from "@/components/common/paper/Paper";
@@ -44,10 +44,10 @@ export default function TableSummary<T extends TablePickerType>(props: TableSumm
     props.hasPicker && props.onPickCategory(state.pickedTab ?? null);
   }, [props, state.pickedTab]);
 
-  let { isLoading, data: summaryData } = useQuery({
+  const { isLoading, data: summaryData } = useQuery({
     queryKey: [props.category],
     queryFn: async () => {
-      let j = await request<DashboardResponse[], DashboardRequest>({
+      const j = await request<DashboardResponse[], DashboardRequest>({
         method: "GET",
         url: API_ROUTE.DASHBOARD,
         data: {
@@ -58,12 +58,12 @@ export default function TableSummary<T extends TablePickerType>(props: TableSumm
     }
   });
 
-  let onClickCategory = (pickedTable: string, enabled: boolean) => {
+  const onClickCategory = (pickedTable: string, enabled: boolean) => {
     setState(produce(s => {
-      let choice = enabled ? pickedTable : null;
-      s.pickedTab = choice as Draft<T>
-    }))
-  }
+      const choice = enabled ? pickedTable : null;
+      s.pickedTab = choice as Draft<T>;
+    }));
+  };
 
   return (
     <div className='flex flex-col gap-4 text-white'>
@@ -97,5 +97,5 @@ export default function TableSummary<T extends TablePickerType>(props: TableSumm
         }
       </div>
     </div>
-  )
+  );
 }

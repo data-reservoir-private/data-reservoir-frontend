@@ -1,9 +1,9 @@
-import { theSimsBustinOutCareer, theSimsCastawayProduct, theSimsFourPcHarvestable, theSimsTwoConsoleCareer, theSimsTwoPetsConsoleCareer, theSimsTwoPetsConsoleProduct } from "@/database/schema";
-import { InferSelectModel } from "drizzle-orm";
+import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from "@/database/schema/the-sims";
+import { HasID } from "./base";
 
-export type TheSimsCastawayProductResponse = InferSelectModel<typeof theSimsCastawayProduct>
-export type TheSimsFourPCHarvestableResponse = InferSelectModel<typeof theSimsFourPcHarvestable>
-export type TheSimsBustinOutCareerResponse = InferSelectModel<typeof theSimsBustinOutCareer>
-export type TheSimsTwoPetsConsoleCareerResponse = InferSelectModel<typeof theSimsTwoPetsConsoleCareer>
-export type TheSimsTwoConsoleCareerResponse = InferSelectModel<typeof theSimsTwoConsoleCareer>
-export type TheSimsTwoPetsConsoleProductResponse = InferSelectModel<typeof theSimsTwoPetsConsoleProduct>
+export interface TheSimsCastawayProductResponse extends Omit<TheSimsCastawayProductSchema & HasID, '_id'> {}
+export interface TheSimsFourPCHarvestableResponse extends Omit<TheSimsFourPCHarvestableSchema & HasID, '_id'> {}
+export interface TheSimsTwoPetsConsoleProductResponse extends Omit<TheSimsTwoPetsConsoleProductSchema & HasID, '_id'> {}
+export interface TheSimsBustinOutCareerResponse extends Omit<TheSimsBustinOutCareerSchema & HasID, '_id'> {}
+export interface TheSimsTwoPetsConsoleCareerResponse extends Omit<TheSimsTwoPetsConsoleCareerSchema & HasID, '_id'> {}
+export interface TheSimsTwoConsoleCareerResponse extends Omit<TheSimsTwoConsoleCareerSchema & HasID, '_id'> {}

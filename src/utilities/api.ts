@@ -17,9 +17,9 @@ export function newPaginationResponse<T>(data: T[], pageSize: number, currentPag
     totalPage: totalPage,
     pageSize: pageSize,
     data: data
-  })
+  });
 }
 
 export function badRequestResponse(message: string) {
-  return NextResponse.json(newResponse(message), { status: 400 })
+  return NextResponse.json(newResponse(message), { status: 400 });
 }

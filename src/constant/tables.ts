@@ -16,7 +16,7 @@ export const TheSimsTableLabel: {[key in TheSimsTableType]: string } = {
   "the_sims_two_pets_console_career": "Pets Console Career",
   "the_sims_four_pc_harvestable": "Four PC Harvestable",
   "the_sims_two_pets_console_product": "Two Pets Console Product"
-}
+};
 
 export type HaydayMenu = "product" | "building"; 
 export const HaydayTab: { [key in HaydayMenu]: string } = {
@@ -24,18 +24,49 @@ export const HaydayTab: { [key in HaydayMenu]: string } = {
   "building": "Building"
 };
 
-export type FarmFrenzyTableType =
-  "farm_frenzy_one_product" |
+export type FarmFrenzyTableType = "farm_frenzy_one_product" |
   "farm_frenzy_two_product" |
   "farm_frenzy_two_pizza_product" |
   "farm_frenzy_three_product";
+export const FarmFrenzyTableTypeOptions : FarmFrenzyTableType[] = [
+  "farm_frenzy_one_product",
+  "farm_frenzy_two_product",
+  "farm_frenzy_two_pizza_product",
+  "farm_frenzy_three_product"
+] as const;
 
 export const FarmFrenzyTableLabel: {[key in FarmFrenzyTableType]: string } = {
   "farm_frenzy_one_product": "One Product",
   "farm_frenzy_two_product": "Two Product",
   "farm_frenzy_two_pizza_product": "Two Pizza Product",
   "farm_frenzy_three_product": "Three Product"
-}
+};
+
+export type QuartzTableType =
+  "shippable" |
+  "recipe" |
+  "utensil"
+
+export const QuartzTableLabel: {[key in QuartzTableType]: string} = {
+  'shippable': 'Shippable',
+  'recipe': 'Recipe',
+  'utensil': 'Utensil'
+};
+
+export type CygnusTableType =
+  "mineral" |
+  "artifact" |
+  "crop" |
+  "dish" |
+  "node"
+
+export const CygnusTableLabel: {[key in CygnusTableType]: string} = {
+  'mineral': 'Mineral',
+  'artifact': 'Artifact',
+  'crop': 'Crop',
+  'dish': 'Dish',
+  'node': "Mining Node"
+};
 
 export type NasiGorengTableType =
   "nasi_goreng_burned_food" |
@@ -54,4 +85,4 @@ export const NasiGorengTableLabel: {[key in NasiGorengTableType]: string} = {
   'nasi_goreng_tool': 'Tool',
   'nasi_goreng_fried_rice': 'Fried Rice',
   'nasi_goreng_upgrade': 'Upgrade'
-}
+};

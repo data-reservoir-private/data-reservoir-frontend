@@ -1,19 +1,18 @@
-import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
-import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { NasiGorengPlateResponse } from '@/model/response/nasi-goreng';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function NasiGorengPlate() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-plate'],
     queryFn: async () => {
-      let j = await request<NasiGorengPlateResponse[], {}>({
+      const j = await request<NasiGorengPlateResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.PLATE,
       });
@@ -21,29 +20,15 @@ export default function NasiGorengPlate() {
     }
   });
 
-  const colHelper = createColumnHelper<NasiGorengPlateResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-    }),
-    colHelper.display({
-      id: 'image',
-      header: 'Image',
-      cell: p => (
-        <div className='flex justify-center w-full'>
-          <img className='h-32 rounded-md' src={p.row.original.image} alt="Plate"></img>
-        </div>
-      )
-    })
-  ];
+  const displayDetail = (d: NasiGorengPlateResponse) => (
+    <div className='w-full gap-3 flex flex-col'>
+      <BasicGridDetailImage src={d.image} width={256} height={256} alt={d.index.toString()} unoptimized/>
+      <GridDetail data={{
+        ID: d.id,
+        Index: d.index,
+      }}/>
+    </div>
+  );
 
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
-      </div>
-    </Paper>
-  )
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.index.toString()} detail={displayDetail} gridContainerClasses='w-32 h-32' />;
 }

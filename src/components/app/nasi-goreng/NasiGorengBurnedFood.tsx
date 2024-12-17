@@ -1,19 +1,20 @@
-import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
-import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { NasiGorengBurnedFoodResponse } from '@/model/response/nasi-goreng';
+import Image from 'next/image';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function NasiGorengBurnedFood() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-burned-food'],
     queryFn: async () => {
-      let j = await request<NasiGorengBurnedFoodResponse[], {}>({
+      const j = await request<NasiGorengBurnedFoodResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.BURNED_FOOD,
       });
@@ -21,51 +22,19 @@ export default function NasiGorengBurnedFood() {
     }
   });
 
-  const colHelper = createColumnHelper<NasiGorengBurnedFoodResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-    }),
-    colHelper.display({
-      id: 'image',
-      header: 'Image',
-      cell: p => (
-        <div className='flex justify-center w-full'>
-          <img className='h-24 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
-        </div>
-      ),
-      meta: {
-        classes: {
-          td: "flex justify-center"
-        }
-      }
-    }),
-    colHelper.accessor('name', {
-      cell: p => p.getValue(),
-      header: "Name",
-      filterFn: 'includesString',
-      meta: {
-        filterVariant: 'search'
-      }
-    }),
-    colHelper.accessor('category', {
-      cell: p => p.getValue(),
-      header: "Category",
-      filterFn: multiSelectFilter,
-      enableSorting: true,
-      meta: {
-        filterVariant: 'select'
-      }
-    }),
-  ];
-
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
+  const displayDetail = (d: NasiGorengBurnedFoodResponse) => (
+    <div className='w-full gap-3 flex flex-col'>
+      <BasicGridDetailImage src={d.image} width={256} height={256} alt={d.name} unoptimized/>
+      <div className='text-white text-lg font-bold'>
+        { d.name }
       </div>
-    </Paper>
-  )
+      <GridDetail data={{
+        ID: d.id,
+        Name: d.name,
+        Category: d.category,
+      }}/>
+    </div>
+  );
+
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />;
 }

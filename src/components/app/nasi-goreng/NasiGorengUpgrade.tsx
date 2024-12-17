@@ -1,19 +1,20 @@
-import React from 'react'
-import BasicTable from '@/components/common/basic-table/BasicTable';
+import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { createColumnHelper } from '@tanstack/react-table';
-import { getStaticIndex } from '@/utilities/table';
 import { NasiGorengUpgradeResponse } from '@/model/response/nasi-goreng';
+import Image from 'next/image';
+import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import GridDetail from '@/components/common/basic-grid/GridDetail';
+import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 
 export default function NasiGorengUpgrade() {
   const { isLoading, data } = useQuery({
     queryKey: ['nasi-goreng-Upgrade'],
     queryFn: async () => {
-      let j = await request<NasiGorengUpgradeResponse[], {}>({
+      const j = await request<NasiGorengUpgradeResponse[], {}>({
         method: "GET",
         url: API_ROUTE.NASI_GORENG.UPGRADE,
       });
@@ -21,37 +22,15 @@ export default function NasiGorengUpgrade() {
     }
   });
 
-  const colHelper = createColumnHelper<NasiGorengUpgradeResponse>();
-  const columns = [
-    colHelper.display({
-      id: 'index',
-      header: "#",
-      cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-    }),
-    colHelper.display({
-      id: 'image',
-      header: 'Image',
-      cell: p => (
-        <div className='flex justify-center w-full'>
-          <img className='h-16 rounded-md' src={p.row.original.image} alt={p.row.original.name}></img>
-        </div>
-      )
-    }),
-    colHelper.accessor('name', {
-      cell: p => p.getValue(),
-      header: "Name",
-      filterFn: 'includesString',
-      meta: {
-        filterVariant: 'search'
-      }
-    })
-  ];
+  const displayDetail = (d: NasiGorengUpgradeResponse) => (
+    <div className='w-full gap-3 flex flex-col'>
+      <BasicGridDetailImage src={d.image} width={256} height={256} alt={d.name} unoptimized/>
+      <GridDetail data={{
+        ID: d.id,
+        Name: d.name,
+      }}/>
+    </div>
+  );
 
-  return (
-    <Paper className='max-h-[800px] overflow-auto rounded-md'>
-      <div className='p-5 inline-block min-w-full'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
-      </div>
-    </Paper>
-  )
+  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-20 h-20' />;
 }

@@ -1,13 +1,12 @@
-import React, { Fragment, useMemo, useState } from 'react'
-import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, RowData, useReactTable } from '@tanstack/react-table'
-import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
+import React, { Fragment, useMemo, useState } from 'react';
+import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
-import { TextInput } from 'flowbite-react';
 
 export interface BasicTableProps<T> {
   data: T[],
-  columns: ColumnDef<T, any>[],
+  columns: ColumnDef<T, unknown>[],
   expandElement?: (row: Row<T>) => React.ReactNode
 }
 
@@ -16,8 +15,8 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
   // const helper = createColumnHelper<Test>();
 
   const cachedColumn = useMemo(() => props.columns, [props.columns]);
-  const [cachedData, _] = useState(props.data);
-  const [canExpand, __] = useState(!!props.expandElement);
+  const [cachedData, ] = useState(props.data);
+  const [canExpand, ] = useState(!!props.expandElement);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
   const reactTable = useReactTable({
@@ -27,7 +26,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
       columnFilters
     },
     enableColumnFilters: true,
-    
+
     getRowCanExpand: () => canExpand,
     enableExpanding: !!props.expandElement,
     onColumnFiltersChange: setColumnFilters,
@@ -40,18 +39,18 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
   });
 
   return (
-    <div className='rounded-md relative'>
-      <table className='min-h-56 rounded-md min-w-full border-2 border-slate-700'>
-        <thead className='sticky top-0 bg-bluish-200 z-50'>
+    <div className='rounded-md relative overflow-auto scrollbar-default'>
+      <table className='min-h-30 rounded-md min-w-full border-2 border-slate-700 border-collapse'>
+        <thead className='sticky top-0 bg-bluish-200 z-20'>
           {
             reactTable.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
                 {
                   headerGroup.headers.map(header => {
-                    let sortSymbol =
+                    const sortSymbol =
                       !header.column.getIsSorted() ? '⏸' : 
                         header.column.getIsSorted() === 'asc' ? '🔼' : '🔽';
-                    const v = header.column.columnDef.meta?.filterVariant
+                    const v = header.column.columnDef.meta?.filterVariant;
                     const hasFilter = header.column.getCanFilter() && !!v;
                     return (
                       <th key={header.id} className='p-2' colSpan={header.colSpan}>
@@ -75,7 +74,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                           </div>
                         }
                       </th>
-                    )
+                    );
                   })
                 }
               </tr>
@@ -89,7 +88,7 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                 <tr>
                   {
                     row.getVisibleCells().map(cell => (
-                      <td key={cell.id} className={classNames('px-2 py-2', cell.column.columnDef.meta?.classes?.td ?? "", {
+                      <td key={cell.id} className={classNames('px-2 py-2 text-xs', cell.column.columnDef.meta?.classes?.td ?? "", {
                         'text-center': (typeof cell.getValue() === 'number')
                       })}>
                         { cell.getIsPlaceholder() ? null : flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -115,11 +114,11 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
 interface BasicTableFilterProps<T> {
-  column: Column<T, any>
+  column: Column<T, unknown>
 }
 
 function BasicTableFilterSelect<T>(props: BasicTableFilterProps<T>)
@@ -132,7 +131,7 @@ function BasicTableFilterSelect<T>(props: BasicTableFilterProps<T>)
 
   // Memoize biar bisa dirender
   const uniqueValues = useMemo(() => {
-    return Array.from<string | number>(uniq.keys()).sort((a, b) => a > b ? 1 : a < b ? -1 : 0)
+    return Array.from<string | number>(uniq.keys()).sort((a, b) => a > b ? 1 : a < b ? -1 : 0);
   }, [uniq]);
 
   if (uniqueValues.length === 0) return (<></>);
@@ -159,7 +158,7 @@ function BasicTableFilterSelect<T>(props: BasicTableFilterProps<T>)
         </ListboxOptions>
       </div>
     </Listbox>
-  )
+  );
 }
 
 function BasicTableFilterSearch<T>(props: BasicTableFilterProps<T>) {
@@ -172,15 +171,15 @@ function BasicTableFilterSearch<T>(props: BasicTableFilterProps<T>) {
       <input
         className='text-sm font-normal bg-gray-700 rounded-sm w-full outline-none py-1 px-2 focus:ring-2 focus:ring-cyan-700'
         value={inputedQuery}
-        onChange={e => {props.column.setFilterValue(e.target.value)}}
+        onChange={e => {props.column.setFilterValue(e.target.value);}}
       />
     </div>
-  )
+  );
 }
 
 function BasicTableFilter<T>(props: BasicTableFilterProps<T>) {
   const filterVariant = props.column.columnDef.meta?.filterVariant;
-  if (filterVariant === 'select') return (<BasicTableFilterSelect {...props}/>)
-  else if (filterVariant === 'search') return (<BasicTableFilterSearch {...props}/>)
-  else return (<></>)
+  if (filterVariant === 'select') return (<BasicTableFilterSelect {...props}/>);
+  else if (filterVariant === 'search') return (<BasicTableFilterSearch {...props}/>);
+  else return (<></>);
 }

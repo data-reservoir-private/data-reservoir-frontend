@@ -1,11 +1,11 @@
-import { DB } from "@/database/client";
-import { nasiGorengRelic } from "@/database/schema";
+export const dynamic = 'force-static';
+
+import { MONGODB, ID_AGGR } from "@/database/db";
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   return NextResponse.json(newResponse(
-    await DB.select()
-      .from(nasiGorengRelic))
-  )
+    await MONGODB.nasi_goreng.relic.aggregate(ID_AGGR).toArray()
+  ));
 }

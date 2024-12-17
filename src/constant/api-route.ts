@@ -1,7 +1,7 @@
 
 // https://stackoverflow.com/questions/68657274/create-type-using-objects-value
 
-const HOST = process.env.NEXT_PUBLIC_API
+const HOST = process.env.NEXT_PUBLIC_API;
 /**
  * Shorthand2 untuk validasi API route
  */
@@ -38,8 +38,22 @@ export const API_SHORTHAND = Object.freeze({
     CORRIDOR: 'corridor',
     BUS_STOP: 'bus-stop',
     STYLE: 'style'
-  }
-} as const)
+  },
+  QUARTZ: {
+    SHIPPABLE: 'shippable',
+    RECIPE: 'recipe',
+    UTENSIL: 'utensil'
+  },
+  CYGNUS: {
+    ARTIFACT: 'artifact',
+    MINERAL: 'mineral',
+    CROP: 'crop',
+    DISH: 'dish',
+    NODE: 'node'
+  },
+  TRANSACTION: ''
+} as const);
+
 /**
  * Untuk link fetching
  */
@@ -77,5 +91,18 @@ export const API_ROUTE = Object.freeze({
     CORRIDOR: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
     BUS_STOP: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,
     STYLE: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}/${API_SHORTHAND.TRANSJAKARTA.STYLE}`
-  }
-} as const)
+  },
+  QUARTZ: {
+    SHIPPABLE: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.SHIPPABLE}`,
+    RECIPE: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.RECIPE}`,
+    UTENSIL: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.UTENSIL}`
+  },
+  CYGNUS: {
+    ARTIFACT: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.ARTIFACT}`,
+    MINERAL: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.MINERAL}`,
+    CROP: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.CROP}`,
+    DISH: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.DISH}`,
+    NODE: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.NODE}`
+  },
+  TRANSACTION: `${HOST}/transaction`
+} as const);
