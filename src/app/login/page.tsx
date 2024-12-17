@@ -11,19 +11,23 @@ export const metadata: Metadata = {
   title: 'Login - Birdeye View'
 };
 
-export default async function LoginPage({ searchParams } : { searchParams : {[key: string]: string | undefined} }) {
+type searchParamsType = Promise<{[key: string]: string | undefined}>
+
+export default async function LoginPage(props: { searchParams: searchParamsType }) {
   const supabase = await supabaseServer();
   const { data } = await supabase.auth.getUser();
   if (data.user) redirect('/dashboard');
+
+  const searchP = await props.searchParams;
 
   return (
     <div className='w-full h-[100svh] flex items-center justify-center'>
       <Paper className='w-fit px-12 py-7'>
         <form action={login} className='flex gap-2 flex-col'>
           {
-            searchParams['message'] && (
+            searchP['message'] && (
               <Alert color='failure' icon={FaLock} className='p-2 text-sm'>
-                <span>{searchParams['message']}</span>
+                <span>{searchP['message']}</span>
               </Alert>
             )
           }
