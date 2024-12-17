@@ -1,0 +1,45 @@
+import Paper from '@/components/common/paper/Paper';
+import { supabaseServer } from '@/utilities/supabase-server';
+import { Alert, Button } from 'flowbite-react';
+import React from 'react';
+import { redirect } from 'next/navigation';
+import { FaGithub, FaLock } from "react-icons/fa";
+import { login } from './actions';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login - Birdeye View'
+};
+
+export default async function LoginPage({ searchParams } : { searchParams : {[key: string]: string | undefined} }) {
+  const supabase = await supabaseServer();
+  const { data } = await supabase.auth.getUser();
+  if (data.user) redirect('/dashboard');
+
+  return (
+    <div className='w-full h-[100svh] flex items-center justify-center'>
+      <Paper className='w-fit px-12 py-7'>
+        <form action={login} className='flex gap-2 flex-col'>
+          {
+            searchParams['message'] && (
+              <Alert color='failure' icon={FaLock} className='p-2 text-sm'>
+                <span>{searchParams['message']}</span>
+              </Alert>
+            )
+          }
+          <Button className='font-bold text-lg flex items-center gap-5 align-middle' color='success' type='submit'>
+            <span className='flex justify-center items-center text-2xl pr-4'>
+              <FaGithub className='flex items-center'/>
+            </span>
+            <span className='flex items-center'>
+              Login using Github
+            </span>
+          </Button>
+          <span className='text-[9px]'>
+            This is a private app. No one else can login :D
+          </span>
+        </form>
+      </Paper>
+    </div>
+  );
+}
