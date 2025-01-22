@@ -1,5 +1,3 @@
-export const dynamic = 'force-static';
-
 import { ID_AGGR, MONGODB } from "@/database/db";
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
@@ -15,29 +13,41 @@ export async function GET() {
         $unset: ['details.id']
       },
       {
+        $addFields: {
+          newDate: {
+            $dateFromString: { dateString: "$date" }
+          }
+        }
+      },
+      {
         $group: {
           _id: {
             year: {
-              $year: "$date"
+              $year: "$newDate"
             },
             month: {
-              $month: "$date"
+              $month: "$newDate"
             }
           },
           total: {
             $sum: {
               $add: [
                 {
-                  $reduce: {
-                    input: "$details",
-                    initialValue: 0,
-                    in: {
-                      $multiply: [
-                        "$$this.price",
-                        "$$this.quantity"
-                      ]
-                    }
-                  }
+                  $multiply: [
+                    {
+                      $reduce: {
+                        input: "$details",
+                        initialValue: 0,
+                        in: {
+                          $multiply: [
+                            "$$this.price",
+                            "$$this.quantity"
+                          ]
+                        }
+                      },
+                    },
+                    "$exchange_rate"
+                  ]
                 },
                 "$tax_discount"
               ]
@@ -65,13 +75,20 @@ export async function GET() {
   const transport = await MONGODB.transaction.transport.aggregate<AggregationResult>(
     [
       {
+        $addFields: {
+          newDate: {
+            $dateFromString: { dateString: "$date_start" }
+          }
+        }
+      },
+      {
         $group: {
           _id: {
             year: {
-              $year: "$date_start"
+              $year: "$newDate"
             },
             month: {
-              $month: "$date_start"
+              $month: "$newDate"
             }
           },
           total: {
@@ -101,16 +118,19 @@ export async function GET() {
   const currentDate = new Date();
   let [year, month] = [currentDate.getFullYear() - 2, 0];
 
+  
   // 3. Generate report
-  while (currentDate.getFullYear() >= year && currentDate.getMonth() >= month) {
+  while (currentDate.getFullYear() >= year) {
     result.push({
       year: year,
       month: month + 1,
-      total: (master.find(x => x.month === month + 1 && x.year === year)?.total ?? 0) +
-        (transport.find(x => x.month === month + 1 && x.year === year)?.total ?? 0)
+      total: Math.round((master.find(x => x.month === month + 1 && x.year === year)?.total ?? 0) +
+      (transport.find(x => x.month === month + 1 && x.year === year)?.total ?? 0))
     });
     if (month + 1 === 12) year++;
     month = ((month + 1) % 12);
+
+    if (currentDate.getFullYear() === year && currentDate.getMonth() < month) break;
   }
 
   return NextResponse.json(newResponse(result));

@@ -1,11 +1,9 @@
 import { BaseRequest } from "@/model/request/base";
 import { BaseResponse } from "@/model/response/base";
 import { isNil, omitBy } from "lodash";
-import { NextRequest, NextResponse } from "next/server";
 
 export async function request<TResponse, TRequest extends Record<string, any> | never>(request: BaseRequest<TRequest>, useForm: boolean = true): Promise<BaseResponse<TResponse>> {
   // Kita pecah prosesnya biar GET dan DELETE punya proses sendiri biar nga mabuk
-
   let url = request.url;
   if (request.method === "GET" || request.method === "DELETE") {
     const arrayParams = Object.entries(omitBy(request.data ?? {}, isNil))
@@ -18,7 +16,9 @@ export async function request<TResponse, TRequest extends Record<string, any> | 
 
   const conf: RequestInit = {
     method: request.method,
-    cache: 'default'
+    next: {
+      revalidate: 24 * 3600
+    }
   };
 
   // Jika kita kirim data pakai form, maka kita masukkan ke formData

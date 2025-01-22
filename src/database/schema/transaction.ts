@@ -2,11 +2,13 @@ import { UUID } from "mongodb";
 import { BaseSchema } from "./base";
 
 export interface TransactionMasterSchema extends BaseSchema {
-  date: Date;
+  date: string;
   restaurant_tax: number;
   service_tax: number;
   tax_discount: number;
   tenant: string;
+  currency: "IDR" | "SGD",
+  exchange_rate: number,
   details: {
     category: string;
     id: UUID;
@@ -18,8 +20,8 @@ export interface TransactionMasterSchema extends BaseSchema {
 
 export interface TransactionTransportSchema extends BaseSchema {
   company: string
-  date_end: Date;
-  date_start: Date;
+  date_end: string;
+  date_start: string;
   notes: string;
   position_end: string;
   position_start: string;

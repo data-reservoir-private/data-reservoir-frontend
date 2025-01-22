@@ -22,6 +22,10 @@ export interface TransjakartaCorridorSchema extends BaseSchema {
     peak_evening: boolean;
     start_north: number;
     start_south: number;
+    location_end_north: string;
+    location_end_south: string;
+    location_start_north: string;
+    location_start_south: string;
     weekday: boolean;
     weekend: boolean;
   }[];
@@ -29,6 +33,7 @@ export interface TransjakartaCorridorSchema extends BaseSchema {
     id: UUID;
     brt: boolean;
     bus_stop_code: number;
+    name: string;
     direction: string;
     latitude: number;
     longitude: number;

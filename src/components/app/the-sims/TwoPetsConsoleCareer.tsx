@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import BasicTable from '@/components/common/basic-table/BasicTable';
 import Loading from '@/components/common/loading/Loading';
 import Paper from '@/components/common/paper/Paper';
@@ -9,7 +10,6 @@ import { useQuery } from '@tanstack/react-query';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { SIMOLEON_ICON } from '@/utilities/char';
-import Image from 'next/image';
 import { ticksToTime } from '@/utilities/general';
 
 export default function TwoPetsConsoleCareer() {
@@ -30,7 +30,6 @@ export default function TwoPetsConsoleCareer() {
       id: 'index',
       header: "#",
       cell: ({row, table}) => (<div className='text-center font-bold'>{getStaticIndex(row, table)}</div>)
-      // cell: p => (<div className='text-center font-bold'>{p.row.index + 1}</div>),
     }),
     colHelper.accessor('career', {
       cell: p => p.getValue(),
