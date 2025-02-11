@@ -9,7 +9,7 @@ export interface LoadingProps {
 
 export default function Loading(props: LoadingProps) {
   return (
-    <div className={classNames('flex flex-col h-full justify-center items-center', props.className)}>
+    <div className={classNames('flex flex-col h-full justify-center items-center p-3', props.className)}>
       <div>
         <Spinner/>
       </div>

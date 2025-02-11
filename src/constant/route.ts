@@ -85,7 +85,7 @@ export const ROUTES: ROUTE_TYPE[] = [
     name: 'Transjakarta',
     icon: TransjakartaIcon,
     link: '/transjakarta',
-    inactive: true,
+    beta: true
   },
   {
     id: 'docs',
