@@ -1,4 +1,3 @@
-import { BaseResponse } from './../model/response/base';
 import { BaseRequest } from "@/model/request/base";
 import { BaseResponse } from "@/model/response/base";
 import { isNil, omitBy } from "lodash";
