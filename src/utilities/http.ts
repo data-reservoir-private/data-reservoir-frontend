@@ -29,7 +29,6 @@ export async function request<TResponse, TRequest extends Record<string, any> | 
   } 
   
   const f = await fetch(url, conf);
-  console.log(f.status);
   if (Math.round(f.status / 100) === 5) throw new Error("Failed to connect to API");
   const response = await (f).json() as BaseResponse<TResponse>;
   return response;

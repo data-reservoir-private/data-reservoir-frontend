@@ -64,7 +64,6 @@ export const useAppStore = create<AppStore>()(
           state.newTransjakarta.busStopCode = 0;
         })),
         setCorridorStyle: (corridorColors: TransjakartaCorridorColor[]) => set(produce<AppStore>(state => {
-          console.log(corridorColors.reduce<Record<string, string>>((acc, val) => { acc[val.code] = val.color; return acc; }, {}));
           state.newTransjakarta.corridorColors = corridorColors.reduce<Record<string, string>>((acc, val) => { acc[val.code] = `${val.color.startsWith('#') ? '' : '#'}${val.color}`; return acc; }, {});
         })),
       },

@@ -4,8 +4,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(_: Request, props: { params: Promise<{ code: string }> }) {
   const { code } = await props.params;
-
-  console.log(code);
   return NextResponse.json(newResponse(
     (await MONGODB.transjakarta.corridor.aggregate([...ID_AGGR,
       { $match: { code: code } },

@@ -70,7 +70,8 @@ export default function BustinOutCareer() {
     }),
     colHelper.display({
       cell: p => `${ticksToTime(p.row.original.work_start)} - ${ticksToTime(p.row.original.work_end)}`,
-      header: "Work Hours"
+      header: "Work Hours",
+      // id: 'work_hours'
     }),
 
     colHelper.accessor('friends', {
