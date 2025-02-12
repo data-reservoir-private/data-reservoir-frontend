@@ -1,6 +1,5 @@
 import React from 'react';
 import BasicTable from '@/components/common/basic-table/BasicTable';
-import Loading from '@/components/common/loading/Loading';
 import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { TheSimsBustinOutCareerResponse } from '@/model/response/the-sims';
@@ -11,9 +10,10 @@ import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { SIMOLEON_ICON } from '@/utilities/char';
 import { ticksToTime } from '@/utilities/general';
 import Image from 'next/image';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function BustinOutCareer() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ["the-sims-bustin-out-career"],
     queryFn: async () => {
       const j = await request<TheSimsBustinOutCareerResponse[], {}>({
@@ -113,7 +113,9 @@ export default function BustinOutCareer() {
 
   return (
     <Paper className='overflow-auto rounded-md h-full w-auto p-5'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
+      <BasicWrapper queryResult={queryResult}>
+        <BasicTable data={queryResult.data!} columns={columns}/>
+      </BasicWrapper>
     </Paper>
   );
 }

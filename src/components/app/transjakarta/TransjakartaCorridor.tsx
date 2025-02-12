@@ -8,11 +8,12 @@ import TransjakartaCode from './TransjakartaCode';
 import Paper from '@/components/common/paper/Paper';
 import TransjakartaCorridorDetail from './corridor/TransjakartaCorridorDetail';
 import classNames from 'classnames';
+import Error from '@/components/common/error/Error';
 
 export default function TransjakartaCorridor() {
 
   const [corridor, setCorridor] = useState("");
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, isError, error } = useQuery({
     queryKey: ['transjakarta-corridor'],
     queryFn: async () => {
       const j = await request<TransjakartaCorridorResponse[], {}>({
@@ -23,7 +24,8 @@ export default function TransjakartaCorridor() {
     },
   });
 
-  if (isLoading || !data) return <Loading />;
+  if (isLoading) return <Loading />;
+  else if (!data || isError) return <Error message={error?.message}/>;
   
   const regrouping: {[key: string]: TransjakartaCorridorResponse[]} = data.reduce((grouping, el) => {
     if (!grouping[el.category]) grouping[el.category] = [el];

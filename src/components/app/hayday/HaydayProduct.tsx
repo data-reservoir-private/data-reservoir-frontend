@@ -12,9 +12,10 @@ import { secondToTimespan } from '@/utilities/general';
 import { Suspense } from 'react';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import HaydayIconHelper from './HaydayIconHelper';
+import Error from '@/components/common/error/Error';
 
 export default function HaydayProduct() {
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, isError, error } = useQuery({
     queryKey: ["hayday-product"],
     queryFn: async () => {
       const j = await request<HayDayProductResponse[], {}>({
@@ -88,5 +89,7 @@ export default function HaydayProduct() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />;
+  if (isLoading) return (<Loading />);
+  else if (isError || !data) return (<Error message={error?.message}/>);
+  return <BasicGrid data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />;
 }

@@ -7,10 +7,10 @@ import { useQuery } from '@tanstack/react-query';
 import { request } from '@/utilities/http';
 import { API_ROUTE } from '@/constant/api-route';
 import Loading from '@/components/common/loading/Loading';
+import Error from '@/components/common/error/Error';
 
 export default function TransactionLineChartExpense() {
-
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, isError, error } = useQuery({
     queryKey: ["transaction-monthly"],
     queryFn: async () => {
       const j = await request<TransactionMonthlyResponse[], {}>({
@@ -22,7 +22,7 @@ export default function TransactionLineChartExpense() {
   });
 
   if (isLoading) return <Loading />;
-  else if (!data) return <p>Data unavailable</p>;
+  else if (!data || isError) return <Error message={error?.message}/>;
 
   const LIMIT = 3_000_000;
   const option: EChartsOption = {

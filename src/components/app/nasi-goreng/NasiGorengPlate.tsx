@@ -1,5 +1,4 @@
 import React from 'react';
-import Loading from '@/components/common/loading/Loading';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
@@ -7,9 +6,10 @@ import { NasiGorengPlateResponse } from '@/model/response/nasi-goreng';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function NasiGorengPlate() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ['nasi-goreng-plate'],
     queryFn: async () => {
       const j = await request<NasiGorengPlateResponse[], {}>({
@@ -30,5 +30,9 @@ export default function NasiGorengPlate() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.index.toString()} detail={displayDetail} gridContainerClasses='w-32 h-32' />;
+  return (
+    <BasicWrapper queryResult={queryResult}>
+      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.index.toString()} detail={displayDetail} gridContainerClasses='w-32 h-32' />
+    </BasicWrapper>
+  );
 }

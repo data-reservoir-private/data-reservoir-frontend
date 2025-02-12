@@ -1,17 +1,16 @@
-import React, { Suspense } from 'react';
-import Paper from '@/components/common/paper/Paper';
+import React from 'react';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import { PizzaFrenzyToppingResponse } from '@/model/response/pizza-frenzy';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
-import Loading from '@/components/common/loading/Loading';
 import Image from 'next/image';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function PizzaFrenzyTable() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ["pizza-frenzy"],
     queryFn: async () => {
       const j = await request <PizzaFrenzyToppingResponse[], {}>({
@@ -49,5 +48,9 @@ export default function PizzaFrenzyTable() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading/> : <BasicGrid data={data} display={displayFunc} imageSrc={d => d.image} imageAlt={d => d.general_name} detail={displayDetail} gridContainerClasses='w-24 h-24'/>;
+  return (
+    <BasicWrapper queryResult={queryResult}>
+      <BasicGrid data={queryResult.data!} display={displayFunc} imageSrc={d => d.image} imageAlt={d => d.general_name} detail={displayDetail} gridContainerClasses='w-24 h-24' />
+    </BasicWrapper>
+  );
 }

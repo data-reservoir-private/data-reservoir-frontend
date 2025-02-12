@@ -7,9 +7,10 @@ import { useQuery } from '@tanstack/react-query';
 import { request } from '@/utilities/http';
 import { API_ROUTE } from '@/constant/api-route';
 import Loading from '@/components/common/loading/Loading';
+import Error from '@/components/common/error/Error';
 
 export default function TransactionPieChartCategory() {
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, isError, error } = useQuery({
     queryKey: ["transaction-category"],
     queryFn: async () => {
       const j = await request<TransactionCategoryResponse[], {}>({
@@ -21,17 +22,14 @@ export default function TransactionPieChartCategory() {
   });
 
   if (isLoading) return <Loading />;
-  else if (!data) return <p>Data unavailable</p>;
+  else if (!data || isError) return <Error message={error?.message}/>;
 
   const refinedData: Record<string, number> = {};
   data.forEach(x => {
     if (refinedData[x.category] === undefined) refinedData[x.category] = x.total;
     else refinedData[x.category] += x.total;
   });
-  console.log(data);
-  console.log(refinedData);
 
-  const LIMIT = 3_000_000;
   const option: EChartsOption = {
     series: [
       {

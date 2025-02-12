@@ -13,6 +13,7 @@ import Picker from '@/components/common/picker/Picker';
 import { request } from '@/utilities/http';
 import TableCategoryCount from '@/components/app/dashboard/TableCategoryCount';
 import TablePieChart from './TablePieChart';
+import Error from '@/components/common/error/Error';
 
 interface DashboardClientPageState {
   pickedCategories: string[]
@@ -23,7 +24,7 @@ export default function DashboardClientPage() {
     pickedCategories: []
   });
 
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, error, isError } = useQuery({
     queryKey: ["dashboard"],
     queryFn: async () => {
       const j = await request<DashboardResponse[], {}>({
@@ -34,7 +35,8 @@ export default function DashboardClientPage() {
     }
   });
 
-  if (isLoading || !data) return (<Loading/>);
+  if (isLoading) return (<Loading />);
+  else if (isError || !data) return (<Error message={error?.message}/>);
   else {
     const cleanData = data.filter(x => state.pickedCategories.length === 0 || state.pickedCategories.includes(x.category));
     const categories = data.map(x => x.category);

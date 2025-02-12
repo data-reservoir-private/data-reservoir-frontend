@@ -7,9 +7,10 @@ import GridDetail from '@/components/common/basic-grid/GridDetail';
 import { QuartzUtensilResponse } from '@/model/response/quartz';
 import { API_ROUTE } from '@/constant/api-route';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function QuartzUtensil() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ['quartz-utensil'],
     queryFn: async () => {
       const j = await request<QuartzUtensilResponse[], {}>({
@@ -34,5 +35,9 @@ export default function QuartzUtensil() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridImageUnoptimized gridImageClasses='rendering-pixelated' />;
+  return (
+    <BasicWrapper queryResult={queryResult}>
+      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridImageUnoptimized gridImageClasses='rendering-pixelated' />
+    </BasicWrapper>
+  );
 }

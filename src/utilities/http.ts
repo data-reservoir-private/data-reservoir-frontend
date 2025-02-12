@@ -1,3 +1,4 @@
+import { BaseResponse } from './../model/response/base';
 import { BaseRequest } from "@/model/request/base";
 import { BaseResponse } from "@/model/response/base";
 import { isNil, omitBy } from "lodash";
@@ -25,8 +26,12 @@ export async function request<TResponse, TRequest extends Record<string, any> | 
   if (request.method !== "GET" && request.method !== "DELETE"){
     if (useForm && request.data) conf.body = toFormData(request.data!);
     else conf.body = JSON.stringify(omitBy(request.data ?? {}, isNil));
-  }
-  const response = await(await fetch(url, conf)).json() as BaseResponse<TResponse>;
+  } 
+  
+  const f = await fetch(url, conf);
+  console.log(f.status);
+  if (Math.round(f.status / 100) === 5) throw new Error("Failed to connect to API");
+  const response = await (f).json() as BaseResponse<TResponse>;
   return response;
 }
 
