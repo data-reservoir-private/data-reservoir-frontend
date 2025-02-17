@@ -115,7 +115,7 @@ export default function BustinOutCareer() {
   return (
     <Paper className='overflow-auto rounded-md h-full w-auto p-5'>
       <BasicWrapper queryResult={queryResult}>
-        <BasicTable data={queryResult.data!} columns={columns}/>
+        <BasicTable data={queryResult.data!} columns={columns} exportType={['json', 'csv']}/>
       </BasicWrapper>
     </Paper>
   );

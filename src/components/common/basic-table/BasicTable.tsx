@@ -11,7 +11,7 @@ export interface BasicTableProps<T> {
   data: T[],
   columns: ColumnDef<T, unknown>[],
   expandElement?: (row: Row<T>) => React.ReactNode,
-  exportType?: ('json')[]
+  exportType?: ('json' | 'csv')[]
 }
 
 export default function BasicTable<T>(props : BasicTableProps<T>) {
@@ -57,14 +57,21 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
 
   return (
     <div className='rounded-md relative overflow-auto scrollbar-default'>
-      <div className='w-fit border-slate-700 border-2 border-b-0 overflow-hidden border-solid p-2 bg-bluish-200 gap-5 flex items-center text-white text-xs'>
-        <div className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('json')}>
-          Export to JSON
+      {
+        props.exportType && props.exportType.length >= 1 &&
+        <div className='w-fit border-slate-700 border-2 border-b-0 overflow-hidden border-solid p-2 bg-bluish-200 gap-5 flex items-center text-white text-xs'>
+          {(props.exportType.find(x => x === 'json')) &&
+            <div className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('json')}>
+              Export to JSON
+            </div>
+          }
+          {(props.exportType.find(x => x === 'csv')) &&
+            <div className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('csv')}>
+              Export to CSV
+            </div>
+          }
         </div>
-        <div className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('csv')}>
-          Export to CSV
-        </div>
-      </div>
+      }
       <table className='min-h-30 rounded-md min-w-full border-2 border-slate-700 border-collapse'>
         <thead className='sticky top-0 bg-bluish-200 z-20'>
           {

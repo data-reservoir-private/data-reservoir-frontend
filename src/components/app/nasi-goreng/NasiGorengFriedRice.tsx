@@ -129,7 +129,7 @@ export default function NasiGorengFriedRice() {
 
   return (
     <BasicWrapper queryResult={queryResult}>
-      <BasicGrid data={queryResult.data!} imageSrc={d => d.levels[0].image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />;
+      <BasicGrid data={queryResult.data!} imageSrc={d => d.levels[0].image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />
     </BasicWrapper>
   );
 }
