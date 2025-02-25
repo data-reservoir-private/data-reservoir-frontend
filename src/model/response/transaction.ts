@@ -1,4 +1,4 @@
-export interface TransactionMonthlyResponse {
+export interface TransactionSummaryResponse {
   year: number;
   month: number;
   total: number;

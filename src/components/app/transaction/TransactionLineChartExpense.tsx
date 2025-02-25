@@ -1,4 +1,4 @@
-import { TransactionMonthlyResponse } from '@/model/response/transaction';
+import { TransactionSummaryResponse } from '@/model/response/transaction';
 import ReactECharts from 'echarts-for-react';
 import { EChartsOption } from 'echarts';
 import React from 'react';
@@ -11,11 +11,11 @@ import Error from '@/components/common/error/Error';
 
 export default function TransactionLineChartExpense() {
   const { isLoading, data, isError, error } = useQuery({
-    queryKey: ["transaction-monthly"],
+    queryKey: ["transaction-overall"],
     queryFn: async () => {
-      const j = await request<TransactionMonthlyResponse[], {}>({
+      const j = await request<TransactionSummaryResponse[], {}>({
         method: "GET",
-        url: API_ROUTE.TRANSACTION.MONTHLY,
+        url: API_ROUTE.TRANSACTION.SUMMARY,
       });
       return (j?.data ?? []);
     }

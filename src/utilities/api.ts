@@ -23,3 +23,7 @@ export function newPaginationResponse<T>(data: T[], pageSize: number, currentPag
 export function badRequestResponse(message: string) {
   return NextResponse.json(newResponse(message), { status: 400 });
 }
+
+export function internalErrorResponse(message: string = "Server Error") {
+  return NextResponse.json(newResponse(message), { status: 500 });
+}

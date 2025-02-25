@@ -52,7 +52,7 @@ export const API_SHORTHAND = Object.freeze({
     NODE: 'node'
   },
   TRANSACTION: {
-    MONTHLY: 'monthly',
+    SUMMARY: 'summary',
     CATEGORY: 'category'
   }
 } as const);
@@ -108,7 +108,7 @@ export const API_ROUTE = Object.freeze({
     NODE: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.NODE}`
   },
   TRANSACTION: {
-    MONTHLY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.MONTHLY}`,
+    SUMMARY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.SUMMARY}`,
     CATEGORY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.CATEGORY}`
   }
 } as const);

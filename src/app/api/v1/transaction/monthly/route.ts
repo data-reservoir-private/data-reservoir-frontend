@@ -1,137 +1,120 @@
 import { ID_AGGR, MONGODB } from "@/database/db";
-import { newResponse } from "@/utilities/api";
-import { NextResponse } from "next/server";
+import { TransactionMonthlySchema } from "@/model/request/transaction";
+import { badRequestResponse, internalErrorResponse, newResponse } from "@/utilities/api";
+import { NextRequest, NextResponse } from "next/server";
+import { ValidationError } from "yup";
 
-interface AggregationResult { year: number, month: number, total: number };
+interface MonthlyResult {
+  date: Date,
+  tenant: string,
+  categories: string[],
+  details: {
+    category: string,
+    order: string,
+    quantity: number,
+    price: number
+  },
+  total: number
+}
 
-export async function GET() {
-  // 1. Get Master and Transport
-  const master = await MONGODB.transaction.master.aggregate<AggregationResult>(
-    [
-      ...ID_AGGR,
-      {
-        $unset: ['details.id']
-      },
-      {
-        $addFields: {
-          newDate: {
-            $dateFromString: { dateString: "$date" }
-          }
-        }
-      },
-      {
-        $group: {
-          _id: {
-            year: {
-              $year: "$newDate"
-            },
-            month: {
-              $month: "$newDate"
+export async function GET(request: NextRequest) {
+
+  try {
+    console.log(Object.fromEntries(request.nextUrl.searchParams));
+    const data = await TransactionMonthlySchema.validate(Object.fromEntries(request.nextUrl.searchParams));
+    const master = await MONGODB.transaction.master.aggregate(
+      [
+        ...ID_AGGR,
+        {
+          $match: {
+            date: {
+              $regex: `${data.year}-${data.month.toString().padStart(2, '0')}-*`
             }
-          },
-          total: {
-            $sum: {
-              $add: [
+          }
+        },
+        {
+          $set: {
+            details: {
+              $sortArray: {
+                input: '$details',
+                sortBy: {
+                  price: -1
+                }
+              }
+            }
+          }
+        },
+        {
+          $addFields: {
+            total: {
+              $multiply: [
                 {
-                  $multiply: [
+                  $add: [
                     {
                       $reduce: {
                         input: "$details",
                         initialValue: 0,
                         in: {
-                          $multiply: [
-                            "$$this.price",
-                            "$$this.quantity"
+                          $add: [
+                            {
+                              $multiply: [
+                                "$$this.price",
+                                "$$this.quantity"
+                              ]
+                            },
+                            "$$value"
                           ]
                         }
-                      },
+                      }
                     },
-                    "$exchange_rate"
+                    "$tax_discount"
                   ]
                 },
-                "$tax_discount"
+                "$exchange_rate"
               ]
-            }
-          }
-        }
-      },
-      {
-        $sort: {
-          "_id.year": -1,
-          "_id.month": -1
-        }
-      },
-      {
-        $project: {
-          _id: false,
-          year: "$_id.year",
-          month: "$_id.month",
-          total: "$total"
-        }
-      }
-    ]
-  ).toArray() as AggregationResult[];
-
-  const transport = await MONGODB.transaction.transport.aggregate<AggregationResult>(
-    [
-      {
-        $addFields: {
-          newDate: {
-            $dateFromString: { dateString: "$date_start" }
-          }
-        }
-      },
-      {
-        $group: {
-          _id: {
-            year: {
-              $year: "$newDate"
             },
-            month: {
-              $month: "$newDate"
+            categories: {
+              $reduce: {
+                input: "$details",
+                initialValue: [],
+                in: {
+                  $concatArrays: [
+                    {
+                      $cond: {
+                        if: { $in: [ '$$this.category', '$$value' ] },
+                        then: [],
+                        else: ['$$this.category']
+                      }
+                    },
+                    '$$value'
+                  ]
+                }
+              }
             }
-          },
-          total: {
-            $sum: "$price"
+          }
+        },
+        {
+          $project: {
+            date: true,
+            tenant: true,
+            categories: true,
+            details: {
+              category: true,
+              order: true,
+              quantity: true,
+              price: true
+            },
+            total: true
           }
         }
-      },
-      {
-        $sort: {
-          "_id.year": -1,
-          "_id.month": -1
-        }
-      },
-      {
-        $project: {
-          _id: false,
-          year: "$_id.year",
-          month: "$_id.month",
-          total: "$total"
-        }
-      }
-    ]
-  ).toArray();
+      ]
+    ).toArray() as MonthlyResult[];
 
-  // 2. Generate Master of year and month (default: 3 years);
-  const result: { year: number, month: number, total: number }[] = [];
-  const currentDate = new Date();
-  let [year, month] = [currentDate.getFullYear() - 2, 0];
-
-  
-  // 3. Generate report
-  while (currentDate.getFullYear() >= year) {
-    result.push({
-      year: year,
-      month: month + 1,
-      total: Math.round((master.find(x => x.month === month + 1 && x.year === year)?.total ?? 0) +
-      (transport.find(x => x.month === month + 1 && x.year === year)?.total ?? 0))
-    });
-    if (month + 1 === 12) year++;
-    month = ((month + 1) % 12);
-
-    if (currentDate.getFullYear() === year && currentDate.getMonth() < month) break;
+    return NextResponse.json(newResponse(master));
+  }
+  catch (e) {
+    if (e instanceof ValidationError) return badRequestResponse(e.errors[0]);
+    else return internalErrorResponse();
   }
 
-  return NextResponse.json(newResponse(result));
 }

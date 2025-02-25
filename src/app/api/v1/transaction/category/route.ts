@@ -14,53 +14,33 @@ export async function GET() {
       },
       {
         $addFields: {
-          year: {
-            $year: {
-              $dateFromString: {
-                dateString: "$date"
-              }
-            }
-          },
-          month: {
-            $month: {
-              $dateFromString: {
-                dateString: "$date"
-              }
-            }
-          }
-        }
-      },
-      {
-        $group: {
-          _id: {
-            year: "$year",
-            month: "$month",
-            category: "$details.category"
-          },
           total: {
-            $sum: {
-              $multiply: [
-                "$exchange_rate",
-                "$details.price",
-                "$details.quantity"
-              ]
-            }
+            $multiply: [
+              {
+                $add: [
+                  {
+                    $reduce: {
+                      input: "$details",
+                      initialValue: 0,
+                      in: {
+                        $add: [
+                          {
+                            $multiply: [
+                              "$$this.price",
+                              "$$this.quantity"
+                            ]
+                          },
+                          "$$value"
+                        ]
+                      }
+                    }
+                  },
+                  "$tax_discount"
+                ]
+              },
+              "$exchange_rate"
+            ]
           }
-        }
-      },
-      {
-        $sort: {
-          "_id.year": -1,
-          "_id.month": -1
-        }
-      },
-      {
-        $project: {
-          _id: false,
-          category: "$_id.category",
-          year: "$_id.year",
-          month: "$_id.month",
-          total: "$total"
         }
       }
     ]
