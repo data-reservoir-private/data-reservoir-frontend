@@ -10,7 +10,11 @@ import { MasterCollectionCategorySchema } from './schema/master';
 import { TransjakartaCorridorSchema, TransjakartBusStopSchema } from './schema/transjakarta';
 import { TransactionMasterSchema, TransactionTransportSchema } from './schema/transaction';
 
-const client = new MongoClient(process.env.DATABASE_URL, { maxConnecting: 2 });
+const client = new MongoClient(process.env.DATABASE_URL, {
+  maxConnecting: 5,
+  timeoutMS: 60000,
+  serverSelectionTimeoutMS: 60000
+});
 const db = client.db(process.env.DATABASE_NAME);
 export const MONGODB = {
   client: client,

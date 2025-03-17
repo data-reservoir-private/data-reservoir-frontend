@@ -6,5 +6,25 @@
     "class:list",
     ".*Classes"
   ],
-  "eslint.useFlatConfig": true
+  "eslint.useFlatConfig": true,
+  "material-icon-theme.files.customClones": [
+    {
+      "name": "nextjs-pagetsx",
+      "base": "react_ts",
+      "color": "orange",
+      "fileNames": ["page.tsx"]
+    },
+    {
+      "name": "nextjs-layouttsx",
+      "base": "react_ts",
+      "color": "purple",
+      "fileNames": ["layout.tsx"]
+    },
+    {
+      "name": "nextjs-errortsx",
+      "base": "react_ts",
+      "color": "red",
+      "fileNames": ["error.tsx"]
+    },
+  ]
 }
