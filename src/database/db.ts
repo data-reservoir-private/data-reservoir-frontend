@@ -11,7 +11,7 @@ import { TransjakartaCorridorSchema, TransjakartBusStopSchema } from './schema/t
 import { TransactionMasterSchema, TransactionTransportSchema } from './schema/transaction';
 
 const client = new MongoClient(process.env.DATABASE_URL, {
-  maxConnecting: 5,
+  maxConnecting: 2,
   timeoutMS: 60000,
   serverSelectionTimeoutMS: 60000
 });

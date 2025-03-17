@@ -20,7 +20,6 @@ interface MonthlyResult {
 export async function GET(request: NextRequest) {
 
   try {
-    console.log(Object.fromEntries(request.nextUrl.searchParams));
     const data = await TransactionMonthlySchema.validate(Object.fromEntries(request.nextUrl.searchParams));
     const master = await MONGODB.transaction.master.aggregate(
       [

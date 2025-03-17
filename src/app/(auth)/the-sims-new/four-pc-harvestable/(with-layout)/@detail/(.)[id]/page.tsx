@@ -1,14 +1,15 @@
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage'
 import GridDetail from '@/components/common/basic-grid/GridDetail'
-import { TheSimsCastawayProductResponse } from '@/model/response/the-sims';
+import { TheSimsFourPCHarvestableResponse } from '@/model/response/the-sims';
 import { GetTheSimsDataByID } from '@/service/the-sims'
+import { SIMOLEON_ICON } from '@/utilities/char';
 import { Checkbox } from 'flowbite-react';
 import React from 'react'
 
-export default async function CastawayProductDetailPage({params} : {params: Promise<{id: string}>}) {
+export default async function FourPCHarvestableDetailPage({params} : {params: Promise<{id: string}>}) {
 
   const { id } = await params;
-  const d = (await GetTheSimsDataByID('castaway-product', id)) as TheSimsCastawayProductResponse;
+  const d = (await GetTheSimsDataByID('four-pc-harvestable', id)) as TheSimsFourPCHarvestableResponse;
   return (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
       <BasicGridDetailImage src={d.image} alt={d.name} unoptimized/>
@@ -18,12 +19,12 @@ export default async function CastawayProductDetailPage({params} : {params: Prom
       <GridDetail data={{
         ID: d.id.toString(),
         Name: d.name,
-        Category: d.category,
         Description: d.description,
-        Hunger: d.hunger,
-        Energy: d.energy,
-        Bladder: d.bladder,
-        "Eaten Raw": <Checkbox checked={d.eaten_raw} size={8} disabled />,
+        Rarity: d.rarity,
+        "Vertical Garden": <Checkbox checked={d.vertical_garden} size={8} disabled />,
+        "Base Value": SIMOLEON_ICON + " " + d.base_value,
+        "Perfect Value": SIMOLEON_ICON + " " + d.perfect_value,
+        "Growth Rate": d.growth_rate,
       }}/>
     </div>
   )
