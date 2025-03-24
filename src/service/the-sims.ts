@@ -25,7 +25,7 @@ export async function GetTheSimsData(category: RouteEndpoint) {
 
 export async function GetTheSimsDataByID(category: RouteEndpoint, id: string) {
   const aggr = [...ID_AGGR, {
-    $match: { id: new UUID(id) }
+    $match: { id: id }
   }];
 
   switch (category as RouteEndpoint) {

@@ -10,7 +10,7 @@ export default async function CastawayProductPage() {
     <div>
       <BasicGridSSR
         data={data}
-        linkOnClick={d => `/the-sims-new/castaway-product/${d.id.toString()}`}
+        linkOnClick={d => `/the-sims/castaway-product/${d.id.toString()}`}
         imageSrc={x => x.image}
         imageAlt={x => x.name}
         gridImageClasses='rounded-sm'

@@ -1,11 +1,11 @@
+'use client'
+
 import React, { Fragment, useMemo, useState } from 'react';
 import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
-import { VscJson } from 'react-icons/vsc';
 import { saveAs } from 'file-saver';
-import { FaFileCsv } from 'react-icons/fa6';
 
 export interface BasicTableProps<T> {
   data: T[],

@@ -16,7 +16,7 @@ export async function GetDashboardData(category: string = ""){
       prefix: m.prefix,
       tables: await Promise.all(collections.filter(x => x.startsWith(m.prefix)).map(async t => ({
         tableName: t,
-        tableUrl: (`/${m.prefix}-new/${t.replace(m.prefix + '_', '')}`).replaceAll('_', '-'),
+        tableUrl: (`/${m.prefix}/${t.replace(m.prefix + '_', '')}`).replaceAll('_', '-'),
         rowCount: await MONGODB.db.collection(t).countDocuments()
       } as DashboardTableResponse)))
     } as DashboardResponse;

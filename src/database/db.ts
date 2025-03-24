@@ -84,8 +84,11 @@ export const MONGODB = {
   }
 } as const;
 
-export const ID_AGGR = [{ $replaceRoot: { newRoot: { $mergeObjects: [ { id: '$_id' }, '$$ROOT' ]} } }, { $unset: ['_id'] }];
-export const PAGINATION_AGGR = ({ currentPage, pageSize } : { currentPage: number, pageSize: number }) => [
+export const ID_AGGR = [
+  { $replaceRoot: { newRoot: { $mergeObjects: [{ id: { $convert: {input: '$_id', format: 'uuid', to: { subtype: 4, type: 2 }}} }, '$$ROOT'] } } },
+  { $unset: ['_id'] }
+];
+export const PAGINATION_AGGR = ({ currentPage, pageSize }: { currentPage: number, pageSize: number }) => [
   { $skip: pageSize * (currentPage - 1) },
   { $limit: pageSize }
 ];

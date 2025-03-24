@@ -26,7 +26,7 @@ export default async function CastawayProductDetailPage({params} : {params: Prom
         Bladder: d.bladder,
         "Eaten Raw": <Checkbox checked={d.eaten_raw} size={8} disabled />,
       }} />
-      <Link passHref href={'/the-sims-new/castaway-product'} className='w-full'>
+      <Link passHref href={'/the-sims/castaway-product'} className='w-full'>
         <Button type='button' className='w-full'>Back</Button>
       </Link>
     </div>

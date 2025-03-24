@@ -1,16 +1,16 @@
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage'
 import GridDetail from '@/components/common/basic-grid/GridDetail'
-import { TheSimsFourPCHarvestableResponse } from '@/model/response/the-sims';
+import { TheSimsTwoPetsConsoleProductResponse } from '@/model/response/the-sims';
 import { GetTheSimsDataByID } from '@/service/the-sims'
 import { SIMOLEON_ICON } from '@/utilities/char';
-import { Button, Checkbox } from 'flowbite-react';
+import { Button } from 'flowbite-react';
 import Link from 'next/link';
 import React from 'react'
 
-export default async function FourPCHarvestableDetailPage({params} : {params: Promise<{id: string}>}) {
+export default async function TwoPetsConsoleProductDetailPage({params} : {params: Promise<{id: string}>}) {
 
   const { id } = await params;
-  const d = (await GetTheSimsDataByID('four-pc-harvestable', id)) as TheSimsFourPCHarvestableResponse;
+  const d = (await GetTheSimsDataByID('two-pets-console-product', id)) as TheSimsTwoPetsConsoleProductResponse;
   return (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none text-white'>
       <BasicGridDetailImage src={d.image} alt={d.name} unoptimized/>
@@ -20,14 +20,14 @@ export default async function FourPCHarvestableDetailPage({params} : {params: Pr
       <GridDetail data={{
         ID: d.id.toString(),
         Name: d.name,
+        Category: d.category,
+        Price: SIMOLEON_ICON + " " + d.price,
         Description: d.description,
-        Rarity: d.rarity,
-        "Vertical Garden": <Checkbox checked={d.vertical_garden} size={8} disabled />,
-        "Base Value": SIMOLEON_ICON + " " + d.base_value,
-        "Perfect Value": SIMOLEON_ICON + " " + d.perfect_value,
-        "Growth Rate": d.growth_rate,
+        Hunger: d.hunger,
+        Energy: d.energy,
+        Bladder: d.bladder,
       }} />
-      <Link passHref href={'/the-sims-new/four-pc-harvestable'} className='w-full'>
+      <Link passHref href={'/the-sims/two-pets-console-product'} className='w-full'>
         <Button type='button' className='w-full'>Back</Button>
       </Link>
     </div>

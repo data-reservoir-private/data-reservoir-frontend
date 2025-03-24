@@ -1,10 +1,10 @@
-import TheSimsClientPage from "@/components/app/the-sims/TheSimsClientPage";
-import { Metadata } from "next";
+import DashboardNavigation from '@/components/app/dashboard/DashboardNavigation'
+import React from 'react'
 
-export const metadata: Metadata = {
-  title: 'The Sims - Birdeye View'
-};
-
-export default function TheSimsPage() {
-  return (<TheSimsClientPage/>);
+export default function TheSimsDashboardPage() {
+  return (
+    <div className='w-full'>
+      <DashboardNavigation category='The Sims'/>
+    </div>
+  )
 }
