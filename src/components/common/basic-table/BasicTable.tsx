@@ -11,12 +11,13 @@ export interface BasicTableProps<T> {
   data: T[],
   columns: ColumnDef<T, unknown>[],
   expandElement?: (row: Row<T>) => React.ReactNode,
-  exportType?: ('json' | 'csv')[]
+  exportType?: ('json' | 'csv')[],
 }
 
 export default function BasicTable<T>(props : BasicTableProps<T>) {
   const cachedColumn = useMemo(() => props.columns, [props.columns]);
-  const [cachedData, ] = useState(props.data);
+  // const [cachedData,] = useState(props.data);
+  const cachedData = useMemo(() => props.data, [props.data])
   const [canExpand, ] = useState(!!props.expandElement);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 

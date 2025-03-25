@@ -11,12 +11,13 @@ import { Logout } from '@/app/(auth)/logout/actions';
 export default function SideNavigation() {
   const path = usePathname();
   return (
-    <div className='bg-bluish-200 text-white py-4 m-auto z-50 h-full w-20'>
-      <div className='flex gap-5 h-full flex-col overflow-x-scroll overflow-y-hidden px-5 scrollbar-none justify-center box-border items-center'>
+    <div className='bg-bluish-200 text-white py-4 m-auto z-50 h-full w-20 max-md:absolute max-md:w-full max-md:h-20 max-md:bottom-0 max-md:overflow-y-scroll max-md:scrollbar-none'>
+      <div className='flex gap-5 h-full flex-col overflow-x-scroll overflow-y-hidden px-5 scrollbar-none justify-center box-border items-center max-md:flex-row max-md:w-fit'>
         {
           ROUTES.map(route => (
-            <Link key={route.id} title={route.name} href={(path === route.link || route.inactive) ? '#' : route.link} className={classNames(
-              'm-auto h-full bg-bluish min-h-9 rounded-md text-2xl flex justify-center items-center text-white/60 relative overflow-hidden', {
+            <Link key={route.id} title={route.name} href={(path === route.link || route.inactive) ? '#' : route.link} passHref className={classNames(
+              'm-auto h-full bg-bluish min-h-9 rounded-md text-2xl flex justify-center items-center text-white/60 relative overflow-hidden',
+              '', {
               '!bg-slate-400 border-slate-500': path === route.link,
               // 'hover:text-white/35': path !== route.link && !route.inactive,
               'bg-bluish/50 !text-white/10 cursor-default': route.inactive,

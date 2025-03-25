@@ -4,7 +4,12 @@ import { TheSimsCastawayProductResponse } from '@/model/response/the-sims';
 import { GetTheSimsDataByID } from '@/service/the-sims'
 import { Button, Checkbox } from 'flowbite-react';
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'The Sims Castaway Product - Birdeye View'
+};
 
 export default async function CastawayProductDetailPage({params} : {params: Promise<{id: string}>}) {
 

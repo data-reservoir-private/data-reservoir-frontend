@@ -48,7 +48,7 @@ export default function TableBarChart(props : TableBarChartProps) {
       {
         type: 'slider',
         show: true,
-        maxSpan: 50,
+        maxSpan: 70,
         handleSize: 8
       },
     ],
