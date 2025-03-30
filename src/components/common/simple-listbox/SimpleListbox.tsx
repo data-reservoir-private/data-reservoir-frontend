@@ -4,6 +4,9 @@ import classNames from 'classnames';
 import React from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 
+/**
+ * @deprecated Change to new
+ */
 export interface SimpleListboxProps {
   onChange: (v: string) => void,
 
@@ -11,13 +14,11 @@ export interface SimpleListboxProps {
    * Key:Value object. Key is the value while label is the label
    */
   options: { [value: string]: string }
-  value: string | null
+  value: string | null,
+  defaultEmptyLabel?: string
 }
 
 export default function SimpleListbox(props: SimpleListboxProps) {
-
-  // const handleOnChange = (e: string) => 
-
   return (
     <Listbox
       onChange={props.onChange}
@@ -30,7 +31,7 @@ export default function SimpleListbox(props: SimpleListboxProps) {
         )}
       >
         <div className='flex justify-between w-full items-center'>
-          {props.value ? props.options[props.value] : "Select a value"}
+          {props.value ? props.options[props.value] : props.defaultEmptyLabel ?? "Select a value"}
           <BsChevronDown/>
         </div>  
       </ListboxButton>
@@ -40,6 +41,10 @@ export default function SimpleListbox(props: SimpleListboxProps) {
           "border-gray-500 bg-gray-600 text-white text-sm border-2 border-t-0 rounded-t-none z-50"
         )}
       >
+        {
+          props.defaultEmptyLabel && 
+            <ListboxOption value={''} key={''} className='p-0.5 px-2.5 hover:bg-gray-700'>{props.defaultEmptyLabel}</ListboxOption>
+        }
         {
           Object.entries(props.options).map(([key, label]) => (
             <ListboxOption value={key} key={key} className='p-0.5 px-2.5 hover:bg-gray-700'>

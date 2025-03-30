@@ -1,17 +1,17 @@
 import React from 'react';
 import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import { NasiGorengUpgradeResponse } from '@/model/response/nasi-goreng';
-import Image from 'next/image';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import Error from '@/components/common/error/Error';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function NasiGorengUpgrade() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ['nasi-goreng-Upgrade'],
     queryFn: async () => {
       const j = await request<NasiGorengUpgradeResponse[], {}>({
@@ -32,5 +32,9 @@ export default function NasiGorengUpgrade() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-20 h-20' />;
+  return (
+    <BasicWrapper queryResult={queryResult}>
+      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-20 h-20' />
+    </BasicWrapper>
+  );
 }

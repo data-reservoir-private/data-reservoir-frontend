@@ -18,7 +18,7 @@ export interface BasePaginationResponse<T> {
 }
 
 export interface HasID { 
-  id: UUID
+  id: string
 }
 
 export interface BaseMongoResponseData extends Omit<BaseSchema, '_id'>, HasID { }

@@ -5,6 +5,7 @@ import { ptSansBold } from '@/constant/font';
 export type TransjakartaCodeProps = {
   code: string,
   color: string,
+  className?: string,
   onClickCode?: (code: string) => void
 }
 
@@ -24,9 +25,9 @@ export default function TransjakartaCode(props: TransjakartaCodeProps) {
 
   return (
     <div
-      className={classNames('w-10 h-10 hover:brightness-75 cursor-pointer flex justify-center items-center text-sm flex-col rounded-full', ptSansBold.className)}
+      className={classNames('w-10 h-10 flex justify-center items-center text-sm flex-col rounded-full text-white', ptSansBold.className, props.className ?? "")}
       style={{
-        backgroundColor: props.color
+        backgroundColor: props.color,
       }}
       onClick={() => props.onClickCode && props.onClickCode(props.code)}
     >

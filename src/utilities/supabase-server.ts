@@ -41,15 +41,15 @@ export async function updateSession(req: NextRequest) {
     }
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
+  // const { data: { user } } = await supabase.auth.getUser();
 
-  if (req.nextUrl.pathname.startsWith('/callback')) return supabaseResponse;
+  // if (req.nextUrl.pathname.startsWith('/callback')) return supabaseResponse;
 
-  if (!user && !req.nextUrl.pathname.startsWith('/login')) {
-    const url = req.nextUrl.clone();
-    url.pathname = '/login';
-    return NextResponse.rewrite(url);
-  };
+  // if (!user && !req.nextUrl.pathname.startsWith('/login')) {
+  //   const url = req.nextUrl.clone();
+  //   url.pathname = '/login';
+  //   return NextResponse.rewrite(url);
+  // };
 
   return supabaseResponse;
 }

@@ -9,12 +9,21 @@ import Loading from '@/components/common/loading/Loading';
 import Image from 'next/image';
 import { Checkbox } from 'flowbite-react';
 import { secondToTimespan } from '@/utilities/general';
-import { Suspense } from 'react';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import HaydayIconHelper from './HaydayIconHelper';
+import Error from '@/components/common/error/Error';
+import SimpleListbox from '@/components/common/simple-listbox/SimpleListbox';
+import { useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+
+
+interface HaydayProductState {
+  keyword: string,
+  category: string
+}
 
 export default function HaydayProduct() {
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, isError, error } = useQuery({
     queryKey: ["hayday-product"],
     queryFn: async () => {
       const j = await request<HayDayProductResponse[], {}>({
@@ -24,6 +33,15 @@ export default function HaydayProduct() {
       return (j?.data ?? []);
     }
   });
+
+  const [state, setState] = useState<HaydayProductState>({
+    keyword: '',
+    category: ''
+  });
+
+  const inputDeb = useDebouncedCallback((value: string) => {
+    setState({ ...state, keyword: value });
+  }, 1000);
 
   const displayDetail = (d: HayDayProductResponse) => (
     <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none'>
@@ -88,5 +106,26 @@ export default function HaydayProduct() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />;
+  if (isLoading) return (<Loading />);
+  else if (isError || !data) return (<Error message={error?.message} />);
+  
+  const pickedChoice = data.reduce((acc, curr) => acc.includes(curr.category) ? acc : [...acc, curr.category], [] as string[])
+    .reduce((acc, curr) => { 
+      acc[curr] = curr;
+      return acc;
+    }, {} as { [key: string]: string });
+
+  return (
+    <>
+      <Paper className='p-2 flex justify-between gap-4'>
+        <SimpleListbox onChange={v => setState({ ...state, category: v })} options={pickedChoice} value={state.category} defaultEmptyLabel='All Categories'/>
+        <input
+          className='text rounded-sm border-2 px-2 py-1 text-sm border-gray-500 bg-gray-600 text-white outline-none w-full'
+          placeholder='Keyword'
+          onChange={e => inputDeb(e.target.value)}
+        />
+      </Paper>
+      <BasicGrid data={data.filter(x => (state.keyword.length === 0 || x.name.toLowerCase().includes(state.keyword.toLowerCase())) && (state.category.length === 0 || state.category === x.category))} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />
+    </>
+  );
 }

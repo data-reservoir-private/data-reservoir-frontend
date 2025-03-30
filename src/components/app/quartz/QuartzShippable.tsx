@@ -7,9 +7,10 @@ import GridDetail from '@/components/common/basic-grid/GridDetail';
 import { QuartzShippableResponse } from '@/model/response/quartz';
 import { API_ROUTE } from '@/constant/api-route';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function QuartzShippable() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ['quartz-shippable'],
     queryFn: async () => {
       const j = await request<QuartzShippableResponse[], {}>({
@@ -36,5 +37,9 @@ export default function QuartzShippable() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridImageUnoptimized />;
+  return (
+    <BasicWrapper queryResult={queryResult}>
+      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridImageUnoptimized />
+    </BasicWrapper>
+  );
 }

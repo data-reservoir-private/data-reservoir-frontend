@@ -17,7 +17,7 @@ const config: Config = {
       },
       colors: {
         "bluish": '#373A45',
-        "bluish-200": '#17191f',
+        "bluish-200": '#17191F',
         "blackish": '#282B34',
         "blackish-200": '#1F2129',
         "blackish-300": '#14161C',

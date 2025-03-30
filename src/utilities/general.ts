@@ -23,8 +23,8 @@ export function ticksToTime(p: number): string {
   const s = p / 10_000_000;
   if (s === 0) return "00:00";
 
-  const h = s / 3600;
-  const m = s % 3600 / 60; 
+  const h = Math.trunc(s / 3600);
+  const m = Math.trunc(s % 3600 / 60); 
   
   return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
 }

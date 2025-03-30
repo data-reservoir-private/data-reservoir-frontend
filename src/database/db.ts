@@ -8,9 +8,13 @@ import { CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema, CygnusMineral
 import { QuartzShippableSchema, QuartzUtensilSchema, QuartzRecipeSchema } from './schema/quartz';
 import { MasterCollectionCategorySchema } from './schema/master';
 import { TransjakartaCorridorSchema, TransjakartBusStopSchema } from './schema/transjakarta';
-import { TransactionMasterSchema, TransactionTransportSchema } from './schema/transaction';
+import { TransactionIncomeSchema, TransactionMasterSchema, TransactionTransportSchema } from './schema/transaction';
 
-const client = new MongoClient(process.env.DATABASE_URL, { maxConnecting: 2 });
+const client = new MongoClient(process.env.DATABASE_URL, {
+  maxConnecting: 2,
+  timeoutMS: 60000,
+  serverSelectionTimeoutMS: 60000
+});
 const db = client.db(process.env.DATABASE_NAME);
 export const MONGODB = {
   client: client,
@@ -73,6 +77,7 @@ export const MONGODB = {
   transaction: {
     master: db.collection<TransactionMasterSchema>('transaction_master'),
     transport: db.collection<TransactionTransportSchema>('transaction_transport'),
+    income: db.collection<TransactionIncomeSchema>('transaction_income'),
   },
 
   master: {
@@ -80,8 +85,11 @@ export const MONGODB = {
   }
 } as const;
 
-export const ID_AGGR = [{ $replaceRoot: { newRoot: { $mergeObjects: [ { id: '$_id' }, '$$ROOT' ]} } }, { $unset: ['_id'] }];
-export const PAGINATION_AGGR = ({ currentPage, pageSize } : { currentPage: number, pageSize: number }) => [
+export const ID_AGGR = [
+  { $replaceRoot: { newRoot: { $mergeObjects: [{ id: { $convert: {input: '$_id', format: 'uuid', to: { subtype: 4, type: 2 }}} }, '$$ROOT'] } } },
+  { $unset: ['_id'] }
+];
+export const PAGINATION_AGGR = ({ currentPage, pageSize }: { currentPage: number, pageSize: number }) => [
   { $skip: pageSize * (currentPage - 1) },
   { $limit: pageSize }
 ];

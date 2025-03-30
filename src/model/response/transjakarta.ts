@@ -16,20 +16,25 @@ export interface TransjakartaCorridorDetailResponse extends HasID {
   problems: number;
   schedule: {
     day: boolean
-    end_north: number;
-    end_south: number;
     night: boolean;
     peak_day: boolean;
     peak_evening: boolean;
+    end_north: number;
+    end_south: number;
     start_north: number;
     start_south: number;
+    location_end_north: string;
+    location_end_south: string;
+    location_start_north: string;
+    location_start_south: string;
     weekday: boolean;
     weekend: boolean;
   }[];
   stops: {
     brt: boolean;
     bus_stop_code: number;
-    direction: string;
+    direction: "NS" | "SN";
+    name: string;
     latitude: number;
     longitude: number;
     order: number;

@@ -7,9 +7,11 @@ import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import { NasiGorengToolResponse } from '@/model/response/nasi-goreng';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import Error from '@/components/common/error/Error';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function NasiGorengTool() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ['nasi-goreng-tool'],
     queryFn: async () => {
       const j = await request<NasiGorengToolResponse[], {}>({
@@ -36,5 +38,9 @@ export default function NasiGorengTool() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />;
+  return (
+    <BasicWrapper queryResult={queryResult}>
+      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />
+    </BasicWrapper>
+  );
 }

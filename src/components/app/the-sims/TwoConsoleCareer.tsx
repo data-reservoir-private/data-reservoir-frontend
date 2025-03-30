@@ -11,9 +11,10 @@ import { getStaticIndex, multiSelectFilter } from '@/utilities/table';
 import { SIMOLEON_ICON } from '@/utilities/char';
 import { ticksToTime } from '@/utilities/general';
 import Image from 'next/image';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function TwoConsoleCareer() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ["the-sims-two-console-career"],
     queryFn: async () => {
       const j = await request<TheSimsTwoConsoleCareerResponse[], {}>({
@@ -116,7 +117,9 @@ export default function TwoConsoleCareer() {
 
   return (
     <Paper className='overflow-auto rounded-md h-full w-auto p-5'>
-      { (isLoading || !data) ? <Loading/> : <BasicTable data={data} columns={columns}/> }
+      <BasicWrapper queryResult={queryResult}>
+        <BasicTable data={queryResult.data!} columns={columns}/>
+      </BasicWrapper>
     </Paper>
   );
 }

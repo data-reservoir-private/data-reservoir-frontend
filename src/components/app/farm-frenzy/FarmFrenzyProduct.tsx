@@ -1,11 +1,11 @@
 import React from 'react';
-import Loading from '@/components/common/loading/Loading';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import { FarmFrenzyProductResponse } from '@/model/response/farm-frenzy';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export interface FarmFrenzyProductProps {
   url: string,
@@ -13,7 +13,7 @@ export interface FarmFrenzyProductProps {
 }
 
 export default function FarmFrenzyProduct(props: FarmFrenzyProductProps) {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: [props.queryKey],
     queryFn: async () => {
       const j = await request<FarmFrenzyProductResponse[], {}>({
@@ -38,5 +38,9 @@ export default function FarmFrenzyProduct(props: FarmFrenzyProductProps) {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
+  return (
+    <BasicWrapper queryResult={queryResult}>
+      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+    </BasicWrapper>
+  );
 }

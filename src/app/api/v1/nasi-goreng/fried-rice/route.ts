@@ -1,5 +1,3 @@
-export const dynamic = 'force-static';
-
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
 import { ID_AGGR, MONGODB } from '@/database/db';

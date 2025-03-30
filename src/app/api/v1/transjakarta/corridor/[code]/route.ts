@@ -1,14 +1,11 @@
-export const dynamic = 'force-static';
-
 import { ID_AGGR, MONGODB } from "@/database/db";
 import { newResponse } from "@/utilities/api";
 import { NextResponse } from "next/server";
 
 export async function GET(_: Request, props: { params: Promise<{ code: string }> }) {
   const { code } = await props.params;
-
   return NextResponse.json(newResponse(
-    await MONGODB.transjakarta.corridor.aggregate([...ID_AGGR,
+    (await MONGODB.transjakarta.corridor.aggregate([...ID_AGGR,
       { $match: { code: code } },
       {
         $unset: [
@@ -49,6 +46,6 @@ export async function GET(_: Request, props: { params: Promise<{ code: string }>
           }
         }
       }
-    ]).toArray()
+    ]).toArray()).find(_ => true)
   ));
 }

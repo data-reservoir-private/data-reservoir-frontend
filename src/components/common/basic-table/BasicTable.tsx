@@ -1,21 +1,23 @@
+'use client'
+
 import React, { Fragment, useMemo, useState } from 'react';
 import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
+import { saveAs } from 'file-saver';
 
 export interface BasicTableProps<T> {
   data: T[],
   columns: ColumnDef<T, unknown>[],
-  expandElement?: (row: Row<T>) => React.ReactNode
+  expandElement?: (row: Row<T>) => React.ReactNode,
+  exportType?: ('json' | 'csv')[],
 }
 
 export default function BasicTable<T>(props : BasicTableProps<T>) {
-
-  // const helper = createColumnHelper<Test>();
-
   const cachedColumn = useMemo(() => props.columns, [props.columns]);
-  const [cachedData, ] = useState(props.data);
+  // const [cachedData,] = useState(props.data);
+  const cachedData = useMemo(() => props.data, [props.data])
   const [canExpand, ] = useState(!!props.expandElement);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
@@ -38,8 +40,39 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
     getExpandedRowModel: getExpandedRowModel()
   });
 
+  function exportData(type: 'json' | 'csv')
+  {
+    const data = reactTable.getRowModel().rows.map(x => x.original);
+    if (type === 'json') {
+      saveAs(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), 'result.json');
+    }
+    else if (type === 'csv') {
+      const separator = '\t';
+      const header = Object.keys(data[0] as { [key: string]: string }).join(separator);
+      const body = data.map(x => Object.values(x as { [key: string]: string }).map(y => y.toString().replaceAll('\n', '')))
+        .reduce((acc, curr) => ([...acc, curr.join(separator)]), [])
+        .join('\n');
+      saveAs(new Blob([header, '\n', ...body], { type: 'text/csv', endings: 'native' }), 'result.csv');
+    }
+  }
+
   return (
     <div className='rounded-md relative overflow-auto scrollbar-default'>
+      {
+        props.exportType && props.exportType.length >= 1 &&
+        <div className='w-fit border-slate-700 border-2 border-b-0 overflow-hidden border-solid p-2 bg-bluish-200 gap-5 flex items-center text-white text-xs'>
+          {(props.exportType.find(x => x === 'json')) &&
+            <div className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('json')}>
+              Export to JSON
+            </div>
+          }
+          {(props.exportType.find(x => x === 'csv')) &&
+            <div className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('csv')}>
+              Export to CSV
+            </div>
+          }
+        </div>
+      }
       <table className='min-h-30 rounded-md min-w-full border-2 border-slate-700 border-collapse'>
         <thead className='sticky top-0 bg-bluish-200 z-20'>
           {

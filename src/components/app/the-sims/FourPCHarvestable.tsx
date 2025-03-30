@@ -1,19 +1,17 @@
 import React from 'react';
-import Loading from '@/components/common/loading/Loading';
-import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { TheSimsFourPCHarvestableResponse } from '@/model/response/the-sims';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGrid from '@/components/common/basic-grid/BasicGrid';
 import { Checkbox } from 'flowbite-react';
 import { SIMOLEON_ICON } from '@/utilities/char';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
+import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
 export default function FourPCHarvestable() {
-  const { isLoading, data } = useQuery({
+  const queryResult = useQuery({
     queryKey: ["the-sims-four-pc-harvestable"],
     queryFn: async () => {
       const j = await request<TheSimsFourPCHarvestableResponse[], {}>({
@@ -43,5 +41,9 @@ export default function FourPCHarvestable() {
     </div>
   );
 
-  return (isLoading || !data) ? <Loading /> : <BasicGrid data={data} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />;
+  return (
+    <BasicWrapper queryResult={queryResult}>
+      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+    </BasicWrapper>
+  );
 }
