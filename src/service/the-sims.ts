@@ -1,7 +1,6 @@
 import { API_SHORTHAND } from "@/constant/api-route";
 import { ID_AGGR, MONGODB } from "@/database/db";
 import { TheSimsBustinOutCareerResponse, TheSimsCastawayProductResponse, TheSimsFourPCHarvestableResponse, TheSimsTwoConsoleCareerResponse, TheSimsTwoPetsConsoleCareerResponse, TheSimsTwoPetsConsoleProductResponse } from "@/model/response/the-sims";
-import { UUID } from "mongodb";
 import 'server-only'
 
 type RouteEndpoint = typeof API_SHORTHAND.THE_SIMS[keyof typeof API_SHORTHAND.THE_SIMS]

@@ -1,6 +1,6 @@
 import { MONGODB } from "@/database/db";
 import { DashboardResponse, DashboardTableResponse } from "@/model/response/dashboard";
-import 'server-only'
+import 'server-only';
 
 export async function GetDashboardData(category: string = ""){
   const master = await MONGODB.master.collection_category

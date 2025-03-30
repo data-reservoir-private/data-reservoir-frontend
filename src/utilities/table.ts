@@ -1,4 +1,5 @@
-import { Row, Table } from "@tanstack/react-table";
+import { ColumnDef, ColumnHelper, createColumnHelper, Row, Table } from "@tanstack/react-table";
+import React from "react";
 
 /**
  * Sorting function untuk react-table. Mirip 'arrIncludesSome', tapi bisa untuk string / number
@@ -15,4 +16,20 @@ export function multiSelectFilter<TData>(row: Row<TData>, columnId: string, sele
 
 export function getStaticIndex<TData>(row: Row<TData>, table: Table<TData>) {
   return (table.getSortedRowModel()?.flatRows?.findIndex((flatRow) => flatRow.id === row.id) || 0) + 1;
+}
+
+export function createColumns<TData>(fn: (colHelper: ColumnHelper<TData>) => ColumnDef<TData, any>[]) {
+  return fn(createColumnHelper<TData>());
+}
+
+export function createIndexColumn<TData>(colHelper: ColumnHelper<TData>) {
+  return colHelper.display({
+    id: 'index',
+    header: "#",
+    cell: ({ row, table }) => (
+      React.createElement('div', {
+        className: 'text-center font-bold'
+      }, getStaticIndex(row, table))
+    )
+  });
 }

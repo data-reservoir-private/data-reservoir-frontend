@@ -29,3 +29,12 @@ export interface TransactionTransportSchema extends BaseSchema {
   subtype: string;
   type: string;
 }
+
+export interface TransactionIncomeSchema extends BaseSchema {
+  category: string,
+  currency: string,
+  date: string,
+  income: number,
+  notes: string | null,
+  source: string
+}

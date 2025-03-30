@@ -1,29 +1,16 @@
-import { TransactionSummaryResponse } from '@/model/response/transaction';
+'use client'
+
 import ReactECharts from 'echarts-for-react';
 import { EChartsOption } from 'echarts';
 import React from 'react';
 import dayjs from 'dayjs';
-import { useQuery } from '@tanstack/react-query';
-import { request } from '@/utilities/http';
-import { API_ROUTE } from '@/constant/api-route';
-import Loading from '@/components/common/loading/Loading';
-import Error from '@/components/common/error/Error';
+import { TransactionSummaryMonthlyResponse } from '@/model/response/transaction';
 
-export default function TransactionLineChartExpense() {
-  const { isLoading, data, isError, error } = useQuery({
-    queryKey: ["transaction-overall"],
-    queryFn: async () => {
-      const j = await request<TransactionSummaryResponse[], {}>({
-        method: "GET",
-        url: API_ROUTE.TRANSACTION.SUMMARY,
-      });
-      return (j?.data ?? []);
-    }
-  });
+interface TransactionLineChartExpenseProps {
+  data: TransactionSummaryMonthlyResponse[]
+}
 
-  if (isLoading) return <Loading />;
-  else if (!data || isError) return <Error message={error?.message}/>;
-
+export default function TransactionLineChartExpense({ data }: TransactionLineChartExpenseProps) {
   const LIMIT = 3_000_000;
   const option: EChartsOption = {
     xAxis: {
@@ -96,7 +83,7 @@ export default function TransactionLineChartExpense() {
   return (
     <div className='w-full p-4'>
       <h1 className='text-xl text-left font-bold'>Expenses</h1>
-      <ReactECharts option={option} className='w-full'/>
+      <ReactECharts option={option} className='w-full' opts={{ renderer: 'svg' }} />
     </div>
   );
 }

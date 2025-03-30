@@ -53,7 +53,8 @@ export const API_SHORTHAND = Object.freeze({
   },
   TRANSACTION: {
     SUMMARY: 'summary',
-    CATEGORY: 'category'
+    CATEGORY: 'category',
+    MONTHLY: 'monthly',
   }
 } as const);
 
@@ -109,6 +110,7 @@ export const API_ROUTE = Object.freeze({
   },
   TRANSACTION: {
     SUMMARY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.SUMMARY}`,
-    CATEGORY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.CATEGORY}`
+    CATEGORY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.CATEGORY}`,
+    MONTHLY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.MONTHLY}`,
   }
 } as const);

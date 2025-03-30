@@ -4,21 +4,21 @@ import classNames from 'classnames';
 import React from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 
-/**
- * @deprecated Change to new
- */
-export interface SimpleListboxProps {
-  onChange: (v: string) => void,
+interface SimpleListboxNewProps<TValue> {
+  onChange: (v: TValue) => void,
 
   /**
-   * Key:Value object. Key is the value while label is the label
+   * Key:Value object. Key is the label and the value is the actual value
    */
-  options: { [value: string]: string }
-  value: string | null,
+  options: { [label: string]: TValue }
+  value: TValue | null,
   defaultEmptyLabel?: string
 }
 
-export default function SimpleListbox(props: SimpleListboxProps) {
+export default function SimpleListboxNew<TValue>(props: SimpleListboxNewProps<TValue>) {
+
+  const l = Object.entries(props.options).find(x => x[1] == props.value);
+
   return (
     <Listbox
       onChange={props.onChange}
@@ -31,7 +31,7 @@ export default function SimpleListbox(props: SimpleListboxProps) {
         )}
       >
         <div className='flex justify-between w-full items-center'>
-          {props.value ? props.options[props.value] : props.defaultEmptyLabel ?? "Select a value"}
+          {(props.value && l) ? l[0] : props.defaultEmptyLabel ?? "Select a value"}
           <BsChevronDown/>
         </div>  
       </ListboxButton>
@@ -46,10 +46,10 @@ export default function SimpleListbox(props: SimpleListboxProps) {
             <ListboxOption value={''} key={''} className='p-0.5 px-2.5 hover:bg-gray-700'>{props.defaultEmptyLabel}</ListboxOption>
         }
         {
-          Object.entries(props.options).map(([key, label]) => (
-            <ListboxOption value={key} key={key} className='p-0.5 px-2.5 hover:bg-gray-700'>
-              { label }
-            </ListboxOption>
+          Object.entries(props.options).map(([key, value]) => (
+            <ListboxOption value={value} key={key} className='p-0.5 px-2.5 hover:bg-gray-700'>
+              { key }
+            </ListboxOption>  
           ))
         }
       </ListboxOptions>
