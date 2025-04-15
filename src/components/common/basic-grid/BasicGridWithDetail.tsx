@@ -4,7 +4,7 @@ import Paper from '../paper/Paper';
 import classNames from 'classnames';
 import Image from 'next/image';
 
-export interface BasicGridProps<TData> {
+export interface BasicGridWithDetailProps<TData> {
   data: TData[]
   display?: (d: TData) => React.ReactNode
   detail?: (d: TData) => React.ReactNode
@@ -16,13 +16,13 @@ export interface BasicGridProps<TData> {
   gridImageUnoptimized?: boolean,
 }
 
-export interface BasicGridState<TData> {
+export interface BasicGridWithDetailState<TData> {
   data?: TData
 }
 
-export default function BasicGrid<TData extends HasID>(props: BasicGridProps<TData>) {
+export default function BasicGridWithDetail<TData extends HasID>(props: BasicGridWithDetailProps<TData>) {
 
-  const [state, setState] = useState<BasicGridState<TData>>({
+  const [state, setState] = useState<BasicGridWithDetailState<TData>>({
     data: undefined
   });
 

@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { Document, MongoClient } from 'mongodb';
 import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwoPizzaProductSchema, FarmFrenzyTwoProductSchema } from './schema/farm-frenzy';
 import { HaydayBuildingSchema, HaydayProductSchema } from './schema/hayday';
 import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
@@ -88,7 +88,7 @@ export const MONGODB = {
 export const ID_AGGR = [
   { $replaceRoot: { newRoot: { $mergeObjects: [{ id: { $convert: {input: '$_id', format: 'uuid', to: { subtype: 4, type: 2 }}} }, '$$ROOT'] } } },
   { $unset: ['_id'] }
-];
+] as Document[];
 export const PAGINATION_AGGR = ({ currentPage, pageSize }: { currentPage: number, pageSize: number }) => [
   { $skip: pageSize * (currentPage - 1) },
   { $limit: pageSize }

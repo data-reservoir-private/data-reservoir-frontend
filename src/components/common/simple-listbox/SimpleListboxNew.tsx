@@ -16,7 +16,6 @@ interface SimpleListboxNewProps<TValue> {
 }
 
 export default function SimpleListboxNew<TValue>(props: SimpleListboxNewProps<TValue>) {
-
   const l = Object.entries(props.options).find(x => x[1] == props.value);
 
   return (

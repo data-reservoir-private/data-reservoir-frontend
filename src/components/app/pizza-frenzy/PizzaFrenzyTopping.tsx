@@ -3,7 +3,7 @@ import { API_ROUTE } from '@/constant/api-route';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import { PizzaFrenzyToppingResponse } from '@/model/response/pizza-frenzy';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import Image from 'next/image';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
@@ -50,7 +50,7 @@ export default function PizzaFrenzyTable() {
 
   return (
     <BasicWrapper queryResult={queryResult}>
-      <BasicGrid data={queryResult.data!} display={displayFunc} imageSrc={d => d.image} imageAlt={d => d.general_name} detail={displayDetail} gridContainerClasses='w-24 h-24' />
+      <BasicGridWithDetail data={queryResult.data!} display={displayFunc} imageSrc={d => d.image} imageAlt={d => d.general_name} detail={displayDetail} gridContainerClasses='w-24 h-24' />
     </BasicWrapper>
   );
 }

@@ -4,7 +4,7 @@ import { TheSimsCastawayProductResponse } from '@/model/response/the-sims';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import { Checkbox } from 'flowbite-react';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
@@ -42,7 +42,7 @@ export default function CastawayProduct() {
 
   return (
     <BasicWrapper queryResult={queryResult}>
-      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+      <BasicGridWithDetail data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
     </BasicWrapper>
   );
 }

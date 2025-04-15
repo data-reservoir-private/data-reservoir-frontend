@@ -6,7 +6,7 @@ import { NasiGorengIngredientResponse } from '@/model/response/nasi-goreng';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import Image from 'next/image';
 import { Checkbox } from 'flowbite-react';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
@@ -67,7 +67,7 @@ export default function NasiGorengIngredient() {
 
   return (
     <BasicWrapper queryResult={queryResult}>
-      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+      <BasicGridWithDetail data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
     </BasicWrapper>
   );
 }

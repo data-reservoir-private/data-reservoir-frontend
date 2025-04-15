@@ -1,8 +1,7 @@
 import React from 'react';
-import Loading from '@/components/common/loading/Loading';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import { QuartzShippableResponse } from '@/model/response/quartz';
 import { API_ROUTE } from '@/constant/api-route';
@@ -39,7 +38,7 @@ export default function QuartzShippable() {
 
   return (
     <BasicWrapper queryResult={queryResult}>
-      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridImageUnoptimized />
+      <BasicGridWithDetail data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridImageUnoptimized />
     </BasicWrapper>
   );
 }

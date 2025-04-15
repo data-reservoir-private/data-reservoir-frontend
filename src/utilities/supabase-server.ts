@@ -43,7 +43,9 @@ export async function updateSession(req: NextRequest) {
 
   // const { data: { user } } = await supabase.auth.getUser();
 
-  // if (req.nextUrl.pathname.startsWith('/callback')) return supabaseResponse;
+  if (req.nextUrl.pathname.startsWith('/api')) {
+    supabaseResponse.headers.set('Access-Control-Allow-Origin', '*');
+  }
 
   // if (!user && !req.nextUrl.pathname.startsWith('/login')) {
   //   const url = req.nextUrl.clone();

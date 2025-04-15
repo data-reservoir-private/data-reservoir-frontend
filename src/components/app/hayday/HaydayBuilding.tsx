@@ -3,7 +3,7 @@ import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import { HayDayBuildingResponse } from '@/model/response/hayday';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import Loading from '@/components/common/loading/Loading';
 import Image from 'next/image';
 import { secondToTimespan } from '@/utilities/general';
@@ -58,5 +58,5 @@ export default function HaydayProduct() {
 
   if (isLoading) return (<Loading />);
   else if (isError || !data) return (<Error message={error?.message}/>);
-  return <BasicGrid data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} gridContainerClasses='w-20 h-20' />;
+  return <BasicGridWithDetail data={data} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} gridContainerClasses='w-20 h-20' />;
 }

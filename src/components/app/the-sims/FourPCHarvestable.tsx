@@ -4,7 +4,7 @@ import { TheSimsFourPCHarvestableResponse } from '@/model/response/the-sims';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import { Checkbox } from 'flowbite-react';
 import { SIMOLEON_ICON } from '@/utilities/char';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
@@ -43,7 +43,7 @@ export default function FourPCHarvestable() {
 
   return (
     <BasicWrapper queryResult={queryResult}>
-      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
+      <BasicGridWithDetail data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} />
     </BasicWrapper>
   );
 }

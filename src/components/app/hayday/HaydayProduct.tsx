@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { HayDayProductResponse } from '@/model/response/hayday';
 import Paper from '@/components/common/paper/Paper';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import Loading from '@/components/common/loading/Loading';
 import Image from 'next/image';
 import { Checkbox } from 'flowbite-react';
@@ -125,7 +125,7 @@ export default function HaydayProduct() {
           onChange={e => inputDeb(e.target.value)}
         />
       </Paper>
-      <BasicGrid data={data.filter(x => (state.keyword.length === 0 || x.name.toLowerCase().includes(state.keyword.toLowerCase())) && (state.category.length === 0 || state.category === x.category))} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />
+      <BasicGridWithDetail data={data.filter(x => (state.keyword.length === 0 || x.name.toLowerCase().includes(state.keyword.toLowerCase())) && (state.category.length === 0 || state.category === x.category))} imageAlt={d => d.name} imageSrc={d => d.image} detail={displayDetail} />
     </>
   );
 }

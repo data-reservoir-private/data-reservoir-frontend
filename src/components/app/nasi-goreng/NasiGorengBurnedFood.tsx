@@ -4,7 +4,7 @@ import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import { NasiGorengBurnedFoodResponse } from '@/model/response/nasi-goreng';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
-import BasicGrid from '@/components/common/basic-grid/BasicGrid';
+import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
 
@@ -36,7 +36,7 @@ export default function NasiGorengBurnedFood() {
 
   return (
     <BasicWrapper queryResult={queryResult}>
-      <BasicGrid data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />;
+      <BasicGridWithDetail data={queryResult.data!} imageSrc={d => d.image} imageAlt={d => d.name} detail={displayDetail} gridContainerClasses='w-24 h-24' />;
     </BasicWrapper>
   );
 }
