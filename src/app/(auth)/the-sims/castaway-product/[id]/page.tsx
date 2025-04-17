@@ -2,10 +2,11 @@ import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetail
 import GridDetail from '@/components/common/basic-grid/GridDetail'
 import { TheSimsCastawayProductResponse } from '@/model/response/the-sims';
 import { GetTheSimsDataByID } from '@/service/the-sims'
-import { Button, Checkbox } from 'flowbite-react';
+import { Button } from 'flowbite-react';
 import Link from 'next/link';
 import React from 'react';
 import { Metadata } from 'next';
+import SimpleCheckbox from '@/components/common/form/SimpleCheckbox';
 
 export const metadata: Metadata = {
   title: 'The Sims Castaway Product - Birdeye View'
@@ -29,7 +30,7 @@ export default async function CastawayProductDetailPage({params} : {params: Prom
         Hunger: d.hunger,
         Energy: d.energy,
         Bladder: d.bladder,
-        "Eaten Raw": <Checkbox checked={d.eaten_raw} size={8} disabled />,
+        "Eaten Raw": <SimpleCheckbox checked={d.eaten_raw} disabled />,
       }} />
       <Link passHref href={'/the-sims/castaway-product'} className='w-full'>
         <Button type='button' className='w-full'>Back</Button>

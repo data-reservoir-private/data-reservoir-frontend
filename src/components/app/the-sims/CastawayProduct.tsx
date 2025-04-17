@@ -3,11 +3,11 @@ import { API_ROUTE } from '@/constant/api-route';
 import { TheSimsCastawayProductResponse } from '@/model/response/the-sims';
 import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
-import { Checkbox } from 'flowbite-react';
 import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
+import SimpleCheckbox from '@/components/common/form/SimpleCheckbox';
 
 export default function CastawayProduct() {
   const queryResult = useQuery({
@@ -35,7 +35,7 @@ export default function CastawayProduct() {
         Hunger: d.hunger,
         Energy: d.energy,
         Bladder: d.bladder,
-        "Eaten Raw": <Checkbox checked={d.eaten_raw} size={8} disabled />,
+        "Eaten Raw": <SimpleCheckbox checked={d.eaten_raw} disabled />,
       }}/>
     </div>
   );

@@ -3,7 +3,6 @@ import { escapeRegExp } from "lodash";
 import { Document } from "mongodb";
 import { createZodRoute } from "next-zod-route";
 import { NextResponse } from "next/server";
-import { z } from 'zod';
 
 export function newResponse<T>(data: T, message: string = ""): BaseResponse<T> {
   return ({
@@ -45,6 +44,14 @@ export class MongoDBHelper {
     return arr;
   }
 
+  static uuidToString(fieldName: string) {
+    return {
+      $addFields: {
+        [fieldName]: { $convert: {input: `$${fieldName}`, format: 'uuid', to: { subtype: 4, type: 2 }}}
+      }
+    }
+  }
+
   static createPipeline(...params: (Document[] | Document | undefined)[]): Document[] {
     return params.reduce<Document[]>((acc, curr) => {
       if (!curr) return acc;
@@ -53,7 +60,7 @@ export class MongoDBHelper {
     }, []) as Document[]
   }
 
-  static unset(...params: Document[]) {
+  static unset(...params: string[]) {
     return {
       $unset: params
     }

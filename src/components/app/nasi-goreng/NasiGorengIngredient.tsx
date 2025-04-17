@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { NasiGorengIngredientResponse } from '@/model/response/nasi-goreng';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import Image from 'next/image';
-import { Checkbox } from 'flowbite-react';
 import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
+import SimpleCheckbox from '@/components/common/form/SimpleCheckbox';
 
 export default function NasiGorengIngredient() {
   const queryResult = useQuery({
@@ -33,13 +33,13 @@ export default function NasiGorengIngredient() {
         Name: d.name,
         Category: d.category,
         Price: d.price,
-        Processed: <Checkbox checked={d.is_processed} size={8} disabled />,
+        Processed: <SimpleCheckbox checked={d.is_processed} disabled />,
         Description: d.description,
         Tool: d.tool ? (
           <>
             <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
             <div className='relative min-h-6 w-6'>
-              <Image src={d.tool.tool_image} alt={d.tool.tool_name} fill objectFit='contain' />
+              <Image src={d.tool.tool_image} alt={d.tool.tool_name} fill />
             </div>
               <span>{d.tool.tool_name}</span>
             </div>
@@ -52,7 +52,7 @@ export default function NasiGorengIngredient() {
                 <li key={i.ingredient_name}>
                   <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
                     <div className='relative min-h-6 w-6'>
-                      <Image src={i.ingredient_image} alt={i.ingredient_name} fill objectFit='contain' />
+                      <Image src={i.ingredient_image} alt={i.ingredient_name} fill />
                     </div>
                     <span>{i.ingredient_name}</span>
                   </div>

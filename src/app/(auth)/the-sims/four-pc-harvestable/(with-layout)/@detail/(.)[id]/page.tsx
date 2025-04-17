@@ -1,9 +1,9 @@
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage'
 import GridDetail from '@/components/common/basic-grid/GridDetail'
+import SimpleCheckbox from '@/components/common/form/SimpleCheckbox';
 import { TheSimsFourPCHarvestableResponse } from '@/model/response/the-sims';
 import { GetTheSimsDataByID } from '@/service/the-sims'
 import { SIMOLEON_ICON } from '@/utilities/char';
-import { Checkbox } from 'flowbite-react';
 import React from 'react'
 
 export default async function FourPCHarvestableDetailPage({params} : {params: Promise<{id: string}>}) {
@@ -21,7 +21,7 @@ export default async function FourPCHarvestableDetailPage({params} : {params: Pr
         Name: d.name,
         Description: d.description,
         Rarity: d.rarity,
-        "Vertical Garden": <Checkbox checked={d.vertical_garden} size={8} disabled />,
+        "Vertical Garden": <SimpleCheckbox checked={d.vertical_garden} disabled />,
         "Base Value": SIMOLEON_ICON + " " + d.base_value,
         "Perfect Value": SIMOLEON_ICON + " " + d.perfect_value,
         "Growth Rate": d.growth_rate,

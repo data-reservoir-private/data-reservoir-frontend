@@ -7,7 +7,6 @@ import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
 import Loading from '@/components/common/loading/Loading';
 import Image from 'next/image';
-import { Checkbox } from 'flowbite-react';
 import { secondToTimespan } from '@/utilities/general';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import HaydayIconHelper from './HaydayIconHelper';
@@ -15,7 +14,7 @@ import Error from '@/components/common/error/Error';
 import SimpleListbox from '@/components/common/simple-listbox/SimpleListbox';
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-
+import SimpleCheckbox from '@/components/common/form/SimpleCheckbox';
 
 interface HaydayProductState {
   keyword: string,
@@ -58,13 +57,13 @@ export default function HaydayProduct() {
         XP: <div className='flex gap-1'>{d.xp} <HaydayIconHelper type='xp'/> </div>,
         Level: d.level,
         "Is Raw": (
-          <Checkbox checked={d.is_raw} size={8} disabled/>
+          <SimpleCheckbox checked={d.is_raw} disabled/>
         ),
         "Made In": d.producer ? (
           <>
             <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
             <div className='relative min-h-6 w-6'>
-              <Image src={d.producer.building_image} alt={d.producer.building_name} fill objectFit='contain' />
+              <Image src={d.producer.building_image} alt={d.producer.building_name} fill />
             </div>
               <span>{d.producer.building_name}</span>
             </div>
@@ -77,7 +76,7 @@ export default function HaydayProduct() {
                 <li key={i.ingredient_name}>
                   <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
                     <div className='relative min-h-6 w-6'>
-                      <Image src={i.ingredient_image} alt={i.ingredient_name} fill objectFit='contain' />
+                      <Image src={i.ingredient_image} alt={i.ingredient_name} fill />
                     </div>
                     <span>{i.ingredient_name} ({i.quantity})</span>
                   </div>
@@ -93,7 +92,7 @@ export default function HaydayProduct() {
                 <li key={i.product_name}>
                   <div className='grid grid-cols-[2fr_8fr] gap-x-2'>
                     <div className='relative min-h-6 w-6'>
-                      <Image src={i.product_image} alt={i.product_name} fill objectFit='contain' />
+                      <Image src={i.product_image} alt={i.product_name} fill />
                     </div>
                     <span>{i.product_name} ({i.quantity})</span>
                   </div>

@@ -1,4 +1,3 @@
-import { FarmFrenzyTableType, FarmFrenzyTableTypeOptions } from '@/constant/tables';
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react';
 import classNames from 'classnames';
 import React from 'react';
@@ -12,7 +11,8 @@ interface SimpleListboxNewProps<TValue> {
    */
   options: { [label: string]: TValue }
   value: TValue | null,
-  defaultEmptyLabel?: string
+  defaultEmptyLabel?: string,
+  classNames?: string
 }
 
 export default function SimpleListboxNew<TValue>(props: SimpleListboxNewProps<TValue>) {
@@ -25,14 +25,15 @@ export default function SimpleListboxNew<TValue>(props: SimpleListboxNewProps<TV
       defaultValue={props.value}
     >
       <ListboxButton
-        className={classNames("w-full overflow-hidden rounded-lg border disabled:cursor-not-allowed disabled:opacity-50", 
-          "inline-flex items-center rounded-sm border-2 px-3 py-1 text-sm border-gray-500 bg-gray-600 text-white outline-none"
+        className={classNames("w-full overflow-hidden rounded-lg border disabled:cursor-not-allowed disabled:opacity-50",
+          "inline-flex items-center rounded-sm border-2 px-3 py-1 text-sm border-gray-500 bg-gray-600 text-white outline-none",
+          ...props.classNames ?? ""
         )}
       >
         <div className='flex justify-between w-full items-center'>
           {(props.value && l) ? l[0] : props.defaultEmptyLabel ?? "Select a value"}
-          <BsChevronDown/>
-        </div>  
+          <BsChevronDown />
+        </div>
       </ListboxButton>
       <ListboxOptions
         anchor="bottom"
@@ -41,14 +42,16 @@ export default function SimpleListboxNew<TValue>(props: SimpleListboxNewProps<TV
         )}
       >
         {
-          props.defaultEmptyLabel && 
-            <ListboxOption value={''} key={''} className='p-0.5 px-2.5 hover:bg-gray-700'>{props.defaultEmptyLabel}</ListboxOption>
+          props.defaultEmptyLabel &&
+          <ListboxOption value={''} key={''} className='p-0.5 px-2.5 hover:bg-gray-700'>{props.defaultEmptyLabel}</ListboxOption>
         }
         {
-          Object.entries(props.options).map(([key, value]) => (
-            <ListboxOption value={value} key={key} className='p-0.5 px-2.5 hover:bg-gray-700'>
-              { key }
-            </ListboxOption>  
+          Object.entries(props.options).map(([key, value], idx) => (
+            <ListboxOption value={value} key={key} className={classNames('p-0.5 px-2.5 hover:bg-gray-700', {
+              'pt-0': idx === 0,
+            })}>
+              {key}
+            </ListboxOption>
           ))
         }
       </ListboxOptions>

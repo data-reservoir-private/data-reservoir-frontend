@@ -5,10 +5,10 @@ import { request } from '@/utilities/http';
 import { useQuery } from '@tanstack/react-query';
 import GridDetail from '@/components/common/basic-grid/GridDetail';
 import BasicGridWithDetail from '@/components/common/basic-grid/BasicGridWithDetail';
-import { Checkbox } from 'flowbite-react';
 import { SIMOLEON_ICON } from '@/utilities/char';
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage';
 import BasicWrapper from '@/components/common/basic-wrapper/BasicWrapper';
+import SimpleCheckbox from '@/components/common/form/SimpleCheckbox';
 
 export default function FourPCHarvestable() {
   const queryResult = useQuery({
@@ -33,7 +33,7 @@ export default function FourPCHarvestable() {
         Name: d.name,
         Description: d.description,
         Rarity: d.rarity,
-        "Vertical Garden": <Checkbox checked={d.vertical_garden} size={8} disabled />,
+        "Vertical Garden": <SimpleCheckbox checked={d.vertical_garden} disabled />,
         "Base Value": SIMOLEON_ICON + " " + d.base_value,
         "Perfect Value": SIMOLEON_ICON + " " + d.perfect_value,
         "Growth Rate": d.growth_rate,

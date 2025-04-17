@@ -1,8 +1,9 @@
 import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage'
 import GridDetail from '@/components/common/basic-grid/GridDetail'
+import SimpleCheckbox from '@/components/common/form/SimpleCheckbox';
 import { TheSimsCastawayProductResponse } from '@/model/response/the-sims';
 import { GetTheSimsDataByID } from '@/service/the-sims'
-import { Checkbox } from 'flowbite-react';
+import Link from 'next/link';
 import React from 'react'
 
 export default async function CastawayProductDetailPage({params} : {params: Promise<{id: string}>}) {
@@ -23,8 +24,8 @@ export default async function CastawayProductDetailPage({params} : {params: Prom
         Hunger: d.hunger,
         Energy: d.energy,
         Bladder: d.bladder,
-        "Eaten Raw": <Checkbox checked={d.eaten_raw} size={8} disabled />,
-      }}/>
+        "Eaten Raw": <SimpleCheckbox checked={d.eaten_raw} disabled />,
+      }} />
     </div>
   )
 }

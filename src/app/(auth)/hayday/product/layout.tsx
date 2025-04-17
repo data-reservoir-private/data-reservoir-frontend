@@ -1,5 +1,3 @@
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'flowbite-react'
-import Link from 'next/link'
 import React from 'react'
 
 interface HaydayProductProps {

@@ -47,7 +47,9 @@ export default function SimpleListbox(props: SimpleListboxProps) {
         }
         {
           Object.entries(props.options).map(([key, label]) => (
-            <ListboxOption value={key} key={key} className='p-0.5 px-2.5 hover:bg-gray-700'>
+            <ListboxOption value={key} key={key} className={classNames('p-0.5 px-2.5 hover:bg-gray-700', {
+              'p-0': label.length === 0
+            })}>
               { label }
             </ListboxOption>
           ))
