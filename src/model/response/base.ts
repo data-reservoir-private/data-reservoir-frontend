@@ -22,3 +22,5 @@ export interface HasID {
 }
 
 export interface BaseMongoResponseData extends Omit<BaseSchema, '_id'>, HasID { }
+
+export type MongoSchemaNoID<TType> = Omit<TType, '_id'> & HasID;

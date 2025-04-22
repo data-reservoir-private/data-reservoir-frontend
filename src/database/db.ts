@@ -1,6 +1,6 @@
 import { Document, MongoClient } from 'mongodb';
 import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwoPizzaProductSchema, FarmFrenzyTwoProductSchema } from './schema/farm-frenzy';
-import { HaydayBuildingSchema, HaydayProductSchema } from './schema/hayday';
+import { HaydayBuildingSchema, HaydayProductSchema, HaydayTruckOrderSchema } from './schema/hayday';
 import { PizzaFrenzyToppingSchema } from './schema/pizza-frenzy';
 import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from './schema/the-sims';
 import { NasiGorengBurnedFoodSchema, NasiGorengFriedRiceSchema, NasiGorengIngredientSchema, NasiGorengPlateSchema, NasiGorengRelicSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from './schema/nasi-goreng';
@@ -29,7 +29,8 @@ export const MONGODB = {
 
   hayday: {
     product: db.collection<HaydayProductSchema>('hayday_product'),
-    building: db.collection<HaydayBuildingSchema>('hayday_building')
+    building: db.collection<HaydayBuildingSchema>('hayday_building'),
+    truck_order: db.collection<HaydayTruckOrderSchema>('hayday_truck_order')
   },
 
   pizza_frenzy: {

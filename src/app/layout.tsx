@@ -4,7 +4,6 @@ import "./globals.css";
 import "./post.css";
 import { Flowbite } from "flowbite-react";
 
-const inter = Inter({ subsets: ["latin"] });
 const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata: Metadata = {

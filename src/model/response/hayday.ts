@@ -37,3 +37,48 @@ export interface HayDayBuildingResponse extends HasID {
     product_name: string
   }[]
 }
+
+export interface HayDayOrderSummaryResponse {
+  income: {
+    non_event: {
+      coin: number,
+      xp: number
+    },
+    event: {
+      coin: number,
+      xp: number
+    }
+  },
+  revenue: {
+    event: number[],
+    non_event: number[],
+    combined: number[]
+  },
+  voucher: {
+    green: number,
+    blue: number,
+    purple: number,
+    gold: number
+  },
+  ratio: {
+    accept: number,
+    reject: number,
+    ongoing: number
+  },
+  objects: {
+    id: string,
+    image: string,
+    name: string,
+    quantity: number
+  }[],
+  clients: {
+    name: string,
+    total: number,
+    count: number,
+    income: {
+      coin: number,
+      xp: number
+    }
+  }[],
+  
+}

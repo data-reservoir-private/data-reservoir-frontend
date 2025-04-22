@@ -36,6 +36,10 @@ export interface TransactionMonthlyResponse {
       name: string
       total: number
     }[],
+    weekly: {
+      week: number,
+      total: number
+    }[]
   }
 }
 

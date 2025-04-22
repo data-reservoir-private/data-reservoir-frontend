@@ -52,6 +52,14 @@ export class MongoDBHelper {
     }
   }
 
+  static dateFromString(fieldName: string) {
+    return {
+      $dateFromString: {
+        dateString: fieldName
+      }
+    }
+  }
+
   static createPipeline(...params: (Document[] | Document | undefined)[]): Document[] {
     return params.reduce<Document[]>((acc, curr) => {
       if (!curr) return acc;
