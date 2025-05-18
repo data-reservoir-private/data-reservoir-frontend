@@ -1,6 +1,9 @@
 import { API_SHORTHAND } from "@/constant/api-route";
 import { ID_AGGR, MONGODB } from "@/database/db";
+import { DB_SQL } from "@/database/db-new";
 import { newResponse } from "@/utilities/api";
+import { castawayProductInTheSims, fourPcHarvestableInTheSims } from "@drizzle/schema";
+import { sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 type RouteEndpoint = typeof API_SHORTHAND.THE_SIMS[keyof typeof API_SHORTHAND.THE_SIMS]
@@ -15,13 +18,13 @@ export async function GET(_: NextRequest, props: { params : Promise<{ table: str
   });
 
   switch (params.table as RouteEndpoint) {
-    case 'castaway-product':
-      return NextResponse.json(newResponse(
-        await MONGODB.the_sims.castaway_product.aggregate(ID_AGGR).toArray()
-      ));
     case 'four-pc-harvestable':
       return NextResponse.json(newResponse(
-        await MONGODB.the_sims.four_pc_harvestable.aggregate(ID_AGGR).toArray()
+        await DB_SQL.query.fourPcHarvestableInTheSims.findMany({
+          extras: {
+            image: sql<string>`${process.env.IMAGE_URL} || ${fourPcHarvestableInTheSims.image}`.as("image")
+          }
+        })
       ));
     case 'two-pets-console-product':
       return NextResponse.json(newResponse(

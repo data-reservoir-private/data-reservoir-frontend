@@ -1,3 +1,7 @@
-[*.{ts,tsx,json,js,mjs,mts}]
+[*.{ts,tsx,json,js,mjs,mts,config.ts,config.js}]
+indent_size = 2
+indent_style = space
+
+[*.*]
 indent_size = 2
 indent_style = space

@@ -2,7 +2,8 @@ import { BasePaginationResponse, BaseResponse } from "@/model/response/base";
 import { escapeRegExp } from "lodash";
 import { Document } from "mongodb";
 import { createZodRoute } from "next-zod-route";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { z, ZodObject, ZodSchema } from "zod";
 
 export function newResponse<T>(data: T, message: string = ""): BaseResponse<T> {
   return ({
@@ -35,7 +36,28 @@ export const routeInstance = createZodRoute({
   handleServerError: (error) => {
     return NextResponse.json(newResponse(null, error.message), { status: 500 });
   }
-})
+});
+
+export const GETMethodRoute = <TSchema extends ZodSchema>(schema: TSchema, handler: (req: NextRequest, query: z.output<TSchema>) => Promise<NextResponse>) => {
+  return async (req: NextRequest) => {
+
+    const finalData: { [key: string]: any } = {}
+    for (const [key, value] of req.nextUrl.searchParams) {
+      const v = finalData[key];
+      if (v === undefined) finalData[key] = value;
+      else if (v !== undefined && !Array.isArray(v)) finalData[key] = [v, value];
+      else if (Array.isArray(v)) finalData[key] = [...v, value];
+    }
+
+    const result = await schema.safeParseAsync(finalData);
+    if (result.error) return NextResponse.json(badRequestResponse(result.error.message));
+
+    else return handler(req, result.data);
+  }
+}
+
+
+
 
 export class MongoDBHelper {
   static addPagination(currentPage: number, pageSize: number) {
