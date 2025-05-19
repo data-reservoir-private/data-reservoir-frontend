@@ -3,7 +3,7 @@ import { escapeRegExp } from "lodash";
 import { Document } from "mongodb";
 import { createZodRoute } from "next-zod-route";
 import { NextRequest, NextResponse } from "next/server";
-import { z, ZodObject, ZodSchema } from "zod";
+import { z, ZodObject } from "zod/v4";
 
 export function newResponse<T>(data: T, message: string = ""): BaseResponse<T> {
   return ({
@@ -38,10 +38,10 @@ export const routeInstance = createZodRoute({
   }
 });
 
-export const GETMethodRoute = <TSchema extends ZodSchema>(schema: TSchema, handler: (req: NextRequest, query: z.output<TSchema>) => Promise<NextResponse>) => {
-  return async (req: NextRequest) => {
-
-    const finalData: { [key: string]: any } = {}
+export const GETMethodRoute = <TSchema extends ZodObject>(schema: TSchema, handler: (req: NextRequest, query: z.infer<TSchema>) => Promise<NextResponse>) => {
+  return async (req: NextRequest, { params }: { params: Promise<{ [key: string]: any }> }) => {
+    const d = await params;
+    const finalData: { [key: string]: any } = {...d}
     for (const [key, value] of req.nextUrl.searchParams) {
       const v = finalData[key];
       if (v === undefined) finalData[key] = value;
@@ -50,14 +50,31 @@ export const GETMethodRoute = <TSchema extends ZodSchema>(schema: TSchema, handl
     }
 
     const result = await schema.safeParseAsync(finalData);
-    if (result.error) return NextResponse.json(badRequestResponse(result.error.message));
+    if (result.error) return badRequestResponse(result.error.issues.map(x => x.message).join(', '));
 
     else return handler(req, result.data);
   }
 }
 
+export const GETMethodRouteDynamic = <TParams, TSchema extends ZodObject>(schema: TSchema, handler: (req: NextRequest, query: z.infer<TSchema>) => Promise<NextResponse>) => {
+  return async (req: NextRequest, { params } : { params: Promise<TParams> }) => {
+    const parameters = await params;
+    const finalData: { [key: string]: any } = { ...parameters as { [key: string]: any } };
+    for (const [key, value] of req.nextUrl.searchParams) {
+      const v = finalData[key];
+      if (v === undefined) finalData[key] = value;
+      else if (v !== undefined && !Array.isArray(v)) finalData[key] = [v, value];
+      else if (Array.isArray(v)) finalData[key] = [...v, value];
+    }
 
+    // Merge with param
 
+    const result = await schema.safeParseAsync(finalData);
+    if (result.error) return badRequestResponse(result.error.issues.map(x => x.message).join(', '));
+
+    else return handler(req, result.data);
+  }
+}
 
 export class MongoDBHelper {
   static addPagination(currentPage: number, pageSize: number) {

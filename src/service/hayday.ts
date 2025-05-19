@@ -49,9 +49,6 @@ export async function GetHaydayOrderSummary(data?: { year: number, month: number
     if (x.event === HAYDAY_EVENT.DOUBLE_COIN) x.coin *= 2;
     else if (x.event === HAYDAY_EVENT.DOUBLE_XP) x.xp *= 2; 
     else if (x.event === HAYDAY_EVENT.TRIPLE_XP) x.xp *= 3; 
-    else if (x.event === HAYDAY_EVENT.REVENUE_AD) { x.coin *= 2; x.xp *= 2 }
-    else if (x.event === HAYDAY_EVENT.DOUBLE_COIN_REVENUE_AD) { x.coin *= 4; x.xp *= 2 }
-    else if (x.event === HAYDAY_EVENT.DOUBLE_XP_REVENUE_AD) { x.coin *= 2; x.xp *= 4 }
 
     return x;
   });
@@ -99,9 +96,6 @@ export async function GetHaydayOrderSummary(data?: { year: number, month: number
     if (order.event === HAYDAY_EVENT.DOUBLE_COIN) order.coin *= 2;
     else if (order.event === HAYDAY_EVENT.DOUBLE_XP) order.xp *= 2; 
     else if (order.event === HAYDAY_EVENT.TRIPLE_XP) order.xp *= 3; 
-    else if (order.event === HAYDAY_EVENT.REVENUE_AD) { order.coin *= 2; order.xp *= 2 }
-    else if (order.event === HAYDAY_EVENT.DOUBLE_COIN_REVENUE_AD) { order.coin *= 4; order.xp *= 2 }
-    else if (order.event === HAYDAY_EVENT.DOUBLE_XP_REVENUE_AD) { order.coin *= 2; order.xp *= 4 }
     
     result.income.event.coin += order.coin;
     result.income.event.xp += order.xp;

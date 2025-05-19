@@ -1,16 +1,29 @@
-import { newResponse } from "@/utilities/api";
+import { DB_SQL } from "@/database/db-new";
+import { newResponse, GETMethodRouteDynamic, GETMethodRoute } from "@/utilities/api";
+import { toppingInPizzaFrenzy } from "@drizzle/schema";
+import { eq, sql } from "drizzle-orm";
 import { NextResponse } from "next/server";
-import { UUID } from 'mongodb';
-import { MONGODB, ID_AGGR } from '@/database/db';
+import { z } from "zod/v4";
 
-export async function GET(_: Request, props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
-  const id = UUID.createFromHexString(params.id);
+const schema = z.object({
+  id: z.uuid()
+});
+
+export const GET = GETMethodRoute(schema, async (_, query) => {
+  const data = await DB_SQL.query.toppingInPizzaFrenzy.findFirst({
+    where: eq(toppingInPizzaFrenzy.id, query.id),
+    extras: {
+      image: sql<string>`${process.env.IMAGE_URL} || ${toppingInPizzaFrenzy.image}`.as("image"),
+    },
+    with: {
+      toppingUpgradeInPizzaFrenzies: true
+    }
+  })
   return NextResponse.json(newResponse(
-    (await MONGODB.pizza_frenzy.topping.aggregate([...ID_AGGR, {
-      $unset: [
-        'upgrades.topping_id', 'upgrades.id'
-      ],
-    }, { $match: { id: id } }]).toArray()).find(_ => true)
+    data ? {
+      ...data,
+      toppingUpgradeInPizzaFrenzies: undefined,
+      toppings: data?.toppingUpgradeInPizzaFrenzies
+    } : null
   ));
-}
+});
