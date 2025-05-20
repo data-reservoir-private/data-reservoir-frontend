@@ -16,7 +16,6 @@ export default defineConfig({
     "transjakarta"
   ],
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
+    url: process.env.DATABASE_URL_POSTGRES!,
   },
-
 });

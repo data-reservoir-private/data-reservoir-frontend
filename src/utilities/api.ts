@@ -1,4 +1,6 @@
 import { BasePaginationResponse, BaseResponse } from "@/model/response/base";
+import { ColumnBaseConfig, ColumnDataType, sql } from "drizzle-orm";
+import { PgColumn } from "drizzle-orm/pg-core";
 import { escapeRegExp } from "lodash";
 import { Document } from "mongodb";
 import { createZodRoute } from "next-zod-route";
@@ -11,6 +13,10 @@ export function newResponse<T>(data: T, message: string = ""): BaseResponse<T> {
     message: message,
     data: data
   });
+}
+
+export function okResponse<T>(data: T, message: string = "") {
+  return NextResponse.json(newResponse(data, message));
 }
 
 export function newPaginationResponse<T>(data: T[], pageSize: number, currentPage: number, totalPage: number): BasePaginationResponse<T> {
@@ -139,4 +145,8 @@ export class MongoDBHelper {
       }
     ]
   }
+}
+
+export function resolveImage<TCol extends ColumnBaseConfig<ColumnDataType, string>>(column: PgColumn<TCol>, columnAlias: string = "image") {
+  return sql<string>`${process.env.IMAGE_URL} || ${column}`.as(columnAlias)
 }

@@ -512,6 +512,27 @@ CREATE TABLE "hayday"."producer" (
 	"building_id" uuid NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE "hayday"."truck_order_header" (
+	"id" uuid PRIMARY KEY NOT NULL,
+	"date_completed" timestamp with time zone,
+	"hash" text NOT NULL,
+	"header_ordering_id" integer NOT NULL,
+	"client_name" text NOT NULL,
+	"coin" integer NOT NULL,
+	"xp" integer NOT NULL,
+	"special" integer,
+	"level" integer NOT NULL,
+	"voucher" integer NOT NULL,
+	"event" integer NOT NULL,
+	"revenue_ad" boolean NOT NULL,
+	"notes" text,
+	"order_status" integer NOT NULL,
+	"position" integer NOT NULL,
+	"bonus_product_id" uuid,
+	"bonus_product_quantity" integer,
+	"bonus_booster" text
+);
+--> statement-breakpoint
 CREATE TABLE "nasi_goreng"."plate" (
 	"id" uuid PRIMARY KEY NOT NULL,
 	"image" text NOT NULL,
@@ -575,27 +596,6 @@ CREATE TABLE "hayday"."truck_order_detail" (
 	"quantity" integer NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "hayday"."truck_order_header" (
-	"id" uuid PRIMARY KEY NOT NULL,
-	"date_completed" timestamp with time zone,
-	"hash" text NOT NULL,
-	"header_ordering_id" integer NOT NULL,
-	"client_name" text NOT NULL,
-	"coin" integer NOT NULL,
-	"xp" integer NOT NULL,
-	"special" integer,
-	"level" integer NOT NULL,
-	"voucher" integer NOT NULL,
-	"event" integer NOT NULL,
-	"revenue_ad" boolean NOT NULL,
-	"notes" text,
-	"order_status" integer NOT NULL,
-	"position" integer NOT NULL,
-	"bonus_product_id" uuid,
-	"bonus_product_quantity" integer,
-	"bonus_booster" text
-);
---> statement-breakpoint
 CREATE TABLE "nasi_goreng"."fried_rice_level" (
 	"id" uuid PRIMARY KEY NOT NULL,
 	"fried_rice_id" uuid NOT NULL,
@@ -642,6 +642,7 @@ ALTER TABLE "hayday"."ingredient" ADD CONSTRAINT "FK_ingredient_product_ingredie
 ALTER TABLE "hayday"."ingredient" ADD CONSTRAINT "FK_ingredient_product_product_id" FOREIGN KEY ("product_id") REFERENCES "hayday"."product"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "hayday"."producer" ADD CONSTRAINT "FK_producer_building_building_id" FOREIGN KEY ("building_id") REFERENCES "hayday"."building"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "hayday"."producer" ADD CONSTRAINT "FK_producer_product_product_id" FOREIGN KEY ("product_id") REFERENCES "hayday"."product"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "hayday"."truck_order_header" ADD CONSTRAINT "FK_truck_order_header_product_bonus_product_id" FOREIGN KEY ("bonus_product_id") REFERENCES "hayday"."product"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "nasi_goreng"."fried_rice" ADD CONSTRAINT "FK_fried_rice_plate_plate_id" FOREIGN KEY ("plate_id") REFERENCES "nasi_goreng"."plate"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "nasi_goreng"."fried_rice" ADD CONSTRAINT "FK_fried_rice_tool_tool_id" FOREIGN KEY ("tool_id") REFERENCES "nasi_goreng"."tool"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "nasi_goreng"."ingredient_tool" ADD CONSTRAINT "FK_ingredient_tool_ingredient_result_id" FOREIGN KEY ("result_id") REFERENCES "nasi_goreng"."ingredient"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
@@ -683,6 +684,10 @@ CREATE INDEX "IX_ingredient_ingredient_id" ON "hayday"."ingredient" USING btree 
 CREATE INDEX "IX_ingredient_product_id" ON "hayday"."ingredient" USING btree ("product_id" uuid_ops);--> statement-breakpoint
 CREATE INDEX "IX_producer_building_id" ON "hayday"."producer" USING btree ("building_id" uuid_ops);--> statement-breakpoint
 CREATE UNIQUE INDEX "IX_producer_product_id" ON "hayday"."producer" USING btree ("product_id" uuid_ops);--> statement-breakpoint
+CREATE INDEX "IX_truck_order_header_bonus_product_id" ON "hayday"."truck_order_header" USING btree ("bonus_product_id" uuid_ops);--> statement-breakpoint
+CREATE INDEX "IX_truck_order_header_client_name" ON "hayday"."truck_order_header" USING btree ("client_name" text_ops);--> statement-breakpoint
+CREATE INDEX "IX_truck_order_header_order_status" ON "hayday"."truck_order_header" USING btree ("order_status" int4_ops);--> statement-breakpoint
+CREATE INDEX "IX_truck_order_header_voucher" ON "hayday"."truck_order_header" USING btree ("voucher" int4_ops);--> statement-breakpoint
 CREATE INDEX "IX_fried_rice_plate_id" ON "nasi_goreng"."fried_rice" USING btree ("plate_id" uuid_ops);--> statement-breakpoint
 CREATE INDEX "IX_fried_rice_tool_id" ON "nasi_goreng"."fried_rice" USING btree ("tool_id" uuid_ops);--> statement-breakpoint
 CREATE UNIQUE INDEX "IX_ingredient_tool_result_id" ON "nasi_goreng"."ingredient_tool" USING btree ("result_id" uuid_ops);--> statement-breakpoint

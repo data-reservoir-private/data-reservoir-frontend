@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm/relations";
-import { cropInCygnus, cropGradeInCygnus, expenseHeaderInTransaction, expenseDetailInTransaction, forageInCygnus, forageGradeInCygnus, ingredientInNasiGoreng, ingredientRecipeInNasiGoreng, productInHayday, ingredientInHayday, buildingInHayday, producerInHayday, plateInNasiGoreng, friedRiceInNasiGoreng, toolInNasiGoreng, ingredientToolInNasiGoreng, relicInNasiGoreng, toppingInPizzaFrenzy, toppingUpgradeInPizzaFrenzy, truckOrderDetailInHayday, truckOrderHeaderInHayday, friedRiceLevelInNasiGoreng, friedRiceRecipeInNasiGoreng, friedRiceLevelDetailInNasiGoreng, upgradeInNasiGoreng, friedRiceLevelRecipeInNasiGoreng } from "./schema";
+import { cropInCygnus, cropGradeInCygnus, expenseHeaderInTransaction, expenseDetailInTransaction, forageInCygnus, forageGradeInCygnus, ingredientInNasiGoreng, ingredientRecipeInNasiGoreng, productInHayday, ingredientInHayday, buildingInHayday, producerInHayday, truckOrderHeaderInHayday, plateInNasiGoreng, friedRiceInNasiGoreng, toolInNasiGoreng, ingredientToolInNasiGoreng, relicInNasiGoreng, toppingInPizzaFrenzy, toppingUpgradeInPizzaFrenzy, truckOrderDetailInHayday, friedRiceLevelInNasiGoreng, friedRiceRecipeInNasiGoreng, friedRiceLevelDetailInNasiGoreng, upgradeInNasiGoreng, friedRiceLevelRecipeInNasiGoreng } from "./schema";
 
 export const cropGradeInCygnusRelations = relations(cropGradeInCygnus, ({one}) => ({
 	cropInCygnus: one(cropInCygnus, {
@@ -73,13 +73,14 @@ export const ingredientInHaydayRelations = relations(ingredientInHayday, ({one})
 }));
 
 export const productInHaydayRelations = relations(productInHayday, ({many}) => ({
-	ingredientInHaydays_ingredientId: many(ingredientInHayday, {
-		relationName: "ingredientInHayday_ingredientId_productInHayday_id"
+  ingredientInHaydays_ingredientId: many(ingredientInHayday, {
+		relationName: "ingredientInHayday_ingredientId_productInHayday_id",
 	}),
 	ingredientInHaydays_productId: many(ingredientInHayday, {
 		relationName: "ingredientInHayday_productId_productInHayday_id"
 	}),
 	producerInHaydays: many(producerInHayday),
+	truckOrderHeaderInHaydays: many(truckOrderHeaderInHayday),
 	truckOrderDetailInHaydays: many(truckOrderDetailInHayday),
 }));
 
@@ -96,6 +97,14 @@ export const producerInHaydayRelations = relations(producerInHayday, ({one}) => 
 
 export const buildingInHaydayRelations = relations(buildingInHayday, ({many}) => ({
 	producerInHaydays: many(producerInHayday),
+}));
+
+export const truckOrderHeaderInHaydayRelations = relations(truckOrderHeaderInHayday, ({one, many}) => ({
+	productInHayday: one(productInHayday, {
+		fields: [truckOrderHeaderInHayday.bonusProductId],
+		references: [productInHayday.id]
+	}),
+	truckOrderDetailInHaydays: many(truckOrderDetailInHayday),
 }));
 
 export const friedRiceInNasiGorengRelations = relations(friedRiceInNasiGoreng, ({one, many}) => ({
@@ -159,10 +168,6 @@ export const truckOrderDetailInHaydayRelations = relations(truckOrderDetailInHay
 		fields: [truckOrderDetailInHayday.truckOrderHeaderId],
 		references: [truckOrderHeaderInHayday.id]
 	}),
-}));
-
-export const truckOrderHeaderInHaydayRelations = relations(truckOrderHeaderInHayday, ({many}) => ({
-	truckOrderDetailInHaydays: many(truckOrderDetailInHayday),
 }));
 
 export const friedRiceLevelInNasiGorengRelations = relations(friedRiceLevelInNasiGoreng, ({one, many}) => ({

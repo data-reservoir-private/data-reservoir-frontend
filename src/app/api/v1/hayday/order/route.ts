@@ -59,7 +59,7 @@ export const GET = GETMethodRoute(schema, async (_, { year, month }) => {
     objects: []
   }
 
-  return NextResponse.json(newResponse(returns  ));
+  return NextResponse.json(newResponse(returns));
 });
 
 async function getSummary(year?: number, month?: number) {
@@ -110,10 +110,6 @@ async function getSummary(year?: number, month?: number) {
     coin_event: sum(sq1.coin_event).mapWith(Number),
     xp_event: sum(sq1.xp_event).mapWith(Number),
     count: count(sq1.client_name).mapWith(Number),
-    // coin_list: sql<number[]>`ARRAY_AGG(${sq1.coin})`,
-    // xp_list: sql<number[]>`ARRAY_AGG(${sq1.xp})`,
-    // coin_event_list: sql<number[]>`ARRAY_AGG(${sq1.coin_event})`,
-    // xp_event_list: sql<number[]>`ARRAY_AGG(${sq1.xp_event})`,
     count_accept: sql<number>`COUNT(${sq1.client_name}) FILTER(WHERE ${sq1.order_status} = ${HAYDAY_ORDER_STATUS.ACCEPTED})`.mapWith(Number),
     count_reject: sql<number>`COUNT(${sq1.client_name}) FILTER(WHERE ${sq1.order_status} = ${HAYDAY_ORDER_STATUS.REJECTED})`.mapWith(Number),
     green_voucher: sql<number>`COUNT(${sq1.client_name}) FILTER(WHERE ${sq1.voucher} = ${HAYDAY_VOUCHER.GREEN})`.mapWith(Number),

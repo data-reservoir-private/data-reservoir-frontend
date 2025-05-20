@@ -588,6 +588,37 @@ export const producerInHayday = hayday.table("producer", {
 		}).onDelete("cascade"),
 ]);
 
+export const truckOrderHeaderInHayday = hayday.table("truck_order_header", {
+	id: uuid().primaryKey().notNull(),
+	dateCompleted: timestamp("date_completed", { withTimezone: true, mode: 'string' }),
+	hash: text().notNull(),
+	headerOrderingId: integer("header_ordering_id").notNull(),
+	clientName: text("client_name").notNull(),
+	coin: integer().notNull(),
+	xp: integer().notNull(),
+	special: integer(),
+	level: integer().notNull(),
+	voucher: integer().notNull(),
+	event: integer().notNull(),
+	revenueAd: boolean("revenue_ad").notNull(),
+	notes: text(),
+	orderStatus: integer("order_status").notNull(),
+	position: integer().notNull(),
+	bonusProductId: uuid("bonus_product_id"),
+	bonusProductQuantity: integer("bonus_product_quantity"),
+	bonusBooster: text("bonus_booster"),
+}, (table) => [
+	index("IX_truck_order_header_bonus_product_id").using("btree", table.bonusProductId.asc().nullsLast().op("uuid_ops")),
+	index("IX_truck_order_header_client_name").using("btree", table.clientName.asc().nullsLast().op("text_ops")),
+	index("IX_truck_order_header_order_status").using("btree", table.orderStatus.asc().nullsLast().op("int4_ops")),
+	index("IX_truck_order_header_voucher").using("btree", table.voucher.asc().nullsLast().op("int4_ops")),
+	foreignKey({
+			columns: [table.bonusProductId],
+			foreignColumns: [productInHayday.id],
+			name: "FK_truck_order_header_product_bonus_product_id"
+		}),
+]);
+
 export const plateInNasiGoreng = nasiGoreng.table("plate", {
 	id: uuid().primaryKey().notNull(),
 	image: text().notNull(),
@@ -703,27 +734,6 @@ export const truckOrderDetailInHayday = hayday.table("truck_order_detail", {
 			name: "FK_truck_order_detail_truck_order_header_truck_order_header_id"
 		}).onDelete("cascade"),
 ]);
-
-export const truckOrderHeaderInHayday = hayday.table("truck_order_header", {
-	id: uuid().primaryKey().notNull(),
-	dateCompleted: timestamp("date_completed", { withTimezone: true, mode: 'string' }),
-	hash: text().notNull(),
-	headerOrderingId: integer("header_ordering_id").notNull(),
-	clientName: text("client_name").notNull(),
-	coin: integer().notNull(),
-	xp: integer().notNull(),
-	special: integer(),
-	level: integer().notNull(),
-	voucher: integer().notNull(),
-	event: integer().notNull(),
-	revenueAd: boolean("revenue_ad").notNull(),
-	notes: text(),
-	orderStatus: integer("order_status").notNull(),
-	position: integer().notNull(),
-	bonusProductId: uuid("bonus_product_id"),
-	bonusProductQuantity: integer("bonus_product_quantity"),
-	bonusBooster: text("bonus_booster"),
-});
 
 export const friedRiceLevelInNasiGoreng = nasiGoreng.table("fried_rice_level", {
 	id: uuid().primaryKey().notNull(),

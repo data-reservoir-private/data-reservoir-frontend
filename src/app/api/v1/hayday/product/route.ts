@@ -1,56 +1,111 @@
-import { NextResponse } from "next/server";
-import { badRequestResponse, MongoDBHelper, newResponse, routeInstance } from "@/utilities/api";
-import { z } from "zod/v4";
+import { DB_SQL } from "@/database/db-new";
 import { PaginationSchema } from "@/model/validation/base";
-import { MONGODB, ID_AGGR } from "@/database/db";
-import { HayDayProductResponse } from "@/model/response/hayday";
-import { supabaseServer } from "@/utilities/supabase-server";
+import { newResponse, GETMethodRoute, resolveImage } from "@/utilities/api";
+import { productInHayday, producerInHayday, buildingInHayday, ingredientInHayday } from "@drizzle/schema";
+import { and, asc, between, eq, getTableColumns, gte, inArray, sql, lte, ilike } from "drizzle-orm";
+import { NextResponse } from "next/server";
+import { z } from "zod/v4";
 
-const validationSchema = z.object({
-  level: z.coerce.number().gte(0).default(0),
-  category: z.string().optional(),
-  keyword: z.string().optional(),
-  simple: z.enum(["0", "1"]).default("0").transform(x => x === "1")
-}).extend(PaginationSchema.shape)
+const schema = z.object({
+  complete: z.coerce.boolean().default(false),
+  category: z.string().default(""),
+  name: z.string().default(""),
+  level: z.coerce.number().default(0),
+  minPrice: z.coerce.number().default(0),
+  maxPrice: z.coerce.number().default(0),
+  isRaw: z.coerce.boolean().optional(),
+}).extend(PaginationSchema.shape);
 
+export const GET = GETMethodRoute(schema, async (_, { complete, name, level, minPrice, maxPrice, pageSize, currentPage, isRaw, category }) => {
 
-export const GET = () => {
-  return badRequestResponse("Not ready");
-}
+  const conditional = and(
+    name.length === 0 ? undefined : sql`SIMILARITY(${name}, ${productInHayday.name}) > 0.2`,
+    category.length === 0 ? undefined : ilike(productInHayday.category, category),
+    level === 0 ? undefined : lte(productInHayday.level, level),
+    typeof isRaw === 'undefined' ? undefined : eq(productInHayday.isRaw, isRaw),
+    minPrice > 0 && maxPrice > 0 ? between(productInHayday.price, minPrice, maxPrice) :
+      minPrice > 0 ? gte(productInHayday.price, minPrice) :
+        maxPrice > 0 ? lte(productInHayday.price, maxPrice) : undefined
+  )
 
-// export const GET = routeInstance
-//   .query(validationSchema)
-//   .handler(async (_, { query }) => {
-//     // if (!query.simple) {
-//     //   const s = await supabaseServer()
-//     //   const { data } = await s.auth.getUser();
-//     //   if (!data.user) return NextResponse.json(newResponse("Unauthorized"), { status: 401 });
-//     // }
-//     const res = await MONGODB.hayday.product.aggregate(
-//       MongoDBHelper.createPipeline(
-//         ID_AGGR,
-//         MongoDBHelper.unset(
-//           'ingredients.ingredient_id', 'ingredients.product_id', 'ingredients.id',
-//           'producer.building_id', 'producer.product_id', 'producer.id',
-//           'usage.product_id', 'usage.id'
-//         ),
-//         query.simple ? MongoDBHelper.unset(
-//           'usage', 'ingredients', 'producer'
-//         ) : undefined,
-//         query.category && query.category.length > 0 ? MongoDBHelper.equalString('$category', query.category) : undefined,
-//         query.keyword && query.keyword.length > 0 ? MongoDBHelper.like('name', query.keyword) : undefined,
-//         query.level > 0 ? {
-//           $match: {
-//             level: {
-//               $lte: query.level
-//             }
-//           }
-//         } : undefined,
-//         { $sort: { level: 1 } },
-//         MongoDBHelper.addPagination(query.currentPage, query.pageSize)
-        
-//       )
-//     ).toArray() as HayDayProductResponse[];
+  if (complete) {
+    let productsQuery = DB_SQL.select({
+      ...getTableColumns(productInHayday),
+      image: resolveImage(productInHayday.image)
+    })
+      .from(productInHayday)
+      .where(conditional);
 
-//     return NextResponse.json(newResponse(res))
-//   });
+    const products = (pageSize === 0) ?
+      await productsQuery :
+      await productsQuery
+        .limit(pageSize)
+        .offset((currentPage - 1) * pageSize);
+    const productIds = products.map(product => product.id);
+
+    // Get Producer
+    const buildings = await DB_SQL.select({
+      id: buildingInHayday.id,
+      productId: producerInHayday.productId,
+      name: buildingInHayday.name,
+      image: resolveImage(buildingInHayday.image),
+    })
+      .from(producerInHayday)
+      .innerJoin(buildingInHayday, eq(producerInHayday.buildingId, buildingInHayday.id))
+      .where(inArray(producerInHayday.productId, productIds));
+
+    // Get Recipe
+    const recipe = await DB_SQL.select({
+      ingredientId: productInHayday.id,
+      productId: ingredientInHayday.productId,
+      name: productInHayday.name,
+      image: resolveImage(productInHayday.image),
+      quantity: ingredientInHayday.quantity
+    })
+      .from(ingredientInHayday)
+      .innerJoin(productInHayday, eq(ingredientInHayday.ingredientId, productInHayday.id))
+      .where(inArray(ingredientInHayday.productId, productIds))
+      .orderBy(asc(productInHayday.level));
+
+    // Get Usage
+    const usage = await DB_SQL.select({
+      ingredientId: ingredientInHayday.ingredientId,
+      productId: ingredientInHayday.productId,
+      name: productInHayday.name,
+      image: resolveImage(productInHayday.image),
+      quantity: ingredientInHayday.quantity
+    })
+      .from(ingredientInHayday)
+      .innerJoin(productInHayday, eq(ingredientInHayday.productId, productInHayday.id))
+      .where(inArray(ingredientInHayday.ingredientId, productIds))
+      .orderBy(asc(productInHayday.level));
+
+    const finalResponse = products.map(product => {
+      const bT = buildings.find(x => x.productId === product.id);
+      const b = bT && { ...bT, productId: undefined };
+
+      const r = recipe.filter(x => x.productId === product.id).map(x => ({ id: x.ingredientId, ...x, ingredientId: undefined, productId: undefined }));
+      const u = usage.filter(x => x.ingredientId === product.id).map(x => ({ id: x.productId, ...x, ingredientId: undefined, productId: undefined }));
+
+      return {
+        ...product,
+        producer: b,
+        recipe: r,
+        usage: u,
+      }
+    });
+    return NextResponse.json(newResponse(finalResponse));
+  }
+  else {
+    return NextResponse.json(newResponse(
+      await DB_SQL.query.productInHayday.findMany({
+        extras: {
+          image: sql<string>`${process.env.IMAGE_URL} || ${productInHayday.image}`.as("image")
+        },
+        limit: pageSize === 0 ? undefined : pageSize,
+        offset: pageSize === 0 ? 0 : (currentPage - 1) * pageSize,
+        where: conditional
+      })
+    ));
+  }
+});
