@@ -1,9 +1,8 @@
 import { DB_SQL } from "@/database/db-new";
 import { PaginationSchema } from "@/model/validation/base";
-import { newResponse, GETMethodRoute } from "@/utilities/api";
+import { GETMethodRoute, okResponse } from "@/utilities/api";
 import { buildingInHayday, productInHayday } from "@drizzle/schema";
 import { sql } from "drizzle-orm";
-import { NextResponse } from "next/server";
 import { z } from "zod/v4";
 
 const schema = z.object({
@@ -12,7 +11,7 @@ const schema = z.object({
 
 export const GET = GETMethodRoute(schema, async (_, query) => {
   if (query.complete) {
-    return NextResponse.json(newResponse(
+    return okResponse(
       (await DB_SQL.query.buildingInHayday.findMany({
         extras: {
           image: sql<string>`${process.env.IMAGE_URL} || ${buildingInHayday.image}`.as("image"),
@@ -43,10 +42,10 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
         })),
         producerInHaydays: undefined
       }))
-    ));
+    );
   }
   else {
-    return NextResponse.json(newResponse(
+    return okResponse(
       await DB_SQL.query.buildingInHayday.findMany({
         extras: {
           image: sql<string>`${process.env.IMAGE_URL} || ${buildingInHayday.image}`.as("image")
@@ -54,6 +53,6 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
         limit: query.pageSize === 0 ? undefined : query.pageSize,
         offset: query.pageSize === 0 ? 0 : query.currentPage * query.pageSize
       })
-    ));
+    );
   }
 });

@@ -147,6 +147,9 @@ export class MongoDBHelper {
   }
 }
 
-export function resolveImage<TCol extends ColumnBaseConfig<ColumnDataType, string>>(column: PgColumn<TCol>, columnAlias: string = "image") {
+export function resolveImageSQL<TCol extends ColumnBaseConfig<ColumnDataType, string>>(column: PgColumn<TCol>, columnAlias: string = "image") {
   return sql<string>`${process.env.IMAGE_URL} || ${column}`.as(columnAlias)
+}
+export function resolveImage(imagePath: string) {
+  return `${process.env.IMAGE_URL}${imagePath}`;
 }

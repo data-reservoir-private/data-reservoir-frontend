@@ -1,9 +1,8 @@
 import { DB_SQL } from "@/database/db-new";
 import { PaginationSchema } from "@/model/validation/base";
-import { newResponse, GETMethodRoute, resolveImage } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL, okResponse } from "@/utilities/api";
 import { productInHayday, producerInHayday, buildingInHayday, ingredientInHayday } from "@drizzle/schema";
 import { and, asc, between, eq, getTableColumns, gte, inArray, sql, lte, ilike } from "drizzle-orm";
-import { NextResponse } from "next/server";
 import { z } from "zod/v4";
 
 const schema = z.object({
@@ -31,7 +30,7 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
   if (complete) {
     let productsQuery = DB_SQL.select({
       ...getTableColumns(productInHayday),
-      image: resolveImage(productInHayday.image)
+      image: resolveImageSQL(productInHayday.image)
     })
       .from(productInHayday)
       .where(conditional);
@@ -48,7 +47,7 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
       id: buildingInHayday.id,
       productId: producerInHayday.productId,
       name: buildingInHayday.name,
-      image: resolveImage(buildingInHayday.image),
+      image: resolveImageSQL(buildingInHayday.image),
     })
       .from(producerInHayday)
       .innerJoin(buildingInHayday, eq(producerInHayday.buildingId, buildingInHayday.id))
@@ -59,7 +58,7 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
       ingredientId: productInHayday.id,
       productId: ingredientInHayday.productId,
       name: productInHayday.name,
-      image: resolveImage(productInHayday.image),
+      image: resolveImageSQL(productInHayday.image),
       quantity: ingredientInHayday.quantity
     })
       .from(ingredientInHayday)
@@ -72,7 +71,7 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
       ingredientId: ingredientInHayday.ingredientId,
       productId: ingredientInHayday.productId,
       name: productInHayday.name,
-      image: resolveImage(productInHayday.image),
+      image: resolveImageSQL(productInHayday.image),
       quantity: ingredientInHayday.quantity
     })
       .from(ingredientInHayday)
@@ -94,10 +93,10 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
         usage: u,
       }
     });
-    return NextResponse.json(newResponse(finalResponse));
+    return okResponse(finalResponse);
   }
   else {
-    return NextResponse.json(newResponse(
+    return okResponse(
       await DB_SQL.query.productInHayday.findMany({
         extras: {
           image: sql<string>`${process.env.IMAGE_URL} || ${productInHayday.image}`.as("image")
@@ -106,6 +105,6 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
         offset: pageSize === 0 ? 0 : (currentPage - 1) * pageSize,
         where: conditional
       })
-    ));
+    );
   }
 });

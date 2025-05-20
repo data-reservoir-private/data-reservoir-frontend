@@ -1,7 +1,7 @@
 import { DB_SQL } from "@/database/db-new";
-import { GETMethodRoute, newResponse, okResponse, resolveImage } from "@/utilities/api";
+import { GETMethodRoute, okResponse, resolveImageSQL } from "@/utilities/api";
 import { productInHayday, buildingInHayday, producerInHayday, ingredientInHayday } from "@drizzle/schema";
-import { getTableColumns, eq, inArray, asc } from "drizzle-orm";
+import { getTableColumns, eq, asc } from "drizzle-orm";
 import _ from "lodash";
 import { z } from "zod/v4";
 
@@ -12,7 +12,7 @@ const schema = z.object({
 export const GET = GETMethodRoute(schema, async (_, query) => {
   const productT = await DB_SQL.select({
     ...getTableColumns(productInHayday),
-    image: resolveImage(productInHayday.image)
+    image: resolveImageSQL(productInHayday.image)
   })
     .from(productInHayday)
     .where(eq(productInHayday.id, query.id))
@@ -26,7 +26,7 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
     id: buildingInHayday.id,
     productId: producerInHayday.productId,
     name: buildingInHayday.name,
-    image: resolveImage(buildingInHayday.image),
+    image: resolveImageSQL(buildingInHayday.image),
   })
     .from(producerInHayday)
     .innerJoin(buildingInHayday, eq(producerInHayday.buildingId, buildingInHayday.id))
@@ -37,7 +37,7 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
     ingredientId: productInHayday.id,
     productId: ingredientInHayday.productId,
     name: productInHayday.name,
-    image: resolveImage(productInHayday.image),
+    image: resolveImageSQL(productInHayday.image),
     quantity: ingredientInHayday.quantity
   })
     .from(ingredientInHayday)
@@ -50,7 +50,7 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
     ingredientId: ingredientInHayday.ingredientId,
     productId: ingredientInHayday.productId,
     name: productInHayday.name,
-    image: resolveImage(productInHayday.image),
+    image: resolveImageSQL(productInHayday.image),
     quantity: ingredientInHayday.quantity
   })
     .from(ingredientInHayday)

@@ -1,10 +1,9 @@
 import { HAYDAY_EVENT, HAYDAY_ORDER_STATUS, HAYDAY_VOUCHER } from "@/constant/enums";
 import { DB_SQL } from "@/database/db-new";
 import { HayDayOrderSummaryResponse } from "@/model/response/hayday";
-import { GETMethodRoute, newResponse } from "@/utilities/api";
+import { GETMethodRoute, okResponse } from "@/utilities/api";
 import { truckOrderHeaderInHayday } from "@drizzle/schema";
 import { and, count, eq, ne, sql, sum } from "drizzle-orm";
-import { NextResponse } from "next/server";
 import { z } from "zod/v4";
 
 const schema = z.object({
@@ -59,7 +58,7 @@ export const GET = GETMethodRoute(schema, async (_, { year, month }) => {
     objects: []
   }
 
-  return NextResponse.json(newResponse(returns));
+  return okResponse(returns);
 });
 
 async function getSummary(year?: number, month?: number) {

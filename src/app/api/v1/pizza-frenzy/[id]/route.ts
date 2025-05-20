@@ -1,8 +1,7 @@
 import { DB_SQL } from "@/database/db-new";
-import { newResponse, GETMethodRouteDynamic, GETMethodRoute } from "@/utilities/api";
+import { GETMethodRoute, okResponse } from "@/utilities/api";
 import { toppingInPizzaFrenzy } from "@drizzle/schema";
 import { eq, sql } from "drizzle-orm";
-import { NextResponse } from "next/server";
 import { z } from "zod/v4";
 
 const schema = z.object({
@@ -19,11 +18,11 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
       toppingUpgradeInPizzaFrenzies: true
     }
   })
-  return NextResponse.json(newResponse(
+  return okResponse(
     data ? {
       ...data,
       toppingUpgradeInPizzaFrenzies: undefined,
       toppings: data?.toppingUpgradeInPizzaFrenzies
     } : null
-  ));
+  );
 });

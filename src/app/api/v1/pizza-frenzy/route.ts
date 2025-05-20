@@ -1,8 +1,7 @@
 import { DB_SQL } from "@/database/db-new";
-import { newResponse, GETMethodRoute } from "@/utilities/api";
+import { GETMethodRoute, okResponse } from "@/utilities/api";
 import { toppingInPizzaFrenzy } from "@drizzle/schema";
 import { sql } from "drizzle-orm";
-import { NextResponse } from "next/server";
 import { z } from "zod/v4";
 
 const schema = z.object({
@@ -11,7 +10,7 @@ const schema = z.object({
 
 export const GET = GETMethodRoute(schema, async (_, query) => {
   if (query.complete) {
-    return NextResponse.json(newResponse(
+    return okResponse(
       (await DB_SQL.query.toppingInPizzaFrenzy.findMany({
         extras: {
           image: sql<string>`${process.env.IMAGE_URL} || ${toppingInPizzaFrenzy.image}`.as("image"),
@@ -24,15 +23,15 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
         toppings: x.toppingUpgradeInPizzaFrenzies,
         toppingUpgradeInPizzaFrenzies: undefined
       }))
-    ));
+    );
   }
   else {
-    return NextResponse.json(newResponse(
+    return okResponse(
       await DB_SQL.query.toppingInPizzaFrenzy.findMany({
         extras: {
           image: sql<string>`${process.env.IMAGE_URL} || ${toppingInPizzaFrenzy.image}`.as("image")
         },
       })
-    ));
+    );
   }
 });

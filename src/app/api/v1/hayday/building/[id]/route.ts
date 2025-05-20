@@ -1,8 +1,7 @@
 import { DB_SQL } from "@/database/db-new";
-import { newResponse, GETMethodRoute } from "@/utilities/api";
+import { GETMethodRoute, okResponse } from "@/utilities/api";
 import { buildingInHayday, productInHayday } from "@drizzle/schema";
 import { sql } from "drizzle-orm";
-import { NextResponse } from "next/server";
 import { z } from "zod/v4";
 
 const schema = z.object({
@@ -30,7 +29,7 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
       }
     }
   });
-  return NextResponse.json(newResponse(
+  return okResponse(
     data ? {
       ...data,
       products: data.producerInHaydays.map(x => ({
@@ -40,5 +39,5 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
       })),
       producerInHaydays: undefined
     } : null
-  ));
+  );
 });

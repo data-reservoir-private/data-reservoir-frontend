@@ -1,21 +1,19 @@
 import { DB_SQL } from "@/database/db-new";
 import { PaginationSchema } from "@/model/validation/base";
-import { newResponse, GETMethodRoute } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL, okResponse } from "@/utilities/api";
 import { castawayProductInTheSims } from "@drizzle/schema";
-import { sql } from "drizzle-orm";
-import { NextResponse } from "next/server";
 import { z } from "zod/v4";
 
 const schema = z.object({}).extend(PaginationSchema.shape);
 
 export const GET = GETMethodRoute(schema, async (_, query) => {
-  return NextResponse.json(newResponse(
+  return okResponse(
     await DB_SQL.query.castawayProductInTheSims.findMany({
       extras: {
-        image: sql<string>`${process.env.IMAGE_URL} || ${castawayProductInTheSims.image}`.as("image")
+        image: resolveImageSQL(castawayProductInTheSims.image)
       },
       limit: query.pageSize === 0 ? undefined : query.pageSize,
       offset: query.pageSize === 0 ? 0 : query.currentPage * query.pageSize
     })
-  ));
+  );
 });
