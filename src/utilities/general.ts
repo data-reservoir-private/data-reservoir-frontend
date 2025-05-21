@@ -28,3 +28,11 @@ export function ticksToTime(p: number): string {
   
   return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
 }
+
+export function omitProperty<T extends object, K extends keyof T>(obj: T, ...keys: K[]): Omit<T, K> {
+  const result = { ...obj };
+  for (const key of keys) {
+    delete result[key];
+  }
+  return result;
+}

@@ -2,6 +2,7 @@ import { DB_SQL } from "@/database/db-new";
 import { CygnusCropStage, CygnusSeeds, CygnusSpecial } from "@/model/dto/cygnus";
 import { PaginationSchema } from "@/model/validation/base";
 import { GETMethodRoute, resolveImageSQL, okResponse, resolveImage } from "@/utilities/api";
+import { omitProperty } from "@/utilities/general";
 import { cropInCygnus } from "@drizzle/schema";
 import { z } from "zod/v4";
 
@@ -39,14 +40,13 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
     stage.Ongoing = stage.Ongoing.map(s => ({ ...s, Image: resolveImage(s.Image) }));
     stage.Done.Harvest = resolveImage(stage.Done.Harvest);
 
-    return {
+    return omitProperty({
       ...x,
       seeds: seed,
       special: special,
       stages: stage,
       grades: x.cropGradeInCygnuses,
-      cropGradeInCygnuses: undefined
-    };
+    }, 'cropGradeInCygnuses');
   });
 
   return okResponse(complete);

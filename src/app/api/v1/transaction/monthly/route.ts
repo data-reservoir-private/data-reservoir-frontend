@@ -1,9 +1,10 @@
 import { ID_AGGR, MONGODB } from "@/database/db";
 import { TransactionMonthlySchema } from "@/model/request/transaction";
 import { GetMonthly } from "@/service/transaction";
-import { badRequestResponse, internalErrorResponse, newResponse } from "@/utilities/api";
+import { badRequestResponse, GETMethodRoute, internalErrorResponse, newResponse, okResponse } from "@/utilities/api";
 import { NextRequest, NextResponse } from "next/server";
 import { ValidationError } from "yup";
+import { z } from "zod/v4";
 
 interface MonthlyResult {
   date: Date,
@@ -18,13 +19,11 @@ interface MonthlyResult {
   total: number
 }
 
-export async function GET(request: NextRequest) {
-  try {
-    const data = await TransactionMonthlySchema.validate(Object.fromEntries(request.nextUrl.searchParams));
-    return NextResponse.json(newResponse(await GetMonthly(data.year, data.month)));
-  }
-  catch (e) {
-    if (e instanceof ValidationError) return badRequestResponse(e.errors[0]);
-    else return internalErrorResponse();
-  }
-}
+const schema = z.object({
+  year: z.coerce.number().default(new Date().getFullYear()),
+  month: z.coerce.number().default(new Date().getMonth() + 1)
+})
+
+export const GET = GETMethodRoute(schema, async (_, { year, month }) => {
+  return okResponse({});
+});

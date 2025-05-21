@@ -1,8 +1,7 @@
 import { BasePaginationResponse, BaseResponse } from "@/model/response/base";
-import { ColumnBaseConfig, ColumnDataType, sql } from "drizzle-orm";
-import { PgColumn } from "drizzle-orm/pg-core";
+import { ColumnBaseConfig, ColumnDataType, InferColumnsDataTypes, sql } from "drizzle-orm";
+import { AnyPgColumn, PgColumn, PgTable, TableConfig } from "drizzle-orm/pg-core";
 import { escapeRegExp } from "lodash";
-import { Document } from "mongodb";
 import { createZodRoute } from "next-zod-route";
 import { NextRequest, NextResponse } from "next/server";
 import { z, ZodObject } from "zod/v4";
@@ -16,7 +15,7 @@ export function newResponse<T>(data: T, message: string = ""): BaseResponse<T> {
 }
 
 export function okResponse<T>(data: T, message: string = "") {
-  return NextResponse.json(newResponse(data, message));
+  return NextResponse.json(newResponse(data satisfies T, message));
 }
 
 export function newPaginationResponse<T>(data: T[], pageSize: number, currentPage: number, totalPage: number): BasePaginationResponse<T> {
@@ -79,71 +78,6 @@ export const GETMethodRouteDynamic = <TParams, TSchema extends ZodObject>(schema
     if (result.error) return badRequestResponse(result.error.issues.map(x => x.message).join(', '));
 
     else return handler(req, result.data);
-  }
-}
-
-export class MongoDBHelper {
-  static addPagination(currentPage: number, pageSize: number) {
-    const arr: Document[] = [{ $skip: (currentPage - 1) * pageSize }];
-    if (pageSize > 0) arr.push({ $limit: pageSize });
-    return arr;
-  }
-
-  static uuidToString(fieldName: string) {
-    return {
-      $addFields: {
-        [fieldName]: { $convert: {input: `$${fieldName}`, format: 'uuid', to: { subtype: 4, type: 2 }}}
-      }
-    }
-  }
-
-  static dateFromString(fieldName: string) {
-    return {
-      $dateFromString: {
-        dateString: fieldName
-      }
-    }
-  }
-
-  static createPipeline(...params: (Document[] | Document | undefined)[]): Document[] {
-    return params.reduce<Document[]>((acc, curr) => {
-      if (!curr) return acc;
-      else if (Array.isArray(curr)) return [...acc, ...curr]
-      else return [...acc, curr];
-    }, []) as Document[]
-  }
-
-  static unset(...params: string[]) {
-    return {
-      $unset: params
-    }
-  }
-
-  static equalString(expression1: string, expression2: string): Document[] {
-    return [
-      {
-        $match: {
-          $expr:
-          {
-            $eq: [ { $strcasecmp: [expression1, expression2] }, 0]
-          }
-        }
-      }
-    ]
-  }
-  
-  static like(field: string, query: string) {
-    const esc = escapeRegExp(query);
-    return [
-      {
-        $match: {
-          [field]: {
-            $regex: esc,
-            $options: 'i'
-          }
-        }
-      }
-    ]
   }
 }
 

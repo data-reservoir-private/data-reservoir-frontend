@@ -99,7 +99,7 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
     return okResponse(
       await DB_SQL.query.productInHayday.findMany({
         extras: {
-          image: sql<string>`${process.env.IMAGE_URL} || ${productInHayday.image}`.as("image")
+          image: resolveImageSQL(productInHayday.image)
         },
         limit: pageSize === 0 ? undefined : pageSize,
         offset: pageSize === 0 ? 0 : (currentPage - 1) * pageSize,

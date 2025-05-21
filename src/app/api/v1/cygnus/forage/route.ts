@@ -1,6 +1,8 @@
 import { DB_SQL } from "@/database/db-new";
+import { CygnusForageResponse } from "@/model/response/cygnus";
 import { PaginationSchema } from "@/model/validation/base";
 import { GETMethodRoute, resolveImageSQL, okResponse } from "@/utilities/api";
+import { omitProperty } from "@/utilities/general";
 import { forageInCygnus } from "@drizzle/schema";
 import { z } from "zod/v4";
 
@@ -26,12 +28,11 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
 
   // Resolve Images
   const complete = data.map(x => {
-    return {
+    return omitProperty({
       ...x,
       grades: x.forageGradeInCygnuses,
-      forageGradeInCygnuses: undefined
-    };
+    }, 'forageGradeInCygnuses');
   });
 
-  return okResponse(complete);
+  return okResponse(complete satisfies CygnusForageResponse[]);
 });

@@ -1,20 +1,20 @@
 import { DB_SQL } from "@/database/db-new";
-import { CygnusMineralResponse } from "@/model/response/cygnus";
 import { PaginationSchema } from "@/model/validation/base";
-import { GETMethodRoute, resolveImageSQL, okResponse } from "@/utilities/api";
-import { mineralInCygnus } from "@drizzle/schema";
+import { GETMethodRoute, okResponse } from "@/utilities/api";
+import { oneProductInFarmFrenzy } from "@drizzle/schema";
+import { sql } from "drizzle-orm";
 import { z } from "zod/v4";
 
 const schema = z.object({}).extend(PaginationSchema.shape);
 
 export const GET = GETMethodRoute(schema, async (_, query) => {
   return okResponse(
-    (await DB_SQL.query.mineralInCygnus.findMany({
+    await DB_SQL.query.oneProductInFarmFrenzy.findMany({
       extras: {
-        image: resolveImageSQL(mineralInCygnus.image)
+        image: sql<string>`${process.env.IMAGE_URL} || ${oneProductInFarmFrenzy.image}`.as("image")
       },
       limit: query.pageSize === 0 ? undefined : query.pageSize,
       offset: query.pageSize === 0 ? 0 : query.currentPage * query.pageSize
-    })) satisfies CygnusMineralResponse[]
+    })
   );
 });

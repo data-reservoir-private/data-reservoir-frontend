@@ -1,93 +1,51 @@
 import { ID_AGGR, MONGODB } from "@/database/db";
-import { newResponse } from "@/utilities/api";
+import { DB_SQL } from "@/database/db-new";
+import { newResponse, okResponse } from "@/utilities/api";
+import { expenseDetailInTransaction, expenseHeaderInTransaction, transportInTransaction } from "@drizzle/schema";
+import { asc, desc, eq, sql, sum } from "drizzle-orm";
+import { union } from "drizzle-orm/pg-core";
 import { NextResponse } from "next/server";
 
 interface AggregationResult { year: number, month: number, total: number, category: string };
 
 export async function GET() {
-  // 1. Get Master and Transport
-  const master = await MONGODB.transaction.master.aggregate<AggregationResult>(
-    [
-      ...ID_AGGR,
-      {
-        $unwind: "$details"
-      },
-      {
-        $addFields: {
-          total: {
-            $multiply: [
-              {
-                $add: [
-                  {
-                    $reduce: {
-                      input: "$details",
-                      initialValue: 0,
-                      in: {
-                        $add: [
-                          {
-                            $multiply: [
-                              "$$this.price",
-                              "$$this.quantity"
-                            ]
-                          },
-                          "$$value"
-                        ]
-                      }
-                    }
-                  },
-                  "$tax_discount"
-                ]
-              },
-              "$exchange_rate"
-            ]
-          }
-        }
-      }
-    ]
-  ).toArray() as AggregationResult[];
+  const master = DB_SQL
+    .select({
+      year: sql<number>`date_part('year', ${expenseHeaderInTransaction.date})`.mapWith(Number).as('year'),
+      month: sql<number>`date_part('month', ${expenseHeaderInTransaction.date})`.mapWith(Number).as('month'),
+      category: expenseDetailInTransaction.category,
+      total: sum(
+        sql<number>`(
+          (
+            (${expenseDetailInTransaction.price} * ${expenseDetailInTransaction.quantity}) +
+            (${expenseHeaderInTransaction.taxDiscount} + ${expenseHeaderInTransaction.adjustment} + ${expenseHeaderInTransaction.service})
+          ) * ${expenseHeaderInTransaction.exchangeRate}
+        )`
+      ).mapWith(Number)
+    })
+    .from(expenseHeaderInTransaction)
+    .innerJoin(expenseDetailInTransaction, eq(expenseHeaderInTransaction.id, expenseDetailInTransaction.expenseHeaderId))
+    .groupBy(
+      sql<number>`date_part('year', ${expenseHeaderInTransaction.date})`,
+      sql<number>`date_part('month', ${expenseHeaderInTransaction.date})`,
+      expenseDetailInTransaction.category
+    );
 
-  const transport = await MONGODB.transaction.transport.aggregate<AggregationResult>(
-    [
-      {
-        $addFields: {
-          newDate: {
-            $dateFromString: { dateString: "$date_start" }
-          }
-        }
-      },
-      {
-        $group: {
-          _id: {
-            year: {
-              $year: "$newDate"
-            },
-            month: {
-              $month: "$newDate"
-            }
-          },
-          total: {
-            $sum: "$price"
-          }
-        }
-      },
-      {
-        $sort: {
-          "_id.year": -1,
-          "_id.month": -1
-        }
-      },
-      {
-        $project: {
-          _id: false,
-          category: "Transport",
-          year: "$_id.year",
-          month: "$_id.month",
-          total: "$total"
-        }
-      }
-    ]
-  ).toArray() as AggregationResult[];
+  const transport = DB_SQL.select({
+    year: sql<number>`date_part('year', ${transportInTransaction.dateStart})`.mapWith(Number).as('year'),
+    month: sql<number>`date_part('month', ${transportInTransaction.dateStart})`.mapWith(Number).as('month'),
+    category: sql<string>`'Transportation'`,
+    total: sum(sql`(${transportInTransaction.price} + ${transportInTransaction.exchangeRate})`).mapWith(Number)
+  })
+    .from(transportInTransaction)
+    .groupBy(
+      sql<number>`date_part('year', ${transportInTransaction.dateStart})`,
+      sql<number>`date_part('month', ${transportInTransaction.dateStart})`,
+    );
 
-  const result = [...master, ...transport];
-  return NextResponse.json(newResponse(result));
+  const final = await union(
+    master, transport
+  ).orderBy(desc(sql`year`), desc(sql`month`))
+
+  return okResponse(final);
 }
