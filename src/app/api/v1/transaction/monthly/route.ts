@@ -1,9 +1,4 @@
-import { ID_AGGR, MONGODB } from "@/database/db";
-import { TransactionMonthlySchema } from "@/model/request/transaction";
-import { GetMonthly } from "@/service/transaction";
-import { badRequestResponse, GETMethodRoute, internalErrorResponse, newResponse, okResponse } from "@/utilities/api";
-import { NextRequest, NextResponse } from "next/server";
-import { ValidationError } from "yup";
+import { GETMethodRoute } from "@/utilities/api";
 import { z } from "zod/v4";
 
 interface MonthlyResult {
@@ -25,5 +20,5 @@ const schema = z.object({
 })
 
 export const GET = GETMethodRoute(schema, async (_, { year, month }) => {
-  return okResponse({});
+  return {};
 });

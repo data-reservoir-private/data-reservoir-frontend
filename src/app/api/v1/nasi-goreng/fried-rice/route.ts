@@ -1,6 +1,6 @@
 import { DB_SQL } from "@/database/db-new";
 import { PaginationSchema } from "@/model/validation/base";
-import { GETMethodRoute, okResponse, resolveImageSQL } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
 import { omitProperty } from "@/utilities/general";
 import { friedRiceInNasiGoreng, friedRiceLevelDetailInNasiGoreng, friedRiceLevelInNasiGoreng, friedRiceLevelRecipeInNasiGoreng, friedRiceRecipeInNasiGoreng, ingredientInNasiGoreng, toolInNasiGoreng, upgradeInNasiGoreng } from "@drizzle/schema";
 import { asc, eq, inArray, or } from "drizzle-orm";
@@ -13,7 +13,7 @@ const schema = z.object({
 
 export const GET = GETMethodRoute(schema, async (_, { complete, pageSize, currentPage }) => {
   if (!complete) {
-    return okResponse(
+    return (
       (
         await DB_SQL.query.friedRiceInNasiGoreng.findMany({
           extras: {
@@ -144,5 +144,5 @@ export const GET = GETMethodRoute(schema, async (_, { complete, pageSize, curren
       plate: fr.plateInNasiGoreng,
     }, 'friedRiceLevelInNasiGorengs', 'toolInNasiGoreng', 'plateInNasiGoreng')
   });
-  return okResponse(finalData);
-});
+  return (finalData);
+}, { cache: true });

@@ -1,6 +1,6 @@
 import { DB_SQL } from "@/database/db-new";
 import { PaginationSchema } from "@/model/validation/base";
-import { GETMethodRoute, okResponse } from "@/utilities/api";
+import { GETMethodRoute } from "@/utilities/api";
 import { threeProductInFarmFrenzy } from "@drizzle/schema";
 import { sql } from "drizzle-orm";
 import { z } from "zod/v4";
@@ -8,7 +8,7 @@ import { z } from "zod/v4";
 const schema = z.object({}).extend(PaginationSchema.shape);
 
 export const GET = GETMethodRoute(schema, async (_, query) => {
-  return okResponse(
+  return (
     await DB_SQL.query.threeProductInFarmFrenzy.findMany({
       extras: {
         image: sql<string>`${process.env.IMAGE_URL} || ${threeProductInFarmFrenzy.image}`.as("image")
@@ -17,4 +17,4 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
       offset: query.pageSize === 0 ? 0 : query.currentPage * query.pageSize
     })
   );
-});
+}, { cache: true });

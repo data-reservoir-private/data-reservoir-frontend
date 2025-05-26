@@ -1,7 +1,7 @@
 import { BasePaginationResponse, BaseResponse } from "@/model/response/base";
 import { ColumnBaseConfig, ColumnDataType, InferColumnsDataTypes, sql } from "drizzle-orm";
 import { AnyPgColumn, PgColumn, PgTable, TableConfig } from "drizzle-orm/pg-core";
-import { escapeRegExp } from "lodash";
+import { Redis } from "ioredis";
 import { createZodRoute } from "next-zod-route";
 import { NextRequest, NextResponse } from "next/server";
 import { z, ZodObject } from "zod/v4";
@@ -14,7 +14,7 @@ export function newResponse<T>(data: T, message: string = ""): BaseResponse<T> {
   });
 }
 
-export function okResponse<T>(data: T, message: string = "") {
+function okResponse<T>(data: T, message: string = "") {
   return NextResponse.json(newResponse(data satisfies T, message));
 }
 
@@ -43,28 +43,54 @@ export const routeInstance = createZodRoute({
   }
 });
 
-export const GETMethodRoute = <TSchema extends ZodObject>(schema: TSchema, handler: (req: NextRequest, query: z.infer<TSchema>) => Promise<NextResponse>) => {
-  return async (req: NextRequest, { params }: { params: Promise<{ [key: string]: any }> }) => {
-    const d = await params;
-    const finalData: { [key: string]: any } = {...d}
-    for (const [key, value] of req.nextUrl.searchParams) {
-      const v = finalData[key];
-      if (v === undefined) finalData[key] = value;
-      else if (v !== undefined && !Array.isArray(v)) finalData[key] = [v, value];
-      else if (Array.isArray(v)) finalData[key] = [...v, value];
-    }
+export interface GETMethodRouteOption {
+  cache: boolean
+}
 
-    const result = await schema.safeParseAsync(finalData);
-    if (result.error) return badRequestResponse(result.error.issues.map(x => x.message).join(', '));
-
-    else return handler(req, result.data);
+const getRedis = async <TResult>(key: string): Promise<TResult | undefined> => {
+  try {
+    console.log(process.env.REDIS_URL);
+    const R = new Redis(process.env.REDIS_URL, { maxRetriesPerRequest: 1 });
+    const result = await R.get(key);
+    return result ? JSON.parse(result) as TResult : undefined;
+  }
+  catch (e) {
+    // console.log(e);
+    return undefined;
   }
 }
 
-export const GETMethodRouteDynamic = <TParams, TSchema extends ZodObject>(schema: TSchema, handler: (req: NextRequest, query: z.infer<TSchema>) => Promise<NextResponse>) => {
-  return async (req: NextRequest, { params } : { params: Promise<TParams> }) => {
-    const parameters = await params;
-    const finalData: { [key: string]: any } = { ...parameters as { [key: string]: any } };
+const setRedis = async <TResult>(key: string, value: TResult) => {
+  try {
+    console.log(process.env.REDIS_URL);
+    const R = new Redis(process.env.REDIS_URL, { maxRetriesPerRequest: 1 });
+    await R.set(key, JSON.stringify(value));
+  }
+  catch (e) {
+    // console.log(e);
+    return;
+  }
+}
+
+export const GETMethodRoute = <TSchema extends ZodObject, TResponse>(
+  schema: TSchema,
+  handler: (req: NextRequest, query: z.infer<TSchema>) => Promise<TResponse>,
+  option: GETMethodRouteOption = { cache: false }
+) => {
+  return async (req: NextRequest, { params }: { params: Promise<{ [key: string]: any }> }) => {
+    // Redis
+    console.log(process.env.REDIS_URL);
+    const hasRedis = !!(option && option.cache);
+
+    if (hasRedis) {
+      const redisKey = req.nextUrl.pathname;
+      const r = await getRedis<TResponse>(redisKey);
+      if (r) return okResponse(r);
+    }
+
+
+    const d = await params;
+    const finalData: { [key: string]: any } = { ...d }
     for (const [key, value] of req.nextUrl.searchParams) {
       const v = finalData[key];
       if (v === undefined) finalData[key] = value;
@@ -72,12 +98,20 @@ export const GETMethodRouteDynamic = <TParams, TSchema extends ZodObject>(schema
       else if (Array.isArray(v)) finalData[key] = [...v, value];
     }
 
-    // Merge with param
-
     const result = await schema.safeParseAsync(finalData);
     if (result.error) return badRequestResponse(result.error.issues.map(x => x.message).join(', '));
 
-    else return handler(req, result.data);
+    try {
+      const resp = await handler(req, result.data);
+      if (hasRedis) {
+        const name = req.nextUrl.pathname;
+        await setRedis(name, resp);
+      }
+      return okResponse(resp);
+    }
+    catch (Error) {
+      return badRequestResponse("");
+    }
   }
 }
 

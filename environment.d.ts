@@ -10,7 +10,8 @@ declare global {
       IMAGE_URL: string,
       NEXT_PUBLIC_SUPABASE_HOST: string,
       NEXT_PUBLIC_SUPABASE_API_KEY: string,
-      ENVIRONMENT?: "Development" | "Production"
+      ENVIRONMENT?: "Development" | "Production",
+      REDIS_URL: string,
     }
   }
 }

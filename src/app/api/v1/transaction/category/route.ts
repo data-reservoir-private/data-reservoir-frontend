@@ -1,10 +1,7 @@
-import { ID_AGGR, MONGODB } from "@/database/db";
 import { DB_SQL } from "@/database/db-new";
-import { newResponse, okResponse } from "@/utilities/api";
 import { expenseDetailInTransaction, expenseHeaderInTransaction, transportInTransaction } from "@drizzle/schema";
-import { asc, desc, eq, sql, sum } from "drizzle-orm";
+import { desc, eq, sql, sum } from "drizzle-orm";
 import { union } from "drizzle-orm/pg-core";
-import { NextResponse } from "next/server";
 
 interface AggregationResult { year: number, month: number, total: number, category: string };
 
@@ -47,5 +44,5 @@ export async function GET() {
     master, transport
   ).orderBy(desc(sql`year`), desc(sql`month`))
 
-  return okResponse(final);
+  return final;
 }

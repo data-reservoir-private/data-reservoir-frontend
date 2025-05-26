@@ -1,5 +1,5 @@
 import { DB_SQL } from "@/database/db-new";
-import { GETMethodRoute, okResponse, resolveImageSQL } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
 import { omitProperty } from "@/utilities/general";
 import { friedRiceInNasiGoreng, friedRiceLevelDetailInNasiGoreng, friedRiceLevelInNasiGoreng, friedRiceLevelRecipeInNasiGoreng, friedRiceRecipeInNasiGoreng, ingredientInNasiGoreng, plateInNasiGoreng, toolInNasiGoreng, upgradeInNasiGoreng } from "@drizzle/schema";
 import { asc, eq, inArray } from "drizzle-orm";
@@ -53,7 +53,7 @@ export const GET = GETMethodRoute(schema, async (_, { id }) => {
     where: eq(friedRiceInNasiGoreng.id, id)
   });
 
-  if (!friedRice) return okResponse(null);
+  if (!friedRice) return null;
   const friedRiceLevelIDs = friedRice.friedRiceLevelInNasiGorengs.map(x => x.id);
 
   const levelDetail = await DB_SQL.select({
@@ -102,5 +102,5 @@ export const GET = GETMethodRoute(schema, async (_, { id }) => {
     tool: friedRice.toolInNasiGoreng,
     plate: friedRice.plateInNasiGoreng,
   }, 'friedRiceLevelInNasiGorengs', 'toolInNasiGoreng', 'plateInNasiGoreng')
-  return okResponse(finalData);
-});
+  return (finalData);
+}, { cache: true });

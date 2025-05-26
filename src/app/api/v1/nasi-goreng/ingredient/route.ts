@@ -1,6 +1,6 @@
 import { DB_SQL } from "@/database/db-new";
 import { PaginationSchema } from "@/model/validation/base";
-import { GETMethodRoute, okResponse, resolveImageSQL } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
 import { ingredientInNasiGoreng, ingredientRecipeInNasiGoreng, ingredientToolInNasiGoreng, toolInNasiGoreng } from "@drizzle/schema";
 import { eq, getTableColumns, inArray } from "drizzle-orm";
 import { z } from "zod/v4";
@@ -43,7 +43,7 @@ export const GET = GETMethodRoute(schema, async (_, { complete, pageSize, curren
       .innerJoin(ingredientInNasiGoreng, eq(ingredientRecipeInNasiGoreng.ingredientNeededId, ingredientInNasiGoreng.id))
       .where(inArray(ingredientRecipeInNasiGoreng.resultId, ingredientID));
 
-    return okResponse(
+    return (
       (
         ingredient.map(i => {
           const t = tool.find(x => x.ingredientId === i.id);
@@ -61,7 +61,7 @@ export const GET = GETMethodRoute(schema, async (_, { complete, pageSize, curren
   }
 
   else {
-    return okResponse(
+    return (
       await DB_SQL.query.ingredientInNasiGoreng.findMany({
         extras: {
           image: resolveImageSQL(ingredientInNasiGoreng.image)
@@ -71,4 +71,4 @@ export const GET = GETMethodRoute(schema, async (_, { complete, pageSize, curren
       })
     );
   }
-});
+}, { cache: true });

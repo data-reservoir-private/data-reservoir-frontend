@@ -1,6 +1,6 @@
 import { DB_SQL } from "@/database/db-new";
 import { PaginationSchema } from "@/model/validation/base";
-import { GETMethodRoute, resolveImageSQL, okResponse } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
 import { productInHayday, producerInHayday, buildingInHayday, ingredientInHayday } from "@drizzle/schema";
 import { and, asc, between, eq, getTableColumns, gte, inArray, sql, lte, ilike } from "drizzle-orm";
 import { z } from "zod/v4";
@@ -93,10 +93,10 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
         usage: u,
       }
     });
-    return okResponse(finalResponse);
+    return (finalResponse);
   }
   else {
-    return okResponse(
+    return (
       await DB_SQL.query.productInHayday.findMany({
         extras: {
           image: resolveImageSQL(productInHayday.image)
@@ -107,4 +107,4 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
       })
     );
   }
-});
+}, { cache: true });

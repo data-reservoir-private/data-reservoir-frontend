@@ -1,5 +1,5 @@
 import { DB_SQL } from "@/database/db-new";
-import { GETMethodRoute, okResponse, resolveImageSQL } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
 import { productInHayday, buildingInHayday, producerInHayday, ingredientInHayday } from "@drizzle/schema";
 import { getTableColumns, eq, asc } from "drizzle-orm";
 import _ from "lodash";
@@ -18,7 +18,7 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
     .where(eq(productInHayday.id, query.id))
     .limit(1);
 
-  if (productT.length !== 1) return okResponse(null);
+  if (productT.length !== 1) return null;
   const product = productT[0];
 
   // Get Producer
@@ -64,10 +64,10 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
   const r = recipe.filter(x => x.productId === product.id).map(x => ({ id: x.ingredientId, ...x, ingredientId: undefined, productId: undefined }));
   const u = usage.filter(x => x.ingredientId === product.id).map(x => ({ id: x.productId, ...x, ingredientId: undefined, productId: undefined }));
 
-  return okResponse({
+  return ({
     ...product,
     producer: b,
     recipe: r,
     usage: u,
   });
-});
+}, { cache: true });
