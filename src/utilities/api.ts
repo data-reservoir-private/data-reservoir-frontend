@@ -1,6 +1,7 @@
+import { BadRequestError } from "@/model/error/error";
 import { BasePaginationResponse, BaseResponse } from "@/model/response/base";
-import { ColumnBaseConfig, ColumnDataType, InferColumnsDataTypes, sql } from "drizzle-orm";
-import { AnyPgColumn, PgColumn, PgTable, TableConfig } from "drizzle-orm/pg-core";
+import { ColumnBaseConfig, ColumnDataType, sql } from "drizzle-orm";
+import { PgColumn } from "drizzle-orm/pg-core";
 import { Redis } from "ioredis";
 import { createZodRoute } from "next-zod-route";
 import { NextRequest, NextResponse } from "next/server";
@@ -18,7 +19,7 @@ function okResponse<T>(data: T, message: string = "") {
   return NextResponse.json(newResponse(data satisfies T, message));
 }
 
-export function newPaginationResponse<T>(data: T[], pageSize: number, currentPage: number, totalPage: number): BasePaginationResponse<T> {
+export function paginationResponse<T>(data: T[], pageSize: number, currentPage: number, totalPage: number): BasePaginationResponse<T> {
   return ({
     date: new Date(),
     message: "",
@@ -29,11 +30,11 @@ export function newPaginationResponse<T>(data: T[], pageSize: number, currentPag
   });
 }
 
-export function badRequestResponse(message: string) {
+function badRequestResponse(message: string) {
   return NextResponse.json(newResponse(message), { status: 400 });
 }
 
-export function internalErrorResponse(message: string = "Server Error") {
+function internalErrorResponse(message: string = "Server Error") {
   return NextResponse.json(newResponse(message), { status: 500 });
 }
 
@@ -42,10 +43,6 @@ export const routeInstance = createZodRoute({
     return NextResponse.json(newResponse(null, error.message), { status: 500 });
   }
 });
-
-export interface GETMethodRouteOption {
-  cache: boolean
-}
 
 const getRedis = async <TResult>(key: string): Promise<TResult | undefined> => {
   try {
@@ -72,7 +69,11 @@ const setRedis = async <TResult>(key: string, value: TResult) => {
   }
 }
 
-export const GETMethodRoute = <TSchema extends ZodObject, TResponse>(
+export interface GETMethodRouteOption {
+  cache: boolean
+}
+
+export const GETMethodRoute = <TResponse, TSchema extends ZodObject>(
   schema: TSchema,
   handler: (req: NextRequest, query: z.infer<TSchema>) => Promise<TResponse>,
   option: GETMethodRouteOption = { cache: false }
@@ -81,13 +82,11 @@ export const GETMethodRoute = <TSchema extends ZodObject, TResponse>(
     // Redis
     console.log(process.env.REDIS_URL);
     const hasRedis = !!(option && option.cache);
-
+    const redisKey = req.nextUrl.pathname + req.nextUrl.href;
     if (hasRedis) {
-      const redisKey = req.nextUrl.pathname;
       const r = await getRedis<TResponse>(redisKey);
       if (r) return okResponse(r);
     }
-
 
     const d = await params;
     const finalData: { [key: string]: any } = { ...d }
@@ -109,8 +108,9 @@ export const GETMethodRoute = <TSchema extends ZodObject, TResponse>(
       }
       return okResponse(resp);
     }
-    catch (Error) {
-      return badRequestResponse("");
+    catch (e) {
+      if (e instanceof BadRequestError) return badRequestResponse(e.message);
+      return internalErrorResponse();
     }
   }
 }

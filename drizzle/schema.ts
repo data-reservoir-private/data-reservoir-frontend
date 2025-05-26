@@ -162,7 +162,7 @@ export const dishInCygnus = cygnus.table("dish", {
 	name: text().notNull(),
 	image: text().notNull(),
 	description: text().notNull(),
-	ingredients: jsonb().notNull(),
+  ingredients: jsonb().notNull().$type<{[key: string]: number}>(),
 	energy: integer().notNull(),
 	health: integer().notNull(),
 	price: integer().notNull(),

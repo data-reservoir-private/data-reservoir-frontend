@@ -1,7 +1,7 @@
 import { DB_SQL } from "@/database/db-new";
 import { CygnusForageResponse } from "@/model/response/cygnus";
 import { PaginationSchema } from "@/model/validation/base";
-import { GETMethodRoute, resolveImageSQL, okResponse } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
 import { omitProperty } from "@/utilities/general";
 import { forageInCygnus } from "@drizzle/schema";
 import { z } from "zod/v4";
@@ -34,5 +34,5 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
     }, 'forageGradeInCygnuses');
   });
 
-  return okResponse(complete satisfies CygnusForageResponse[]);
-});
+  return (complete satisfies CygnusForageResponse[]);
+}, { cache: true });

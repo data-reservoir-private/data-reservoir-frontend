@@ -1,6 +1,7 @@
 import { CygnusArtifactSchema, CygnusCropSchema, CygnusDishSchema } from "@/database/schema/cygnus";
 import { HasID } from "./base";
 import { CYGNUS_GRADE_ID } from "@/constant/enums";
+import { CygnusCropStage, CygnusSeeds, CygnusSpecial } from "../dto/cygnus";
 
 type CygnusGrade = {
   price: number | null;
@@ -19,27 +20,35 @@ export type CygnusMineralResponse = {
   id: string;
 }
 
-export interface CygnusArtifactResponse extends Omit<CygnusArtifactSchema & HasID, '_id'> { }
+export type CygnusArtifactResponse = {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+}
+
 export type CygnusCropResponse = {
   name: string;
   image: string;
   description: string;
   id: string;
   season: string[];
-  seeds: {
-    name: string,
-    image: string,
-    source: {
-      name: string,
-      priceGold: number | null,
-      priceItems: {
-        name: string,
-        quantity: number
-      }[]
-    }[] | null;
-  }
+  seeds: CygnusSeeds,
+  special: CygnusSpecial | null,
+  stages: CygnusCropStage,
+  grades: CygnusGrade[]
 }
-export interface CygnusDishResponse extends Omit<CygnusDishSchema & HasID, '_id'> { }
+export type CygnusDishResponse = {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+  price: number;
+  energy: number;
+  ingredients: {[key: string]: number};
+  health: number;
+}
 
 export type CygnusForageResponse = {
   id: string;

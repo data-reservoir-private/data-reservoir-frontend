@@ -1,7 +1,8 @@
 import { DB_SQL } from "@/database/db-new";
 import { CygnusCropStage, CygnusSeeds, CygnusSpecial } from "@/model/dto/cygnus";
+import { CygnusCropResponse } from "@/model/response/cygnus";
 import { PaginationSchema } from "@/model/validation/base";
-import { GETMethodRoute, resolveImageSQL, okResponse, resolveImage } from "@/utilities/api";
+import { GETMethodRoute, resolveImageSQL, resolveImage } from "@/utilities/api";
 import { omitProperty } from "@/utilities/general";
 import { cropInCygnus } from "@drizzle/schema";
 import { z } from "zod/v4";
@@ -49,5 +50,5 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
     }, 'cropGradeInCygnuses');
   });
 
-  return okResponse(complete);
-});
+  return complete satisfies CygnusCropResponse[];
+}, { cache: true });
