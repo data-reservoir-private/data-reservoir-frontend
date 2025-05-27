@@ -441,6 +441,7 @@ export const expenseHeaderInTransaction = transaction.table("expense_header", {
 	date: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
 	tenant: text().notNull(),
 	taxDiscount: doublePrecision("tax_discount").notNull(),
+	discount: doublePrecision().notNull(),
 	service: doublePrecision().notNull(),
 	adjustment: doublePrecision().notNull(),
 	serviceTax: integer("service_tax").notNull(),

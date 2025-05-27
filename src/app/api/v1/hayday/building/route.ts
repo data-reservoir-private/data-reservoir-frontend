@@ -1,6 +1,8 @@
 import { DB_SQL } from "@/database/db-new";
+import { HayDayBuildingResponse, HayDaySimpleBuildingResponse } from "@/model/response/hayday";
 import { PaginationSchema } from "@/model/validation/base";
 import { GETMethodRoute } from "@/utilities/api";
+import { omitProperty } from "@/utilities/general";
 import { buildingInHayday, productInHayday } from "@drizzle/schema";
 import { sql } from "drizzle-orm";
 import { z } from "zod/v4";
@@ -33,26 +35,21 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
             }
           }
         }
-      })).map(x => ({
-        ...x,
-        products: x.producerInHaydays.map(y => ({
-          ...y,
-          product: y.productInHayday,
-          productInHayday: undefined
-        })),
-        producerInHaydays: undefined
-      }))
+      })).map(data => omitProperty({
+        ...data,
+        produces: data.producerInHaydays.map(x => x.productInHayday),
+      }, 'producerInHaydays') satisfies HayDayBuildingResponse) satisfies HayDayBuildingResponse[]
     );
   }
   else {
-    return (
-      await DB_SQL.query.buildingInHayday.findMany({
-        extras: {
-          image: sql<string>`${process.env.IMAGE_URL} || ${buildingInHayday.image}`.as("image")
-        },
-        limit: query.pageSize === 0 ? undefined : query.pageSize,
-        offset: query.pageSize === 0 ? 0 : query.currentPage * query.pageSize
-      })
-    );
-  }
+  return (
+    await DB_SQL.query.buildingInHayday.findMany({
+      extras: {
+        image: sql<string>`${process.env.IMAGE_URL} || ${buildingInHayday.image}`.as("image")
+      },
+      limit: query.pageSize === 0 ? undefined : query.pageSize,
+      offset: query.pageSize === 0 ? 0 : query.currentPage * query.pageSize
+    })
+  ) satisfies HayDaySimpleBuildingResponse[];
+}
 }, { cache: true });

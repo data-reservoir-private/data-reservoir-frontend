@@ -1,4 +1,5 @@
 import { DB_SQL } from "@/database/db-new";
+import { HayDayProductResponse } from "@/model/response/hayday";
 import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
 import { productInHayday, buildingInHayday, producerInHayday, ingredientInHayday } from "@drizzle/schema";
 import { getTableColumns, eq, asc } from "drizzle-orm";
@@ -64,10 +65,10 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
   const r = recipe.filter(x => x.productId === product.id).map(x => ({ id: x.ingredientId, ...x, ingredientId: undefined, productId: undefined }));
   const u = usage.filter(x => x.ingredientId === product.id).map(x => ({ id: x.productId, ...x, ingredientId: undefined, productId: undefined }));
 
-  return ({
+  return {
     ...product,
     producer: b,
-    recipe: r,
     usage: u,
-  });
+    ingredients: r
+  } satisfies HayDayProductResponse;
 }, { cache: true });

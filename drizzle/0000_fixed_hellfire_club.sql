@@ -426,6 +426,7 @@ CREATE TABLE "transaction"."expense_header" (
 	"date" timestamp with time zone NOT NULL,
 	"tenant" text NOT NULL,
 	"tax_discount" double precision NOT NULL,
+	"discount" double precision NOT NULL,
 	"service" double precision NOT NULL,
 	"adjustment" double precision NOT NULL,
 	"service_tax" integer NOT NULL,

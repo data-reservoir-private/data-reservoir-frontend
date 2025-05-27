@@ -1,7 +1,6 @@
 import pluginNext from '@next/eslint-plugin-next';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import parser from '@typescript-eslint/parser'; // optional
 import unusedImports from "eslint-plugin-unused-imports";
 
 /** @type {import('eslint').Linter.Config[]} */

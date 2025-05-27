@@ -1,9 +1,9 @@
 import { HAYDAY_EVENT, HAYDAY_ORDER_STATUS, HAYDAY_VOUCHER } from "@/constant/enums";
 import { DB_SQL } from "@/database/db-new";
 import { HayDayOrderSummaryResponse } from "@/model/response/hayday";
-import { GETMethodRoute } from "@/utilities/api";
-import { truckOrderHeaderInHayday } from "@drizzle/schema";
-import { and, count, eq, ne, sql, sum } from "drizzle-orm";
+import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
+import { productInHayday, truckOrderDetailInHayday, truckOrderHeaderInHayday } from "@drizzle/schema";
+import { and, count, desc, eq, ne, sql, sum } from "drizzle-orm";
 import { z } from "zod/v4";
 
 const schema = z.object({
@@ -13,7 +13,8 @@ const schema = z.object({
 
 export const GET = GETMethodRoute(schema, async (_, { year, month }) => {
   const summary = await getSummary(year, month);
-  const detail = (await getDetail())[0];
+  const detail = await getDetail(year, month);
+  const top = await getTopProduct(year, month);
 
   const [sumCoin, sumXP, sumEventCoin, sumEventXP, sumAcc, sumRej, sumVGreen, sumVBlue, sumVPurple, sumVGold] = [
     summary.reduce((acc, curr) => acc + curr.coin, 0),
@@ -53,9 +54,8 @@ export const GET = GETMethodRoute(schema, async (_, { year, month }) => {
     revenue: {
       event: detail.revenue_event,
       non_event: detail.revenue,
-      combined: []
     },
-    objects: []
+    topProducts: top
   }
 
   return returns;
@@ -119,7 +119,15 @@ async function getSummary(year?: number, month?: number) {
     .groupBy(sq1.client_name);
 }
 
-async function getDetail() {
+async function getDetail(year?: number, month?: number) {
+  const cond = and(
+    eq(truckOrderHeaderInHayday.orderStatus, HAYDAY_ORDER_STATUS.ACCEPTED),
+    ...((year && month) ? [
+      eq(sql<number>`DATE_PART('year', ${truckOrderHeaderInHayday.dateCompleted})`, year),
+      eq(sql<number>`DATE_PART('month', ${truckOrderHeaderInHayday.dateCompleted})`, month)
+    ] : [])
+  );
+
   const sq1 = DB_SQL.select({
     xp: truckOrderHeaderInHayday.xp,
     coin: truckOrderHeaderInHayday.coin,
@@ -145,11 +153,37 @@ async function getDetail() {
 			)
     `.as('xp_event'),
   }).from(truckOrderHeaderInHayday)
-    .where(eq(truckOrderHeaderInHayday.orderStatus, HAYDAY_ORDER_STATUS.ACCEPTED))
+    .where(cond)
     .as('sq1');
 
-  return await DB_SQL.select({
+  return (await DB_SQL.select({
     revenue: sql<number[]>`ARRAY_AGG(${sq1.coin} + ${sq1.xp})`,
     revenue_event: sql<number[]>`ARRAY_AGG(${sq1.coin_event} + ${sq1.xp_event})`,
-  }).from(sq1).limit(1);
+  }).from(sq1).limit(1))[0];
+}
+
+async function getTopProduct(year?: number, month?: number) {
+  const cond = and(
+    eq(truckOrderHeaderInHayday.orderStatus, HAYDAY_ORDER_STATUS.ACCEPTED),
+    ...((year && month) ? [
+      eq(sql<number>`DATE_PART('year', ${truckOrderHeaderInHayday.dateCompleted})`, year),
+      eq(sql<number>`DATE_PART('month', ${truckOrderHeaderInHayday.dateCompleted})`, month)
+    ] : [])
+  );
+
+  const result = await DB_SQL.select({
+    id: productInHayday.id,
+    name: productInHayday.name,
+    image: resolveImageSQL(productInHayday.image),
+    quantity: sum(truckOrderDetailInHayday.quantity).mapWith(Number)
+  })
+    .from(truckOrderDetailInHayday)
+    .innerJoin(truckOrderHeaderInHayday, eq(truckOrderDetailInHayday.truckOrderHeaderId, truckOrderHeaderInHayday.id))
+    .innerJoin(productInHayday, eq(truckOrderDetailInHayday.productId, productInHayday.id))
+    .where(cond)
+    .groupBy(productInHayday.id)
+    .orderBy(desc(sum(truckOrderDetailInHayday.quantity)))
+    .limit(50);
+
+  return result;
 }

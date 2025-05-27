@@ -2455,6 +2455,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "discount": {
+          "name": "discount",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": true
+        },
         "service": {
           "name": "service",
           "type": "double precision",

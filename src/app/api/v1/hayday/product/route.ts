@@ -1,4 +1,5 @@
 import { DB_SQL } from "@/database/db-new";
+import { HayDayProductResponse, HayDaySimpleProductResponse } from "@/model/response/hayday";
 import { PaginationSchema } from "@/model/validation/base";
 import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
 import { productInHayday, producerInHayday, buildingInHayday, ingredientInHayday } from "@drizzle/schema";
@@ -89,11 +90,11 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
       return {
         ...product,
         producer: b,
-        recipe: r,
+        ingredients: r,
         usage: u,
-      }
+      } satisfies HayDayProductResponse;
     });
-    return (finalResponse);
+    return finalResponse satisfies HayDayProductResponse[];
   }
   else {
     return (
@@ -105,6 +106,6 @@ export const GET = GETMethodRoute(schema, async (_, { complete, name, level, min
         offset: pageSize === 0 ? 0 : (currentPage - 1) * pageSize,
         where: conditional
       })
-    );
+    ) satisfies HayDaySimpleProductResponse[];
   }
 }, { cache: true });

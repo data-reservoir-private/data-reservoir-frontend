@@ -1,31 +1,37 @@
 import { HasID } from "./base";
 
-export interface HayDayProductResponse extends HasID {
+export type HayDayProductResponse = {
+  id: string,
   category: string,
   image: string,
-  is_raw: boolean,
+  isRaw: boolean,
   level: number,
   name: string,
   price: number,
   time: number,
   xp: number,
   ingredients: {
-    ingredient_name: string,
-    ingredient_image: string,
+    id: string,
+    name: string,
+    image: string,
     quantity: number,
   }[],
   usage: {
-    product_name: string,
-    product_image: string,
+    id: string,
+    name: string,
+    image: string,
     quantity: number,
   }[],
   producer: {
-    building_name: string,
-    building_image: string
-  }
+    id: string,
+    name: string,
+    image: string
+  } | undefined
 }
+export type HayDaySimpleProductResponse = Omit<HayDayProductResponse, 'ingredients' | 'usage' | 'producer'>;
 
-export interface HayDayBuildingResponse extends HasID {
+export type HayDayBuildingResponse = {
+  id: string
   image: string
   level: number
   name: string
@@ -33,10 +39,12 @@ export interface HayDayBuildingResponse extends HasID {
   time: number
   xp: number
   produces: {
-    product_image: string
-    product_name: string
+    id: string,
+    image: string
+    name: string
   }[]
 }
+export type HayDaySimpleBuildingResponse = Omit<HayDayBuildingResponse, 'produces'>;
 
 export interface HayDayOrderSummaryResponse {
   income: {
@@ -51,8 +59,7 @@ export interface HayDayOrderSummaryResponse {
   },
   revenue: {
     event: number[],
-    non_event: number[],
-    combined: number[]
+    non_event: number[]
   },
   voucher: {
     green: number,
@@ -65,7 +72,7 @@ export interface HayDayOrderSummaryResponse {
     reject: number,
     ongoing: number
   },
-  objects: {
+  topProducts: {
     id: string,
     image: string,
     name: string,

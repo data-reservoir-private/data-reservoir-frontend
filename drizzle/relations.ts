@@ -73,8 +73,8 @@ export const ingredientInHaydayRelations = relations(ingredientInHayday, ({one})
 }));
 
 export const productInHaydayRelations = relations(productInHayday, ({many}) => ({
-  ingredientInHaydays_ingredientId: many(ingredientInHayday, {
-		relationName: "ingredientInHayday_ingredientId_productInHayday_id",
+	ingredientInHaydays_ingredientId: many(ingredientInHayday, {
+		relationName: "ingredientInHayday_ingredientId_productInHayday_id"
 	}),
 	ingredientInHaydays_productId: many(ingredientInHayday, {
 		relationName: "ingredientInHayday_productId_productInHayday_id"

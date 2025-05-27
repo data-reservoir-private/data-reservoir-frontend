@@ -46,25 +46,21 @@ export const routeInstance = createZodRoute({
 
 const getRedis = async <TResult>(key: string): Promise<TResult | undefined> => {
   try {
-    console.log(process.env.REDIS_URL);
     const R = new Redis(process.env.REDIS_URL, { maxRetriesPerRequest: 1 });
     const result = await R.get(key);
     return result ? JSON.parse(result) as TResult : undefined;
   }
   catch (e) {
-    // console.log(e);
     return undefined;
   }
 }
 
 const setRedis = async <TResult>(key: string, value: TResult) => {
   try {
-    console.log(process.env.REDIS_URL);
     const R = new Redis(process.env.REDIS_URL, { maxRetriesPerRequest: 1 });
     await R.set(key, JSON.stringify(value));
   }
   catch (e) {
-    // console.log(e);
     return;
   }
 }
@@ -80,7 +76,6 @@ export const GETMethodRoute = <TResponse, TSchema extends ZodObject>(
 ) => {
   return async (req: NextRequest, { params }: { params: Promise<{ [key: string]: any }> }) => {
     // Redis
-    console.log(process.env.REDIS_URL);
     const hasRedis = !!(option && option.cache);
     const redisKey = req.nextUrl.pathname + req.nextUrl.href;
     if (hasRedis) {

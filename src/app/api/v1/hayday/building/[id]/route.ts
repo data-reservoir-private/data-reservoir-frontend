@@ -1,7 +1,9 @@
 import { DB_SQL } from "@/database/db-new";
-import { GETMethodRoute } from "@/utilities/api";
+import { HayDayBuildingResponse } from "@/model/response/hayday";
+import { GETMethodRoute, resolveImageSQL } from "@/utilities/api";
+import { omitProperty } from "@/utilities/general";
 import { buildingInHayday, productInHayday } from "@drizzle/schema";
-import { sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { z } from "zod/v4";
 
 const schema = z.object({
@@ -11,8 +13,9 @@ const schema = z.object({
 export const GET = GETMethodRoute(schema, async (_, query) => {
   const data = await DB_SQL.query.buildingInHayday.findFirst({
     extras: {
-      image: sql<string>`${process.env.IMAGE_URL} || ${buildingInHayday.image}`.as("image"),
+      image: resolveImageSQL(buildingInHayday.image),
     },
+    where: eq(buildingInHayday.id, query.id),
     with: {
       producerInHaydays: {
         with: {
@@ -29,15 +32,9 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
       }
     }
   });
-  return (
-    data ? {
-      ...data,
-      products: data.producerInHaydays.map(x => ({
-        ...x,
-        product: x.productInHayday,
-        productInHayday: undefined
-      })),
-      producerInHaydays: undefined
-    } : null
-  );
+  if (!data) return null;
+  return omitProperty({
+    ...data,
+    produces: data.producerInHaydays.map(x => x.productInHayday),
+  }, 'producerInHaydays') satisfies HayDayBuildingResponse;
 }, { cache: true });

@@ -1,4 +1,5 @@
 import { DB_SQL } from "@/database/db-new";
+import { FarmFrenzyOneProductResponse } from "@/model/response/farm-frenzy";
 import { PaginationSchema } from "@/model/validation/base";
 import { GETMethodRoute } from "@/utilities/api";
 import { oneProductInFarmFrenzy } from "@drizzle/schema";
@@ -16,5 +17,5 @@ export const GET = GETMethodRoute(schema, async (_, query) => {
       limit: query.pageSize === 0 ? undefined : query.pageSize,
       offset: query.pageSize === 0 ? 0 : query.currentPage * query.pageSize
     })
-  );
+  ) satisfies FarmFrenzyOneProductResponse[];
 }, { cache: true });
