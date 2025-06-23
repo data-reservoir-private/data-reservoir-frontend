@@ -8,7 +8,7 @@ import { login } from './actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Login - Birdeye View'
+  title: 'Login - Data Reservoir'
 };
 
 type searchParamsType = Promise<{[key: string]: string | undefined}>
