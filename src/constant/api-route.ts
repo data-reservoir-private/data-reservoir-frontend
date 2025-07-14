@@ -7,12 +7,22 @@ const HOST = process.env.NEXT_PUBLIC_API;
  */
 export const API_SHORTHAND = Object.freeze({
   THE_SIMS: {
-    CASTAWAY_PRODUCT: `castaway-product`,
-    FOUR_PC_HARVESTABLE: `four-pc-harvestable`,
-    TWO_PETS_CONSOLE_PRODUCT: `two-pets-console-product`,
     BUSTIN_OUT_CAREER: `bustin-out-career`,
+    CASTAWAY_PRODUCT: `castaway-product`,
+    FOUR_PC_DISH: `four-pc-dish`,
+    FOUR_PC_ELEMENT: `four-pc-element`,
+    FOUR_PC_HARVESTABLE: `four-pc-harvestable`,
+    THREE_PC_DISH: `three-pc-dish`,
+    THREE_PC_GEM_CUT: `three-pc-gem-cut`,
+    THREE_PC_GEM: `three-pc-gem`,
+    THREE_PC_HARVESTABLE: `three-pc-harvestable`,
+    THREE_PC_METAL: `three-pc-metal`,
+    THREE_PC_PRESERVE_DISH: `three-pc-preserve-dish`,
+    THREE_PC_RAW_GEM: `three-pc-raw-gem`,
+    THREE_PC_SPREAD_DISH: `three-pc-spread-dish`,
     TWO_CONSOLE_CAREER: `two-console-career`,
     TWO_PETS_CONSOLE_CAREER: `two-pets-console-career`,
+    TWO_PETS_CONSOLE_PRODUCT: `two-pets-console-product`,
   },
   HAY_DAY: {
     PRODUCT: 'product',
@@ -62,14 +72,24 @@ export const API_SHORTHAND = Object.freeze({
  * Untuk link fetching
  */
 export const API_ROUTE = Object.freeze({
-  DASHBOARD: `${HOST}/dashboard`,
+  DASHBOARD: `${HOST}/master/dashboard`,
   THE_SIMS: {
-    CASTAWAY_PRODUCT: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.CASTAWAY_PRODUCT}`,
-    FOUR_PC_HARVESTABLE: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_HARVESTABLE}`,
-    TWO_PETS_CONSOLE_PRODUCT: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT}`,
     BUSTIN_OUT_CAREER: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.BUSTIN_OUT_CAREER}`,
+    CASTAWAY_PRODUCT: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.CASTAWAY_PRODUCT}`,
+    FOUR_PC_DISH: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_DISH}`,
+    FOUR_PC_ELEMENT: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_ELEMENT}`,
+    FOUR_PC_HARVESTABLE: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_HARVESTABLE}`,
+    THREE_PC_DISH: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_DISH}`,
+    THREE_PC_GEM_CUT: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_GEM_CUT}`,
+    THREE_PC_GEM: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_GEM}`,
+    THREE_PC_HARVESTABLE: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_HARVESTABLE}`,
+    THREE_PC_METAL: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_METAL}`,
+    THREE_PC_PRESERVE_DISH: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_PRESERVE_DISH}`,
+    THREE_PC_RAW_GEM: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_RAW_GEM}`,
+    THREE_PC_SPREAD_DISH: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_SPREAD_DISH}`,
     TWO_CONSOLE_CAREER: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.TWO_CONSOLE_CAREER}`,
     TWO_PETS_CONSOLE_CAREER: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.TWO_PETS_CONSOLE_CAREER}`,
+    TWO_PETS_CONSOLE_PRODUCT: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT}`,
   },
   HAY_DAY: {
     PRODUCT: `${HOST}/hayday/${API_SHORTHAND.HAY_DAY.PRODUCT}`,

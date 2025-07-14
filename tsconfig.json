@@ -38,7 +38,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "noeslint.config.mjs"
-, "drizzle.config.ts"  ],
+, "drizzle.config.ts", "src/app/(auth)/docs/page.mdx"  ],
   "exclude": [
     "node_modules"
   ]

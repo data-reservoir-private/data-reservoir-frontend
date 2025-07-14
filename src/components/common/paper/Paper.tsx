@@ -1,10 +1,11 @@
+import Box from '@mui/material/Box';
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
 export default function Paper({children, className}: {children: ReactNode, className?: string}) {
   return (
-    <div className={classNames('text-white bg-blackish margin-auto rounded-md content-center scrollbar-default', className ?? "")}>
+    <Box component='div' className={classNames('bg-background-paper border-divider border-2 rounded-sm', className ?? "")}>
       {children}
-    </div>
+    </Box>
   );
 }

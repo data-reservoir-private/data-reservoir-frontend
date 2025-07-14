@@ -1,9 +1,8 @@
 import Paper from '@/components/common/paper/Paper';
 import { supabaseServer } from '@/utilities/supabase-server';
-import { Alert, Button } from 'flowbite-react';
 import React from 'react';
 import { redirect } from 'next/navigation';
-import { FaGithub, FaLock } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { login } from './actions';
 import { Metadata } from 'next';
 
@@ -26,19 +25,19 @@ export default async function LoginPage(props: { searchParams: searchParamsType 
         <form action={login} className='flex gap-2 flex-col'>
           {
             searchP['message'] && (
-              <Alert color='failure' icon={FaLock} className='p-2 text-sm'>
+              <div color='failure' className='p-2 text-sm'>
                 <span>{searchP['message']}</span>
-              </Alert>
+              </div>
             )
           }
-          <Button className='font-bold text-lg flex items-center gap-5 align-middle' color='success' type='submit'>
+          <button className='font-bold text-lg flex items-center gap-5 align-middle' color='success' type='submit'>
             <span className='flex justify-center items-center text-2xl pr-4'>
               <FaGithub className='flex items-center'/>
             </span>
             <span className='flex items-center'>
               Login using Github
             </span>
-          </Button>
+          </button>
           <span className='text-[9px]'>
             This is a private app. No one else can login :D
           </span>

@@ -1,5 +1,4 @@
 import 'server-only';
-import { HasID } from '@/model/response/base';
 import React from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
@@ -17,7 +16,7 @@ export interface BasicGridSSRProps<TData> {
   gridImageUnoptimized?: boolean,
 }
 
-export default function BasicGridSSR<TData extends HasID>(props: BasicGridSSRProps<TData>) {
+export default function BasicGridSSR<TData extends { id: string }>(props: BasicGridSSRProps<TData>) {
   return (  
     <div className='flex gap-4 flex-grow justify-between overflow-y-scroll scrollbar-none'>
       <div className='min-h-0'>

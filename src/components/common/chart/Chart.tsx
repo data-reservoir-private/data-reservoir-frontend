@@ -1,16 +1,37 @@
 'use client'
 
-import { EChartsOption } from 'echarts'
-import ReactECharts from 'echarts-for-react';
+import React, { useRef, useEffect } from 'react'
+import { init, getInstanceByDom, EChartsOption } from 'echarts'
+import Box from '@mui/material/Box'
+import classNames from 'classnames'
 
-
-interface ChartProps {
+interface EChartProps {
   option: EChartsOption,
   className?: string
 }
 
-export default function Chart(props: ChartProps) {
-  return (
-    <ReactECharts option={props.option} className={''} />
-  );
+export const EChart = (props: EChartProps) => {
+  const chartRef = useRef(null)
+
+  useEffect(() => {
+    // Initialize chart
+    const chart = init(chartRef.current, null)
+
+    return () => {
+      chart?.dispose()
+    }
+  }, []);
+
+  useEffect(() => {
+    // Re-render chart when option changes
+    const chart = getInstanceByDom(chartRef.current!)!;
+    window.onresize = function() {
+      chart.resize();
+    };
+
+    chart.setOption(props.option);
+  }, [props.option]);
+
+
+  return <Box className={classNames(props.className)} ref={chartRef} {...props} />
 }

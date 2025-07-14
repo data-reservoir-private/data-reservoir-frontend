@@ -1,9 +1,58 @@
-import { TheSimsBustinOutCareerSchema, TheSimsCastawayProductSchema, TheSimsFourPCHarvestableSchema, TheSimsTwoConsoleCareerSchema, TheSimsTwoPetsConsoleCareerSchema, TheSimsTwoPetsConsoleProductSchema } from "@/database/schema/the-sims";
-import { HasID } from "./base";
-
-export interface TheSimsCastawayProductResponse extends Omit<TheSimsCastawayProductSchema & HasID, '_id'> {}
-export interface TheSimsFourPCHarvestableResponse extends Omit<TheSimsFourPCHarvestableSchema & HasID, '_id'> {}
-export interface TheSimsTwoPetsConsoleProductResponse extends Omit<TheSimsTwoPetsConsoleProductSchema & HasID, '_id'> {}
-export interface TheSimsBustinOutCareerResponse extends Omit<TheSimsBustinOutCareerSchema & HasID, '_id'> {}
-export interface TheSimsTwoPetsConsoleCareerResponse extends Omit<TheSimsTwoPetsConsoleCareerSchema & HasID, '_id'> {}
-export interface TheSimsTwoConsoleCareerResponse extends Omit<TheSimsTwoConsoleCareerSchema & HasID, '_id'> {}
+export type ITheSimsResponse = {
+  'bustin-out-career': {
+    id: string
+    career: string
+    level: number
+    job: string
+    description: string
+    workStart: string
+    workEnd: string
+    friends: number
+    salary: number
+    promotion: number
+    cooking: number
+    mechanical: number
+    charisma: number
+    body: number
+    logic: number
+    creativity: number
+  },
+  'castaway-product': {
+    id: string
+    name: string
+    image: string
+    eatenRaw: boolean
+    hunger: number
+    bladder: number
+    energy: number
+    category: string
+    description: string
+  },
+  'three-pc-dish': {
+    id: string
+    name: string
+    image: string
+    category: string
+    skill: number
+    types?: string[],
+    flavours?: string[],
+    ingredients?: string[],
+    isVegetarian: boolean
+    notes: string
+  },
+  'three-pc-gem': {
+    id: string
+    image: string
+    gemCut: {
+      id: string
+      name: string
+      image: string
+    }
+    rawGem: {
+      id: string
+      name: string
+      image: string
+      rarity: number
+    }
+  }
+}

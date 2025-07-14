@@ -1,4 +1,3 @@
-import { HasID } from '@/model/response/base';
 import React, { useState } from 'react';
 import Paper from '../paper/Paper';
 import classNames from 'classnames';
@@ -20,7 +19,7 @@ export interface BasicGridWithDetailState<TData> {
   data?: TData
 }
 
-export default function BasicGridWithDetail<TData extends HasID>(props: BasicGridWithDetailProps<TData>) {
+export default function BasicGridWithDetail<TData extends { id: string }>(props: BasicGridWithDetailProps<TData>) {
 
   const [state, setState] = useState<BasicGridWithDetailState<TData>>({
     data: undefined
@@ -45,7 +44,7 @@ export default function BasicGridWithDetail<TData extends HasID>(props: BasicGri
               >
                 {
                   props.display ? props.display(d) :
-                    <Image src={props.imageSrc(d)} alt={props.imageAlt(d)} width={0} height={0} objectFit='contain' unoptimized={props?.gridImageUnoptimized} className={classNames('inline-block object-contain w-full h-full p-3', props.gridImageClasses ?? "")}/>
+                    <Image src={props.imageSrc(d)} alt={props.imageAlt(d)} width={0} height={0} unoptimized={props?.gridImageUnoptimized} className={classNames('inline-block object-contain w-full h-full p-3', props.gridImageClasses ?? "")}/>
                 }
                 </div>
             ))

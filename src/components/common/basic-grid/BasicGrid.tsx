@@ -1,6 +1,4 @@
-import { HasID } from '@/model/response/base';
-import React, { useState } from 'react';
-import Paper from '../paper/Paper';
+import React from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
 
@@ -21,7 +19,7 @@ export interface BasicGridState<TData> {
   data?: TData
 }
 
-export default function BasicGrid<TData extends HasID>(props: BasicGridProps<TData>) {
+export default function BasicGrid<TData extends { id: string }>(props: BasicGridProps<TData>) {
   const handleOnClick = ((d: TData) => props.onClick && props.onClick(d));
 
   return (  

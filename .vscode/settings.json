@@ -6,6 +6,7 @@
     "class:list",
     ".*Classes"
   ],
+  "tailwindCSS.experimental.classRegex": [["className\\s*:\\s*['\"]([^'\"]*)['\"]"]],
   "eslint.useFlatConfig": true,
   "material-icon-theme.files.customClones": [
     {

@@ -24,74 +24,86 @@ export type ROUTE_TYPE = {
   new?: boolean,
 };
 
-export const ROUTES: ROUTE_TYPE[] = [
-  {
-    id: 'dashboard',
-    name: 'Dashboard',
-    icon: BiSolidHome,
-    link: '/dashboard'
-  },
-  {
-    id: 'the-sims',
-    name: 'The Sims',
-    icon: BsFillSuitDiamondFill,
-    link: '/the-sims'
-  },
-  {
-    id: 'farm-frenzy',
-    name: 'Farm Frenzy',
-    icon: PiBarn,
-    link: '/farm-frenzy'
-  },
-  {
-    id: 'hayday',
-    name: 'Hayday',
-    icon: CiWheat,
-    link: '/hayday'
-  },
-  {
-    id: 'pizza-frenzy',
-    name: 'Pizza Frenzy',
-    icon: FaPizzaSlice,
-    link: '/pizza-frenzy'
-  },
-  {
-    id: 'nasi-goreng',
-    name: 'Nasi Goreng',
-    icon: FaBowlFood,
-    link: '/nasi-goreng'
-  },
-  {
-    id: 'cygnus',
-    name: 'Cygnus',
-    icon: GiPolarStar,
-    link: '/cygnus'
-  },
-  {
-    id: 'quartz',
-    name: 'Quartz',
-    icon: GiCrystalGrowth,
-    link: '/quartz'
-  },
-  {
-    id: 'transaction',
-    name: 'Transaction',
-    icon: GrTransaction,
-    link: '/transaction',
-    beta: true
-  },
-  {
-    id: 'transjakarta',
-    name: 'Transjakarta',
-    icon: TransjakartaIcon,
-    link: '/transjakarta',
-    beta: true
-  },
-  {
-    id: 'docs',
-    name: 'Documentation',
-    icon: IoIosDocument,
-    link: '/docs',
-    inactive: true
-  },
+export const ROUTES: ROUTE_TYPE[][] = [
+  [
+    {
+      id: 'dashboard',
+      name: 'Dashboard',
+      icon: BiSolidHome,
+      link: '/dashboard'
+    },
+    {
+      id: 'the-sims',
+      name: 'The Sims',
+      icon: BsFillSuitDiamondFill,
+      link: '/the-sims'
+    },
+    {
+      id: 'hayday',
+      name: 'Hayday',
+      icon: CiWheat,
+      link: '/hayday'
+    },
+    {
+      id: 'farm-frenzy',
+      name: 'Farm Frenzy',
+      icon: PiBarn,
+      inactive: true,
+      link: '/farm-frenzy'
+    },
+    {
+      id: 'pizza-frenzy',
+      name: 'Pizza Frenzy',
+      icon: FaPizzaSlice,
+      inactive: true,
+      link: '/pizza-frenzy'
+    },
+    {
+      id: 'nasi-goreng',
+      name: 'Nasi Goreng',
+      icon: FaBowlFood,
+      inactive: true,
+      link: '/nasi-goreng'
+    },
+    {
+      id: 'cygnus',
+      name: 'Cygnus',
+      icon: GiPolarStar,
+      inactive: true,
+      link: '/cygnus'
+    },
+    {
+      id: 'quartz',
+      name: 'Quartz',
+      icon: GiCrystalGrowth,
+      inactive: true,
+      link: '/quartz'
+    },
+    {
+      id: 'transaction',
+      name: 'Transaction',
+      icon: GrTransaction,
+      inactive: true,
+      link: '/transaction',
+      beta: true
+    },
+    {
+      id: 'transjakarta',
+      name: 'Transjakarta',
+      icon: TransjakartaIcon,
+      inactive: true,
+      link: '/transjakarta',
+      beta: true
+    },
+
+  ],
+  [
+    {
+      id: 'docs',
+      name: 'Documentation',
+      icon: IoIosDocument,
+      link: '/docs',
+      inactive: true,
+    },
+  ]
 ];

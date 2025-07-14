@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { PT_Sans, Inconsolata } from "next/font/google";
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
+import { ThemeProvider } from "@mui/material/styles";
+import { themeOptions } from "@/theme";
 import "./globals.css";
-import "./post.css";
-import { Flowbite } from "flowbite-react";
+import classNames from "classnames";
 
-const montserrat = Montserrat({ subsets: ['latin'] });
+const ptSansFont = PT_Sans({ weight: ['400', '700'], subsets: ['latin'] });
+const inconsolata = Inconsolata({ weight: ['400', '700'], subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,13 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
       </head>
-      <body className={montserrat.className}>
-        <Flowbite theme={{mode: 'dark'}}>
-          {children}
-        </Flowbite>
+      <body className={classNames(ptSansFont.className, inconsolata.className)}>
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <ThemeProvider theme={themeOptions}>
+            {children}
+          </ThemeProvider>
+        </AppRouterCacheProvider>
       </body>
     </html>
   );

@@ -1,12 +1,11 @@
-export interface DashboardResponse {
-  category: string,
-  owner: string,
-  prefix: string,
-  tables: DashboardTableResponse[]
-}
-
-export interface DashboardTableResponse {
-  tableName: string,
-  tableUrl: string,
-  rowCount: number,
+export type IDashboardResponse = {
+  category: string
+  owner: string
+  prefix: string
+  rows: number
+  tables: {
+    tableName: string
+    tableURL: string
+    rowCount: number
+  }[]
 }

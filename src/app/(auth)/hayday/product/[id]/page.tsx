@@ -1,0 +1,87 @@
+import { API_ROUTE } from '@/constant/api-route';
+import { IHaydayResponse } from '@/model/response/hayday';
+import { secondToTimespan } from '@/utilities/general';
+import { grabData } from '@/utilities/http';
+import Paper from '@/components/common/paper/Paper';
+import TableDetail from '@/components/common/table-detail/TableDetail';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react'
+import Section from '@/components/common/paper/Section';
+
+interface HaydayProductDetailProps {
+  params: Promise<{ id: string }>
+}
+
+export default async function HaydayProductDetail(props: HaydayProductDetailProps) {
+  const { id } = await props.params;
+  const { data } = await grabData<IHaydayResponse['hayday-product-complete']>(`${API_ROUTE.HAY_DAY.PRODUCT}/${id}`);
+
+  return (
+    <Box className='flex flex-col gap-3'>
+      {/* Name */}
+      <Box className='flex flex-col gap-2'>
+        <Typography className='font-bold' variant='h4'>{data.name}</Typography>
+        <Paper className='w-full flex justify-center py-5'>
+          <Box className='w-50 h-50 relative items-center object-center'>
+            <Image src={data.image} alt={data.name} fill className='object-contain' />
+          </Box>
+        </Paper>
+      </Box>
+
+      {/* Information */}
+      <Section variant='h6' name='Information'>
+        <TableDetail data={{
+          ID: data.id,
+          Name: data.name,
+          Category: data.category,
+          Price: data.price,
+          "Is Raw": data.isRaw,
+          Time: secondToTimespan(data.time, true),
+          Level: data.level,
+          XP: data.xp,
+          Effort: data.effort,
+          "Effort (ln)": data.effortLn,
+        }} />
+
+      </Section>
+
+      {/* Recipe */}
+      { data.ingredients.length > 0 && <Grids name='Ingredients' data={data.ingredients} /> }
+
+      {/* Used In */}
+      { data.usedIn.length > 0 && <Grids name='Used In' data={data.usedIn} /> }
+    </Box>
+  )
+}
+
+function Grids({ name, data }: { name: string, data: { name: string, quantity: number, image: string, id: string }[] }) {
+  return (
+    <Section name={name} variant='h6' className="flex flex-col gap-2">
+      <Grid container columns={{ md: 3, xs: 1 }} spacing={'.5rem'}>
+        {
+          data.map(ing => (
+            <Grid size={1} key={ing.id}>
+              <Paper className="flex overflow-hidden">
+                <Link passHref href={`/hayday/product/${ing.id}`}>
+                  <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
+                    <Image src={ing.image} alt={ing.name} fill className='object-contain p-1' />
+                  </Box>
+                </Link>
+                <Box className="grow flex">
+                  <Box className="grow p-3">
+                    <Typography className=''>{ing.name}</Typography>
+                  </Box>
+                  <Box className="p-3 flex items-center text-3xl font-bold bg-secondary-dark">{ing.quantity}</Box>
+                </Box>
+              </Paper>
+            </Grid>
+          ))
+        }
+      </Grid>
+    </Section>
+  );
+}

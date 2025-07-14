@@ -2,7 +2,6 @@
 
 import React, { Fragment, useMemo, useState } from 'react';
 import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
 import { saveAs } from 'file-saver';
@@ -154,45 +153,45 @@ interface BasicTableFilterProps<T> {
   column: Column<T, unknown>
 }
 
-function BasicTableFilterSelect<T>(props: BasicTableFilterProps<T>)
-{
-  // Ambil value unique dari 1 col ini
-  const uniq = props.column.getFacetedUniqueValues();
+// function BasicTableFilterSelect<T>(props: BasicTableFilterProps<T>)
+// {
+//   // Ambil value unique dari 1 col ini
+//   const uniq = props.column.getFacetedUniqueValues();
 
-  // Ambil value yang sekarang dipilih
-  const pickedValues = props.column.getFilterValue() ? props.column.getFilterValue() as (string | number)[] : [];
+//   // Ambil value yang sekarang dipilih
+//   const pickedValues = props.column.getFilterValue() ? props.column.getFilterValue() as (string | number)[] : [];
 
-  // Memoize biar bisa dirender
-  const uniqueValues = useMemo(() => {
-    return Array.from<string | number>(uniq.keys()).sort((a, b) => a > b ? 1 : a < b ? -1 : 0);
-  }, [uniq]);
+//   // Memoize biar bisa dirender
+//   const uniqueValues = useMemo(() => {
+//     return Array.from<string | number>(uniq.keys()).sort((a, b) => a > b ? 1 : a < b ? -1 : 0);
+//   }, [uniq]);
 
-  if (uniqueValues.length === 0) return (<></>);
+//   if (uniqueValues.length === 0) return (<></>);
 
-  return (
-    <Listbox value={pickedValues} multiple onChange={e => props.column.setFilterValue(e)}>
-      <div className='relative'>
-        <ListboxButton className='text-sm font-normal bg-gray-700 rounded-sm w-full py-1 px-2 data-[open]:ring-2 data-[open]:ring-cyan-700'>{pickedValues.length} Selected</ListboxButton>
-        <ListboxOptions className={'z-50 absolute bottom-auto bg-bluish w-full rounded-md max-h-40 overflow-y-scroll scrollbar-default'}>
-          {
-            uniqueValues.map(x => (
-              <ListboxOption className='px-2 py-1 text-left cursor-pointer' value={x} key={x}>
-                <div className='hover:bg-gray-600 w-full p-1 rounded-md font-light text-sm flex gap-3'>
-                  {pickedValues.includes(x) &&
-                    <div className='items-center text-center flex'>
-                      <BiCheck className='text-normal'/>
-                    </div>
-                  }
-                  <span className='text-xs'>{x}</span>
-                </div>
-              </ListboxOption>
-            ))
-          }
-        </ListboxOptions>
-      </div>
-    </Listbox>
-  );
-}
+//   return (
+//     <Listbox value={pickedValues} multiple onChange={e => props.column.setFilterValue(e)}>
+//       <div className='relative'>
+//         <ListboxButton className='text-sm font-normal bg-gray-700 rounded-sm w-full py-1 px-2 data-[open]:ring-2 data-[open]:ring-cyan-700'>{pickedValues.length} Selected</ListboxButton>
+//         <ListboxOptions className={'z-50 absolute bottom-auto bg-bluish w-full rounded-md max-h-40 overflow-y-scroll scrollbar-default'}>
+//           {
+//             uniqueValues.map(x => (
+//               <ListboxOption className='px-2 py-1 text-left cursor-pointer' value={x} key={x}>
+//                 <div className='hover:bg-gray-600 w-full p-1 rounded-md font-light text-sm flex gap-3'>
+//                   {pickedValues.includes(x) &&
+//                     <div className='items-center text-center flex'>
+//                       <BiCheck className='text-normal'/>
+//                     </div>
+//                   }
+//                   <span className='text-xs'>{x}</span>
+//                 </div>
+//               </ListboxOption>
+//             ))
+//           }
+//         </ListboxOptions>
+//       </div>
+//     </Listbox>
+//   );
+// }
 
 function BasicTableFilterSearch<T>(props: BasicTableFilterProps<T>) {
 
@@ -212,7 +211,7 @@ function BasicTableFilterSearch<T>(props: BasicTableFilterProps<T>) {
 
 function BasicTableFilter<T>(props: BasicTableFilterProps<T>) {
   const filterVariant = props.column.columnDef.meta?.filterVariant;
-  if (filterVariant === 'select') return (<BasicTableFilterSelect {...props}/>);
-  else if (filterVariant === 'search') return (<BasicTableFilterSearch {...props}/>);
+  // if (filterVariant === 'select') return (<BasicTableFilterSelect {...props}/>);
+  if (filterVariant === 'search') return (<BasicTableFilterSearch {...props}/>);
   else return (<></>);
 }

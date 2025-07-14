@@ -1,46 +1,41 @@
-import { BaseRequest } from "@/model/request/base";
-import { BaseResponse } from "@/model/response/base";
-import { isNil, omitBy } from "lodash";
+'use server'
 
-export async function request<TResponse, TRequest extends Record<string, any> | never>(request: BaseRequest<TRequest>, useForm: boolean = true): Promise<BaseResponse<TResponse>> {
-  // Kita pecah prosesnya biar GET dan DELETE punya proses sendiri biar nga mabuk
-  let url = request.url;
-  if (request.method === "GET" || request.method === "DELETE") {
-    const arrayParams = Object.entries(omitBy(request.data ?? {}, isNil))
-      .flatMap(([k, v]) => {
-        if (Array.isArray(v)) return v.map(x => ([k, x]));
-        else return [[k, v]];
-      });
-    url = url + "?" + new URLSearchParams(arrayParams);
+import { IPaginationResponse } from '@/model/response/base';
+import axios from 'axios';
+import https from 'https'
+import 'server-only'
+import * as fs from 'fs'
+import queryString from 'query-string';
+
+
+export async function grabData<TData>(url: string, params?: Record<string, any>): Promise<{
+  pagination?: IPaginationResponse,
+  data: TData
+}> {
+
+  let agent: https.Agent | undefined = undefined;
+  if (process.env.ENVIRONMENT && process.env.ENVIRONMENT == 'Development')
+    {
+    const cert = fs.readFileSync('./test_pk.pem');
+    agent = new https.Agent({
+      ca: [cert]
+    });
   }
-
-  const conf: RequestInit = {
-    method: request.method,
-    next: {
-      revalidate: 24 * 3600
-    }
-  };
-
-  // Jika kita kirim data pakai form, maka kita masukkan ke formData
-  if (request.method !== "GET" && request.method !== "DELETE"){
-    if (useForm && request.data) conf.body = toFormData(request.data!);
-    else conf.body = JSON.stringify(omitBy(request.data ?? {}, isNil));
-  } 
   
-  const f = await fetch(url, conf);
-  if (Math.round(f.status / 100) === 5) throw new Error("Failed to connect to API");
-  const response = await (f).json() as BaseResponse<TResponse>;
-  return response;
-}
-
-export function toFormData(param: any): FormData{
-  if (typeof param !== "object") return new FormData();
-
-  const formData = new FormData();
-  Object.keys(param).forEach(key => {
-    if (Array.isArray(param[key])) param[key].forEach(x => formData.append(key + '[]', x));
-    else formData.append(key, param[key]);
+  const res = await axios.get(url, {
+    params: params,
+    httpsAgent: agent,
+    paramsSerializer: function (param) {
+      return queryString.stringify(param, {
+        arrayFormat: 'none',
+        skipEmptyString: true,
+        skipNull: true
+      })
+    }
   });
-
-  return formData;
+  
+  return {
+    pagination: res.data.pagination,
+    data: res.data.data
+  };
 }

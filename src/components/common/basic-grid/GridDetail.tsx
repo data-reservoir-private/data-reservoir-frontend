@@ -1,4 +1,3 @@
-import { HasID } from '@/model/response/base';
 import React from 'react';
 
 interface GridDetailProps {
