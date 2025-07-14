@@ -9,16 +9,26 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react'
+import React, { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 
 interface HaydayProductDetailProps {
   params: Promise<{ id: string }>
 }
 
+const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['hayday-product-complete']>(`${API_ROUTE.HAY_DAY.PRODUCT}/${id}`));
+
+export async function generateMetadata(props: HaydayProductDetailProps) {
+  const post = await grabDetail((await props.params).id);
+  return {
+    title: `Hayday Product - ${post.data.name} - Data Reservoir`
+  }
+}
+
+
 export default async function HaydayProductDetail(props: HaydayProductDetailProps) {
   const { id } = await props.params;
-  const { data } = await grabData<IHaydayResponse['hayday-product-complete']>(`${API_ROUTE.HAY_DAY.PRODUCT}/${id}`);
+  const { data } = await grabDetail(id);
 
   return (
     <Box className='flex flex-col gap-3'>
@@ -49,11 +59,31 @@ export default async function HaydayProductDetail(props: HaydayProductDetailProp
 
       </Section>
 
+      {/* Made In */}
+      {
+        data.building && (
+          <Section name='Made In' variant='h6'>
+            <Paper className="flex overflow-hidden">
+              <Link passHref href={`/hayday/building/${data.building.id}`}>
+                <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
+                  <Image src={data.building.image} alt={data.building.name} fill className='object-contain p-1' />
+                </Box>
+              </Link>
+              <Box className="grow flex">
+                <Box className="grow p-3">
+                  <Typography className=''>{data.building.name}</Typography>
+                </Box>
+              </Box>
+            </Paper>
+          </Section>
+        )
+      }
+
       {/* Recipe */}
-      { data.ingredients.length > 0 && <Grids name='Ingredients' data={data.ingredients} /> }
+      {data.ingredients.length > 0 && <Grids name='Ingredients' data={data.ingredients} />}
 
       {/* Used In */}
-      { data.usedIn.length > 0 && <Grids name='Used In' data={data.usedIn} /> }
+      {data.usedIn.length > 0 && <Grids name='Used In' data={data.usedIn} />}
     </Box>
   )
 }

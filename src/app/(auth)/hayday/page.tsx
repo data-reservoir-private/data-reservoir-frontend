@@ -4,7 +4,6 @@ import { IQuickLink } from '@/model/dto/dashboard'
 import { IDashboardResponse } from '@/model/response/dashboard'
 import { grabData } from '@/utilities/http'
 import Box from '@mui/material/box'
-import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
@@ -16,6 +15,11 @@ import { EChartsOption } from 'echarts'
 import { EChart } from '@/components/common/chart/Chart'
 import { FaTruck } from "react-icons/fa6";
 import Section from '@/components/common/paper/Section'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Hayday - Data Reservoir'
+}
 
 const navigation: IQuickLink[] = [
   { name: "Order", link: '/hayday/order' },
