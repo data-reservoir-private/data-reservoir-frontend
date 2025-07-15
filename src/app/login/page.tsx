@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Login - Data Reservoir'
 };
 
-type searchParamsType = Promise<{[key: string]: string | undefined}>
+type searchParamsType = Promise<Record<string, string | undefined>>
 
 export default async function LoginPage(props: { searchParams: searchParamsType }) {
   const supabase = await supabaseServer();

@@ -1,6 +1,6 @@
 'use client'
 
-import { ROUTES } from '@/constant/route';
+import { ROUTES } from '@/constant/menu-route';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -15,17 +15,21 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsMenuApp } from 'react-icons/bs';
 import { Logout } from './logout/actions';
+import Box from '@mui/material/Box';
+import { themeOptions } from '@/theme';
 
 export default function MainLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const [open, setOpen] = useState(false);
   const handleOnClose = () => { setOpen(false) }
-  const smol = useMediaQuery('(max-width:600px)');
+  const smol = useMediaQuery(themeOptions.breakpoints.down('sm'), {
+    ssrMatchMedia: () => ({ matches: true })
+  });
 
   return (
-    <div className='flex-grow'>
+    <Box className='flex-grow'>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundImage: 'none' }} className='bg-background-paper shadow-none border-b-divider border-b' >
         <Toolbar variant='dense'>
           {
@@ -46,38 +50,38 @@ export default function MainLayout({ children }: Readonly<{ children: React.Reac
           <Skeleton variant='circular' width={20} height={20} className='bg-green-400' animation='pulse' title='API is online' />
         </Toolbar>
       </AppBar>
-        <Drawer variant={smol ? 'temporary' : 'permanent'}
-          anchor='left'
-          className='w-full'
-          open={open}
-          slotProps={{
-            paper: {
-              className: 'box-border'
-            }
-          }}
-          onClose={() => setOpen(false)}
-        >
-          <Toolbar variant='dense' />
-          <DrawerOptions onClose={handleOnClose} />
-        </Drawer>
-        <div className='relative min-sm:left-[250px] min-sm:w-[calc(100%-250px)] p-2 min-h-[100svh]'>
-          <Toolbar variant='dense' />
-          <div className='p-4'>
-            {children}
-          </div>
-        </div>
-    </div>
+      <Drawer variant={smol ? 'temporary' : 'permanent'}
+        anchor='left'
+        className='w-full'
+        open={open}
+        slotProps={{
+          paper: {
+            className: 'box-border'
+          }
+        }}
+        onClose={() => setOpen(false)}
+      >
+        <Toolbar variant='dense' />
+        <DrawerOptions onClose={handleOnClose} />
+      </Drawer>
+      <Box className='relative min-sm:left-[250px] min-sm:w-[calc(100%-250px)] p-2 min-h-[100svh]'>
+        <Toolbar variant='dense' />
+        <Box className='p-4'>
+          {children}
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
 function DrawerOptions({ onClose }: { onClose: () => void }) {
   return (
-    <div className='w-[250px] h-full'>
-      <div className='flex flex-col h-full p-3 max-sm:px-2 justify-between'>
-        <div>
+    <Box className='w-[250px] h-full'>
+      <Box className='flex flex-col h-full p-3 max-sm:px-2 justify-between'>
+        <Box>
           {
             ROUTES.map((x, idx) => (
-              <div className='py-1' key={idx}>
+              <Box className='py-1' key={idx}>
                 {
                   x.map((route) => (
                     <ListItem key={route.id} onClick={() => onClose()} className='p-0'>
@@ -90,17 +94,17 @@ function DrawerOptions({ onClose }: { onClose: () => void }) {
                     </ListItem>
                   ))
                 }
-              { idx !== ROUTES.length - 1 && <Divider/> }
-              </div>
+                {idx !== ROUTES.length - 1 && <Divider />}
+              </Box>
             ))
           }
-        </div>
-        <form action={Logout}>
+        </Box>
+        <Box component='form' action={Logout}>
           <Link href={'/logout'} passHref>
             <Button type='button' color='error' className='w-full shadow-none opacity-50' variant='contained'>Logout</Button>
           </Link>
-        </form>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   )
 }

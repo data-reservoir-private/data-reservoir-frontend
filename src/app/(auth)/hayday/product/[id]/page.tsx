@@ -7,10 +7,11 @@ import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { cache } from 'react'
 import Section from '@/components/common/paper/Section';
+import SimpleImage from '@/components/common/SimpleImage';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
 
 interface HaydayProductDetailProps {
   params: Promise<{ id: string }>
@@ -25,22 +26,18 @@ export async function generateMetadata(props: HaydayProductDetailProps) {
   }
 }
 
-
 export default async function HaydayProductDetail(props: HaydayProductDetailProps) {
   const { id } = await props.params;
   const { data } = await grabDetail(id);
 
   return (
-    <Box className='flex flex-col gap-3'>
-      {/* Name */}
-      <Box className='flex flex-col gap-2'>
-        <Typography className='font-bold' variant='h4'>{data.name}</Typography>
-        <Paper className='w-full flex justify-center py-5'>
-          <Box className='w-50 h-50 relative items-center object-center'>
-            <Image src={data.image} alt={data.name} fill className='object-contain' />
-          </Box>
-        </Paper>
-      </Box>
+    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['hayday-product-detail'], { label: data.name }]}>
+      {/* Image */}
+      <Paper className='w-full flex justify-center py-5'>
+        <Box className='w-50 h-50 relative items-center object-center'>
+          <SimpleImage src={data.image} alt={data.name} />
+        </Box>
+      </Paper>
 
       {/* Information */}
       <Section variant='h6' name='Information'>
@@ -66,7 +63,7 @@ export default async function HaydayProductDetail(props: HaydayProductDetailProp
             <Paper className="flex overflow-hidden">
               <Link passHref href={`/hayday/building/${data.building.id}`}>
                 <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                  <Image src={data.building.image} alt={data.building.name} fill className='object-contain p-1' />
+                  <SimpleImage src={data.building.image} alt={data.building.name} />
                 </Box>
               </Link>
               <Box className="grow flex">
@@ -84,7 +81,7 @@ export default async function HaydayProductDetail(props: HaydayProductDetailProp
 
       {/* Used In */}
       {data.usedIn.length > 0 && <Grids name='Used In' data={data.usedIn} />}
-    </Box>
+    </Section>
   )
 }
 
@@ -98,7 +95,7 @@ function Grids({ name, data }: { name: string, data: { name: string, quantity: n
               <Paper className="flex overflow-hidden">
                 <Link passHref href={`/hayday/product/${ing.id}`}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                    <Image src={ing.image} alt={ing.name} fill className='object-contain p-1' />
+                    <SimpleImage quality={20} src={ing.image} alt={ing.name}/>
                   </Box>
                 </Link>
                 <Box className="grow flex">

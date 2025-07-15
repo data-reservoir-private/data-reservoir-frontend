@@ -6,6 +6,8 @@ import https from 'https'
 import 'server-only'
 import * as fs from 'fs'
 import queryString from 'query-string';
+import { headers } from 'next/headers';
+import { parseSearchParam } from './general';
 
 
 export async function grabData<TData>(url: string, params?: Record<string, any>): Promise<{
@@ -38,4 +40,13 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
     pagination: res.data.pagination,
     data: res.data.data
   };
+}
+
+/**
+ * NextJS built-in search params are not that advanced as it cannot handle `key[]=a&key[]=b`. It parses those
+ * key as `key[]=[a,b]` rather than `key=[a, b]` which is not the 
+ * @returns Search param as TResult
+ */
+export async function getSearchParam<TResult>() : Promise<TResult> {
+  return parseSearchParam<TResult>((await headers()).get('X-Current-URL')!);
 }

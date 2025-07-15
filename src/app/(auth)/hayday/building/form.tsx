@@ -6,7 +6,7 @@ import { formOptions } from '@tanstack/react-form';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 import { z } from 'zod'
-import queryString from 'query-string';
+import { makeSearchParam } from '@/utilities/general';
 
 const categories = [
   "Production",
@@ -45,18 +45,14 @@ export default function HaydayBuildingForm({ param, totalData = 0 }: { param: Ha
     ...defaultValues,
     onSubmit: async ({ value, meta }) => {
       if (meta?.resetPagination) value.currentPage = 1;
-      router.push(`/hayday/building?${queryString.stringify(value, {
-        skipEmptyString: true,
-        skipNull: true,
-        arrayFormat: 'bracket'
-      })}`);
+      router.push(`/hayday/building?${makeSearchParam(value)}`);
     }
   });
 
   return (
     <Box
       component='form'
-      onSubmit={e => { e.preventDefault(); e.stopPropagation(); form.handleSubmit() }}
+      onSubmit={e => { e.preventDefault(); e.stopPropagation(); form.handleSubmit({ resetPagination: true }) }}
       className="flex flex-col grow gap-2"
     >
       <Box className="gap-2 flex grow">

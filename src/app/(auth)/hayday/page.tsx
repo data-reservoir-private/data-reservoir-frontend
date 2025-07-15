@@ -35,7 +35,7 @@ export default async function Page() {
       {/* Ini Table dan Rows */}
       <Grid container spacing='1rem' columns={2}>
         <Grid size={1}>
-          <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none'>
+          <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none gap-2'>
             <Box flexDirection='column'>
               <Typography variant='h4' fontWeight='bold'>{data.rows}</Typography>
               <Typography variant='subtitle2'>Records</Typography>

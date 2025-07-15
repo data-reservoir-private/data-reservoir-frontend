@@ -9,35 +9,34 @@ import { z } from 'zod'
 import { makeSearchParam } from '@/utilities/general';
 
 const categories = [
-  "Animals",
-  "Bushes",
-  "Crops",
-  "Ores",
-  "Processed",
-  "Supplies",
-  "Trees"
+  "Fruits",
+  "Large Fishes",
+  "Small Fishes",
+  "Medium Fishes",
+  "Spices",
+  "Veggies, Nuts, and Grains",
+  "Resources",
+  "Meats",
 ];
 
 const schema = z.object({
   name: z.union([z.string().length(0), z.string().min(3)], "Must be empty or min 3 chars").optional(),
-  level: z.number().gte(0).optional(),
   category: z.array(z.string()).optional(),
   pageSize: z.number(),
   currentPage: z.number()
 });
 
 type SubmitMeta = { resetPagination?: boolean };
-export type HaydayProductFormSchema = z.infer<typeof schema>;
+export type CastawayProductFormSchema = z.infer<typeof schema>;
 
-export default function HaydayProductForm({ param, totalData = 0 }: { param: HaydayProductFormSchema, totalData: number }) {
+export default function CastawayProductForm({ param, totalData = 0 }: { param: CastawayProductFormSchema, totalData: number }) {
   const defaultValues = formOptions({
     defaultValues: {
       name: param.name ?? "",
-      level: param.level ?? 0,
-      category: (param.category && !Array.isArray(param.category)) ? [param.category] : (param.category ?? []),
+      category: param.category ?? [],
       currentPage: param.currentPage ?? 1,
       pageSize: param.pageSize ?? 50
-    } as HaydayProductFormSchema,
+    } as CastawayProductFormSchema,
     validators: {
       onChange: schema
     },
@@ -49,20 +48,16 @@ export default function HaydayProductForm({ param, totalData = 0 }: { param: Hay
     ...defaultValues,
     onSubmit: async ({ value, meta }) => {
       if (meta?.resetPagination) value.currentPage = 1;
-      router.push(`/hayday/product?${makeSearchParam(value)}`);
+      router.push(`/the-sims/castaway-product?${makeSearchParam(value)}`);
     }
   });
 
   return (
-    <Box
-      component='form'
+    <form
       onSubmit={e => { e.preventDefault(); e.stopPropagation(); form.handleSubmit({ resetPagination: true }) }}
       className="flex flex-col grow gap-2"
     >
       <Box className="gap-2 flex grow">
-        <form.AppField name='level' children={(field) => (
-          <field.SimpleNumberbox label='Level'/>
-        )} />
         <form.AppField name='name' children={(field) => (
           <field.SimpleTextbox label='Name'/>
         )} />
@@ -86,6 +81,6 @@ export default function HaydayProductForm({ param, totalData = 0 }: { param: Hay
           }}
         />
       </form.AppForm>
-    </Box>
+    </form>
   )
 }

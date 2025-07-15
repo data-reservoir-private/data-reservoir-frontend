@@ -47,6 +47,8 @@ export async function updateSession(req: NextRequest) {
     supabaseResponse.headers.set('Access-Control-Allow-Origin', '*');
   }
 
+  supabaseResponse.headers.set('X-Current-URL', req.nextUrl.search.slice(1));
+
   // if (!user && !req.nextUrl.pathname.startsWith('/login')) {
   //   const url = req.nextUrl.clone();
   //   url.pathname = '/login';

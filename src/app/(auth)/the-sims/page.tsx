@@ -14,7 +14,12 @@ import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import { BsTable } from "react-icons/bs";
 import { EChartsOption } from 'echarts'
 import { EChart } from '@/components/common/chart/Chart'
+import { Metadata } from 'next'
+import Section from '@/components/common/paper/Section'
 
+export const metadata: Metadata = {
+  title: 'The Sims - Data Reservoir'
+}
 
 const navigation: IQuickLink[] = [
   { name: "Castaway Product", link: '/the-sims/castaway-product', image: '/image/quick_link/ts_castaway_product.png' },
@@ -28,10 +33,8 @@ export default async function Page() {
   const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/the_sims`);
 
   return (
-    <Box display='flex' gap='1rem' flexDirection='column'>
-      <Typography variant='h4' fontWeight='bold'>The Sims</Typography>
-      <Divider />
-
+    <Section name="The Sims" variant='h4'>
+  
       {/* Ini Table dan Rows */}
       <Grid container spacing='1rem' columns={2}>
         <Grid size={1}>
@@ -62,29 +65,30 @@ export default async function Page() {
         <DataChart data={data}/>
       </Paper>
 
-      <Typography variant='h6' fontWeight='bold'>Quick Link</Typography>
-      <Divider />
-      <Grid container spacing='1rem' columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
-        {
-          navigation.map((nav) => (
-            <Grid size={1} key={nav.name}>
-              <Link passHref href={nav.link}>
-                <Paper className='p-2 cursor-pointer hover:bg-background-paper/50 flex flex-col gap-3 items-center'>
-                  <Box className='h-[80px] flex items-center'>
-                    {
-                      (nav.image && typeof (nav.image) === 'string') ? <Image src={nav.image} alt={nav.name} width={80} height={80} className='rounded-sm' />
-                        : (nav.image && typeof (nav.image) !== 'string') ? nav.image() :
-                            <BsTable className='text-[60px] text-gray-500' />
-                    }
-                  </Box>
-                  <Typography className='font-bold'>{nav.name}</Typography>
-                </Paper>
-              </Link>
-            </Grid>
-          ))
-        }
-      </Grid>
-    </Box>
+      <Section variant='h6' name='Quick Link'>
+        <Grid container spacing='1rem' columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
+          {
+            navigation.map((nav) => (
+              <Grid size={1} key={nav.name}>
+                <Link passHref href={nav.link}>
+                  <Paper className='p-2 cursor-pointer hover:bg-background-paper/50 flex flex-col gap-3 items-center'>
+                    <Box className='h-[80px] flex items-center'>
+                      {
+                        (nav.image && typeof (nav.image) === 'string') ? <Image src={nav.image} alt={nav.name} width={80} height={80} className='rounded-sm' />
+                          : (nav.image && typeof (nav.image) !== 'string') ? nav.image() :
+                              <BsTable className='text-[60px] text-gray-500' />
+                      }
+                    </Box>
+                    <Typography className='font-bold'>{nav.name}</Typography>
+                  </Paper>
+                </Link>
+              </Grid>
+            ))
+          }
+        </Grid>
+      </Section>
+
+    </Section>
   )
 }
 

@@ -6,10 +6,11 @@ import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Image from 'next/image';
 import Link from 'next/link';
 import React, { cache } from 'react'
 import Section from '@/components/common/paper/Section';
+import SimpleImage from '@/components/common/SimpleImage';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
 
 interface HaydayBuildingDetailProps {
   params: Promise<{ id: string }>
@@ -29,16 +30,13 @@ export default async function HaydayBuildingDetail(props: HaydayBuildingDetailPr
   const { data } = await grabDetail(id);
 
   return (
-    <Box className='flex flex-col gap-3'>
-      {/* Name */}
-      <Box className='flex flex-col gap-2'>
-        <Typography className='font-bold' variant='h4'>{data.name}</Typography>
-        <Paper className='w-full flex justify-center py-5'>
-          <Box className='w-100 h-100 relative items-center object-center'>
-            <Image src={data.image} alt={data.name} fill className='object-contain' />
-          </Box>
-        </Paper>
-      </Box>
+    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['hayday-building-detail'], { label: data.name }]}>
+      {/* Image */}
+      <Paper className='w-full flex justify-center py-5'>
+        <Box className='w-100 h-100 relative items-center object-center'>
+          <SimpleImage src={data.image} alt={data.name} />
+        </Box>
+      </Paper>
 
       {/* Information */}
       <Section variant='h6' name='Information'>
@@ -55,7 +53,7 @@ export default async function HaydayBuildingDetail(props: HaydayBuildingDetailPr
 
       {/* Products Made */}
       {data.productsMade && data.productsMade.length > 0 && <Grids name='Products Made' data={data.productsMade} />}
-    </Box>
+    </Section>
   )
 }
 
@@ -67,7 +65,7 @@ function Grids({ name, data }: { name: string, data: IHaydayResponse['hayday-bui
           <Paper className="flex overflow-hidden" key={item.id}>
             <Link passHref href={`/hayday/product/${item.id}`}>
               <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                <Image src={item.image} alt={item.name} fill className='object-contain p-1' />
+                <SimpleImage src={item.image} alt={item.name} />
               </Box>
             </Link>
             <Box className="grow flex">
@@ -80,7 +78,7 @@ function Grids({ name, data }: { name: string, data: IHaydayResponse['hayday-bui
                       <Link key={ing.id} href={`/hayday/product/${ing.id}`} className='group'>
                         <Paper className="flex gap-3 items-center h-full rounded-full overflow-hidden group-hover:bg-gray-600/20">
                           <Box className="relative w-7 h-7">
-                            <Image src={ing.image} alt={ing.name} fill className='object-contain p-1 bg-gray-500/20' />
+                            <SimpleImage sizes='28px' src={ing.image} alt={ing.name} className='bg-gray-500/20' />
                           </Box>
                           <Typography className='text-sm font-light'>{ing.name}</Typography>
                           <Typography className='text-sm font-bold pr-2'>{ing.quantity}</Typography>

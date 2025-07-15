@@ -1,26 +1,19 @@
-import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route'
 import { IHaydayResponse } from '@/model/response/hayday';
-import { grabData } from '@/utilities/http'
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Image from 'next/image';
-import Link from 'next/link';
+import { getSearchParam, grabData } from '@/utilities/http'
 import React from 'react';
 import HaydayProductForm, { HaydayProductFormSchema } from './form';
 import Section from '@/components/common/paper/Section';
 import { Metadata } from 'next';
+import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
 
 export const metadata: Metadata = {
   title: 'Hayday Product - Data Reservoir'
 }
 
-type Props = {
-  searchParams: Promise<HaydayProductFormSchema>;
-}
-
-export default async function HaydayProduct(props: Props) {
-  const sp = await props.searchParams;
+export default async function HaydayProduct() {
+  const sp = await getSearchParam<HaydayProductFormSchema>();
   const { data, pagination } = await grabData<IHaydayResponse['hayday-product'][]>(API_ROUTE.HAY_DAY.PRODUCT, {
     name: sp.name ?? "",
     category: sp.category ?? [],
@@ -30,23 +23,9 @@ export default async function HaydayProduct(props: Props) {
   });
 
   return (
-    <Section name='Hayday Products' variant='h4' >
+    <Section name='Hayday Products' variant='h4' breadcrumbs={BREADCRUMBS['hayday-product']}>
       <HaydayProductForm param={sp} totalData={pagination?.totalData ?? 0}/>
-      <Grid container spacing='1rem' columns={12} className="justify-evenly">
-        {
-          data.map((d) => (
-            <Grid key={d.id}>
-              <Link passHref href={`/hayday/product/${d.id}`}>
-                <Paper className='p-1 flex relative'>
-                  <Box className='w-20 h-20 relative'>
-                    <Image src={d.image} alt={d.name} fill sizes='50px' className='rounded-sm h-auto object-contain'/>
-                  </Box>
-                </Paper>
-              </Link>
-            </Grid>
-          ))
-        }
-      </Grid>
+      <SimpleGrid data={data} link='/hayday/product'/>
     </Section>
   )
 }

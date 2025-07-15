@@ -1,3 +1,5 @@
+import queryString from "query-string";
+
 /**
  * Second to string timespan (d:HH:mm:ss)
  * @param p Time in seconds
@@ -42,4 +44,19 @@ export function omitProperty<T extends object, K extends keyof T>(obj: T, ...key
   const result = { ...obj };
   for (const key of keys) delete result[key];
   return result;
+}
+
+export function makeSearchParam(obj: Record<string, any>) {
+  return queryString.stringify(obj, {
+    skipEmptyString: true,
+    skipNull: true,
+    arrayFormat: 'bracket'
+  })
+}
+
+export function parseSearchParam<TResult>(obj: string) {
+  return {...queryString.parse(obj, {
+    arrayFormat: 'bracket',
+    parseNumbers: true,
+  })} as TResult
 }
