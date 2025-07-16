@@ -1,3 +1,5 @@
+import { THE_SIMS_RARITY } from "@/constant/enums"
+
 export type ITheSimsResponse = {
   'bustin-out-career': {
     id: string
@@ -54,5 +56,83 @@ export type ITheSimsResponse = {
       image: string
       rarity: number
     }
-  }
+  },
+  'two-pets-console-product': {
+    id: string
+    name: string
+    image: string
+    category: string
+    energy: number
+    hunger: number
+    bladder: number
+    description: string
+    price: number
+  },
+  'four-pc-harvestable': {
+    id: string
+    name: string
+    image: string
+    rarity: THE_SIMS_RARITY
+    baseValue: number
+    perfectValue: number
+    growthRate: number
+    form: string
+    verticalGarden: boolean
+    description: string
+  },
+  'four-pc-element': {
+    id: string
+    name: string
+    image: string
+    rarity: number
+    value: number
+  },
+  'four-pc-element-complete': {
+    id: string
+    name: string
+    image: string
+    rarity: number
+    value: number
+    metals: {
+      id: string
+      name: string
+      image: string
+    }[],
+    crystals: {
+      id: string
+      name: string
+      image: string
+    }[]
+  },
+  'four-pc-metal': {
+    id: string
+    name: string
+    image: string
+    rarity: THE_SIMS_RARITY
+    value: number,
+    description: string
+  },
+  'four-pc-metal-complete': (ITheSimsResponse['four-pc-metal'] & {
+    elements: {
+      id: string
+      name: string
+      image: string
+    }[]
+  }),
+  'four-pc-crystal': {
+    id: string
+    name: string
+    image: string
+    rarity: THE_SIMS_RARITY
+    value: number,
+    description: string,
+    effect: string
+  },
+  'four-pc-crystal-complete': (ITheSimsResponse['four-pc-crystal'] & {
+    elements: {
+      id: string
+      name: string
+      image: string
+    }[]
+  }),
 }

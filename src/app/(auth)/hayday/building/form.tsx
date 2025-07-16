@@ -8,14 +8,6 @@ import React from 'react'
 import { z } from 'zod'
 import { makeSearchParam } from '@/utilities/general';
 
-const categories = [
-  "Production",
-  "Decorations",
-  "Service",
-  "Storage",
-  "Other"
-];
-
 const schema = z.object({
   name: z.union([z.string().length(0), z.string().min(3)], "Must be empty or min 3 chars").optional(),
   level: z.number().gte(0).optional(),

@@ -1,3 +1,4 @@
+import { THE_SIMS_RARITY } from "@/constant/enums";
 import queryString from "query-string";
 
 /**
@@ -59,4 +60,11 @@ export function parseSearchParam<TResult>(obj: string) {
     arrayFormat: 'bracket',
     parseNumbers: true,
   })} as TResult
+}
+
+export function convertTheSimsRarity(num: THE_SIMS_RARITY) {
+  return num === THE_SIMS_RARITY.COMMON ? 'Common' :
+    num === THE_SIMS_RARITY.NO_RARITY ? '-' :
+      num === THE_SIMS_RARITY.RARE ? 'Rare' : 
+        num === THE_SIMS_RARITY.UNCOMMON ? 'Uncommon': ''
 }

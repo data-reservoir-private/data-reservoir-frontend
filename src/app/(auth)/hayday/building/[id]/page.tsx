@@ -11,15 +11,17 @@ import React, { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
+import { notFound } from 'next/navigation';
 
 interface HaydayBuildingDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['hayday-building-complete']>(`${API_ROUTE.HAY_DAY.BUILDING}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['hayday-building-complete'] | null>(`${API_ROUTE.HAY_DAY.BUILDING}/${id}`));
 
 export async function generateMetadata(props: HaydayBuildingDetailProps) {
   const post = await grabDetail((await props.params).id);
+  if (!post.data) return { title: 'Not Found - Data Reservoir' }
   return {
     title: `Hayday Building - ${post.data.name} - Data Reservoir`
   }
@@ -28,6 +30,7 @@ export async function generateMetadata(props: HaydayBuildingDetailProps) {
 export default async function HaydayBuildingDetail(props: HaydayBuildingDetailProps) {
   const { id } = await props.params;
   const { data } = await grabDetail(id);
+  if (!data) return notFound();
 
   return (
     <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['hayday-building-detail'], { label: data.name }]}>

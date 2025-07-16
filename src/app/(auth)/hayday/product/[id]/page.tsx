@@ -12,15 +12,17 @@ import React, { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
+import { notFound, redirect } from 'next/navigation';
 
 interface HaydayProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['hayday-product-complete']>(`${API_ROUTE.HAY_DAY.PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['hayday-product-complete'] | null>(`${API_ROUTE.HAY_DAY.PRODUCT}/${id}`));
 
 export async function generateMetadata(props: HaydayProductDetailProps) {
   const post = await grabDetail((await props.params).id);
+  if (!post.data) return { title: 'Not Found - Data Reservoir' }
   return {
     title: `Hayday Product - ${post.data.name} - Data Reservoir`
   }
@@ -29,6 +31,7 @@ export async function generateMetadata(props: HaydayProductDetailProps) {
 export default async function HaydayProductDetail(props: HaydayProductDetailProps) {
   const { id } = await props.params;
   const { data } = await grabDetail(id);
+  if (!data) return notFound();
 
   return (
     <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['hayday-product-detail'], { label: data.name }]}>

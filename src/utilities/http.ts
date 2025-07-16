@@ -35,7 +35,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
       })
     }
   });
-  
+
   return {
     pagination: res.data.pagination,
     data: res.data.data

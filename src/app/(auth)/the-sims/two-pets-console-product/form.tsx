@@ -17,16 +17,16 @@ const schema = z.object({
 });
 
 type SubmitMeta = { resetPagination?: boolean };
-export type CastawayProductFormSchema = z.infer<typeof schema>;
+export type TwoPetsConsoleProductFormSchema = z.infer<typeof schema>;
 
-export default function CastawayProductForm({ param, totalData = 0 }: { param: CastawayProductFormSchema, totalData: number }) {
+export default function TwoPetsConsoleProductForm({ param, totalData = 0 }: { param: TwoPetsConsoleProductFormSchema, totalData: number }) {
   const defaultValues = formOptions({
     defaultValues: {
       name: param.name ?? "",
       category: param.category ?? [],
       currentPage: param.currentPage ?? 1,
       pageSize: param.pageSize ?? 50
-    } as CastawayProductFormSchema,
+    } as TwoPetsConsoleProductFormSchema,
     validators: {
       onChange: schema
     },
@@ -38,7 +38,7 @@ export default function CastawayProductForm({ param, totalData = 0 }: { param: C
     ...defaultValues,
     onSubmit: async ({ value, meta }) => {
       if (meta?.resetPagination) value.currentPage = 1;
-      router.push(`/the-sims/castaway-product?${makeSearchParam(value)}`);
+      router.push(`/the-sims/two-pets-console-product?${makeSearchParam(value)}`);
     }
   });
 
@@ -52,7 +52,7 @@ export default function CastawayProductForm({ param, totalData = 0 }: { param: C
           <field.SimpleTextbox label='Name'/>
         )} />
         <form.AppField name='category' children={(field) => (
-          <field.SimpleMultiselectString label='Category' choices={CATEGORIES['the-sims-castaway-product']}/>
+          <field.SimpleMultiselectString label='Category' choices={CATEGORIES['the-sims-two-pets-console-product']}/>
         )} />
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' meta={{ resetPagination: true } as SubmitMeta}/>

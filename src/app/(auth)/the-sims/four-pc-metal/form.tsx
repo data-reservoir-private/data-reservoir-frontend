@@ -8,25 +8,26 @@ import React from 'react'
 import { z } from 'zod'
 import { makeSearchParam } from '@/utilities/general';
 import { CATEGORIES } from '@/constant/categories';
+import { THE_SIMS_RARITY } from '@/constant/enums';
 
 const schema = z.object({
   name: z.union([z.string().length(0), z.string().min(3)], "Must be empty or min 3 chars").optional(),
-  category: z.array(z.string()).optional(),
+  rarity: z.enum(THE_SIMS_RARITY).optional(),
   pageSize: z.number(),
   currentPage: z.number()
 });
 
 type SubmitMeta = { resetPagination?: boolean };
-export type CastawayProductFormSchema = z.infer<typeof schema>;
+export type FourPCMetalFormSchema = z.infer<typeof schema>;
 
-export default function CastawayProductForm({ param, totalData = 0 }: { param: CastawayProductFormSchema, totalData: number }) {
+export default function FourPCMetalForm({ param, totalData = 0 }: { param: FourPCMetalFormSchema, totalData: number }) {
   const defaultValues = formOptions({
     defaultValues: {
       name: param.name ?? "",
-      category: param.category ?? [],
+      rarity: param.rarity,
       currentPage: param.currentPage ?? 1,
       pageSize: param.pageSize ?? 50
-    } as CastawayProductFormSchema,
+    } as FourPCMetalFormSchema,
     validators: {
       onChange: schema
     },
@@ -38,7 +39,7 @@ export default function CastawayProductForm({ param, totalData = 0 }: { param: C
     ...defaultValues,
     onSubmit: async ({ value, meta }) => {
       if (meta?.resetPagination) value.currentPage = 1;
-      router.push(`/the-sims/castaway-product?${makeSearchParam(value)}`);
+      router.push(`/the-sims/four-pc-metal?${makeSearchParam(value)}`);
     }
   });
 
@@ -51,8 +52,8 @@ export default function CastawayProductForm({ param, totalData = 0 }: { param: C
         <form.AppField name='name' children={(field) => (
           <field.SimpleTextbox label='Name'/>
         )} />
-        <form.AppField name='category' children={(field) => (
-          <field.SimpleMultiselectString label='Category' choices={CATEGORIES['the-sims-castaway-product']}/>
+        <form.AppField name='rarity' children={(field) => (
+          <field.SimpleSelect label='Rarity' choices={CATEGORIES['the-sims-rarity']}/>
         )} />
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' meta={{ resetPagination: true } as SubmitMeta}/>

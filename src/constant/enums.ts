@@ -7,7 +7,7 @@ export enum TRANSJAKARTA_DIRECTION {
   SOUTH_NORTH = "SN"
 }
 
-export enum FOUR_PC_HARVESTABLE_RARITY {
+export enum THE_SIMS_RARITY {
   NO_RARITY,
   COMMON,
   UNCOMMON,

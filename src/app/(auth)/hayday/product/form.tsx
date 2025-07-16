@@ -7,16 +7,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react'
 import { z } from 'zod'
 import { makeSearchParam } from '@/utilities/general';
-
-const categories = [
-  "Animals",
-  "Bushes",
-  "Crops",
-  "Ores",
-  "Processed",
-  "Supplies",
-  "Trees"
-];
+import { CATEGORIES } from '@/constant/categories';
 
 const schema = z.object({
   name: z.union([z.string().length(0), z.string().min(3)], "Must be empty or min 3 chars").optional(),
@@ -67,7 +58,7 @@ export default function HaydayProductForm({ param, totalData = 0 }: { param: Hay
           <field.SimpleTextbox label='Name'/>
         )} />
         <form.AppField name='category' children={(field) => (
-          <field.SimpleMultiselectString label='Category' choices={categories}/>
+          <field.SimpleMultiselectString label='Category' choices={CATEGORIES['hayday-product']}/>
         )} />
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' meta={{ resetPagination: true } as SubmitMeta}/>

@@ -8,11 +8,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { BsCopy } from "react-icons/bs";
 import CopyButton from '../CopyButton';
 
 interface GridDetailProps {
-  data: Record<string, React.ReactNode | boolean>
+  data: Record<string, React.ReactNode | boolean | string[]>
 }
 
 export default function TableDetail(props: GridDetailProps) {
@@ -32,7 +31,8 @@ export default function TableDetail(props: GridDetailProps) {
                           <Typography className='text-sm' fontFamily='inconsolata'>{ value }</Typography>
                           <CopyButton value={value}/>
                         </Box>
-                      ) : (value)
+                      ) :
+                        Array.isArray(value) ? (value.join(', ')) : (value)
                   }
                 </TableCell>
               </TableRow>

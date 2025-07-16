@@ -25,8 +25,11 @@ const navigation: IQuickLink[] = [
   { name: "Castaway Product", link: '/the-sims/castaway-product', image: '/image/quick_link/ts_castaway_product.png' },
   { name: "Two Pets Console Product", link: '/the-sims/two-pets-console-product', image: '/image/quick_link/ts2p_product.png' },
   { name: "Three PC Dish", link: '/the-sims/three-pc-dish', image: '/image/quick_link/ts3_pc_dish.png' },
-  { name: "Three PC Gem", link: '/the-sims/three-pc-gem', image: '/image/quick_link/ts3_pc_gem.png' },
   { name: "Bustin Out Career", link: '/the-sims/bustin-out-career' },
+  { name: "Four PC Harvestable", link: '/the-sims/four-pc-harvestable', image: '/image/quick_link/ts4_pc_harvestable.png' },
+  { name: "Four PC Metal", link: '/the-sims/four-pc-metal', image: '/image/quick_link/ts4_pc_metal.png' },
+  { name: "Four PC Element", link: '/the-sims/four-pc-element', image: '/image/quick_link/ts4_pc_element.png' },
+  { name: "Four PC Crystal", link: '/the-sims/four-pc-crystal', image: '/image/quick_link/ts4_pc_crystal.png' },
 ];
 
 export default async function Page() {

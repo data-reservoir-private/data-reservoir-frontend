@@ -2,29 +2,34 @@
 
 import Button from '@mui/material/Button'
 import React, { useEffect, useState } from 'react'
-import { BsCheck, BsCopy } from 'react-icons/bs'
+import { BsCheck, BsCopy, BsX } from 'react-icons/bs'
 
 export default function CopyButton({ value } : { value: string }) {
+  const [copied, setCopied] = useState<'awaiting' | 'success' | 'failed'>('awaiting');
 
-  const [copied, setCopied] = useState(false);
   useEffect(() => {
-    if(copied) setTimeout(() => setCopied(false), 1000)
+    if(copied !== 'awaiting') setTimeout(() => setCopied('awaiting'), 1000)
   }, [copied])
 
   const handleOnClick = () => {
-    navigator.clipboard.writeText(value);
-    setCopied(true);
+    if ('clipboard' in navigator)
+    {
+      navigator.clipboard.writeText(value)
+        .then(() => setCopied('success'))
+        .catch(() => setCopied('failed'));
+    }
+    else setCopied('failed');
   }
 
   return (
     <Button
       size='small'
-      color={copied ? 'success' : 'info'}
-      variant={copied ? 'contained' : 'outlined'}
+      color={copied === 'success' ? 'success' : copied === 'failed' ? 'error' : 'info'}
+      variant={copied !== 'awaiting' ? 'contained' : 'outlined'}
       onClick={handleOnClick}
-      disabled={copied} 
+      disabled={copied !== 'awaiting'} 
     >
-      { copied ? <BsCheck/> : <BsCopy />}
+      { copied === 'success' ? <BsCheck/> : copied === 'failed' ? <BsX/> : <BsCopy />}
     </Button>
   )
 }
