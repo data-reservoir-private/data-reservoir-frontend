@@ -1,6 +1,5 @@
 import Paper from '@/components/common/paper/Paper'
 import { API_ROUTE } from '@/constant/api-route'
-import { IQuickLink } from '@/model/dto/dashboard'
 import { IDashboardResponse } from '@/model/response/dashboard'
 import { grabData } from '@/utilities/http'
 import Box from '@mui/material/box'
@@ -16,16 +15,11 @@ import { EChart } from '@/components/common/chart/Chart'
 import { FaTruck } from "react-icons/fa6";
 import Section from '@/components/common/paper/Section'
 import { Metadata } from 'next'
+import { QUICK_LINKS } from '@/constant/quick-link'
 
 export const metadata: Metadata = {
   title: 'Hayday - Data Reservoir'
 }
-
-const navigation: IQuickLink[] = [
-  { name: "Order", link: '/hayday/order' },
-  { name: "Product", link: '/hayday/product', image: '/image/quick_link/hd_product.png' },
-  { name: "Building", link: '/hayday/building', image: '/image/quick_link/hd_building.png' },
-];
 
 export default async function Page() {
   const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/hayday`);
@@ -33,7 +27,7 @@ export default async function Page() {
   return (
     <Section variant='h4' name='Hayday'>
       {/* Ini Table dan Rows */}
-      <Grid container spacing='1rem' columns={2}>
+      <Grid container spacing='1rem' columns={{ xs: 1, md: 2 }}>
         <Grid size={1}>
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none gap-2'>
             <Box flexDirection='column'>
@@ -65,7 +59,7 @@ export default async function Page() {
       <Section name='Quick Link' variant='h6'>
         <Grid container spacing='1rem' columns={{ xs: 1, sm: 2, md: 3 }}>
           {
-            navigation.map((nav) => (
+            QUICK_LINKS['hayday'].map((nav) => (
               <Grid size={1} key={nav.name}>
                 <Link passHref href={nav.link}>
                   <Paper className='p-2 cursor-pointer hover:bg-background-paper/50 flex flex-col gap-3 items-center'>

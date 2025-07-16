@@ -1,11 +1,153 @@
-import Box from '@mui/material/Box'
-import Skeleton from '@mui/material/Skeleton'
-import React from 'react'
+import Section from '@/components/common/paper/Section'
+import { API_ROUTE } from '@/constant/api-route';
+import { IDashboardResponse } from '@/model/response/dashboard';
+import { grabData } from '@/utilities/http';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import React, { cache } from 'react'
+import { BsFillGrid3X3GapFill } from 'react-icons/bs';
+import { IoMdDocument } from "react-icons/io";
+import { MdCategory } from "react-icons/md";
+import { FaThList } from "react-icons/fa";
+import { EChartsOption } from 'echarts';
+import { EChart } from '@/components/common/chart/Chart';
+import Paper from '@/components/common/paper/Paper';
+import { QUICK_LINKS } from '@/constant/quick-link';
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const { data } = await grabData<IDashboardResponse[]>(`${API_ROUTE.DASHBOARD}`);
+
+  const totalRecord = cache(() => data.reduce((acc, curr) => acc + curr.tables.reduce((a, c) => a + c.rowCount, 0), 0));
+  const totalTable = cache(() => data.reduce((acc, curr) => acc + curr.tables.length, 0));
+  const totalPages = Object.values(QUICK_LINKS).reduce((acc, curr) => acc + curr.length, 0);
+  const totalCategory = data.length;
+
   return (
-    <Box className="p-0 flex flex-col gap-2">
-      Dashboard here
-    </Box>
+    <Section name='Dashboard' variant='h4'>
+      <Grid container spacing='1rem' columns={{ xs: 1, md: 2, lg: 4 }}>
+        <Grid size={1}>
+          <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none'>
+            <Box flexDirection='column'>
+              <Typography variant='h4' fontWeight='bold'>{totalRecord()}</Typography>
+              <Typography variant='subtitle2'>Records</Typography>
+            </Box>
+            <Box component='div' className='h-full flex items-center justify-center text-5xl'>
+              <FaThList />
+            </Box>
+          </Paper>
+        </Grid>
+        <Grid size={1}>
+          <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-green-700 to-green-400 border-none'>
+            <Box flexDirection='column'>
+              <Typography variant='h4' fontWeight='bold'>{totalTable()}</Typography>
+              <Typography variant='subtitle2'>Tables</Typography>
+            </Box>
+            <Box component='div' className='h-full flex items-center justify-center text-5xl'>
+              <BsFillGrid3X3GapFill />
+            </Box>
+          </Paper>
+        </Grid>
+        <Grid size={1}>
+          <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-slate-600 to-slate-400 border-none'>
+            <Box flexDirection='column'>
+              <Typography variant='h4' fontWeight='bold'>{totalPages}</Typography>
+              <Typography variant='subtitle2'>Pages</Typography>
+            </Box>
+            <Box component='div' className='h-full flex items-center justify-center text-5xl'>
+              <IoMdDocument />
+            </Box>
+          </Paper>
+        </Grid>
+        <Grid size={1}>
+          <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-sky-600 to-sky-400 border-none'>
+            <Box flexDirection='column'>
+              <Typography variant='h4' fontWeight='bold'>{totalCategory}</Typography>
+              <Typography variant='subtitle2'>Categories</Typography>
+            </Box>
+            <Box component='div' className='h-full flex items-center justify-center text-5xl'>
+              <MdCategory />
+            </Box>
+          </Paper>
+        </Grid>
+      </Grid>
+
+      <Section name='Distribution' variant='h6'>
+        <Grid container columns={{ xs: 1, md: 3 }}>
+          <Grid size={2}>
+            <Paper>
+              <TreeChart data={data} />
+            </Paper>
+          </Grid>
+
+        </Grid>
+
+      </Section>
+
+    </Section>
   )
+}
+
+function TreeChart({ data }: { data: IDashboardResponse[] }) {
+  const opt: EChartsOption = {
+    series: [
+      {
+        type: 'treemap',
+        scaleLimit: {
+          min: 1.1,
+          max: 12
+        },
+        zoom: 1.1,
+        visibleMin: 300,
+        label: {
+          show: true,
+          formatter: '{b}'
+        },
+        data: data.map(category => ({
+          name: category.prefix,
+
+          children: category.tables.map(table => ({
+            name: table.tableURL,
+            value: table.rowCount
+          }))
+        })),
+        levels: [
+          {
+            itemStyle: {
+              borderWidth: 0,
+              gapWidth: 5,
+              borderColor: 'transparent'
+            }
+          },
+          {
+            itemStyle: {
+              gapWidth: 1,
+              borderColor: 'transparent'
+            }
+          },
+          {
+            colorSaturation: [0.35, 0.5],
+            itemStyle: {
+              gapWidth: 1,
+              borderColorSaturation: 0.6,
+              borderColor: 'transparent'
+            }
+          }
+        ]
+      }
+    ],
+    tooltip: {
+      show: true
+    },
+    grid: {
+      top: 40,
+      left: 40,
+      right: 40,
+      bottom: 40,
+    },
+  }
+
+  return (
+    <EChart className='w-full h-[300px]' option={opt} />
+  );
 }

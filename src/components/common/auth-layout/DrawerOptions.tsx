@@ -13,8 +13,6 @@ import { usePathname } from "next/navigation";
 
 export function DrawerOptions({ onClose }: { onClose: () => void }) {
   const path = usePathname();
-
-  console.log(path)
   return (
     <Box className='w-[250px] h-full'>
       <Box className='flex flex-col h-full p-3 max-sm:px-2 justify-between'>

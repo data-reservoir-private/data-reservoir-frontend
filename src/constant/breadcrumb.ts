@@ -76,4 +76,12 @@ export const BREADCRUMBS = Object.freeze({
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Three PC Dish", link: '/the-sims/three-pc-dish' }
   ],
+  'the-sims-bustin-out-career': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Bustin Out Career" }
+  ],
+  'the-sims-bustin-out-career-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Bustin Out Career", link: '/the-sims/bustin-out-career' }
+  ],
 });

@@ -1,10 +1,8 @@
 import Paper from '@/components/common/paper/Paper'
 import { API_ROUTE } from '@/constant/api-route'
-import { IQuickLink } from '@/model/dto/dashboard'
 import { IDashboardResponse } from '@/model/response/dashboard'
 import { grabData } from '@/utilities/http'
 import Box from '@mui/material/box'
-import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
@@ -16,21 +14,11 @@ import { EChartsOption } from 'echarts'
 import { EChart } from '@/components/common/chart/Chart'
 import { Metadata } from 'next'
 import Section from '@/components/common/paper/Section'
+import { QUICK_LINKS } from '@/constant/quick-link'
 
 export const metadata: Metadata = {
   title: 'The Sims - Data Reservoir'
 }
-
-const navigation: IQuickLink[] = [
-  { name: "Castaway Product", link: '/the-sims/castaway-product', image: '/image/quick_link/ts_castaway_product.png' },
-  { name: "Two Pets Console Product", link: '/the-sims/two-pets-console-product', image: '/image/quick_link/ts2p_product.png' },
-  { name: "Three PC Dish", link: '/the-sims/three-pc-dish', image: '/image/quick_link/ts3_pc_dish.png' },
-  { name: "Bustin Out Career", link: '/the-sims/bustin-out-career' },
-  { name: "Four PC Harvestable", link: '/the-sims/four-pc-harvestable', image: '/image/quick_link/ts4_pc_harvestable.png' },
-  { name: "Four PC Metal", link: '/the-sims/four-pc-metal', image: '/image/quick_link/ts4_pc_metal.png' },
-  { name: "Four PC Element", link: '/the-sims/four-pc-element', image: '/image/quick_link/ts4_pc_element.png' },
-  { name: "Four PC Crystal", link: '/the-sims/four-pc-crystal', image: '/image/quick_link/ts4_pc_crystal.png' },
-];
 
 export default async function Page() {
   const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/the_sims`);
@@ -39,7 +27,7 @@ export default async function Page() {
     <Section name="The Sims" variant='h4'>
   
       {/* Ini Table dan Rows */}
-      <Grid container spacing='1rem' columns={2}>
+      <Grid container spacing='1rem' columns={{ xs: 1, md: 2 }}>
         <Grid size={1}>
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none'>
             <Box flexDirection='column'>
@@ -71,7 +59,7 @@ export default async function Page() {
       <Section variant='h6' name='Quick Link'>
         <Grid container spacing='1rem' columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
           {
-            navigation.map((nav) => (
+            QUICK_LINKS['the-sims'].map((nav) => (
               <Grid size={1} key={nav.name}>
                 <Link passHref href={nav.link}>
                   <Paper className='p-2 cursor-pointer hover:bg-background-paper/50 flex flex-col gap-3 items-center'>
