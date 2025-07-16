@@ -13,15 +13,17 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { convertTheSimsRarity } from '@/utilities/general';
+import { notFound } from 'next/navigation';
 
 interface FourPCElementDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-element-complete']>(`${API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-element-complete'] | null>(`${API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT}/${id}`));
 
 export async function generateMetadata(props: FourPCElementDetailProps) {
   const post = await grabDetail((await props.params).id);
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `The Sims Four PC Element - ${post.data.name} - Data Reservoir`
   }
@@ -30,8 +32,7 @@ export async function generateMetadata(props: FourPCElementDetailProps) {
 export default async function FourPCElementDetail(props: FourPCElementDetailProps) {
   const { id } = await props.params;
   const { data } = await grabDetail(id);
-
-  console.log(data);
+  if (!data) return notFound();
 
   return (
     <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['the-sims-four-pc-element-detail'], { label: data.name }]}>

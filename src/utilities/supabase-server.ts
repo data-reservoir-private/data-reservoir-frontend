@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
+import 'server-only';
 
 export async function supabaseServer() {
   const cookie = await cookies();
@@ -41,19 +42,17 @@ export async function updateSession(req: NextRequest) {
     }
   );
 
+  // BEGIN CUSTOM LOGIC HERE
   // const { data: { user } } = await supabase.auth.getUser();
-
-  if (req.nextUrl.pathname.startsWith('/api')) {
-    supabaseResponse.headers.set('Access-Control-Allow-Origin', '*');
-  }
-
-  supabaseResponse.headers.set('X-Current-URL', req.nextUrl.search.slice(1));
-
+  
   // if (!user && !req.nextUrl.pathname.startsWith('/login')) {
   //   const url = req.nextUrl.clone();
   //   url.pathname = '/login';
   //   return NextResponse.rewrite(url);
   // };
+  supabaseResponse.headers.set('X-Query-Param', req.nextUrl.search.slice(1));
+  supabaseResponse.headers.set('X-Current-URL', req.nextUrl.pathname);
+  // END CUSTOM LOGIC
 
   return supabaseResponse;
 }

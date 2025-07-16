@@ -8,15 +8,17 @@ import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
+import { notFound } from 'next/navigation';
 
 interface ThreePCDishDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-dish']>(`${API_ROUTE.THE_SIMS.THREE_PC_DISH}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-dish'] | null>(`${API_ROUTE.THE_SIMS.THREE_PC_DISH}/${id}`));
 
 export async function generateMetadata(props: ThreePCDishDetailProps) {
   const post = await grabDetail((await props.params).id);
+  if (!post.data) return { title: 'Not Found - Data Reservoir' }
   return {
     title: `The Sims Three PC Dish - ${post.data.name} - Data Reservoir`
   }
@@ -25,6 +27,7 @@ export async function generateMetadata(props: ThreePCDishDetailProps) {
 export default async function ThreePCDishDetail(props: ThreePCDishDetailProps) {
   const { id } = await props.params;
   const { data } = await grabDetail(id);
+  if (!data) return notFound();
 
   return (
     <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['the-sims-three-pc-dish-detail'], { label: data.name }]}>

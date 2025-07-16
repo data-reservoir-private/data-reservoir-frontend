@@ -48,5 +48,9 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
  * @returns Search param as TResult
  */
 export async function getSearchParam<TResult>() : Promise<TResult> {
+  return parseSearchParam<TResult>((await headers()).get('X-Query-Param')!);
+}
+
+export async function getURL<TResult>() : Promise<TResult> {
   return parseSearchParam<TResult>((await headers()).get('X-Current-URL')!);
 }

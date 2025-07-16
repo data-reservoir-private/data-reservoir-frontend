@@ -9,15 +9,17 @@ import Section from '@/components/common/paper/Section';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { convertTheSimsRarity } from '@/utilities/general';
+import { notFound } from 'next/navigation';
 
 interface FourPCHarvestableDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-harvestable']>(`${API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-harvestable'] | null>(`${API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE}/${id}`));
 
 export async function generateMetadata(props: FourPCHarvestableDetailProps) {
   const post = await grabDetail((await props.params).id);
+  if (!post.data) return { title: 'Not Found - Data Reservoir' }
   return {
     title: `The Sims Four PC Harvestable - ${post.data.name} - Data Reservoir`
   }
@@ -26,6 +28,7 @@ export async function generateMetadata(props: FourPCHarvestableDetailProps) {
 export default async function FourPCHarvestableDetail(props: FourPCHarvestableDetailProps) {
   const { id } = await props.params;
   const { data } = await grabDetail(id);
+  if (!data) return notFound();
 
   return (
     <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['the-sims-four-pc-harvestable-detail'], { label: data.name }]}

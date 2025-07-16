@@ -5,12 +5,15 @@ import { redirect } from 'next/navigation';
 import { FaGithub } from "react-icons/fa";
 import { login } from './actions';
 import { Metadata } from 'next';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 export const metadata: Metadata = {
   title: 'Login - Data Reservoir'
 };
 
-type searchParamsType = Promise<Record<string, string | undefined>>
+type searchParamsType = Promise<{ message: string }>
 
 export default async function LoginPage(props: { searchParams: searchParamsType }) {
   const supabase = await supabaseServer();
@@ -20,29 +23,29 @@ export default async function LoginPage(props: { searchParams: searchParamsType 
   const searchP = await props.searchParams;
 
   return (
-    <div className='w-full h-[100svh] flex items-center justify-center'>
+    <Box className='w-full h-[100svh] flex items-center justify-center'>
       <Paper className='w-fit px-12 py-7'>
-        <form action={login} className='flex gap-2 flex-col'>
+        <Box component='form' action={login} className='flex gap-2 flex-col'>
           {
-            searchP['message'] && (
+            searchP.message && (
               <div color='failure' className='p-2 text-sm'>
-                <span>{searchP['message']}</span>
+                <span>{searchP.message}</span>
               </div>
             )
           }
-          <button className='font-bold text-lg flex items-center gap-5 align-middle' color='success' type='submit'>
-            <span className='flex justify-center items-center text-2xl pr-4'>
+          <Button type='submit' variant='contained'>
+            <Box className='flex justify-center items-center text-2xl pr-4'>
               <FaGithub className='flex items-center'/>
-            </span>
-            <span className='flex items-center'>
+            </Box>
+            <Typography className='flex items-center'>
               Login using Github
-            </span>
-          </button>
-          <span className='text-[9px]'>
+            </Typography>
+          </Button>
+          <Typography>
             This is a private app. No one else can login :D
-          </span>
-        </form>
+          </Typography>
+        </Box>
       </Paper>
-    </div>
+    </Box>
   );
 }
