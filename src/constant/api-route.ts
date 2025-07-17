@@ -36,7 +36,9 @@ export const API_SHORTHAND = Object.freeze({
     TWO_PIZZA_PRODUCT: 'two-pizza-product',
     THREE_PRODUCT: 'three-product',
   },
-  PIZZA_FRENZY: '',
+  PIZZA_FRENZY: {
+    TOPPING: 'topping'
+  },
   NASI_GORENG: {
     BURNED_FOOD: 'burned-food',
     INGREDIENT: 'ingredient',
@@ -105,7 +107,9 @@ export const API_ROUTE = Object.freeze({
     TWO_PIZZA_PRODUCT: `${HOST}/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.TWO_PIZZA_PRODUCT}`,
     THREE_PRODUCT: `${HOST}/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.THREE_PRODUCT}`,
   },
-  PIZZA_FRENZY: `${HOST}/pizza-frenzy/`,
+  PIZZA_FRENZY: {
+    TOPPING: `${HOST}/pizza-frenzy/${API_SHORTHAND.PIZZA_FRENZY.TOPPING}`
+  },
   NASI_GORENG: {
     BURNED_FOOD: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.BURNED_FOOD}`,
     INGREDIENT: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.INGREDIENT}`,

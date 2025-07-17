@@ -26,5 +26,8 @@ export const QUICK_LINKS = Object.freeze({
     { name: "Two Product", link: '/farm-frenzy/two-product', image: '/image/quick_link/ff_two_product.png' },
     { name: "Two Pizza Product", link: '/farm-frenzy/two-pizza-product', image: '/image/quick_link/ff_two_pizza_product.png' },
     { name: "Three Product", link: '/farm-frenzy/three-product', image: '/image/quick_link/ff_three_product.png' },
+  ] as IQuickLink[],
+  'pizza-frenzy': [
+    { name: "Topping", link: '/pizza-frenzy/topping', image: '/image/quick_link/pf_topping.png' },
   ] as IQuickLink[]
 });
