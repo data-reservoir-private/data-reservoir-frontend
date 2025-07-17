@@ -20,6 +20,8 @@ export const BREADCRUMBS = Object.freeze({
     { label: "Hayday", link: '/hayday' },
     { label: "Hayday Building", link: '/hayday/building' }
   ],
+
+  // Hayday
   'the-sims-castaway-product': [
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Castaway Product" }
@@ -83,5 +85,39 @@ export const BREADCRUMBS = Object.freeze({
   'the-sims-bustin-out-career-detail': [
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Bustin Out Career", link: '/the-sims/bustin-out-career' }
+  ],
+
+  // Farm Frenzy
+  'farm-frenzy-one-product': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy One Product", }
+  ],
+  'farm-frenzy-one-product-detail': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy One Product", link: '/farm-frenzy/one-product' }
+  ],
+  'farm-frenzy-two-product': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy Two Product", }
+  ],
+  'farm-frenzy-two-product-detail': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy Two Product", link: '/farm-frenzy/two-product' }
+  ],
+  'farm-frenzy-three-product': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy Three Product", }
+  ],
+  'farm-frenzy-three-product-detail': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy Three Product", link: '/farm-frenzy/three-product' }
+  ],
+  'farm-frenzy-two-pizza-product': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy Two Pizza Product", }
+  ],
+  'farm-frenzy-two-pizza-product-detail': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy Two Pizza", link: '/farm-frenzy/two-pizza-product' }
   ],
 });

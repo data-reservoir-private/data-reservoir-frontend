@@ -25,7 +25,7 @@ export function DrawerOptions({ onClose }: { onClose: () => void }) {
                     <ListItem key={route.id} onClick={() => onClose()} className='p-0'>
                       <ListItemButton className={classNames('rounded p-0 mx-2', {
                         'bg-primary/60': path.startsWith(route.link)
-                      })} disabled={route.inactive || path.startsWith(route.link)} component={Link} href={route.link} >
+                      })} disabled={route.inactive || path.startsWith(route.link)} component={Link} href={route.link}>
                         <ListItemIcon className='flex justify-center items-center gap-3 w-full p-2 rounded'>
                           <route.icon className='text-xl' />
                           <ListItemText className={classNames({

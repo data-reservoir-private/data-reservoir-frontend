@@ -2,17 +2,19 @@ import { PiBarn } from 'react-icons/pi';
 import { TransjakartaIcon } from "@/components/icon/icons";
 import { IconType } from "react-icons";
 import { BiSolidHome } from "react-icons/bi";
-import { BsFillSuitDiamondFill } from "react-icons/bs";
+import { BsFillSuitDiamondFill, BsDatabaseFillDown } from "react-icons/bs";
 import { CiWheat } from "react-icons/ci";
 import { FaBowlFood, FaPizzaSlice } from "react-icons/fa6";
 import { IoIosDocument } from "react-icons/io";
 import { GiCrystalGrowth, GiPolarStar } from "react-icons/gi";
 import { GrTransaction } from "react-icons/gr";
 
+
 export type ROUTE =
   "dashboard" | "transjakarta" | "hayday" |
   "the-sims" | "pizza-frenzy" | "farm-frenzy" |
-  "nasi-goreng" | "quartz" | "cygnus" | "transaction" | "docs";
+  "nasi-goreng" | "quartz" | "cygnus" | "transaction" |
+  "docs" | "export";
 
 export type ROUTE_TYPE = {
   id: ROUTE,
@@ -48,7 +50,6 @@ export const ROUTES: ROUTE_TYPE[][] = [
       id: 'farm-frenzy',
       name: 'Farm Frenzy',
       icon: PiBarn,
-      inactive: true,
       link: '/farm-frenzy'
     },
     {
@@ -98,6 +99,13 @@ export const ROUTES: ROUTE_TYPE[][] = [
 
   ],
   [
+    {
+      id: 'export',
+      name: 'Export Data',
+      icon: BsDatabaseFillDown,
+      link: '/export',
+      inactive: true,
+    },
     {
       id: 'docs',
       name: 'Documentation',

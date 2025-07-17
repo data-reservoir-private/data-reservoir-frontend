@@ -14,6 +14,12 @@ import { EChartsOption } from 'echarts';
 import { EChart } from '@/components/common/chart/Chart';
 import Paper from '@/components/common/paper/Paper';
 import { QUICK_LINKS } from '@/constant/quick-link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Dashboard - Data Reservoir'
+}
+
 
 export default async function Dashboard() {
   const { data } = await grabData<IDashboardResponse[]>(`${API_ROUTE.DASHBOARD}`);
@@ -73,17 +79,14 @@ export default async function Dashboard() {
       </Grid>
 
       <Section name='Distribution' variant='h6'>
-        <Grid container columns={{ xs: 1, md: 3 }}>
-          <Grid size={2}>
+        <Grid container columns={1}>
+          <Grid size={1}>
             <Paper>
               <TreeChart data={data} />
             </Paper>
           </Grid>
-
         </Grid>
-
       </Section>
-
     </Section>
   )
 }
