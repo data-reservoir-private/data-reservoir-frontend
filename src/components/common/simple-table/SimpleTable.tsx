@@ -19,7 +19,7 @@ import * as XML from 'xml-js'
 import TOML from 'json2toml';
 import { json2csv } from 'json-2-csv';
 
-type ExportType = 'json' | 'csv' | 'yaml' | 'toml' | 'xml';
+type ExportType = 'json' | 'csv' | 'yaml' | 'xml';
 
 export interface SimpleTableProps<T> {
   data: T[],
@@ -68,9 +68,6 @@ export default function SimpleTable<T>(props: SimpleTableProps<T>) {
           data: data
         }
       }, { spaces: 2, compact: true })], { type: 'application/xml' }), 'result.xml');
-    }
-    else if (type === 'toml') {
-      saveAs(new Blob([TOML(data, { indent: 2, newlineAfterSection: true })], { type: 'text/plain' }), 'result.toml');
     }
     else if (type === 'csv') {
       saveAs(new Blob([json2csv(data as object[])], { type: 'application/csv' }), 'result.csv');

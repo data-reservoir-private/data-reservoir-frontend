@@ -103,7 +103,6 @@ export const ROUTES: ROUTE_TYPE[][] = [
       name: 'Export Data',
       icon: BsDatabaseFillDown,
       link: '/export',
-      inactive: true,
     },
     {
       id: 'docs',

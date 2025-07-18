@@ -13,8 +13,8 @@ import { FaThList } from "react-icons/fa";
 import { EChartsOption } from 'echarts';
 import { EChart } from '@/components/common/chart/Chart';
 import Paper from '@/components/common/paper/Paper';
-import { QUICK_LINKS } from '@/constant/quick-link';
 import { Metadata } from 'next';
+import { DATA_AVAILABLE } from '@/constant/data';
 
 export const metadata: Metadata = {
   title: 'Dashboard - Data Reservoir'
@@ -26,7 +26,7 @@ export default async function Dashboard() {
 
   const totalRecord = cache(() => data.reduce((acc, curr) => acc + curr.tables.reduce((a, c) => a + c.rowCount, 0), 0));
   const totalTable = cache(() => data.reduce((acc, curr) => acc + curr.tables.length, 0));
-  const totalPages = Object.values(QUICK_LINKS).reduce((acc, curr) => acc + curr.length, 0);
+  const totalPages = Object.values(DATA_AVAILABLE).reduce((acc, curr) => acc + curr.categories.length, 0);
   const totalCategory = data.length;
 
   return (

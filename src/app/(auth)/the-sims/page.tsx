@@ -14,7 +14,7 @@ import { EChartsOption } from 'echarts'
 import { EChart } from '@/components/common/chart/Chart'
 import { Metadata } from 'next'
 import Section from '@/components/common/paper/Section'
-import { QUICK_LINKS } from '@/constant/quick-link'
+import { DATA_AVAILABLE } from '@/constant/data'
 
 export const metadata: Metadata = {
   title: 'The Sims - Data Reservoir'
@@ -59,7 +59,7 @@ export default async function Page() {
       <Section variant='h6' name='Quick Link'>
         <Grid container spacing='1rem' columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
           {
-            QUICK_LINKS['the-sims'].map((nav) => (
+            DATA_AVAILABLE['the-sims'].categories.map((nav) => (
               <Grid size={1} key={nav.name}>
                 <Link passHref href={nav.link}>
                   <Paper className='p-2 cursor-pointer hover:bg-background-paper/50 flex flex-col gap-3 items-center'>

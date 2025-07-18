@@ -15,7 +15,7 @@ import { EChart } from '@/components/common/chart/Chart'
 import { FaTruck } from "react-icons/fa6";
 import Section from '@/components/common/paper/Section'
 import { Metadata } from 'next'
-import { QUICK_LINKS } from '@/constant/quick-link'
+import { DATA_AVAILABLE } from '@/constant/data'
 
 export const metadata: Metadata = {
   title: 'Farm Frenzy - Data Reservoir'
@@ -59,7 +59,7 @@ export default async function Page() {
       <Section name='Quick Link' variant='h6'>
         <Grid container spacing='1rem' columns={{ xs: 1, sm: 2, md: 3 }}>
           {
-            QUICK_LINKS['farm-frenzy'].map((nav) => (
+            DATA_AVAILABLE['farm-frenzy'].categories.map((nav) => (
               <Grid size={1} key={nav.name}>
                 <Link passHref href={nav.link}>
                   <Paper className='p-2 cursor-pointer hover:bg-background-paper/50 flex flex-col gap-3 items-center'>
