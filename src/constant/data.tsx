@@ -1,7 +1,10 @@
 import { API_ROUTE } from "./api-route";
+import { BsBuildingFill } from "react-icons/bs";
 import 'server-only'
 
 export type ExportType = 'json' | 'csv' | 'yaml' | 'xml';
+
+const ALL_EXPORTS: ExportType[] = ['json', 'csv', 'xml', 'yaml'];
 
 interface IData {
   name: string,
@@ -29,8 +32,8 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/the-sims/castaway-product',
         description: 'Products gathered from The Sims Castaway console game. Including fishes and crafted products that are stored inside inventory',
         export: {
-          route: `${API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT}`,
-          exportType: ['json', 'csv', 'xml', 'yaml']
+          route: API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT,
+          exportType: ALL_EXPORTS
         }
       },
       {
@@ -40,8 +43,8 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/the-sims/two-pets-console-product',
         description: 'Ingredients gathered from fridge. Includes harvested products such as veggies, fruits, and seafood. Oh, also golden egg',
         export: {
-          route: `${API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT}`,
-          exportType: ['json', 'csv', 'xml', 'yaml']
+          route: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT,
+          exportType: ALL_EXPORTS
         }
       },
       {
@@ -49,41 +52,66 @@ export const DATA_AVAILABLE = Object.freeze(({
         name: "Three PC Dish",
         link: '/the-sims/three-pc-dish',
         image: '/image/quick_link/ts3_pc_dish.png',
-        description: ''
+        description: 'All of dishes that can be made inside TS3 PC game. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.THREE_PC_DISH,
+          exportType: ALL_EXPORTS
+        }
       },
       {
         id: 'bustin-out-career',
         name: "Bustin Out Career",
         link: '/the-sims/bustin-out-career',
-        description: ''
+        image: () => (<BsBuildingFill className="text-4xl" />),
+        description: 'TS Bustin Out\'s career path and job. Including the story mode and freeplay mode\'s careers',
+        export: {
+          route: `${API_ROUTE.THE_SIMS.BUSTIN_OUT_CAREER}`,
+          exportType: ALL_EXPORTS
+        }
       },
       {
         id: 'four-pc-harvestable',
         name: "Four PC Harvestable",
         link: '/the-sims/four-pc-harvestable',
         image: '/image/quick_link/ts4_pc_harvestable.png',
-        description: ''
+        description: 'All of TS4 PC\'s harvestable product',
+        export: {
+          route: `${API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE}`,
+          exportType: ALL_EXPORTS
+        }
       },
       {
         id: 'four-pc-metal',
         name: "Four PC Metal",
         link: '/the-sims/four-pc-metal',
         image: '/image/quick_link/ts4_pc_metal.png',
-        description: ''
+        description: 'All of TS4 metal collectibles. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.FOUR_PC_METAL,
+          exportType: ALL_EXPORTS
+        }
       },
       {
         id: 'four-pc-element',
         name: "Four PC Element",
         link: '/the-sims/four-pc-element',
         image: '/image/quick_link/ts4_pc_element.png',
-        description: ''
+        description: 'All of TS4 element collectibles. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT,
+          exportType: ALL_EXPORTS
+        }
       },
       {
         id: 'four-pc-crystal',
         name: "Four PC Crystal",
         link: '/the-sims/four-pc-crystal',
         image: '/image/quick_link/ts4_pc_crystal.png',
-        description: ''
+        description: 'All of TS4 crystal collectibles. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL,
+          exportType: ALL_EXPORTS
+        }
       },
     ]
   } as IData,
@@ -101,14 +129,22 @@ export const DATA_AVAILABLE = Object.freeze(({
         name: "Product",
         link: '/hayday/product',
         image: '/image/quick_link/hd_product.png',
-        description: '',
+        description: 'Every products that harvested or processed via buildings. Accurate as of July 2025. All are sourced from Hayday Wiki',
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.HAY_DAY.PRODUCT
+        }
       },
       {
         id: 'building',
         name: "Building",
         link: '/hayday/building',
         image: '/image/quick_link/hd_building.png',
-        description: '',
+        description: 'Hayday\'s all production buildings. Accurate as of July 2025. All are sourced from Hayday Wiki',
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.HAY_DAY.BUILDING
+        }
       },
     ]
   } as IData,
@@ -120,28 +156,44 @@ export const DATA_AVAILABLE = Object.freeze(({
         name: "One Product",
         link: '/farm-frenzy/one-product',
         image: '/image/quick_link/ff_one_product.png',
-        description: '',
+        description: 'Farm Frenzy One products',
+        export: {
+          route: API_ROUTE.FARM_FRENZY.ONE_PRODUCT,
+          exportType: ALL_EXPORTS
+        }
       },
       {
         id: 'two-product',
         name: "Two Product",
         link: '/farm-frenzy/two-product',
         image: '/image/quick_link/ff_two_product.png',
-        description: ''
+        description: 'Farm Frenzy Two products',
+        export: {
+          route: API_ROUTE.FARM_FRENZY.TWO_PRODUCT,
+          exportType: ALL_EXPORTS
+        }
       },
       {
         id: 'two-pizza-product',
         name: "Two Pizza Product",
         link: '/farm-frenzy/two-pizza-product',
         image: '/image/quick_link/ff_two_pizza_product.png',
-        description: ''
+        description: 'Farm Frenzy Two Pizza Party products',
+        export: {
+          route: API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT,
+          exportType: ALL_EXPORTS
+        }
       },
       {
         id: 'three-product',
         name: "Three Product",
         link: '/farm-frenzy/three-product',
         image: '/image/quick_link/ff_three_product.png',
-        description: ''
+        description: 'Farm Frenzy Three products (All franchises)',
+        export: {
+          route: API_ROUTE.FARM_FRENZY.THREE_PRODUCT,
+          exportType: ALL_EXPORTS
+        }
       },
     ]
   } as IData,
@@ -166,7 +218,10 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_ingredient.png',
         description: 'Bahan2 yang bisa didapatkan atau dibuat',
         link: '/nasi-goreng/ingredient',
-        
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.NASI_GORENG.INGREDIENT
+        }
       },
       {
         id: 'fried-rice',

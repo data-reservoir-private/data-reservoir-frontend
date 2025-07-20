@@ -31,13 +31,14 @@ function getType(exportType: ExportType) {
 export default function ExportPage() {
   return (
     <Section name='Export Data' variant='h4'>
-      <Typography>Please note that your data might be incomplete and some of data provided by this export utility might be cached, resulting in delayed updates.</Typography>
-      <Typography>I suggest you to keep looking at indicator on the top right. Those might indicate your chance of success of getting these data.</Typography>
-      <Typography>The structure of the data is similar to the one you usually found inside detail endpoint (endpoint that ends with GUID like <code>00000000-0000-0000-0000-000000000000</code>)</Typography>
+      <Typography textAlign='justify'>Please note that your data might be incomplete and some of data provided by this export utility might be cached, resulting in delayed updates.</Typography>
+      <Typography textAlign='justify'>Exported data might be simpler than your detail menu (might just be its ID, image, and name). If you need more data (relations for example), please contact me personally and I will query it all for you.</Typography>
+      <Typography textAlign='justify'>Not every data that you can view can be exported due to complexity of those data. I will try my best to support it all, but for now, you just have to wait :(</Typography>
+      <Typography textAlign='justify'>I suggest you to keep looking at indicator on the top right. Those might indicate your chance of success of getting these data.</Typography>
+      <Typography textAlign='justify'>The structure of the data is similar to the one you usually found inside detail endpoint (endpoint that ends with GUID like <code>00000000-0000-0000-0000-000000000000</code>).</Typography>
 
       <Section name='Data Store' variant='h5'>
-        <Typography>You can start to download this without any additional obstacle.</Typography>
-        <Typography>Do not forget to check your data received. If you need to insert these into your database, make a use of an online converter</Typography>
+        <Typography textAlign='justify'>Do not forget to check your data received. If you need to insert these into your database, make a use of an online converter.</Typography>
         {
           Object.entries(DATA_AVAILABLE).filter(([_, value]) => value.categories.some(y => y.export)).map(([categoryKey, categoryValue]) => (
             <Section name={categoryValue.name} key={categoryKey} variant='h6'>
@@ -46,7 +47,7 @@ export default function ExportPage() {
                   <Paper className='flex flex-col gap-2 p-1' key={l.id}>
                     <Box className='flex gap-2'>
                       <Box>
-                        <Box className='h-[80px] w-[80px] flex items-center relative'>
+                        <Box className='h-[80px] w-[80px] flex justify-center items-center relative'>
                           {
                             (l.image && typeof (l.image) === 'string') ? <SimpleImage src={l.image} alt={l.name} className='rounded-sm' />
                               : (l.image && typeof (l.image) !== 'string') ? l.image() :

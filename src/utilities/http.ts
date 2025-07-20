@@ -9,7 +9,6 @@ import queryString from 'query-string';
 import { headers } from 'next/headers';
 import { parseSearchParam } from './general';
 
-
 export async function grabData<TData>(url: string, params?: Record<string, any>): Promise<{
   pagination?: IPaginationResponse,
   data: TData
