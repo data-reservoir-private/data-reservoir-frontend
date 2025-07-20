@@ -64,18 +64,17 @@ export const ROUTES: ROUTE_TYPE[][] = [
       link: '/nasi-goreng'
     },
     {
+      id: 'quartz',
+      name: 'Quartz',
+      icon: GiCrystalGrowth,
+      link: '/quartz'
+    },
+    {
       id: 'cygnus',
       name: 'Cygnus',
       icon: GiPolarStar,
       inactive: true,
       link: '/cygnus'
-    },
-    {
-      id: 'quartz',
-      name: 'Quartz',
-      icon: GiCrystalGrowth,
-      inactive: true,
-      link: '/quartz'
     },
     {
       id: 'transaction',

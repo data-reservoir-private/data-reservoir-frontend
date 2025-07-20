@@ -266,5 +266,43 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/nasi-goreng/plate',
       },
     ]
+  } as IData,
+  'quartz': {
+    name: 'Quartz',
+    categories: [
+      {
+        id: 'recipe',
+        name: 'Recipe',
+        image: '/image/quick_link/q_recipe.png',
+        description: 'Harvest Moon: Friends of Mineral Town GBA recipes. Sourced from https://fogu.com/hm4/',
+        link: '/quartz/recipe',
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.QUARTZ.RECIPE
+        }
+      },
+      {
+        id: 'shippable',
+        name: 'Shippable',
+        image: '/image/quick_link/q_shippable.png',
+        description: 'Harvest Moon: Friends of Mineral Town GBA shippable products. Sourced from https://fogu.com/hm4/',
+        link: '/quartz/shippable',
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.QUARTZ.SHIPPABLE
+        }
+      },
+      {
+        id: 'utensil',
+        name: 'Utensil',
+        image: '/image/quick_link/q_utensil.png',
+        description: 'Harvest Moon: Friends of Mineral Town GBA utensils. Sourced from https://fogu.com/hm4/',
+        link: '/quartz/utensil',
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.QUARTZ.UTENSIL
+        }
+      }
+    ]
   } as IData
 }))

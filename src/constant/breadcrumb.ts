@@ -187,5 +187,31 @@ export const BREADCRUMBS = Object.freeze({
   'nasi-goreng-plate-detail': [
     { label: "Nasi Goreng", link: '/nasi-goreng' },
     { label: "Nasi Goreng Plate", link: '/nasi-goreng/plate' }
-  ]
+  ],
+
+  // Quartz
+  'quartz-shippable': [
+    { label: "Quartz", link: '/quartz' },
+    { label: "Quartz Shippable", }
+  ],
+  'quartz-shippable-detail': [
+    { label: "Quartz", link: '/quartz' },
+    { label: "Quartz Shippable", link: '/quartz/shippable' }
+  ],
+  'quartz-recipe': [
+    { label: "Quartz", link: '/quartz' },
+    { label: "Quartz Recipe", }
+  ],
+  'quartz-recipe-detail': [
+    { label: "Quartz", link: '/quartz' },
+    { label: "Quartz Recipe", link: '/quartz/recipe' }
+  ],
+  'quartz-utensil': [
+    { label: "Quartz", link: '/quartz' },
+    { label: "Quartz Utensil", }
+  ],
+  'quartz-utensil-detail': [
+    { label: "Quartz", link: '/quartz' },
+    { label: "Quartz Utensil", link: '/quartz/utensil' }
+  ],
 });
