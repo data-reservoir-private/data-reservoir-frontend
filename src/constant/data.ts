@@ -18,7 +18,7 @@ interface IData {
   }[]
 }
 
-export const DATA_AVAILABLE = Object.freeze({
+export const DATA_AVAILABLE = Object.freeze(({
   'the-sims': {
     name: 'The Sims',
     categories: [
@@ -86,7 +86,7 @@ export const DATA_AVAILABLE = Object.freeze({
         description: ''
       },
     ]
-  },
+  } as IData,
   'hayday': {
     name: 'Hayday',
     categories: [
@@ -111,7 +111,7 @@ export const DATA_AVAILABLE = Object.freeze({
         description: '',
       },
     ]
-  },
+  } as IData,
   'farm-frenzy': {
     name: "Farm Frenzy",
     categories: [
@@ -144,7 +144,7 @@ export const DATA_AVAILABLE = Object.freeze({
         description: ''
       },
     ]
-  },
+  } as IData,
   'pizza-frenzy': {
     name: "Pizza Frenzy",
     categories: [
@@ -156,5 +156,60 @@ export const DATA_AVAILABLE = Object.freeze({
         description: ''
       },
     ]
-  }
-} as Record<string, IData>)
+  } as IData,
+  'nasi-goreng': {
+    name: "Nasi Goreng",
+    categories: [
+      {
+        id: 'ingredient',
+        name: 'Ingredient',
+        image: '/image/quick_link/ng_ingredient.png',
+        description: 'Bahan2 yang bisa didapatkan atau dibuat',
+        link: '/nasi-goreng/ingredient',
+        
+      },
+      {
+        id: 'fried-rice',
+        name: 'Fried Rice',
+        image: '/image/quick_link/ng_fried_rice.png',
+        description: 'Semua nasi goreng yang bisa dimasak',
+        link: '/nasi-goreng/fried-rice',
+      },
+      {
+        id: 'upgrade',
+        name: 'Upgrade',
+        image: '/image/quick_link/ng_upgrade.png',
+        description: 'Pretelan2 yang biasa ditambahkan di nasi goreng. Ini cuma bentuk doang ya hehe',
+        link: '/nasi-goreng/upgrade',
+      },
+      {
+        id: 'tool',
+        name: 'Tool',
+        image: '/image/quick_link/ng_tool.png',
+        description: 'Alat2 masak yang bakal kalian pakai untuk bereksperimen',
+        link: '/nasi-goreng/tool',
+      },
+      {
+        id: 'relic',
+        name: 'Relic',
+        image: '/image/quick_link/ng_relic.png',
+        description: 'Burned Food versi langka because we love gacha hehe',
+        link: '/nasi-goreng/relic',
+      },
+      {
+        id: 'burned-food',
+        name: 'Burned Food',
+        image: '/image/quick_link/ng_burned_food.png',
+        description: 'Aduh? Salah resep kali :/',
+        link: '/nasi-goreng/burned-food',
+      },
+      {
+        id: 'plate',
+        name: 'Plate',
+        image: '/image/quick_link/ng_plate.png',
+        description: 'Walau nga dimakan, tapi ingat kalau dalam culinary, plating itu faktor dalam rating makanan kalian',
+        link: '/nasi-goreng/plate',
+      },
+    ]
+  } as IData
+}))

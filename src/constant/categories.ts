@@ -52,5 +52,11 @@ export const CATEGORIES = Object.freeze({
     "Standard",
     "Pet",
     "Store",
+  ],
+  'nasi-goreng-ingredient': [
+    "Seasoning / Bumbu",
+    "Other / Lainnya",
+    "Stir Fry / Tumisan",
+    "Meat / Daging"
   ]
 })

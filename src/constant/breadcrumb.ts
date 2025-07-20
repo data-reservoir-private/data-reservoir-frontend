@@ -130,4 +130,62 @@ export const BREADCRUMBS = Object.freeze({
     { label: "Pizza Frenzy", link: '/pizza-frenzy' },
     { label: "Pizza Frenzy Topping", link: '/pizza-frenzy/topping' }
   ],
+
+  // Nasi Goreng
+  'nasi-goreng-ingredient': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Ingredient", }
+  ],
+  'nasi-goreng-ingredient-detail': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Ingredient", link: '/nasi-goreng/ingredient' }
+  ],
+  'nasi-goreng-fried-rice': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Fried Rice", }
+  ],
+  'nasi-goreng-fried-rice-detail': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Fried Rice", link: '/nasi-goreng/fried-rice' }
+  ],
+  'nasi-goreng-upgrade': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Upgrade", }
+  ],
+  'nasi-goreng-upgrade-detail': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Upgrade", link: '/nasi-goreng/upgrade' }
+  ],
+  'nasi-goreng-tool': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Tool", }
+  ],
+  'nasi-goreng-tool-detail': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Tool", link: '/nasi-goreng/tool' }
+  ],
+  'nasi-goreng-relic': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Relic", }
+  ],
+  'nasi-goreng-relic-detail': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Relic", link: '/nasi-goreng/relic' }
+  ],
+  'nasi-goreng-burned-food': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Burned Food", }
+  ],
+  'nasi-goreng-burned-food-detail': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Burned Food", link: '/nasi-goreng/burned-food' }
+  ],
+  'nasi-goreng-plate': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Plate", }
+  ],
+  'nasi-goreng-plate-detail': [
+    { label: "Nasi Goreng", link: '/nasi-goreng' },
+    { label: "Nasi Goreng Plate", link: '/nasi-goreng/plate' }
+  ]
 });

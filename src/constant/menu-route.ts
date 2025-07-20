@@ -9,7 +9,6 @@ import { IoIosDocument } from "react-icons/io";
 import { GiCrystalGrowth, GiPolarStar } from "react-icons/gi";
 import { GrTransaction } from "react-icons/gr";
 
-
 export type ROUTE =
   "dashboard" | "transjakarta" | "hayday" |
   "the-sims" | "pizza-frenzy" | "farm-frenzy" |
@@ -62,7 +61,6 @@ export const ROUTES: ROUTE_TYPE[][] = [
       id: 'nasi-goreng',
       name: 'Nasi Goreng',
       icon: FaBowlFood,
-      inactive: true,
       link: '/nasi-goreng'
     },
     {
