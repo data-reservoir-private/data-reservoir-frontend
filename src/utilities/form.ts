@@ -3,6 +3,7 @@ import SimpleNumberbox from '@/components/form/SimpleNumberbox';
 import SimplePageNavigation from '@/components/form/SimplePageNavigation';
 import SimpleResetButton from '@/components/form/SimpleResetButton';
 import SimpleSelect from '@/components/form/SimpleSelect';
+import SimpleSelectString from '@/components/form/SimpleSelectString';
 import SimpleSubmitButton from '@/components/form/SimpleSubmitButton';
 import SimpleTextbox from '@/components/form/SimpleTextbox';
 import { createFormHookContexts, createFormHook } from '@tanstack/react-form'
@@ -21,6 +22,7 @@ export const { useAppForm } = createFormHook({
   fieldComponents: {
     SimpleTextbox,
     SimpleSelect,
+    SimpleSelectString,
     SimpleNumberbox,
     SimpleMultiselectString
   },

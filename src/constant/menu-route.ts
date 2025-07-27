@@ -8,10 +8,11 @@ import { FaBowlFood, FaPizzaSlice } from "react-icons/fa6";
 import { IoIosDocument } from "react-icons/io";
 import { GiCrystalGrowth, GiPolarStar } from "react-icons/gi";
 import { GrTransaction } from "react-icons/gr";
+import { TbAtom2Filled } from "react-icons/tb";
 
 export type ROUTE =
   "dashboard" | "transjakarta" | "hayday" |
-  "the-sims" | "pizza-frenzy" | "farm-frenzy" |
+  "the-sims" | "pizza-frenzy" | "farm-frenzy" | "element" |
   "nasi-goreng" | "quartz" | "cygnus" | "transaction" |
   "docs" | "export";
 
@@ -73,26 +74,31 @@ export const ROUTES: ROUTE_TYPE[][] = [
       id: 'cygnus',
       name: 'Cygnus',
       icon: GiPolarStar,
-      inactive: true,
       link: '/cygnus'
     },
-    {
-      id: 'transaction',
-      name: 'Transaction',
-      icon: GrTransaction,
-      inactive: true,
-      link: '/transaction',
-      beta: true
-    },
-    {
-      id: 'transjakarta',
-      name: 'Transjakarta',
-      icon: TransjakartaIcon,
-      inactive: true,
-      link: '/transjakarta',
-      beta: true
-    },
-
+    // {
+    //   id: 'element',
+    //   name: 'Element',
+    //   icon: TbAtom2Filled,
+    //   link: '/element',
+    //   inactive: true
+    // },
+    // {
+    //   id: 'transaction',
+    //   name: 'Transaction',
+    //   icon: GrTransaction,
+    //   inactive: true,
+    //   link: '/transaction',
+    //   beta: true
+    // },
+    // {
+    //   id: 'transjakarta',
+    //   name: 'Transjakarta',
+    //   icon: TransjakartaIcon,
+    //   inactive: true,
+    //   link: '/transjakarta',
+    //   beta: true
+    // },
   ],
   [
     {
@@ -101,12 +107,12 @@ export const ROUTES: ROUTE_TYPE[][] = [
       icon: BsDatabaseFillDown,
       link: '/export',
     },
-    {
-      id: 'docs',
-      name: 'Documentation',
-      icon: IoIosDocument,
-      link: '/docs',
-      inactive: true,
-    },
+    // {
+    //   id: 'docs',
+    //   name: 'Documentation',
+    //   icon: IoIosDocument,
+    //   link: '/docs',
+    //   inactive: true,
+    // },
   ]
 ];

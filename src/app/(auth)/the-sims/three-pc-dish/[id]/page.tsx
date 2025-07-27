@@ -46,8 +46,8 @@ export default async function ThreePCDishDetail(props: ThreePCDishDetailProps) {
           Category: data.category,
           Skill: data.skill,
           Types: data.types,
-          Flavours: data.flavours,
-          Ingredients: data.ingredients,
+          Flavours: data.flavours?.join(', '),
+          Ingredients: data.ingredients?.join(', '),
           Vegetarian: data.isVegetarian,
           Notes: data.notes,
         }} />

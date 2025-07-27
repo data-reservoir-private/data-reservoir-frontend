@@ -24,6 +24,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
   }
   
   const res = await axios.get(url, {
+    baseURL: process.env.NEXT_PUBLIC_API,
     params: params,
     httpsAgent: agent,
     paramsSerializer: function (param) {
@@ -43,7 +44,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
 
 /**
  * NextJS built-in search params are not that advanced as it cannot handle `key[]=a&key[]=b`. It parses those
- * key as `key[]=[a,b]` rather than `key=[a, b]` which is not the 
+ * key as `key[]=[a,b]` rather than `key=[a, b]` which is not lib wants
  * @returns Search param as TResult
  */
 export async function getSearchParam<TResult>() : Promise<TResult> {

@@ -10,20 +10,21 @@ import { makeSearchParam } from '@/utilities/general';
 
 const schema = z.object({
   name: z.union([z.string().length(0), z.string().min(3)], "Must be empty or min 3 chars").optional(),
+  category: z.string().optional(),
   pageSize: z.number(),
   currentPage: z.number()
 });
 
 type SubmitMeta = { resetPagination?: boolean };
-export type ToppingFormSchema = z.infer<typeof schema>;
+export type ForageFormSchema = z.infer<typeof schema>;
 
-export default function ToppingForm({ param, totalData = 0 }: { param: ToppingFormSchema, totalData: number }) {
+export default function ForageForm({ param, totalData = 0 }: { param: ForageFormSchema, totalData: number }) {
   const defaultValues = formOptions({
     defaultValues: {
       name: param.name ?? "",
       currentPage: param.currentPage ?? 1,
       pageSize: param.pageSize ?? 50
-    } as ToppingFormSchema,
+    } as ForageFormSchema,
     validators: {
       onChange: schema
     },
@@ -35,7 +36,7 @@ export default function ToppingForm({ param, totalData = 0 }: { param: ToppingFo
     ...defaultValues,
     onSubmit: async ({ value, meta }) => {
       if (meta?.resetPagination) value.currentPage = 1;
-      router.push(`/pizza-frenzy/topping?${makeSearchParam(value)}`);
+      router.push(`/cygnus/forage?${makeSearchParam(value)}`);
     }
   });
 

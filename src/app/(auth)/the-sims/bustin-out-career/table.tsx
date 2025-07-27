@@ -81,6 +81,6 @@ export default function BustinOutCareerTable({ data }: BustinOutCareerTableProps
   ]);
 
   return (
-    <SimpleTable columns={cols} data={data} exportType={['csv', 'json', 'yaml', 'toml', 'xml']}/>
+    <SimpleTable columns={cols} data={data} exportType={['csv', 'json', 'yaml', 'xml']}/>
   )
 }

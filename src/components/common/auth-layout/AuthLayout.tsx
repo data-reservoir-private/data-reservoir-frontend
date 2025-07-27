@@ -30,7 +30,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               edge="start"
               color="inherit"
               aria-label="menu"
-              className='mr-2'
+              className='m-2'
               onClick={() => setOpen(!open)}
             >
               <BsMenuApp />
@@ -48,7 +48,10 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         open={open}
         slotProps={{
           paper: {
-            className: 'box-border'
+            className: 'box-border',
+            sx: {
+              scrollbarWidth: 'none'
+            }
           }
         }}
         onClose={() => setOpen(false)}

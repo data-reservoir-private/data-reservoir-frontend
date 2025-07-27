@@ -20,6 +20,10 @@ export const BREADCRUMBS = Object.freeze({
     { label: "Hayday", link: '/hayday' },
     { label: "Hayday Building", link: '/hayday/building' }
   ],
+  'hayday-order': [
+    { label: "Hayday", link: '/hayday' },
+    { label: "Hayday Order" }
+  ],
 
   // Hayday
   'the-sims-castaway-product': [
@@ -213,5 +217,55 @@ export const BREADCRUMBS = Object.freeze({
   'quartz-utensil-detail': [
     { label: "Quartz", link: '/quartz' },
     { label: "Quartz Utensil", link: '/quartz/utensil' }
+  ],
+
+  // Cygnus
+  'cygnus-mineral': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Mineral", }
+  ],
+  'cygnus-mineral-detail': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Mineral", link: '/cygnus/mineral' }
+  ],
+  'cygnus-dish': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Dish", }
+  ],
+  'cygnus-dish-detail': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Dish", link: '/cygnus/dish' }
+  ],
+  'cygnus-artifact': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Artifact", }
+  ],
+  'cygnus-artifact-detail': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Artifact", link: '/cygnus/artifact' }
+  ],
+  'cygnus-node': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Node", }
+  ],
+  'cygnus-node-detail': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Node", link: '/cygnus/node' }
+  ],
+  'cygnus-forage': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Forage", }
+  ],
+  'cygnus-forage-detail': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Forage", link: '/cygnus/forage' }
+  ],
+  'cygnus-crop': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Crop", }
+  ],
+  'cygnus-crop-detail': [
+    { label: "Cygnus", link: '/cygnus' },
+    { label: "Cygnus Crop", link: '/cygnus/crop' }
   ],
 });

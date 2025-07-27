@@ -1,4 +1,3 @@
-import Section from '@/components/common/paper/Section'
 import React from 'react'
 import HaydayOrderForm, { HaydayOrderFormSchema } from './form'
 import { MonthsArray } from '@/constant/date';
@@ -22,9 +21,5 @@ export async function generateMetadata() {
 
 export default async function HaydayOrder() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  return (
-    <Section name='Hayday Orders' variant='h4' >
-      <HaydayOrderForm param={sp}/>
-    </Section>
-  )
+  return (<HaydayOrderForm param={sp}/>)
 }

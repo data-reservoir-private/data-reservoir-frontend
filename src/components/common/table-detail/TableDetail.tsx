@@ -20,7 +20,7 @@ export default function TableDetail(props: GridDetailProps) {
       <Table size='small' className='text-sm w-full'>
         <TableBody>
           {
-            Object.entries(props.data).map(([key, value]) => (
+            Object.entries(props.data).filter(([_, value]) => !!value).map(([key, value]) => (
               <TableRow key={key} className='text-sm'>
                 <TableCell size='small' className='text-sm bg-white/20 w-[20%] font-bold'>{key}</TableCell>
                 <TableCell className='text-sm overflow-clip'>

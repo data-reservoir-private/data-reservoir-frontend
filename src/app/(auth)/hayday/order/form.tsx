@@ -10,11 +10,11 @@ import { MonthsArray } from '@/constant/date';
 import { makeSearchParam } from '@/utilities/general';
 
 const dj = new Date().getFullYear();
-const yearChoices = [dj, dj - 1, dj - 2, dj - 3].reduce<{ label: string, value: number }[]>((acc, curr) => [...acc, { label: curr.toString(), value: curr }], []);
+const yearChoices = [dj, dj - 1].reduce<{ label: string, value: number }[]>((acc, curr) => [...acc, { label: curr.toString(), value: curr }], []);
 
 const schema = z.object({
-  year: z.number().gte(2020).optional(),
-  month: z.number().gte(1).lte(12).optional()
+  year: z.union([z.null(), z.number().gte(2020)]).optional(),
+  month: z.union([z.null(), z.number().gte(1).lte(12)]).optional()
 });
 
 export type HaydayOrderFormSchema = z.infer<typeof schema>;
@@ -45,10 +45,20 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
       className="flex flex-col grow gap-2"
     >
       <Box className="gap-2 flex grow">
-        <form.AppField name='month' children={(field) => (
+        <form.AppField name='month' validators={{
+          onChangeListenTo: ['year'],
+          onChange: ({ value, fieldApi }) => {
+            return (!fieldApi.form.getFieldValue('year') && !!value) ? { message: 'Both must be filled' } : undefined;
+          }
+        }} children={(field) => (
           <field.SimpleSelect label='Month' choices={MonthsArray}/>
         )} />
-        <form.AppField name='year' children={(field) => (
+        <form.AppField name='year' validators={{
+          onChangeListenTo: ['month'],
+          onChange: ({ value, fieldApi }) => {
+            return (!fieldApi.form.getFieldValue('month') && !!value) ? { message: 'Both must be filled' } : undefined;
+          }
+        }} children={(field) => (
           <field.SimpleSelect label='Year' choices={yearChoices}/>
         )} />
         <form.AppForm>

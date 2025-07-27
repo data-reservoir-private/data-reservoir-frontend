@@ -9,7 +9,7 @@ export default function BackButton() {
   const router = useRouter();
   
   return (
-    <ButtonBase className='w-7 rounded-sm' onClick={() => router.back()}>
+    <ButtonBase title='Back to Previous Page' className='w-7 rounded-sm' onClick={() => router.back()}>
       <FaAngleLeft />
     </ButtonBase>
   )

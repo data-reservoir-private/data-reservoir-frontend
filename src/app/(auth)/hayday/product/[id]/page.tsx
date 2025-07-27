@@ -50,7 +50,7 @@ export default async function HaydayProductDetail(props: HaydayProductDetailProp
           Category: data.category,
           Price: data.price,
           "Is Raw": data.isRaw,
-          Time: secondToTimespan(data.time, true),
+          Time: data.time == 0 ? '-' : secondToTimespan(data.time, true),
           Level: data.level,
           XP: data.xp,
           Effort: data.effort,

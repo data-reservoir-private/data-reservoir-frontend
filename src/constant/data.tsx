@@ -5,8 +5,7 @@ import 'server-only'
 export type ExportType = 'json' | 'csv' | 'yaml' | 'xml';
 
 const ALL_EXPORTS: ExportType[] = ['json', 'csv', 'xml', 'yaml'];
-
-interface IData {
+export interface IData {
   name: string,
   categories: {
     id: string,
@@ -302,6 +301,53 @@ export const DATA_AVAILABLE = Object.freeze(({
           exportType: ALL_EXPORTS,
           route: API_ROUTE.QUARTZ.UTENSIL
         }
+      }
+    ]
+  } as IData,
+  'cygnus': {
+    name: "Cygnus",
+    categories: [
+      {
+        id: 'artifact',
+        name: 'Artifact',
+        description: '',
+        image: '/image/quick_link/c_artifact.png',
+        link: '/cygnus/artifact'
+      },
+      {
+        id: 'mineral',
+        name: 'Mineral',
+        description: '',
+        image: '/image/quick_link/c_mineral.png',
+        link: '/cygnus/mineral'
+      },
+      {
+        id: 'forage',
+        name: 'Forage',
+        description: '',
+        image: '/image/quick_link/c_forage.png',
+        link: '/cygnus/forage'
+      },
+      {
+        id: 'crop',
+        name: 'Crop',
+        description: '',
+        image: '/image/quick_link/c_crop.png',
+        link: '/cygnus/crop'
+      },
+      {
+        id: 'dish',
+        name: 'Dish',
+        description: '',
+        image: '/image/quick_link/c_dish.png',
+        link: '/cygnus/dish'
+      },
+      {
+        id: 'node',
+        name: 'Node',
+        description: '',
+        image: '/image/quick_link/c_node.png',
+        link: '/cygnus/node'
       }
     ]
   } as IData

@@ -58,5 +58,13 @@ export const CATEGORIES = Object.freeze({
     "Other / Lainnya",
     "Stir Fry / Tumisan",
     "Meat / Daging"
+  ],
+  'cygnus-mineral': [
+    'Foraged Minerals',
+    'Geode Minerals',
+    'Gems',
+    'Ores',
+    'Geodes',
+    'Bars',
   ]
 })

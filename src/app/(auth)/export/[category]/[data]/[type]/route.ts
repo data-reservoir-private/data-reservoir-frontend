@@ -5,7 +5,7 @@ import * as XML from 'xml-js'
 import YAML from 'yaml'
 import { json2csv } from 'json-2-csv';
 import { cache } from "react";
-import { DATA_AVAILABLE, ExportType } from "@/constant/data";
+import { DATA_AVAILABLE, ExportType, IData } from "@/constant/data";
 
 interface IParam {
   category: string,
@@ -16,7 +16,7 @@ interface IParam {
 export async function GET(_: NextRequest, { params }: { params: Promise<IParam> }) {
   const { category, data, type } = await params;
 
-  const cat = DATA_AVAILABLE[category];
+  const cat = DATA_AVAILABLE[category as keyof typeof DATA_AVAILABLE] as IData | undefined;
   if (!cat) return notFound();
 
   const d = cat.categories.find(x => x.id === data);

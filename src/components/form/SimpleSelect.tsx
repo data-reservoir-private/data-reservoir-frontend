@@ -1,5 +1,6 @@
 import { useCustomFieldContext } from '@/utilities/form'
 import Autocomplete from '@mui/material/Autocomplete';
+import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import React from 'react'
 
@@ -8,7 +9,6 @@ interface SimpleSelectProps<TValue> {
   choices: { label: string, value: TValue }[],
   selectAll?: boolean
 }
-
 
 export default function SimpleSelect<TValue>(props: SimpleSelectProps<TValue>) {
   const field = useCustomFieldContext<TValue | null>();
@@ -23,15 +23,18 @@ export default function SimpleSelect<TValue>(props: SimpleSelectProps<TValue>) {
   }
 
   return (
-    <Autocomplete
-      size='small'
-      className='w-full'
-      disablePortal
-      value={picked}
-      onChange={handleOnChange}
-      options={props.choices}
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label={props.label} />}
-    />
+    <FormControl className='flex flex-col w-full min-w-6'>
+      <Autocomplete
+        size='small'
+        className='w-full'
+        disablePortal
+        value={picked}
+        onChange={handleOnChange}
+        options={props.choices}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label={props.label} />}
+      />
+      {!field.state.meta.isValid && <span className='text-xs text-error-light'>{field.state.meta.errors.map(x => x?.message).join(', ')}</span>}
+    </FormControl>
   )
 }

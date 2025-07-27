@@ -71,5 +71,73 @@ export type IHaydayResponse = {
         quantity: number
       }[]
     }[]
+  },
+  'hayday-order': {
+    'summary': {
+      acceptedOrder: number
+      rejectedOrder: number
+      settledOrder: number
+      percentageAcceptedOrder: number
+      percentageRejectedOrder: number
+      coinEvent: number
+      coin: number
+      xpEvent: number
+      xp: number
+      revenueEvent: number
+      revenue: number
+      voucher: {
+        green: number
+        blue: number
+        purple: number
+        gold: number
+      }
+      materials: {
+        id: string
+        name: string
+        image: string
+        quantity: number
+      }[]
+    },
+    'weekly': {
+      date: string
+      acceptedOrder: number
+      rejectedOrder: number
+      settledOrder: number
+      percentageAcceptedOrder: number
+      percentageRejectedOrder: number
+      coinEvent: number
+      coin: number
+      xpEvent: number
+      xp: number
+      revenueEvent: number
+      revenue: number
+    },
+    'distribution': {
+      boxplot: {
+        min: number,
+        q1: number,
+        median: number,
+        q3: number,
+        max: number,
+        outliers: number[]
+      },
+      eventBoxplot: IHaydayResponse['hayday-order']['distribution']['boxplot']
+    },
+    'valuable': {
+      dateAccepted: string
+      clientName: string
+      products: {
+        id: string
+        name: string
+        image: string
+        quantity: number
+      }[]
+      coin: number
+      coinEvent: number
+      xp: number
+      xpEvent: number
+      revenue: number
+      revenueEvent: number
+    }
   }
 }
