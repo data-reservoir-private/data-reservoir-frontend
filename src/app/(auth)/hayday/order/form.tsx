@@ -8,13 +8,15 @@ import React from 'react'
 import { z } from 'zod'
 import { MonthsArray } from '@/constant/date';
 import { makeSearchParam } from '@/utilities/general';
+import Button from '@mui/material/Button';
 
 const dj = new Date().getFullYear();
 const yearChoices = [dj, dj - 1].reduce<{ label: string, value: number }[]>((acc, curr) => [...acc, { label: curr.toString(), value: curr }], []);
 
 const schema = z.object({
   year: z.union([z.null(), z.number().gte(2020)]).optional(),
-  month: z.union([z.null(), z.number().gte(1).lte(12)]).optional()
+  month: z.union([z.null(), z.number().gte(1).lte(12)]).optional(),
+  isProcessed: z.literal([1, 0])
 });
 
 export type HaydayOrderFormSchema = z.infer<typeof schema>;
@@ -23,7 +25,8 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
   const defaultValues = formOptions({
     defaultValues: {
       month: param.month,
-      year: param.year
+      year: param.year,
+      isProcessed: param.isProcessed
     } as HaydayOrderFormSchema,
     validators: {
       onChange: schema
@@ -38,6 +41,12 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
     }
   });
 
+  const handleResetValue = () => {
+    form.setFieldValue('month', null);
+    form.setFieldValue('year', null);
+    form.setFieldValue('isProcessed', 0);
+  }
+
   return (
     <Box
       component='form'
@@ -50,22 +59,43 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
           onChange: ({ value, fieldApi }) => {
             return (!fieldApi.form.getFieldValue('year') && !!value) ? { message: 'Both must be filled' } : undefined;
           }
-        }} children={(field) => (
-          <field.SimpleSelect label='Month' choices={MonthsArray}/>
-        )} />
+        }}>
+          {(field) => (<field.SimpleSelect label='Month' choices={MonthsArray} />)}
+        </form.AppField>
+
         <form.AppField name='year' validators={{
           onChangeListenTo: ['month'],
           onChange: ({ value, fieldApi }) => {
             return (!fieldApi.form.getFieldValue('month') && !!value) ? { message: 'Both must be filled' } : undefined;
           }
-        }} children={(field) => (
-          <field.SimpleSelect label='Year' choices={yearChoices}/>
-        )} />
+        }}>
+          {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
+        </form.AppField>
+
+        <form.AppField name='isProcessed'>
+          {
+            (field) => <field.SimpleHorizontalSwitch label='Processed Product Only' />
+          }
+        </form.AppField>
+      </Box>
+      <Box className='flex gap-2'>
         <form.AppForm>
-          <form.SimpleResetButton label='Reset'/>
+          <form.Subscribe selector={(state) => state.isSubmitting}>
+            {(isSubmitting) => (
+              <Button type="button"
+                variant="contained"
+                color='error'
+                className='w-full'
+                disabled={isSubmitting}
+                onClick={e => { e.preventDefault(); handleResetValue() }}
+              >
+                Reset
+              </Button>
+            )}
+          </form.Subscribe>
         </form.AppForm>
         <form.AppForm>
-          <form.SimpleSubmitButton label='Search'/>
+          <form.SimpleSubmitButton className='w-full' label='Search' />
         </form.AppForm>
       </Box>
     </Box>

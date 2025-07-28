@@ -73,6 +73,13 @@ export type IHaydayResponse = {
     }[]
   },
   'hayday-order': {
+    'product': {
+      id: string,
+      name: string,
+      image: string,
+      quantity: number,
+      average: number
+    },
     'summary': {
       acceptedOrder: number
       rejectedOrder: number
@@ -97,6 +104,9 @@ export type IHaydayResponse = {
         image: string
         quantity: number
       }[]
+    },
+    'client': IHaydayResponse['hayday-order']['summary'] & {
+      name: string
     },
     'weekly': {
       date: string

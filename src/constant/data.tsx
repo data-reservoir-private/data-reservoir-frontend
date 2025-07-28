@@ -228,6 +228,10 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_fried_rice.png',
         description: 'Semua nasi goreng yang bisa dimasak',
         link: '/nasi-goreng/fried-rice',
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.NASI_GORENG.FRIED_RICE
+        }
       },
       {
         id: 'upgrade',
@@ -331,16 +335,24 @@ export const DATA_AVAILABLE = Object.freeze(({
       {
         id: 'crop',
         name: 'Crop',
-        description: '',
+        description: 'Stardew\'s base vanilla crops. I will consider adding mod crops in the future, but let\'s just keep it simple hehe',
         image: '/image/quick_link/c_crop.png',
-        link: '/cygnus/crop'
+        link: '/cygnus/crop',
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.CYGNUS.CROP
+        }
       },
       {
         id: 'dish',
         name: 'Dish',
-        description: '',
+        description: 'Stardew\'s base vanilla dishes.',
         image: '/image/quick_link/c_dish.png',
-        link: '/cygnus/dish'
+        link: '/cygnus/dish',
+        export: {
+          exportType: ALL_EXPORTS,
+          route: API_ROUTE.CYGNUS.DISH
+        }
       },
       {
         id: 'node',

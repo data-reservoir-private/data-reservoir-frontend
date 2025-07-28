@@ -6,10 +6,20 @@ import { EChartsOption } from 'echarts'
 import React from 'react'
 import { HaydayOrderFormSchema } from '../form';
 import { EChart } from '@/components/common/chart/Chart';
+import Typography from '@mui/material/Typography';
 
 export default async function DistributionPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data: { boxplot } } = await grabData<IHaydayResponse['hayday-order']['distribution']>(API_ROUTE.HAY_DAY.ORDER.DISTRIBUTION, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['distribution']>(API_ROUTE.HAY_DAY.ORDER.DISTRIBUTION, sp);
+
+  if (!data) {
+    return (
+      <Paper className='w-full flex justify-center items-center p-2'>
+        <Typography>No data</Typography>
+      </Paper>
+    )
+  }
+
 
   const opt: EChartsOption = {
     xAxis: {
@@ -24,13 +34,13 @@ export default async function DistributionPage() {
         name: 'Revenue Boxplot',
         type: 'boxplot',
         data: [
-          [boxplot.min, boxplot.q1, boxplot.median, boxplot.q3, boxplot.max],
+          [data.boxplot.min, data.boxplot.q1, data.boxplot.median, data.boxplot.q3, data.boxplot.max],
         ],
       },
       {
         name: 'outliers',
         type: 'scatter',
-        data: boxplot.outliers,
+        data: data.boxplot.outliers,
         tooltip: {
           show: false
         }
@@ -44,7 +54,13 @@ export default async function DistributionPage() {
       show: true,
       position: 'top',
       color: 'white'
-    }
+    },
+    grid: {
+      top: 40,
+      left: 80,
+      right: 80,
+      bottom: 40,
+    },
   }
 
   return (

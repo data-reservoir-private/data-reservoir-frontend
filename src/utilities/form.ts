@@ -1,3 +1,4 @@
+import SimpleHorizontalSwitch from '@/components/form/SimpleHorizontalSwitch';
 import SimpleMultiselectString from '@/components/form/SimpleMultiselectString';
 import SimpleNumberbox from '@/components/form/SimpleNumberbox';
 import SimplePageNavigation from '@/components/form/SimplePageNavigation';
@@ -24,7 +25,8 @@ export const { useAppForm } = createFormHook({
     SimpleSelect,
     SimpleSelectString,
     SimpleNumberbox,
-    SimpleMultiselectString
+    SimpleMultiselectString,
+    SimpleHorizontalSwitch
   },
   formComponents: {
     SimpleSubmitButton,

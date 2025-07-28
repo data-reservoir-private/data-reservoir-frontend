@@ -25,9 +25,10 @@ export const EChart = (props: EChartProps) => {
   useEffect(() => {
     // Re-render chart when option changes
     const chart = getInstanceByDom(chartRef.current!)!;
-    window.onresize = function() {
+
+    window.addEventListener('resize', function () {
       chart.resize();
-    };
+    })
 
     chart.setOption(props.option);
   }, [props.option]);

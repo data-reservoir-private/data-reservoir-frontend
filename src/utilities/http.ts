@@ -44,7 +44,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
 
 /**
  * NextJS built-in search params are not that advanced as it cannot handle `key[]=a&key[]=b`. It parses those
- * key as `key[]=[a,b]` rather than `key=[a, b]` which is not lib wants
+ * key as `key[]=[a,b]` rather than `key=[a, b]` which is not what the query-string lib wants
  * @returns Search param as TResult
  */
 export async function getSearchParam<TResult>() : Promise<TResult> {

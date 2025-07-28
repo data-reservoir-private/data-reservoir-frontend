@@ -22,6 +22,7 @@ export default async function WeeklyPage() {
     tooltip: {
       show: true
     },
+
     series: [
       {
         name: 'Revenue',
@@ -48,12 +49,25 @@ export default async function WeeklyPage() {
         stack: 'bar',
         color: '#0084d1'
       }
+    ],
+    grid: {
+      top: 40,
+      left: 80,
+      right: 20,
+      bottom: 40,
+    },
+    dataZoom: [
+      {
+        show: true,
+        start: 50,
+        end: 100
+      },
     ]
   }
 
   return (
     <Paper className='min-h-[300px] w-full'>
-      <EChart option={opt} className='min-h-[300px] w-full' />
+      <EChart option={opt} className='min-h-[300px]' />
     </Paper>
   )
 }
