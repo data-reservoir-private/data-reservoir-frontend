@@ -5,12 +5,12 @@ import { ITheSimsResponse } from '@/model/response/the-sims'
 import { createColumns } from '@/utilities/table';
 import React from 'react'
 
-interface BustinOutCareerTableProps {
-  data: ITheSimsResponse['bustin-out-career'][]
+interface TwoPetsConsoleCareerTableProps {
+  data: ITheSimsResponse['two-pets-console-career'][]
 }
 
-export default function BustinOutCareerTable({ data }: BustinOutCareerTableProps) {
-  const cols = createColumns<ITheSimsResponse['bustin-out-career']>(h => [
+export default function TwoPetsConsoleCareerTable({ data }: TwoPetsConsoleCareerTableProps) {
+  const cols = createColumns<ITheSimsResponse['two-pets-console-career']>(h => [
     h.accessor('career', {
       cell: (x) => x.getValue(),
       header: 'Career',
@@ -70,6 +70,10 @@ export default function BustinOutCareerTable({ data }: BustinOutCareerTableProps
         h.accessor('creativity', {
           cell: (x) => x.getValue(),
           header: 'Creativity'
+        }),
+        h.accessor('cleanliness', {
+          cell: (x) => x.getValue(),
+          header: 'Cleanliness'
         }),
         h.accessor('friends', {
           cell: (x) => x.getValue(),

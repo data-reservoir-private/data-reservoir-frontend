@@ -47,6 +47,28 @@ export const DATA_AVAILABLE = Object.freeze(({
         }
       },
       {
+        id: 'two-pets-console-career',
+        name: "Two Pets Console career",
+        image: () => (<BsBuildingFill className="text-4xl" />),
+        link: '/the-sims/two-pets-console-career',
+        description: 'TS 2 Pets PS2 careers available. Data sourced from my own digging and The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_CAREER,
+          exportType: ALL_EXPORTS
+        }
+      },
+      {
+        id: 'two-console-career',
+        name: "Two Console career",
+        image: () => (<BsBuildingFill className="text-4xl" />),
+        link: '/the-sims/two-console-career',
+        description: 'TS 2 PS2 careers available. Data sourced from my own digging and The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.TWO_CONSOLE_CAREER,
+          exportType: ALL_EXPORTS
+        }
+      },
+      {
         id: 'three-pc-dish',
         name: "Three PC Dish",
         link: '/the-sims/three-pc-dish',

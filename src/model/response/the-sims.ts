@@ -19,6 +19,44 @@ export type ITheSimsResponse = {
     logic: number
     creativity: number
   },
+  'two-pets-console-career': {
+    id: string
+    career: string
+    level: number
+    job: string
+    description: string
+    workStart: string
+    workEnd: string
+    friends: number
+    salary: number
+    promotion: number
+    cooking: number
+    mechanical: number
+    charisma: number
+    body: number
+    logic: number
+    creativity: number
+    cleanliness: number
+  },
+  'two-console-career': {
+    id: string
+    career: string
+    level: number
+    job: string
+    description: string
+    workStart: string
+    workEnd: string
+    friends: number
+    salary: number
+    promotion: number
+    cooking: number
+    mechanical: number
+    charisma: number
+    body: number
+    logic: number
+    creativity: number
+    cleanliness: number
+  },
   'castaway-product': {
     id: string
     name: string

@@ -42,6 +42,22 @@ export const BREADCRUMBS = Object.freeze({
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Two Pets Console Product", link: '/the-sims/two-pets-console-product' }
   ],
+  'the-sims-two-pets-console-career': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Two Pets Console Career" }
+  ],
+  'the-sims-two-pets-console-career-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Two Pets Console Career", link: '/the-sims/two-pets-console-career' }
+  ],
+  'the-sims-two-console-career': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Two Console Career" }
+  ],
+  'the-sims-two-console-career-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Two Console Career", link: '/the-sims/two-console-career' }
+  ],
   'the-sims-four-pc-harvestable': [
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Four PC Harvestable" }

@@ -12,10 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function BustinOutCareer() {
-  const { data, pagination } = await grabData<ITheSimsResponse['bustin-out-career'][]>(API_ROUTE.THE_SIMS.BUSTIN_OUT_CAREER, {
-    // name: sp.name ?? "",
-    // category: sp.category ?? [],
-    // currentPage: Math.max(1, sp.currentPage ?? 1),
+  const { data } = await grabData<ITheSimsResponse['bustin-out-career'][]>(API_ROUTE.THE_SIMS.BUSTIN_OUT_CAREER, {
     pageSize: 0,
   });
 

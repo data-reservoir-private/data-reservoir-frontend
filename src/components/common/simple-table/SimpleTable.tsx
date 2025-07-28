@@ -3,7 +3,6 @@
 import React, { Fragment, useMemo, useState } from 'react';
 import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
 import classNames from 'classnames';
-import { saveAs } from 'file-saver';
 import Box from '@mui/material/Box';
 import TableContainer from '@mui/material/TableContainer';
 import Table from '@mui/material/Table';
@@ -13,18 +12,11 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import Paper from '../paper/Paper';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import YAML from 'yaml'
-import * as XML from 'xml-js'
-import { json2csv } from 'json-2-csv';
-
-type ExportType = 'json' | 'csv' | 'yaml' | 'xml';
 
 export interface SimpleTableProps<T> {
   data: T[],
   columns: ColumnDef<T, any>[],
-  expandElement?: (row: Row<T>) => React.ReactNode,
-  exportType?: ExportType[],
+  expandElement?: (row: Row<T>) => React.ReactNode
 }
 
 export default function SimpleTable<T>(props: SimpleTableProps<T>) {
@@ -52,48 +44,10 @@ export default function SimpleTable<T>(props: SimpleTableProps<T>) {
     getExpandedRowModel: getExpandedRowModel()
   });
 
-  function exportData(type: ExportType) {
-    const data = reactTable.getRowModel().rows.map(x => x.original);
-    if (type === 'json') {
-      saveAs(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), 'result.json');
-    }
-    else if (type === 'yaml') {
-      saveAs(new Blob([YAML.stringify(data, null, { indent: 2 })], { type: 'application/yaml' }), 'result.yaml');
-    }
-    else if (type === 'xml') {
-      saveAs(new Blob([XML.js2xml({
-        "_declaration": { "_attributes": { "version": "1.0", "encoding": "utf-8" } },
-        content: {
-          data: data
-        }
-      }, { spaces: 2, compact: true })], { type: 'application/xml' }), 'result.xml');
-    }
-    else if (type === 'csv') {
-      saveAs(new Blob([json2csv(data as object[])], { type: 'application/csv' }), 'result.csv');
-    }
-  }
-
   return (
     <TableContainer component={Paper} className='rounded-md relative overflow-auto scrollbar-default'>
       <Table size='small' className='min-h-30 rounded-md min-w-full border-collapse relative'>
         <TableHead>
-          {
-            props.exportType && props.exportType.length >= 1 && (
-              <TableRow>
-                <TableCell colSpan={reactTable.getAllColumns().flatMap(x => x.columns.length === 0 ? [x] : x.columns).length}>
-                  <Box className='flex gap-2 justify-end-safe'>
-                    {
-                      props.exportType.map(et => (
-                        <Button key={et} variant='contained' size='small' color='primary' className='text-white' onClick={_ => exportData(et)}>
-                          Export to {et.toUpperCase()}
-                        </Button>
-                      ))
-                    }
-                  </Box>
-                </TableCell>
-              </TableRow>
-            )
-          }
           {
             reactTable.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
