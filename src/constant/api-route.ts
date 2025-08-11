@@ -32,6 +32,7 @@ const API_SHORTHAND = Object.freeze({
       PRODUCT: 'product',
       VALUABLE: 'valuable',
       WEEKLY: 'weekly',
+      DAILY: 'daily',
     }
   },
   FARM_FRENZY: {
@@ -39,6 +40,7 @@ const API_SHORTHAND = Object.freeze({
     TWO_PRODUCT: 'two-product',
     TWO_PIZZA_PRODUCT: 'two-pizza-product',
     THREE_PRODUCT: 'three-product',
+    HURRICANE: 'hurricane',
   },
   PIZZA_FRENZY: {
     TOPPING: 'topping'
@@ -112,12 +114,14 @@ export const API_ROUTE = Object.freeze({
       PRODUCT: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.PRODUCT}`,
       VALUABLE: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.VALUABLE}`,
       WEEKLY: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.WEEKLY}`,
+      DAILY: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.DAILY}`,
     }
   },
   FARM_FRENZY: {
     ONE_PRODUCT: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.ONE_PRODUCT}`,
     TWO_PRODUCT: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.TWO_PRODUCT}`,
     TWO_PIZZA_PRODUCT: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.TWO_PIZZA_PRODUCT}`,
+    HURRICANE: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.HURRICANE}`,
     THREE_PRODUCT: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.THREE_PRODUCT}`,
   },
   PIZZA_FRENZY: {

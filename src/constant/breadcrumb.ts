@@ -140,6 +140,14 @@ export const BREADCRUMBS = Object.freeze({
     { label: "Farm Frenzy", link: '/farm-frenzy' },
     { label: "Farm Frenzy Two Pizza", link: '/farm-frenzy/two-pizza-product' }
   ],
+  'farm-frenzy-hurricane-product': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy Hurricane Seasons Product", }
+  ],
+  'farm-frenzy-hurricane-product-detail': [
+    { label: "Farm Frenzy", link: '/farm-frenzy' },
+    { label: "Farm Frenzy Hurricane Seasons", link: '/farm-frenzy/hurricane-product' }
+  ],
 
   // Pizza Frenzy
   'pizza-frenzy-topping': [

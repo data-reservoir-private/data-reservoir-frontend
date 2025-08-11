@@ -26,7 +26,7 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
     defaultValues: {
       month: param.month,
       year: param.year,
-      isProcessed: param.isProcessed
+      isProcessed: param.isProcessed ?? 0
     } as HaydayOrderFormSchema,
     validators: {
       onChange: schema

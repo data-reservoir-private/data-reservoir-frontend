@@ -14,7 +14,7 @@ interface TwoProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse | null>(`${API_ROUTE.FARM_FRENZY.TWO_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['two'] | null>(`${API_ROUTE.FARM_FRENZY.TWO_PRODUCT}/${id}`));
 
 export async function generateMetadata(props: TwoProductDetailProps) {
   const post = await grabDetail((await props.params).id);
@@ -44,6 +44,7 @@ export default async function TwoProductDetail(props: TwoProductDetailProps) {
           ID: data.id,
           Name: data.name,
           Price: data.price,
+          Size: data.size,
         }} />
       </Section>
     </Section>

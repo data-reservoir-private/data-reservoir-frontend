@@ -1,13 +1,14 @@
 import Paper from '@/components/common/paper/Paper';
-import { supabaseServer } from '@/utilities/supabase-server';
 import React from 'react';
 import { redirect } from 'next/navigation';
-import { FaGithub } from "react-icons/fa";
 import { login } from './actions';
 import { Metadata } from 'next';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { SignedIn, SignInButton } from '@clerk/nextjs';
+import Button from '@mui/material/Button';
+import { FaGithub } from 'react-icons/fa6';
+import { currentUser } from '@clerk/nextjs/server';
 
 export const metadata: Metadata = {
   title: 'Login - Data Reservoir'
@@ -16,36 +17,37 @@ export const metadata: Metadata = {
 type searchParamsType = Promise<{ message: string }>
 
 export default async function LoginPage(props: { searchParams: searchParamsType }) {
-  const supabase = await supabaseServer();
-  const { data } = await supabase.auth.getUser();
-  if (data.user) redirect('/dashboard');
-
   const searchP = await props.searchParams;
 
+  const user = await currentUser();
+  if (user) redirect('/dashboard');
+
   return (
-    <Box className='w-full h-[100svh] flex items-center justify-center'>
-      <Paper className='w-fit px-12 py-7'>
-        <Box component='form' action={login} className='flex gap-2 flex-col'>
-          {
-            searchP.message && (
-              <div color='failure' className='p-2 text-sm'>
-                <span>{searchP.message}</span>
-              </div>
-            )
-          }
-          <Button type='submit' variant='contained'>
-            <Box className='flex justify-center items-center text-2xl pr-4'>
-              <FaGithub className='flex items-center'/>
+    <>
+      <Box className='w-full h-[100svh] flex items-center justify-center'>
+        <Paper className='w-fit px-12 py-7'>
+          <Box component='form' action={login} className='flex gap-2 flex-col'>
+            {
+              searchP.message && (
+                <div color='failure' className='p-2 text-sm'>
+                  <span>{searchP.message}</span>
+                </div>
+              )
+            }
+            <Box className='flex justify-between items-center'>
+              <Typography variant='h5' textAlign='center' fontWeight='bold'>Data Reservoir</Typography>
+              <SignInButton oauthFlow='redirect' fallbackRedirectUrl={'/dashboard'} forceRedirectUrl={'/dashboard'}>
+                <Button startIcon={<FaGithub />} className='pl-4 pr-4' variant='contained'>
+                  Github Login
+                </Button>
+              </SignInButton>
             </Box>
-            <Typography className='flex items-center'>
-              Login using Github
+            <Typography variant='subtitle1'>
+              This is a private app. Please ask the (sole) dev to give you access hehe
             </Typography>
-          </Button>
-          <Typography>
-            This is a private app. No one else can login :D
-          </Typography>
-        </Box>
-      </Paper>
-    </Box>
+          </Box>
+        </Paper>
+      </Box>
+    </>
   );
 }

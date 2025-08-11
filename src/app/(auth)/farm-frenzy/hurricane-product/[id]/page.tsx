@@ -10,27 +10,27 @@ import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
 
-interface OneProductDetailProps {
+interface HurricaneProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['one'] | null>(`${API_ROUTE.FARM_FRENZY.ONE_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['hurricane'] | null>(`${API_ROUTE.FARM_FRENZY.HURRICANE}/${id}`));
 
-export async function generateMetadata(props: OneProductDetailProps) {
+export async function generateMetadata(props: HurricaneProductDetailProps) {
   const post = await grabDetail((await props.params).id);
   if (!post.data) return { title: 'Not Found - Data Reservoir' }
   return {
-    title: `Farm Frenzy One Product - ${post.data.name} - Data Reservoir`
+    title: `Farm Frenzy Hurricane Seasons Product - ${post.data.name} - Data Reservoir`
   }
 }
 
-export default async function OneProductDetail(props: OneProductDetailProps) {
+export default async function HurricaneProductDetail(props: HurricaneProductDetailProps) {
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();
 
   return (
-    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['farm-frenzy-one-product-detail'], { label: data.name }]}>
+    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['farm-frenzy-hurricane-product-detail'], { label: data.name }]}>
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
@@ -44,7 +44,8 @@ export default async function OneProductDetail(props: OneProductDetailProps) {
           ID: data.id,
           Name: data.name,
           Price: data.price,
-          Size: data.size
+          "Buy Price": data.priceBuy,
+          Size: data.size,
         }} />
       </Section>
     </Section>

@@ -8,6 +8,7 @@ interface HaydayOrderLayoutProps {
   distribution: React.ReactNode,
   valuable: React.ReactNode,
   weekly: React.ReactNode,
+  daily: React.ReactNode,
   client: React.ReactNode,
   product: React.ReactNode
 }
@@ -21,9 +22,8 @@ export default function HaydayOrderLayout(props: HaydayOrderLayoutProps) {
         {props.summary}
       </Section>
 
-      <Section name='Weekly Revenue' variant='h6'>
-        {props.weekly}
-      </Section>
+      {props.weekly}
+      {props.daily}
 
       <Section name='Distribution' variant='h6'>
         {props.distribution}

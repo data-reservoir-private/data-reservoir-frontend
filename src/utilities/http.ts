@@ -8,11 +8,14 @@ import * as fs from 'fs'
 import queryString from 'query-string';
 import { headers } from 'next/headers';
 import { parseSearchParam } from './general';
+import { auth, clerkClient } from '@clerk/nextjs/server';
 
 export async function grabData<TData>(url: string, params?: Record<string, any>): Promise<{
   pagination?: IPaginationResponse,
   data: TData
 }> {
+  const { sessionId } = await auth();
+  const d = await (await clerkClient()).sessions.getToken(sessionId!);
 
   let agent: https.Agent | undefined = undefined;
   if (process.env.ENVIRONMENT && process.env.ENVIRONMENT == 'Development')
@@ -27,6 +30,10 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
     baseURL: process.env.NEXT_PUBLIC_API,
     params: params,
     httpsAgent: agent,
+    withCredentials: true,
+    headers: {
+      'Authorization': `Bearer ${d.jwt}`
+    },
     paramsSerializer: function (param) {
       return queryString.stringify(param, {
         arrayFormat: 'none',

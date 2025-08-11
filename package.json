@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.30.0",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -60,6 +61,7 @@
       "sharp"
     ],
     "onlyBuiltDependencies": [
+      "@clerk/shared",
       "@tailwindcss/oxide"
     ]
   }

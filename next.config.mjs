@@ -3,6 +3,11 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        hostname: "img.clerk.com",
+        protocol: "https",
+        pathname: "/**"
+      },
+      {
         hostname: "raw.githubusercontent.com",
         protocol: "https",
         pathname: "/apify-apps/apify-static-assets/**"

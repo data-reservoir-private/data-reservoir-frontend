@@ -14,7 +14,7 @@ interface ThreeProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse | null>(`${API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['three'] | null>(`${API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/${id}`));
 
 export async function generateMetadata(props: ThreeProductDetailProps) {
   const post = await grabDetail((await props.params).id);

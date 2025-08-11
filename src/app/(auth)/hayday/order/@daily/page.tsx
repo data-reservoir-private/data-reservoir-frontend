@@ -8,11 +8,11 @@ import { HaydayOrderFormSchema } from '../form';
 import { EChart } from '@/components/common/chart/Chart';
 import Section from '@/components/common/paper/Section';
 
-export default async function WeeklyPage() {
+export default async function DailyPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  if (sp.month && sp.year) return <></>;
+  if (!sp.month || !sp.year) return <></>;
 
-  const { data } = await grabData<IHaydayResponse['hayday-order']['weekly'][]>(API_ROUTE.HAY_DAY.ORDER.WEEKLY, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['daily'][]>(API_ROUTE.HAY_DAY.ORDER.DAILY, sp);
 
   const opt: EChartsOption = {
     xAxis: {
@@ -62,14 +62,14 @@ export default async function WeeklyPage() {
     dataZoom: [
       {
         show: true,
-        start: 50,
+        start: 70,
         end: 100
       },
     ]
   }
 
   return (
-    <Section name='Weekly Revenue' variant='h6'>
+    <Section name='Daily Revenue' variant='h6'>
       <Paper className='min-h-[300px] w-full'>
         <EChart option={opt} className='min-h-[300px]' />
       </Paper>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function TwoProduct() {
-  const { data } = await grabData<IFarmFrenzyResponse[]>(API_ROUTE.FARM_FRENZY.TWO_PRODUCT, {
+  const { data } = await grabData<IFarmFrenzyResponse['two'][]>(API_ROUTE.FARM_FRENZY.TWO_PRODUCT, {
     pageSize: 0,
   });
 

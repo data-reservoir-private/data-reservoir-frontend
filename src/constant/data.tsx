@@ -2,9 +2,10 @@ import { API_ROUTE } from "./api-route";
 import { BsBuildingFill } from "react-icons/bs";
 import 'server-only'
 
-export type ExportType = 'json' | 'csv' | 'yaml' | 'xml';
+export type ExportType = 'json' | 'csv' | 'yaml' | 'xml' | 'html' | 'postgresql' | 'sql_server' | 'sqlite';
 
 const ALL_EXPORTS: ExportType[] = ['json', 'csv', 'xml', 'yaml'];
+const ALL_EXPORTS_WITH_INSERT: ExportType[] = ['json', 'csv', 'xml', 'yaml', 'html', 'postgresql', 'sql_server', 'sqlite'];
 export interface IData {
   name: string,
   categories: {
@@ -32,7 +33,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Products gathered from The Sims Castaway console game. Including fishes and crafted products that are stored inside inventory',
         export: {
           route: API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -43,7 +44,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Ingredients gathered from fridge. Includes harvested products such as veggies, fruits, and seafood. Oh, also golden egg',
         export: {
           route: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -54,7 +55,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'TS 2 Pets PS2 careers available. Data sourced from my own digging and The Sims Wikia',
         export: {
           route: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_CAREER,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -65,7 +66,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'TS 2 PS2 careers available. Data sourced from my own digging and The Sims Wikia',
         export: {
           route: API_ROUTE.THE_SIMS.TWO_CONSOLE_CAREER,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -76,7 +77,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'All of dishes that can be made inside TS3 PC game. Sourced from The Sims Wikia',
         export: {
           route: API_ROUTE.THE_SIMS.THREE_PC_DISH,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -87,7 +88,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'TS Bustin Out\'s career path and job. Including the story mode and freeplay mode\'s careers',
         export: {
           route: `${API_ROUTE.THE_SIMS.BUSTIN_OUT_CAREER}`,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -98,7 +99,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'All of TS4 PC\'s harvestable product',
         export: {
           route: `${API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE}`,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -109,7 +110,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'All of TS4 metal collectibles. Sourced from The Sims Wikia',
         export: {
           route: API_ROUTE.THE_SIMS.FOUR_PC_METAL,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -120,7 +121,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'All of TS4 element collectibles. Sourced from The Sims Wikia',
         export: {
           route: API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -131,7 +132,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'All of TS4 crystal collectibles. Sourced from The Sims Wikia',
         export: {
           route: API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
     ]
@@ -152,7 +153,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/hd_product.png',
         description: 'Every products that harvested or processed via buildings. Accurate as of July 2025. All are sourced from Hayday Wiki',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_WITH_INSERT,
           route: API_ROUTE.HAY_DAY.PRODUCT
         }
       },
@@ -163,7 +164,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/hd_building.png',
         description: 'Hayday\'s all production buildings. Accurate as of July 2025. All are sourced from Hayday Wiki',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_WITH_INSERT,
           route: API_ROUTE.HAY_DAY.BUILDING
         }
       },
@@ -180,7 +181,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy One products',
         export: {
           route: API_ROUTE.FARM_FRENZY.ONE_PRODUCT,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -191,7 +192,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy Two products',
         export: {
           route: API_ROUTE.FARM_FRENZY.TWO_PRODUCT,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -202,7 +203,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy Two Pizza Party products',
         export: {
           route: API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
       {
@@ -213,7 +214,18 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy Three products (All franchises)',
         export: {
           route: API_ROUTE.FARM_FRENZY.THREE_PRODUCT,
-          exportType: ALL_EXPORTS
+          exportType: ALL_EXPORTS_WITH_INSERT
+        }
+      },
+      {
+        id: 'hurricane-product',
+        name: "Hurricane Seasons Product",
+        link: '/farm-frenzy/hurricane-product',
+        image: '/image/quick_link/ff_hurricane_product.png',
+        description: 'Farm Frenzy Hurricane Seasons products',
+        export: {
+          route: API_ROUTE.FARM_FRENZY.HURRICANE,
+          exportType: ALL_EXPORTS_WITH_INSERT
         }
       },
     ]
@@ -240,7 +252,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Bahan2 yang bisa didapatkan atau dibuat',
         link: '/nasi-goreng/ingredient',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_WITH_INSERT,
           route: API_ROUTE.NASI_GORENG.INGREDIENT
         }
       },
@@ -251,7 +263,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Semua nasi goreng yang bisa dimasak',
         link: '/nasi-goreng/fried-rice',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_WITH_INSERT,
           route: API_ROUTE.NASI_GORENG.FRIED_RICE
         }
       },

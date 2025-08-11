@@ -11,6 +11,10 @@ import { RiCodeSSlashFill } from "react-icons/ri";
 import { FaFileCsv, FaTruck } from "react-icons/fa6";
 import { SiYaml } from "react-icons/si";
 import { Metadata } from 'next'
+import { DiMsqlServer } from "react-icons/di";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { SiSqlite } from "react-icons/si";
+import { FaHtml5 } from "react-icons/fa";
 import { DATA_AVAILABLE, ExportType } from '@/constant/data'
 
 export const metadata: Metadata = {
@@ -19,11 +23,14 @@ export const metadata: Metadata = {
 
 function getType(exportType: ExportType) {
   switch (exportType) {
-    // case 'postgres': return <DiPostgresql/>
     case 'json': return <VscJson />
     case 'xml': return <RiCodeSSlashFill />
     case 'csv': return <FaFileCsv />
     case 'yaml': return <SiYaml />
+    case 'postgresql': return <BiLogoPostgresql />
+    case 'sql_server': return <DiMsqlServer />
+    case 'sqlite': return <SiSqlite />
+    case 'html': return <FaHtml5 />
     default: return <></>
   }
 }
@@ -38,7 +45,6 @@ export default function ExportPage() {
       <Typography textAlign='justify'>The structure of the data is similar to the one you usually found inside detail endpoint (endpoint that ends with GUID like <code>00000000-0000-0000-0000-000000000000</code>).</Typography>
 
       <Section name='Data Store' variant='h5'>
-        <Typography textAlign='justify'>Do not forget to check your data received. If you need to insert these into your database, make a use of an online converter.</Typography>
         {
           Object.entries(DATA_AVAILABLE).filter(([_, value]) => value.categories.some(y => y.export)).map(([categoryKey, categoryValue]) => (
             <Section name={categoryValue.name} key={categoryKey} variant='h6'>
@@ -61,7 +67,7 @@ export default function ExportPage() {
                       </Box>
                     </Box>
 
-                    <Box className="flex justify-end gap-2">
+                    <Box className="flex justify-end gap-2 flex-wrap">
                       {
                         l.export!.exportType.map(et => (
                           <Link passHref href={`/export/${categoryKey}/${l.id}/${et}`} key={et} target='_blank'>

@@ -140,7 +140,6 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                   ))
                 }
               </Fragment>
-              
             ))
           }
         </tbody>

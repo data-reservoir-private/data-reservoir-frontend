@@ -12,6 +12,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import React, { useState } from 'react'
 import { BsMenuApp } from 'react-icons/bs';
 import { DrawerOptions } from './DrawerOptions';
+import PersonalInfo from './PersonalInfo';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -39,7 +40,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <Typography variant='h6' component="div" className='flex-grow font-bold'>
             Data Reservoir
           </Typography>
-          <Skeleton variant='circular' width={20} height={20} className='bg-green-400' animation='pulse' title='API is online' />
+          <PersonalInfo/>
+          {/* <Skeleton variant='circular' width={20} height={20} className='bg-green-400' animation='pulse' title='API is online' /> */}
         </Toolbar>
       </AppBar>
       <Drawer variant={smol ? 'temporary' : 'permanent'}
