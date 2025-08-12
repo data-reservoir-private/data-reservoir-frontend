@@ -1,30 +1,50 @@
-
-// https://stackoverflow.com/questions/68657274/create-type-using-objects-value
-
-const HOST = process.env.NEXT_PUBLIC_API;
 /**
  * Shorthand2 untuk validasi API route
  */
-export const API_SHORTHAND = Object.freeze({
+const API_SHORTHAND = Object.freeze({
   THE_SIMS: {
-    CASTAWAY_PRODUCT: `castaway-product`,
-    FOUR_PC_HARVESTABLE: `four-pc-harvestable`,
-    TWO_PETS_CONSOLE_PRODUCT: `two-pets-console-product`,
     BUSTIN_OUT_CAREER: `bustin-out-career`,
+    CASTAWAY_PRODUCT: `castaway-product`,
+    FOUR_PC_DISH: `four-pc-dish`,
+    FOUR_PC_ELEMENT: `four-pc-element`,
+    FOUR_PC_METAL: `four-pc-metal`,
+    FOUR_PC_CRYSTAL: `four-pc-crystal`,
+    FOUR_PC_HARVESTABLE: `four-pc-harvestable`,
+    THREE_PC_DISH: `three-pc-dish`,
+    THREE_PC_GEM_CUT: `three-pc-gem-cut`,
+    THREE_PC_GEM: `three-pc-gem`,
+    THREE_PC_HARVESTABLE: `three-pc-harvestable`,
+    THREE_PC_METAL: `three-pc-metal`,
+    THREE_PC_PRESERVE_DISH: `three-pc-preserve-dish`,
+    THREE_PC_RAW_GEM: `three-pc-raw-gem`,
+    THREE_PC_SPREAD_DISH: `three-pc-spread-dish`,
     TWO_CONSOLE_CAREER: `two-console-career`,
     TWO_PETS_CONSOLE_CAREER: `two-pets-console-career`,
+    TWO_PETS_CONSOLE_PRODUCT: `two-pets-console-product`,
   },
   HAY_DAY: {
     PRODUCT: 'product',
-    BUILDING: 'building'
+    BUILDING: 'building',
+    ORDER: {
+      SUMMARY: 'summary',
+      CLIENT: 'client',
+      DISTRIBUTION: 'distribution',
+      PRODUCT: 'product',
+      VALUABLE: 'valuable',
+      WEEKLY: 'weekly',
+      DAILY: 'daily',
+    }
   },
   FARM_FRENZY: {
     ONE_PRODUCT: 'one-product',
     TWO_PRODUCT: 'two-product',
     TWO_PIZZA_PRODUCT: 'two-pizza-product',
     THREE_PRODUCT: 'three-product',
+    HURRICANE: 'hurricane',
   },
-  PIZZA_FRENZY: '',
+  PIZZA_FRENZY: {
+    TOPPING: 'topping'
+  },
   NASI_GORENG: {
     BURNED_FOOD: 'burned-food',
     INGREDIENT: 'ingredient',
@@ -49,6 +69,7 @@ export const API_SHORTHAND = Object.freeze({
     MINERAL: 'mineral',
     CROP: 'crop',
     DISH: 'dish',
+    FORAGE: 'forage',
     NODE: 'node'
   },
   TRANSACTION: {
@@ -62,55 +83,80 @@ export const API_SHORTHAND = Object.freeze({
  * Untuk link fetching
  */
 export const API_ROUTE = Object.freeze({
-  DASHBOARD: `${HOST}/dashboard`,
+  DASHBOARD: `/master/dashboard`,
   THE_SIMS: {
-    CASTAWAY_PRODUCT: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.CASTAWAY_PRODUCT}`,
-    FOUR_PC_HARVESTABLE: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_HARVESTABLE}`,
-    TWO_PETS_CONSOLE_PRODUCT: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT}`,
-    BUSTIN_OUT_CAREER: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.BUSTIN_OUT_CAREER}`,
-    TWO_CONSOLE_CAREER: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.TWO_CONSOLE_CAREER}`,
-    TWO_PETS_CONSOLE_CAREER: `${HOST}/the-sims/${API_SHORTHAND.THE_SIMS.TWO_PETS_CONSOLE_CAREER}`,
+    BUSTIN_OUT_CAREER: `/the-sims/${API_SHORTHAND.THE_SIMS.BUSTIN_OUT_CAREER}`,
+    CASTAWAY_PRODUCT: `/the-sims/${API_SHORTHAND.THE_SIMS.CASTAWAY_PRODUCT}`,
+    FOUR_PC_DISH: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_DISH}`,
+    FOUR_PC_ELEMENT: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_ELEMENT}`,
+    FOUR_PC_METAL: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_METAL}`,
+    FOUR_PC_CRYSTAL: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_CRYSTAL}`,
+    FOUR_PC_HARVESTABLE: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_HARVESTABLE}`,
+    THREE_PC_DISH: `/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_DISH}`,
+    THREE_PC_GEM_CUT: `/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_GEM_CUT}`,
+    THREE_PC_GEM: `/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_GEM}`,
+    THREE_PC_HARVESTABLE: `/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_HARVESTABLE}`,
+    THREE_PC_METAL: `/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_METAL}`,
+    THREE_PC_PRESERVE_DISH: `/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_PRESERVE_DISH}`,
+    THREE_PC_RAW_GEM: `/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_RAW_GEM}`,
+    THREE_PC_SPREAD_DISH: `/the-sims/${API_SHORTHAND.THE_SIMS.THREE_PC_SPREAD_DISH}`,
+    TWO_CONSOLE_CAREER: `/the-sims/${API_SHORTHAND.THE_SIMS.TWO_CONSOLE_CAREER}`,
+    TWO_PETS_CONSOLE_CAREER: `/the-sims/${API_SHORTHAND.THE_SIMS.TWO_PETS_CONSOLE_CAREER}`,
+    TWO_PETS_CONSOLE_PRODUCT: `/the-sims/${API_SHORTHAND.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT}`,
   },
   HAY_DAY: {
-    PRODUCT: `${HOST}/hayday/${API_SHORTHAND.HAY_DAY.PRODUCT}`,
-    BUILDING: `${HOST}/hayday/${API_SHORTHAND.HAY_DAY.BUILDING}`
+    PRODUCT: `/hayday/${API_SHORTHAND.HAY_DAY.PRODUCT}`,
+    BUILDING: `/hayday/${API_SHORTHAND.HAY_DAY.BUILDING}`,
+    ORDER: {
+      SUMMARY: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.SUMMARY}`,
+      CLIENT: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.CLIENT}`,
+      DISTRIBUTION: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.DISTRIBUTION}`,
+      PRODUCT: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.PRODUCT}`,
+      VALUABLE: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.VALUABLE}`,
+      WEEKLY: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.WEEKLY}`,
+      DAILY: `/hayday/order/${API_SHORTHAND.HAY_DAY.ORDER.DAILY}`,
+    }
   },
   FARM_FRENZY: {
-    ONE_PRODUCT: `${HOST}/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.ONE_PRODUCT}`,
-    TWO_PRODUCT: `${HOST}/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.TWO_PRODUCT}`,
-    TWO_PIZZA_PRODUCT: `${HOST}/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.TWO_PIZZA_PRODUCT}`,
-    THREE_PRODUCT: `${HOST}/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.THREE_PRODUCT}`,
+    ONE_PRODUCT: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.ONE_PRODUCT}`,
+    TWO_PRODUCT: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.TWO_PRODUCT}`,
+    TWO_PIZZA_PRODUCT: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.TWO_PIZZA_PRODUCT}`,
+    HURRICANE: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.HURRICANE}`,
+    THREE_PRODUCT: `/farm-frenzy/${API_SHORTHAND.FARM_FRENZY.THREE_PRODUCT}`,
   },
-  PIZZA_FRENZY: `${HOST}/pizza-frenzy/`,
+  PIZZA_FRENZY: {
+    TOPPING: `/pizza-frenzy/${API_SHORTHAND.PIZZA_FRENZY.TOPPING}`
+  },
   NASI_GORENG: {
-    BURNED_FOOD: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.BURNED_FOOD}`,
-    INGREDIENT: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.INGREDIENT}`,
-    PLATE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.PLATE}`,
-    RELIC: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.RELIC}`,
-    TOOL: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.TOOL}`,
-    FRIED_RICE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.FRIED_RICE}`,
-    UPGRADE: `${HOST}/nasi-goreng/${API_SHORTHAND.NASI_GORENG.UPGRADE}`
+    BURNED_FOOD: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.BURNED_FOOD}`,
+    INGREDIENT: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.INGREDIENT}`,
+    PLATE: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.PLATE}`,
+    RELIC: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.RELIC}`,
+    TOOL: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.TOOL}`,
+    FRIED_RICE: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.FRIED_RICE}`,
+    UPGRADE: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.UPGRADE}`
   },
   TRANSJAKARTA: {
-    CORRIDOR: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
-    BUS_STOP: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,
-    STYLE: `${HOST}/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}/${API_SHORTHAND.TRANSJAKARTA.STYLE}`
+    CORRIDOR: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
+    BUS_STOP: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,
+    STYLE: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}/${API_SHORTHAND.TRANSJAKARTA.STYLE}`
   },
   QUARTZ: {
-    SHIPPABLE: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.SHIPPABLE}`,
-    RECIPE: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.RECIPE}`,
-    UTENSIL: `${HOST}/quartz/${API_SHORTHAND.QUARTZ.UTENSIL}`
+    SHIPPABLE: `/quartz/${API_SHORTHAND.QUARTZ.SHIPPABLE}`,
+    RECIPE: `/quartz/${API_SHORTHAND.QUARTZ.RECIPE}`,
+    UTENSIL: `/quartz/${API_SHORTHAND.QUARTZ.UTENSIL}`
   },
   CYGNUS: {
-    ARTIFACT: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.ARTIFACT}`,
-    MINERAL: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.MINERAL}`,
-    CROP: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.CROP}`,
-    DISH: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.DISH}`,
-    NODE: `${HOST}/cygnus/${API_SHORTHAND.CYGNUS.NODE}`
+    ARTIFACT: `/cygnus/${API_SHORTHAND.CYGNUS.ARTIFACT}`,
+    MINERAL: `/cygnus/${API_SHORTHAND.CYGNUS.MINERAL}`,
+    CROP: `/cygnus/${API_SHORTHAND.CYGNUS.CROP}`,
+    DISH: `/cygnus/${API_SHORTHAND.CYGNUS.DISH}`,
+    FORAGE: `/cygnus/${API_SHORTHAND.CYGNUS.FORAGE}`,
+    NODE: `/cygnus/${API_SHORTHAND.CYGNUS.NODE}`
   },
   TRANSACTION: {
-    SUMMARY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.SUMMARY}`,
-    CATEGORY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.CATEGORY}`,
-    MONTHLY: `${HOST}/transaction/${API_SHORTHAND.TRANSACTION.MONTHLY}`,
+    SUMMARY: `/transaction/${API_SHORTHAND.TRANSACTION.SUMMARY}`,
+    CATEGORY: `/transaction/${API_SHORTHAND.TRANSACTION.CATEGORY}`,
+    MONTHLY: `/transaction/${API_SHORTHAND.TRANSACTION.MONTHLY}`,
   }
 } as const);

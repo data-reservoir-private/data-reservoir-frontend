@@ -1,14 +1,38 @@
-import { HasID } from "./base";
-import { FarmFrenzyOneProductSchema, FarmFrenzyThreeProductSchema, FarmFrenzyTwoPizzaProductSchema, FarmFrenzyTwoProductSchema } from "@/database/schema/farm-frenzy";
-
-export interface FarmFrenzyOneProductResponse extends Omit<FarmFrenzyOneProductSchema & HasID, '_id'> {}
-export interface FarmFrenzyTwoProductResponse extends Omit<FarmFrenzyTwoProductSchema & HasID, '_id'> {}
-export interface FarmFrenzyTwoPizzaProductResponse extends Omit<FarmFrenzyTwoPizzaProductSchema & HasID, '_id'> {}
-export interface FarmFrenzyThreeProductResponse extends Omit<FarmFrenzyThreeProductSchema & HasID, '_id'> { }
-
-export interface FarmFrenzyProductResponse extends HasID {
-  name: string,
-  image: string,
-  price: number
+export type IFarmFrenzyResponse = {
+  'three': {
+    id: string,
+    name: string,
+    image: string,
+    price: number
+  },
+  'one': {
+    id: string,
+    name: string,
+    image: string,
+    price: number,
+    size: number
+  },
+  'two': {
+    id: string,
+    name: string,
+    image: string,
+    price: number,
+    size: number
+  },
+  'two-pizza': {
+    id: string,
+    name: string,
+    image: string,
+    price: number,
+    priceBuy: number,
+    size: number
+  },
+  'hurricane': {
+    id: string,
+    name: string,
+    image: string,
+    price: number,
+    priceBuy: number,
+    size: number
+  }
 }
-

@@ -1,35 +1,56 @@
-import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage'
-import GridDetail from '@/components/common/basic-grid/GridDetail'
-import { TheSimsTwoPetsConsoleProductResponse } from '@/model/response/the-sims';
-import { GetTheSimsDataByID } from '@/service/the-sims'
-import { SIMOLEON_ICON } from '@/utilities/char';
-import { Button } from 'flowbite-react';
-import Link from 'next/link';
-import React from 'react'
+import { API_ROUTE } from '@/constant/api-route';
+import { grabData } from '@/utilities/http';
+import Paper from '@/components/common/paper/Paper';
+import TableDetail from '@/components/common/table-detail/TableDetail';
+import Box from '@mui/material/Box';
+import Image from 'next/image';
+import React, { cache } from 'react'
+import Section from '@/components/common/paper/Section';
+import { ITheSimsResponse } from '@/model/response/the-sims';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
+import { notFound } from 'next/navigation';
 
-export default async function TwoPetsConsoleProductDetailPage({params} : {params: Promise<{id: string}>}) {
+interface TwoPetsConsoleDetailProps {
+  params: Promise<{ id: string }>
+}
 
-  const { id } = await params;
-  const d = (await GetTheSimsDataByID('two-pets-console-product', id)) as TheSimsTwoPetsConsoleProductResponse;
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['two-pets-console-product'] | null>(`${API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT}/${id}`));
+
+export async function generateMetadata(props: TwoPetsConsoleDetailProps) {
+  const post = await grabDetail((await props.params).id);
+  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  return {
+    title: `The Sims Two Pets Console Product - ${post.data.name} - Data Reservoir`
+  }
+}
+
+export default async function TwoPetsConsoleDetail(props: TwoPetsConsoleDetailProps) {
+  const { id } = await props.params;
+  const { data } = await grabDetail(id);
+  if (!data) return notFound();
+
   return (
-    <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none text-white'>
-      <BasicGridDetailImage src={d.image} alt={d.name} unoptimized/>
-      <div className='text-white text-lg font-bold'>
-        { d.name }
-      </div>
-      <GridDetail data={{
-        ID: d.id.toString(),
-        Name: d.name,
-        Category: d.category,
-        Price: SIMOLEON_ICON + " " + d.price,
-        Description: d.description,
-        Hunger: d.hunger,
-        Energy: d.energy,
-        Bladder: d.bladder,
-      }} />
-      <Link passHref href={'/the-sims/two-pets-console-product'} className='w-full'>
-        <Button type='button' className='w-full'>Back</Button>
-      </Link>
-    </div>
+    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['the-sims-two-pets-console-product-detail'], { label: data.name }]}>
+      {/* Image */}
+      <Paper className='w-full flex justify-center py-5'>
+        <Box className='w-50 h-50 relative items-center object-center'>
+          <Image src={data.image} alt={data.name} fill className='object-contain' />
+        </Box>
+      </Paper>
+
+      {/* Information */}
+      <Section variant='h6' name='Information'>
+        <TableDetail data={{
+          ID: data.id,
+          Name: data.name,
+          Category: data.category,
+          Price: data.price,
+          Hunger: data.hunger,
+          Bladder: data.bladder,
+          Energy: data.energy,
+          Description: data.description,
+        }} />
+      </Section>
+    </Section>
   )
 }

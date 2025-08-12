@@ -1,16 +1,21 @@
-import QueryComponent from '@/components/app/QueryComponent';
-import SideNavigation from '@/components/app/side-nav/SideNavigation';
 import React from 'react';
+import AuthLayout from '@/components/common/auth-layout/AuthLayout';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
 export default async function MainLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+
+  const user = await currentUser();
+  if (!user) redirect('/login');
+
   return (
-    <div className='w-full flex justify-center overflow-scroll scrollbar-none box-border !h-[100dvh] max-md:flex-col-reverse'>
-      <SideNavigation />
-      <QueryComponent>
-        <div className='flex-grow p-4 max-h-[100dvh] h-[100dvh] overflow-x-auto scrollbar-none overflow-y-scroll max-md:mb-24'>
+    <>
+      <SignedIn>
+        <AuthLayout>
           {children}
-        </div>
-      </QueryComponent>
-    </div>
-  );
+        </AuthLayout>
+      </SignedIn>
+    </>
+  )
 }

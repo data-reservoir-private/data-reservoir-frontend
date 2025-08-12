@@ -1,39 +1,56 @@
-import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage'
-import GridDetail from '@/components/common/basic-grid/GridDetail'
-import { TheSimsCastawayProductResponse } from '@/model/response/the-sims';
-import { GetTheSimsDataByID } from '@/service/the-sims'
-import { Button, Checkbox } from 'flowbite-react';
-import Link from 'next/link';
-import React from 'react';
-import { Metadata } from 'next';
+import { API_ROUTE } from '@/constant/api-route';
+import { grabData } from '@/utilities/http';
+import Paper from '@/components/common/paper/Paper';
+import TableDetail from '@/components/common/table-detail/TableDetail';
+import Box from '@mui/material/Box';
+import Image from 'next/image';
+import React, { cache } from 'react'
+import Section from '@/components/common/paper/Section';
+import { ITheSimsResponse } from '@/model/response/the-sims';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
+import { notFound } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: 'The Sims Castaway Product - Birdeye View'
-};
+interface CastawayDetailProps {
+  params: Promise<{ id: string }>
+}
 
-export default async function CastawayProductDetailPage({params} : {params: Promise<{id: string}>}) {
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['castaway-product'] | null>(`${API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT}/${id}`));
 
-  const { id } = await params;
-  const d = (await GetTheSimsDataByID('castaway-product', id)) as TheSimsCastawayProductResponse;
+export async function generateMetadata(props: CastawayDetailProps) {
+  const post = await grabDetail((await props.params).id);
+  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  return {
+    title: `The Sims Castaway Product - ${post.data.name} - Data Reservoir`
+  }
+}
+
+export default async function CastawayDetail(props: CastawayDetailProps) {
+  const { id } = await props.params;
+  const { data } = await grabDetail(id);
+  if (!data) return notFound();
+
   return (
-    <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none text-white'>
-      <BasicGridDetailImage src={d.image} alt={d.name} unoptimized/>
-      <div className='text-white text-lg font-bold'>
-        { d.name }
-      </div>
-      <GridDetail data={{
-        ID: d.id.toString(),
-        Name: d.name,
-        Category: d.category,
-        Description: d.description,
-        Hunger: d.hunger,
-        Energy: d.energy,
-        Bladder: d.bladder,
-        "Eaten Raw": <Checkbox checked={d.eaten_raw} size={8} disabled />,
-      }} />
-      <Link passHref href={'/the-sims/castaway-product'} className='w-full'>
-        <Button type='button' className='w-full'>Back</Button>
-      </Link>
-    </div>
+    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['the-sims-castaway-product-detail'], { label: data.name }]}>
+      {/* Image */}
+      <Paper className='w-full flex justify-center py-5'>
+        <Box className='w-50 h-50 relative items-center object-center'>
+          <Image src={data.image} alt={data.name} fill className='object-contain' />
+        </Box>
+      </Paper>
+
+      {/* Information */}
+      <Section variant='h6' name='Information'>
+        <TableDetail data={{
+          ID: data.id,
+          Name: data.name,
+          Category: data.category,
+          "Eaten Raw": data.eatenRaw,
+          Hunger: data.hunger,
+          Bladder: data.bladder,
+          Energy: data.energy,
+          Description: data.description,
+        }} />
+      </Section>
+    </Section>
   )
 }

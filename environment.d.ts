@@ -1,13 +1,12 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      POSTGRES: string,
       NEXT_PUBLIC_API: string,
-      DATABASE_URL: string,
-      DATABASE_NAME: string,
       NEXT_PUBLIC_HOST: string,
+      IMAGE_URL: string,
       NEXT_PUBLIC_SUPABASE_HOST: string,
-      NEXT_PUBLIC_SUPABASE_API_KEY: string
+      NEXT_PUBLIC_SUPABASE_API_KEY: string,
+      ENVIRONMENT: "Development" | "Production",
     }
   }
 }

@@ -1,24 +1,6 @@
-import { BaseSchema } from "@/database/schema/base";
-import { UUID } from "crypto";
-
-export interface BaseResponse<T> {
-  date: Date,
-  message: string,
-  data: T
-}
-
-export interface BasePaginationResponse<T> {
-  date: Date,
-  message: string,
-
+export interface IPaginationResponse {
   currentPage: number,
   pageSize: number,
-  totalPage: number,
-  data: T[]
+  totalData: number,
+  isLastPage: boolean,
 }
-
-export interface HasID { 
-  id: string
-}
-
-export interface BaseMongoResponseData extends Omit<BaseSchema, '_id'>, HasID { }

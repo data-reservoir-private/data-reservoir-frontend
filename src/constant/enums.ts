@@ -1,13 +1,9 @@
-export enum PIZZA_FRENZY_TOPPING_UPGRADE {
-  BRONZE = 1, SILVER, GOLD, PLATINUM
-}
-
 export enum TRANSJAKARTA_DIRECTION {
   NORTH_SOUTH = "NS",
   SOUTH_NORTH = "SN"
 }
 
-export enum FOUR_PC_HARVESTABLE_RARITY {
+export enum THE_SIMS_RARITY {
   NO_RARITY,
   COMMON,
   UNCOMMON,
@@ -26,4 +22,29 @@ export enum CYGNUS_GRADE_STR {
   SILVER = "silver",
   GOLD = "gold",
   IRIDIUM = "iridium"
+}
+
+export enum HAYDAY_VOUCHER {
+  NO_VOUCHER,
+  GREEN,
+  BLUE,
+  PURPLE,
+  GOLD
+}
+
+export enum HAYDAY_ORDER_STATUS {
+  REJECTED,
+  ONGOING,
+  ACCEPTED
+}
+
+export enum HAYDAY_EVENT {
+  NO_EVENT,
+  DOUBLE_XP,
+  TRIPLE_XP,
+  DOUBLE_COIN,
+  BOOSTER_BONUS,
+  LEM_BONUS,
+  BEM_SEM_BONUS,
+  VOUCHER_BONUS
 }

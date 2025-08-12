@@ -1,14 +1,24 @@
-import Paper from '@/components/common/paper/Paper';
-import { TheSimsTwoPetsConsoleCareerResponse } from '@/model/response/the-sims';
-import { GetTheSimsData } from '@/service/the-sims';
-import React from 'react'
-import TwoPetsConsoleCareerTable from './_table';
+import Section from '@/components/common/paper/Section';
+import { API_ROUTE } from '@/constant/api-route';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
+import { ITheSimsResponse } from '@/model/response/the-sims';
+import { grabData } from '@/utilities/http';
+import { Metadata } from 'next';
+import React from 'react';
+import TwoPetsConsoleCareerTable from './table';
 
-export default async function TwoPetsConsoleCareerPage() {
-  const data = await GetTheSimsData('two-pets-console-career') as TheSimsTwoPetsConsoleCareerResponse[];
+export const metadata: Metadata = {
+  title: 'The Sims Two Pets Console Career - Data Reservoir'
+}
+
+export default async function TwoPetsConsoleCareer() {
+  const { data } = await grabData<ITheSimsResponse['two-pets-console-career'][]>(API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_CAREER, {
+    pageSize: 0,
+  });
+
   return (
-    <Paper className='overflow-auto rounded-md h-full w-auto p-5'>
+    <Section name='The Sims Two Pets Console Career' variant='h4' breadcrumbs={BREADCRUMBS['the-sims-two-pets-console-career']}>
       <TwoPetsConsoleCareerTable data={data}/>
-    </Paper>
-  );
+    </Section>
+  )
 }

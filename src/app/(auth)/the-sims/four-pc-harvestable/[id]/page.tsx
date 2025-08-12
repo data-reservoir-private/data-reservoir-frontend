@@ -1,35 +1,59 @@
-import BasicGridDetailImage from '@/components/common/basic-grid/BasicGridDetailImage'
-import GridDetail from '@/components/common/basic-grid/GridDetail'
-import { TheSimsFourPCHarvestableResponse } from '@/model/response/the-sims';
-import { GetTheSimsDataByID } from '@/service/the-sims'
-import { SIMOLEON_ICON } from '@/utilities/char';
-import { Button, Checkbox } from 'flowbite-react';
-import Link from 'next/link';
-import React from 'react'
+import { API_ROUTE } from '@/constant/api-route';
+import { grabData } from '@/utilities/http';
+import Paper from '@/components/common/paper/Paper';
+import TableDetail from '@/components/common/table-detail/TableDetail';
+import Box from '@mui/material/Box';
+import Image from 'next/image';
+import React, { cache } from 'react'
+import Section from '@/components/common/paper/Section';
+import { ITheSimsResponse } from '@/model/response/the-sims';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
+import { convertTheSimsRarity } from '@/utilities/general';
+import { notFound } from 'next/navigation';
 
-export default async function FourPCHarvestableDetailPage({params} : {params: Promise<{id: string}>}) {
+interface FourPCHarvestableDetailProps {
+  params: Promise<{ id: string }>
+}
 
-  const { id } = await params;
-  const d = (await GetTheSimsDataByID('four-pc-harvestable', id)) as TheSimsFourPCHarvestableResponse;
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-harvestable'] | null>(`${API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE}/${id}`));
+
+export async function generateMetadata(props: FourPCHarvestableDetailProps) {
+  const post = await grabDetail((await props.params).id);
+  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  return {
+    title: `The Sims Four PC Harvestable - ${post.data.name} - Data Reservoir`
+  }
+}
+
+export default async function FourPCHarvestableDetail(props: FourPCHarvestableDetailProps) {
+  const { id } = await props.params;
+  const { data } = await grabDetail(id);
+  if (!data) return notFound();
+
   return (
-    <div className='w-full gap-3 flex flex-col overflow-scroll scrollbar-none text-white'>
-      <BasicGridDetailImage src={d.image} alt={d.name} unoptimized/>
-      <div className='text-white text-lg font-bold'>
-        { d.name }
-      </div>
-      <GridDetail data={{
-        ID: d.id.toString(),
-        Name: d.name,
-        Description: d.description,
-        Rarity: d.rarity,
-        "Vertical Garden": <Checkbox checked={d.vertical_garden} size={8} disabled />,
-        "Base Value": SIMOLEON_ICON + " " + d.base_value,
-        "Perfect Value": SIMOLEON_ICON + " " + d.perfect_value,
-        "Growth Rate": d.growth_rate,
-      }} />
-      <Link passHref href={'/the-sims/four-pc-harvestable'} className='w-full'>
-        <Button type='button' className='w-full'>Back</Button>
-      </Link>
-    </div>
+    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['the-sims-four-pc-harvestable-detail'], { label: data.name }]}
+    >
+      {/* Image */}
+      <Paper className='w-full flex justify-center py-5'>
+        <Box className='w-50 h-50 relative items-center object-center'>
+          <Image src={data.image} alt={data.name} fill className='object-contain' />
+        </Box>
+      </Paper>
+
+      {/* Information */}
+      <Section variant='h6' name='Information'>
+        <TableDetail data={{
+          ID: data.id,
+          Name: data.name,
+          Rarity: convertTheSimsRarity(data.rarity),
+          "Base Value": data.baseValue,
+          "Perfect Value": data.perfectValue,
+          "Growth Rate": data.growthRate,
+          "Form": data.form,
+          "Vertical Garden": data.verticalGarden,
+          Description: data.description,
+        }} />
+      </Section>
+    </Section>
   )
 }

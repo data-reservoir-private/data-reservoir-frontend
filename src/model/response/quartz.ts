@@ -1,6 +1,22 @@
-import { QuartzRecipeSchema, QuartzShippableSchema, QuartzUtensilSchema } from "@/database/schema/quartz";
-import { HasID } from "./base";
-
-export interface QuartzShippableResponse extends Omit<QuartzShippableSchema & HasID, '_id'> {}
-export interface QuartzRecipeResponse extends Omit<QuartzRecipeSchema & HasID, '_id'> {}
-export interface QuartzUtensilResponse extends Omit<QuartzUtensilSchema & HasID, '_id'> {}
+export type IQuartzResponse = {
+  'recipe': {
+    id: string,
+    name: string,
+    image: string,
+    recipe: string[]
+  },
+  'shippable': {
+    id: string,
+    name: string,
+    image: string,
+    season: string,
+    location: string,
+    price: number
+  },
+  'utensil': {
+    id: string,
+    name: string,
+    image: string,
+    price: number
+  }
+}

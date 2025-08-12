@@ -25,6 +25,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@drizzle/*": [
+        "./drizzle/*"
       ]
     },
     "target": "ES2017"
@@ -35,7 +38,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "noeslint.config.mjs"
-  ],
+, "drizzle.config.ts", "src/app/(auth)/docs/page.mdx"  ],
   "exclude": [
     "node_modules"
   ]

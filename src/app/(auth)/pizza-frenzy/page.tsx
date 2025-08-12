@@ -1,11 +1,26 @@
-import PizzaFrenzyClientPage from '@/components/app/pizza-frenzy/PizzaFrenzyClient';
-import { Metadata } from 'next';
-import React from 'react';
+import { API_ROUTE } from '@/constant/api-route'
+import { IDashboardResponse } from '@/model/response/dashboard'
+import { grabData } from '@/utilities/http'
+import React from 'react'
+import Section from '@/components/common/paper/Section'
+import { Metadata } from 'next'
+import { DATA_AVAILABLE } from '@/constant/data'
+import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart'
+import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleRecordTableCards'
+import SimpleQuickLink from '@/components/common/simple-dashboard/SimpleQuickLink'
 
 export const metadata: Metadata = {
-  title: 'Pizza Frenzy - Birdeye View'
-};
+  title: 'Pizza Frenzy - Data Reservoir'
+}
 
-export default function PizzaFrenzyPage() {
-  return (<PizzaFrenzyClientPage/>);
+export default async function Page() {
+  const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/pizza_frenzy`);
+
+  return (
+    <Section variant='h4' name='Pizza Frenzy'>
+      <SimpleRecordTableCards response={data}/>
+      <SimpleBarTableChart response={data}/>
+      <SimpleQuickLink quickLink={DATA_AVAILABLE['pizza-frenzy']}/>
+    </Section>
+  )
 }

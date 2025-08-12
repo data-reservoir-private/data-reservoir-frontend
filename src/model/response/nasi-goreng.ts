@@ -1,70 +1,132 @@
-import { NasiGorengBurnedFoodSchema, NasiGorengPlateSchema, NasiGorengToolSchema, NasiGorengUpgradeSchema } from "@/database/schema/nasi-goreng";
-import { HasID } from "./base";
-
-export interface NasiGorengBurnedFoodResponse extends Omit<NasiGorengBurnedFoodSchema & HasID, '_id'> {};
-export interface NasiGorengPlateResponse extends Omit<NasiGorengPlateSchema & HasID, '_id'> {};
-export interface NasiGorengRelicResponse extends HasID {
-  image: string;
-  name: string;
-  tool: {
-    tool_image: string;
-    tool_name: string;
-  }
-};
-
-export interface NasiGorengUpgradeResponse extends Omit<NasiGorengUpgradeSchema & HasID, '_id'> { };
-export interface NasiGorengToolResponse extends Omit<NasiGorengToolSchema & HasID, '_id'> { };
-
-export interface NasiGorengIngredientResponse extends HasID {
-  category: string
-  description: string
-  image: string
-  is_processed: boolean
-  name: string
-  price: number
-  recipe: {
-    ingredient_image: string
-    ingredient_name: string
-  }[]
-  tool: {
-    tool_image: string
-    tool_name: string
-  }
-}
-
-export interface NasiGorengFriedRiceResponse extends HasID {
-  description: string
-  name: string
-  price: number
-  raw_image: string
-  raw_layer_number: number
-  raw_x_coordinate: number
-  raw_y_coordinate: number
-  tool_image: string
-  tool_name: string
-  levels: {
-    fried_rices_needed: number
+export type INasiGorengResponse = {
+  'ingredient': {
+    id: string
+    name: string
     image: string
-    level: number
-    details: {
-      flip_image_type: number
-      layer_number: number
-      upgrade_image: string
-      upgrade_name: string
-      x_coordinate: number
-      y_coordinate: number
-    }[],
+    description: string
+    isProcessed: boolean
+    price: number
+    category: string
+  },
+  'ingredient-complete': (INasiGorengResponse['ingredient'] & {
     recipe: {
-      ingredient_image: string
-      ingredient_name: string
+      id: string
+      name: string
+      image: string
+    }[];
+    usage: {
+      id: string
+      name: string
+      image: string
+    }[];
+    friedRice: {
+      id: string
+      name: string
+      image: string
+    }[];
+    tool?: {
+      id: string
+      name: string
+      image: string
+    },
+    friedRiceLevel: {
+      id: string
+      friedRiceID: string
+      name: string
+      image: string
+      level: number,
       quantity: number
-    }[],
-  }[],
-  plate: {
+    }[]
+  }),
+  'fried-rice': {
+    id: string
+    name: string
+    imageLevel1: string
+    imageLevel6: string
+    description: string
+    price: number
+  },
+  'fried-rice-complete': INasiGorengResponse['fried-rice'] & {
+    tool: {
+      id: string
+      name: string
+      image: string
+    }
+    recipe: {
+      id: string
+      name: string
+      image: string
+    }[]
+    level: {
+      id: string
+      level: number
+      image: string
+      amountNeeded: number
+      upgrades: {
+        id: string
+        name: string
+        image: string
+      }[],
+      recipe: {
+        id: string
+        name: string
+        image: string,
+        quantity: number
+      }[]
+    }[]
+  },
+  'upgrade': {
+    id: string,
+    name: string,
     image: string
+  },
+  'upgrade-complete': INasiGorengResponse['upgrade'] & {
+    friedRice: {
+      id: string,
+      name: string,
+      image: string
+    }[]
+  },
+  'tool': {
+    id: string,
+    name: string,
+    image: string,
+    longDescription: string,
+    shortDescription: string,
+    price: string,
+  },
+  'tool-complete': INasiGorengResponse['tool'] & {
+    usage: {
+      id: string,
+      name: string,
+      image: string
+    }[]
+  },
+  'burned-food': {
+    id: string,
+    name: string,
+    image: string,
+    category: string
+  },
+  'relic': {
+    id: string,
+    name: string,
+    image: string,
+    tool: {
+      id: string,
+      name: string,
+      image: string
+    }
+  },
+  'plate': {
+    id: string,
+    image: string
+  },
+  'plate-complete': INasiGorengResponse['plate'] & {
+    friedRices: {
+      id: string,
+      name: string,
+      image: string
+    }[]
   }
-  recipe: {
-    ingredient_image: string
-    ingredient_name: string
-  }[]
 }
