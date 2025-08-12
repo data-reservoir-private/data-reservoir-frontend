@@ -1,4 +1,3 @@
-import { Logout } from "@/app/(auth)/logout/actions";
 import { ROUTES } from "@/constant/menu-route";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -46,11 +45,6 @@ export function DrawerOptions({ onClose }: { onClose: () => void }) {
             ))
           }
         </Box>
-        {/* <Box component='form' action={Logout}>
-          <Link href={'/logout'} passHref>
-            <Button type='button' className='w-full shadow-none bg-error-dark brightness-80' variant='contained'>Logout</Button>
-          </Link>
-        </Box> */}
       </Box>
     </Box>
   )

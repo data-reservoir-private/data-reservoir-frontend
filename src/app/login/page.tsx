@@ -1,11 +1,10 @@
 import Paper from '@/components/common/paper/Paper';
 import React from 'react';
 import { redirect } from 'next/navigation';
-import { login } from './actions';
 import { Metadata } from 'next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { SignedIn, SignInButton } from '@clerk/nextjs';
+import { SignInButton } from '@clerk/nextjs';
 import Button from '@mui/material/Button';
 import { FaGithub } from 'react-icons/fa6';
 import { currentUser } from '@clerk/nextjs/server';
@@ -26,7 +25,7 @@ export default async function LoginPage(props: { searchParams: searchParamsType 
     <>
       <Box className='w-full h-[100svh] flex items-center justify-center'>
         <Paper className='w-fit px-12 py-7'>
-          <Box component='form' action={login} className='flex gap-2 flex-col'>
+          <Box className='flex gap-2 flex-col'>
             {
               searchP.message && (
                 <div color='failure' className='p-2 text-sm'>

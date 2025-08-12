@@ -1,5 +1,5 @@
 {
-  "name": "bird-view",
+  "name": "data-reservoir",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,8 +15,6 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.1.2",
     "@mui/material-nextjs": "^7.1.1",
-    "@supabase/ssr": "^0.5.2",
-    "@supabase/supabase-js": "^2.47.8",
     "@tailwindcss/postcss": "^4.1.10",
     "@tanstack/react-form": "^1.14.1",
     "@tanstack/react-table": "^8.19.3",

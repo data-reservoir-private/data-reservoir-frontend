@@ -37,11 +37,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               <BsMenuApp />
             </IconButton>
           }
-          <Typography variant='h6' component="div" className='flex-grow font-bold'>
-            Data Reservoir
-          </Typography>
+          <Typography variant='h6' component="div" className='flex-grow font-bold'>Data Reservoir</Typography>
           <PersonalInfo/>
-          {/* <Skeleton variant='circular' width={20} height={20} className='bg-green-400' animation='pulse' title='API is online' /> */}
         </Toolbar>
       </AppBar>
       <Drawer variant={smol ? 'temporary' : 'permanent'}
