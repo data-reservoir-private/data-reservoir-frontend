@@ -2,11 +2,9 @@ import { clerkMiddleware } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 export default clerkMiddleware(async (_, req) => {
-  const r = NextResponse.next({ ...req });
-  r.headers.set('X-Current-URL', req.nextUrl.pathname);
-  r.headers.set('X-Query-Param', req.nextUrl.search.slice(1));
-
-  return r;
+  const r = NextResponse.next({ ...req, headers: {} });
+  r.cookies.set('QueryParam', req.nextUrl.search.slice(1))
+  return r
 }, {
   afterSignInUrl: '/dashboard',
 });

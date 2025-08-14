@@ -6,7 +6,7 @@ import https from 'https'
 import 'server-only'
 import * as fs from 'fs'
 import queryString from 'query-string';
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { parseSearchParam } from './general';
 import { auth } from '@clerk/nextjs/server';
 
@@ -31,7 +31,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
     params: params,
     httpsAgent: agent,
     headers: {
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
     },
     paramsSerializer: function (param) {
       return queryString.stringify(param, {
@@ -54,9 +54,6 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
  * @returns Search param as TResult
  */
 export async function getSearchParam<TResult>() : Promise<TResult> {
-  return parseSearchParam<TResult>((await headers()).get('X-Query-Param')!);
-}
-
-export async function getURL<TResult>() : Promise<TResult> {
-  return parseSearchParam<TResult>((await headers()).get('X-Current-URL')!);
+  // return parseSearchParam<TResult>((await headers()).get('X-Query-Param')!);
+  return parseSearchParam<TResult>((await cookies()).get('QueryParam')!.value);
 }
