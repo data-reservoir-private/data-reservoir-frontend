@@ -1,3 +1,4 @@
+import { Route } from "next";
 import { API_ROUTE } from "./api-route";
 import { BsBuildingFill } from "react-icons/bs";
 import 'server-only'
@@ -12,7 +13,7 @@ export interface IData {
     id: string,
     name: string,
     description: string,
-    link: string,
+    link: Route,
     image?: string | (() => React.ReactNode),
     export?: {
       route: string,
@@ -304,40 +305,40 @@ export const DATA_AVAILABLE = Object.freeze(({
       },
     ]
   } as IData,
-  'quartz': {
-    name: 'Quartz',
+  'seasons': {
+    name: 'Story of Seasons',
     categories: [
       {
-        id: 'recipe',
-        name: 'Recipe',
-        image: '/image/quick_link/q_recipe.png',
+        id: 'ds-mineral-recipe',
+        name: 'DS Mineral Recipe',
+        image: '/image/quick_link/sos_ds_mineral_recipe.png',
         description: 'Harvest Moon: Friends of Mineral Town GBA recipes. Sourced from https://fogu.com/hm4/',
-        link: '/quartz/recipe',
+        link: '/seasons/ds-mineral-recipe',
         export: {
           exportType: ALL_EXPORTS,
-          route: API_ROUTE.QUARTZ.RECIPE
+          route: API_ROUTE.SEASONS.DS_MINERAL_RECIPE
         }
       },
       {
-        id: 'shippable',
-        name: 'Shippable',
-        image: '/image/quick_link/q_shippable.png',
+        id: 'ds-mineral-shippable',
+        name: 'DS Mineral Shippable',
+        image: '/image/quick_link/sos_ds_mineral_shippable.png',
         description: 'Harvest Moon: Friends of Mineral Town GBA shippable products. Sourced from https://fogu.com/hm4/',
-        link: '/quartz/shippable',
+        link: '/seasons/ds-mineral-shippable',
         export: {
           exportType: ALL_EXPORTS,
-          route: API_ROUTE.QUARTZ.SHIPPABLE
+          route: API_ROUTE.SEASONS.DS_MINERAL_SHIPPABLE
         }
       },
       {
-        id: 'utensil',
-        name: 'Utensil',
-        image: '/image/quick_link/q_utensil.png',
+        id: 'ds-mineral-utensil',
+        name: 'DS Mineral Utensil',
+        image: '/image/quick_link/sos_ds_mineral_utensil.png',
         description: 'Harvest Moon: Friends of Mineral Town GBA utensils. Sourced from https://fogu.com/hm4/',
-        link: '/quartz/utensil',
+        link: '/seasons/ds-mineral-utensil',
         export: {
           exportType: ALL_EXPORTS,
-          route: API_ROUTE.QUARTZ.UTENSIL
+          route: API_ROUTE.SEASONS.DS_MINERAL_UTENSIL
         }
       }
     ]

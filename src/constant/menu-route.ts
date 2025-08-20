@@ -9,18 +9,19 @@ import { IoIosDocument } from "react-icons/io";
 import { GiCrystalGrowth, GiPolarStar } from "react-icons/gi";
 import { GrTransaction } from "react-icons/gr";
 import { TbAtom2Filled } from "react-icons/tb";
+import { Route } from 'next';
 
 export type ROUTE =
   "dashboard" | "transjakarta" | "hayday" |
   "the-sims" | "pizza-frenzy" | "farm-frenzy" | "element" |
-  "nasi-goreng" | "quartz" | "cygnus" | "transaction" |
+  "nasi-goreng" | "seasons" | "cygnus" | "transaction" |
   "docs" | "export";
 
 export type ROUTE_TYPE = {
   id: ROUTE,
   name: string,
   icon: IconType,
-  link: string,
+  link: Route,
   inactive?: boolean,
   beta?: boolean,
   new?: boolean,
@@ -65,10 +66,10 @@ export const ROUTES: ROUTE_TYPE[][] = [
       link: '/nasi-goreng'
     },
     {
-      id: 'quartz',
-      name: 'Quartz',
+      id: 'seasons',
+      name: 'Seasons',
       icon: GiCrystalGrowth,
-      link: '/quartz'
+      link: '/seasons'
     },
     {
       id: 'cygnus',

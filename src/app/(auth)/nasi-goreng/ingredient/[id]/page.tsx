@@ -12,6 +12,7 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
+import { Route } from 'next';
 
 interface NasiGorengIngredientDetailProps {
   params: Promise<{ id: string }>
@@ -89,7 +90,7 @@ export default async function NasiGorengIngredientDetail(props: NasiGorengIngred
   )
 }
 
-function Grids({ name, data, link }: { name: string, link: string, data: { name: string, image: string, id: string }[] }) {
+function Grids<T extends string>({ name, data, link }: { name: string, link: Route<T> | URL, data: { name: string, image: string, id: string }[] }) {
   return (
     <Section name={name} variant='h6' className="flex flex-col gap-2">
       <Grid container columns={{ md: 3, xs: 1 }} spacing={'.5rem'}>
@@ -97,7 +98,7 @@ function Grids({ name, data, link }: { name: string, link: string, data: { name:
           data.map(ing => (
             <Grid size={1} key={ing.id}>
               <Paper className="flex overflow-hidden">
-                <Link passHref href={`${link}/${ing.id}`}>
+                <Link passHref href={`${link}/${ing.id}` as Route}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
                     <SimpleImage quality={20} src={ing.image} alt={ing.name} />
                   </Box>
@@ -124,7 +125,7 @@ function GridLevel({ name, data, link }: { name: string, link: string, data: INa
           data.map(ing => (
             <Grid size={1} key={ing.id}>
               <Paper className="flex overflow-hidden">
-                <Link passHref href={`${link}/${ing.friedRiceID}`}>
+                <Link passHref href={`${link}/${ing.friedRiceID}` as Route}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
                     <SimpleImage quality={20} src={ing.image} alt={ing.name} />
                   </Box>

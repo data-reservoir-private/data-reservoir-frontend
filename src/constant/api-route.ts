@@ -59,10 +59,10 @@ const API_SHORTHAND = Object.freeze({
     BUS_STOP: 'bus-stop',
     STYLE: 'style'
   },
-  QUARTZ: {
-    SHIPPABLE: 'shippable',
-    RECIPE: 'recipe',
-    UTENSIL: 'utensil'
+  SEASONS: {
+    DS_MINERAL_SHIPPABLE: 'ds-mineral-shippable',
+    DS_MINERAL_RECIPE: 'ds-mineral-recipe',
+    DS_MINERAL_UTENSIL: 'ds-mineral-utensil'
   },
   CYGNUS: {
     ARTIFACT: 'artifact',
@@ -141,10 +141,10 @@ export const API_ROUTE = Object.freeze({
     BUS_STOP: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,
     STYLE: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}/${API_SHORTHAND.TRANSJAKARTA.STYLE}`
   },
-  QUARTZ: {
-    SHIPPABLE: `/quartz/${API_SHORTHAND.QUARTZ.SHIPPABLE}`,
-    RECIPE: `/quartz/${API_SHORTHAND.QUARTZ.RECIPE}`,
-    UTENSIL: `/quartz/${API_SHORTHAND.QUARTZ.UTENSIL}`
+  SEASONS: {
+    DS_MINERAL_SHIPPABLE: `/seasons/${API_SHORTHAND.SEASONS.DS_MINERAL_SHIPPABLE}`,
+    DS_MINERAL_RECIPE: `/seasons/${API_SHORTHAND.SEASONS.DS_MINERAL_RECIPE}`,
+    DS_MINERAL_UTENSIL: `/seasons/${API_SHORTHAND.SEASONS.DS_MINERAL_UTENSIL}`
   },
   CYGNUS: {
     ARTIFACT: `/cygnus/${API_SHORTHAND.CYGNUS.ARTIFACT}`,

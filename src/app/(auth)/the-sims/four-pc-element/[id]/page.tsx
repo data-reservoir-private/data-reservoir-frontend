@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { convertTheSimsRarity } from '@/utilities/general';
 import { notFound } from 'next/navigation';
+import { Route } from 'next';
 
 interface FourPCElementDetailProps {
   params: Promise<{ id: string }>
@@ -70,7 +71,7 @@ function Grids({ name, link, data }: { name: string, link: string, data: { name:
           data.map(ing => (
             <Grid size={1} key={ing.id}>
               <Paper className="flex overflow-hidden">
-                <Link passHref href={`${link}/${ing.id}`}>
+                <Link passHref href={`${link}/${ing.id}` as Route}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
                     <SimpleImage quality={20} src={ing.image} alt={ing.name}/>
                   </Box>

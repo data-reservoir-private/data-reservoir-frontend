@@ -2,18 +2,7 @@ import Section from '@/components/common/paper/Section'
 import { BREADCRUMBS } from '@/constant/breadcrumb'
 import React from 'react'
 
-interface HaydayOrderLayoutProps {
-  summary: React.ReactNode,
-  children: React.ReactNode,
-  distribution: React.ReactNode,
-  valuable: React.ReactNode,
-  weekly: React.ReactNode,
-  daily: React.ReactNode,
-  client: React.ReactNode,
-  product: React.ReactNode
-}
-
-export default function HaydayOrderLayout(props: HaydayOrderLayoutProps) {
+export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
   return (
     <Section name='Hayday Orders' variant='h4' breadcrumbs={BREADCRUMBS['hayday-order']}>
       {props.children}

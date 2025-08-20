@@ -10,7 +10,7 @@ import { DATA_AVAILABLE, ExportType, IData } from "@/constant/data";
 interface IParam {
   category: string,
   data: string,
-  type: ExportType
+  type: string
 }
 
 export async function GET(_: NextRequest, { params }: { params: Promise<IParam> }) {
@@ -20,7 +20,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
   if (!cat) return notFound();
 
   const d = cat.categories.find(x => x.id === data);
-  if (!d || !d.export || !d.export.exportType.includes(type)) return notFound();
+  if (!d || !d.export || !d.export.exportType.includes(type as ExportType)) return notFound();
 
   const c = cache(async () => await grabData<object[]>(d.export!.route, {
     PageSize: 0

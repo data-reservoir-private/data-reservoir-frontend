@@ -8,6 +8,7 @@ import { BsTable } from 'react-icons/bs'
 import Section from '../paper/Section'
 import Paper from '../paper/Paper'
 import Image from 'next/image'
+import { Route } from 'next'
 
 interface SimpleQuickLinkProps {
   quickLink: IData;
@@ -20,7 +21,7 @@ export default function SimpleQuickLink({ quickLink }: SimpleQuickLinkProps) {
         {
           quickLink.categories.map((nav) => (
             <Grid size={1} key={nav.name}>
-              <Link passHref href={nav.link}>
+              <Link passHref href={nav.link as Route}>
                 <Paper className='p-2 cursor-pointer hover:bg-background-paper/50 flex flex-col gap-3 items-center'>
                   <Box className='h-[80px] flex items-center'>
                     {

@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typedRoutes: true,
   images: {
+    qualities: [50],
     remotePatterns: [
       {
         hostname: "img.clerk.com",

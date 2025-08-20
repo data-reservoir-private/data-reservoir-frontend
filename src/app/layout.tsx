@@ -3,12 +3,13 @@ import { PT_Sans, Inconsolata } from "next/font/google";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ThemeProvider } from "@mui/material/styles";
 import { themeOptions } from "@/theme";
-import "./globals.css";
 import classNames from "classnames";
 import { ClerkProvider } from '@clerk/nextjs';
 
-const ptSansFont = PT_Sans({ weight: ['400', '700'], subsets: ['latin'] });
-const inconsolata = Inconsolata({ weight: ['400', '700'], subsets: ['latin'] });
+import "./globals.css";
+
+const ptSansFont = PT_Sans({ weight: ['400', '700'], subsets: ['latin'], display: 'swap' });
+const inconsolata = Inconsolata({ weight: ['400', '700'], subsets: ['latin'], display: 'swap' });
 
 export const metadata: Metadata = {
   title: "Create Next App",

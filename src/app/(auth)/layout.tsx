@@ -1,6 +1,6 @@
 import React from 'react';
 import AuthLayout from '@/components/common/auth-layout/AuthLayout';
-import { SignedIn, SignedOut } from '@clerk/nextjs';
+import { SignedIn } from '@clerk/nextjs';
 import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 

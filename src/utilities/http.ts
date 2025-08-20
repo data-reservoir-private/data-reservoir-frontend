@@ -1,50 +1,47 @@
 'use server'
 
 import { IPaginationResponse } from '@/model/response/base';
-import axios from 'axios';
-import https from 'https'
 import 'server-only'
-import * as fs from 'fs'
 import queryString from 'query-string';
-import { cookies, headers } from 'next/headers';
+import { cookies } from 'next/headers';
 import { parseSearchParam } from './general';
-import { auth } from '@clerk/nextjs/server';
+// import { auth } from '@clerk/nextjs/server';
 
 export async function grabData<TData>(url: string, params?: Record<string, any>): Promise<{
   pagination?: IPaginationResponse,
   data: TData
 }> {
-  const { getToken } = await auth();
-  const token = await getToken();
+  // const { getToken } = await auth();
+  // const token = await getToken();
 
-  let agent: https.Agent | undefined = undefined;
-  if (process.env.ENVIRONMENT && process.env.ENVIRONMENT == 'Development')
-    {
-    const cert = fs.readFileSync('./test_pk.pem');
-    agent = new https.Agent({
-      ca: [cert]
+  let urlFinal = `${process.env.NEXT_PUBLIC_API}${url}`;
+  if (!!params) {
+    urlFinal = urlFinal + '?' + queryString.stringify(params, {
+      arrayFormat: 'none',
+      skipEmptyString: true,
+      skipNull: true
     });
   }
-  
-  const res = await axios.get(url, {
-    baseURL: process.env.NEXT_PUBLIC_API,
-    params: params,
-    httpsAgent: agent,
+
+  const response = await fetch(urlFinal, {
+    method: 'GET',
+    cache: 'force-cache',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`
+      'X-API-Key': process.env.API_KEY
     },
-    paramsSerializer: function (param) {
-      return queryString.stringify(param, {
-        arrayFormat: 'none',
-        skipEmptyString: true,
-        skipNull: true
-      })
+    next: {
+      revalidate: 3600
     }
   });
 
+  const res = await response.json();
+  // SImulate loading
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  
   return {
-    pagination: res.data.pagination,
-    data: res.data.data
+    pagination: res.pagination,
+    data: res.data
   };
 }
 
@@ -53,7 +50,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
  * key as `key[]=[a,b]` rather than `key=[a, b]` which is not what the query-string lib wants
  * @returns Search param as TResult
  */
-export async function getSearchParam<TResult>() : Promise<TResult> {
+export async function getSearchParam<TResult>(): Promise<TResult> {
   // return parseSearchParam<TResult>((await headers()).get('X-Query-Param')!);
   return parseSearchParam<TResult>((await cookies()).get('QueryParam')!.value);
 }
