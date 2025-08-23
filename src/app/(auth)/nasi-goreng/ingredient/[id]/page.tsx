@@ -100,7 +100,7 @@ function Grids<T extends string>({ name, data, link }: { name: string, link: Rou
               <Paper className="flex overflow-hidden">
                 <Link passHref href={`${link}/${ing.id}` as Route}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                    <SimpleImage quality={20} src={ing.image} alt={ing.name} />
+                    <SimpleImage quality={50} src={ing.image} alt={ing.name} />
                   </Box>
                 </Link>
                 <Box className="grow flex">
@@ -127,7 +127,7 @@ function GridLevel({ name, data, link }: { name: string, link: string, data: INa
               <Paper className="flex overflow-hidden">
                 <Link passHref href={`${link}/${ing.friedRiceID}` as Route}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                    <SimpleImage quality={20} src={ing.image} alt={ing.name} />
+                    <SimpleImage quality={50} src={ing.image} alt={ing.name} />
                   </Box>
                 </Link>
                 <Box className="grow flex">

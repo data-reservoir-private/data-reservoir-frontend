@@ -9,22 +9,16 @@ import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
+import SimpleImage from '@/components/common/SimpleImage';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Link from 'next/link';
 
 interface OneProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-// export async function generateStaticParams(){
-//   const { data } = await grabData<IFarmFrenzyResponse['one'][]>(API_ROUTE.FARM_FRENZY.ONE_PRODUCT, {
-//     pageSize: 0,
-//   });
-
-//   return data.map(x => {
-//     x.id
-//   });
-// }
-
-const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['one'] | null>(`${API_ROUTE.FARM_FRENZY.ONE_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['one-detail'] | null>(`${API_ROUTE.FARM_FRENZY.ONE_PRODUCT}/${id}`));
 
 export async function generateMetadata(props: OneProductDetailProps) {
   const post = await grabDetail((await props.params).id);
@@ -57,6 +51,39 @@ export default async function OneProductDetail(props: OneProductDetailProps) {
           Size: data.size
         }} />
       </Section>
+
+      {/* Recipe */}
+      {data.recipe && <Grids name='Recipe' data={[data.recipe]} />}
+
+      {/* Used In */}
+      {data.usage && <Grids name='Usage' data={[data.usage]} />}
     </Section>
   )
+}
+
+function Grids({ name, data }: { name: string, data: { name: string, image: string, id: string }[] }) {
+  return (
+    <Section name={name} variant='h6' className="flex flex-col gap-2">
+      <Grid container columns={{ md: 3, xs: 1 }} spacing={'.5rem'}>
+        {
+          data.map(ing => (
+            <Grid size={1} key={ing.id}>
+              <Paper className="flex overflow-hidden">
+                <Link passHref href={`/farm-frenzy/one-product/${ing.id}`}>
+                  <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
+                    <SimpleImage quality={50} src={ing.image} alt={ing.name}/>
+                  </Box>
+                </Link>
+                <Box className="grow flex">
+                  <Box className="grow p-3">
+                    <Typography className=''>{ing.name}</Typography>
+                  </Box>
+                </Box>
+              </Paper>
+            </Grid>
+          ))
+        }
+      </Grid>
+    </Section>
+  );
 }

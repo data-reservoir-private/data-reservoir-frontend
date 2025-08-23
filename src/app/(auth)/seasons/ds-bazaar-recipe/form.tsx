@@ -15,15 +15,15 @@ const schema = z.object({
 });
 
 type SubmitMeta = { resetPagination?: boolean };
-export type DSMineralShippableFormSchema = z.infer<typeof schema>;
+export type DSBazaarRecipeFormSchema = z.infer<typeof schema>;
 
-export default function DSMineralShippableForm({ param, totalData = 0 }: { param: DSMineralShippableFormSchema, totalData: number }) {
+export default function RecipeForm({ param, totalData = 0 }: { param: DSBazaarRecipeFormSchema, totalData: number }) {
   const defaultValues = formOptions({
     defaultValues: {
       name: param.name ?? "",
       currentPage: param.currentPage ?? 1,
       pageSize: param.pageSize ?? 50
-    } as DSMineralShippableFormSchema,
+    } as DSBazaarRecipeFormSchema,
     validators: {
       onChange: schema
     },
@@ -35,7 +35,7 @@ export default function DSMineralShippableForm({ param, totalData = 0 }: { param
     ...defaultValues,
     onSubmit: async ({ value, meta }) => {
       if (meta?.resetPagination) value.currentPage = 1;
-      router.push(`/seasons/ds-mineral-shippable?${makeSearchParam(value)}`);
+      router.push(`/seasons/ds-bazaar-recipe?${makeSearchParam(value)}`);
     }
   });
 

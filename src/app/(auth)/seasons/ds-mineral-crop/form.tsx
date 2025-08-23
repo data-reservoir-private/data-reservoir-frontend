@@ -15,15 +15,15 @@ const schema = z.object({
 });
 
 type SubmitMeta = { resetPagination?: boolean };
-export type DSMineralShippableFormSchema = z.infer<typeof schema>;
+export type DSMineralCropFormSchema = z.infer<typeof schema>;
 
-export default function DSMineralShippableForm({ param, totalData = 0 }: { param: DSMineralShippableFormSchema, totalData: number }) {
+export default function DSMineralCropForm({ param, totalData = 0 }: { param: DSMineralCropFormSchema, totalData: number }) {
   const defaultValues = formOptions({
     defaultValues: {
       name: param.name ?? "",
       currentPage: param.currentPage ?? 1,
       pageSize: param.pageSize ?? 50
-    } as DSMineralShippableFormSchema,
+    } as DSMineralCropFormSchema,
     validators: {
       onChange: schema
     },
@@ -35,7 +35,7 @@ export default function DSMineralShippableForm({ param, totalData = 0 }: { param
     ...defaultValues,
     onSubmit: async ({ value, meta }) => {
       if (meta?.resetPagination) value.currentPage = 1;
-      router.push(`/seasons/ds-mineral-shippable?${makeSearchParam(value)}`);
+      router.push(`/seasons/ds-mineral-crop?${makeSearchParam(value)}`);
     }
   });
 

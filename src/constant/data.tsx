@@ -315,7 +315,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Harvest Moon: Friends of Mineral Town GBA recipes. Sourced from https://fogu.com/hm4/',
         link: '/seasons/ds-mineral-recipe',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_WITH_INSERT,
           route: API_ROUTE.SEASONS.DS_MINERAL_RECIPE
         }
       },
@@ -323,10 +323,10 @@ export const DATA_AVAILABLE = Object.freeze(({
         id: 'ds-mineral-shippable',
         name: 'DS Mineral Shippable',
         image: '/image/quick_link/sos_ds_mineral_shippable.png',
-        description: 'Harvest Moon: Friends of Mineral Town GBA shippable products. Sourced from https://fogu.com/hm4/',
+        description: 'Harvest Moon: Friends of Mineral Town GBA shippable products (not including crops). Sourced from https://fogu.com/hm4/',
         link: '/seasons/ds-mineral-shippable',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_WITH_INSERT,
           route: API_ROUTE.SEASONS.DS_MINERAL_SHIPPABLE
         }
       },
@@ -337,10 +337,77 @@ export const DATA_AVAILABLE = Object.freeze(({
         description: 'Harvest Moon: Friends of Mineral Town GBA utensils. Sourced from https://fogu.com/hm4/',
         link: '/seasons/ds-mineral-utensil',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_WITH_INSERT,
           route: API_ROUTE.SEASONS.DS_MINERAL_UTENSIL
         }
-      }
+      },
+      {
+        id: 'ds-mineral-crop',
+        name: 'DS Mineral Crops',
+        image: '/image/quick_link/sos_ds_mineral_crop.png',
+        description: 'Harvest Moon: Friends of Mineral Town GBA crop. Sourced from https://fogu.com/hm4/',
+        link: '/seasons/ds-mineral-crop',
+        export: {
+          exportType: ALL_EXPORTS_WITH_INSERT,
+          route: API_ROUTE.SEASONS.DS_MINERAL_CROP
+        }
+      },
+
+      {
+        id: 'ds-bazaar-crop',
+        name: 'DS Bazaar Crops',
+        image: '/image/quick_link/sos_ds_bazaar_crop.png',
+        description: 'Harvest Moon: Grand Bazaar Town DS crops. Sourced from https://fogu.com/hm9/item-profit-list.php',
+        link: '/seasons/ds-bazaar-crop',
+        export: {
+          exportType: ALL_EXPORTS_WITH_INSERT,
+          route: API_ROUTE.SEASONS.DS_BAZAAR_CROP
+        }
+      },
+      {
+        id: 'ds-bazaar-recipe',
+        name: 'DS Bazaar Recipes',
+        image: '/image/quick_link/sos_ds_bazaar_recipe.png',
+        description: 'Harvest Moon: Grand Bazaar Town DS recipes. Sourced from https://fogu.com/hm9/item-profit-list.php',
+        link: '/seasons/ds-bazaar-recipe',
+        export: {
+          exportType: ALL_EXPORTS_WITH_INSERT,
+          route: API_ROUTE.SEASONS.DS_BAZAAR_RECIPE
+        }
+      },
+      {
+        id: 'ds-bazaar-animal-product',
+        name: 'DS Bazaar Animal Product',
+        image: '/image/quick_link/sos_ds_bazaar_animal_product.png',
+        description: 'Harvest Moon: Grand Bazaar Town DS animal products. Sourced from https://fogu.com/hm9/item-profit-list.php',
+        link: '/seasons/ds-bazaar-animal-product',
+        export: {
+          exportType: ALL_EXPORTS_WITH_INSERT,
+          route: API_ROUTE.SEASONS.DS_BAZAAR_ANIMAL_PRODUCT
+        }
+      },
+      {
+        id: 'ds-bazaar-windmill-product',
+        name: 'DS Bazaar Windmill Product',
+        image: '/image/quick_link/sos_ds_bazaar_windmill_product.png',
+        description: 'Harvest Moon: Grand Bazaar Town DS windmill products. Sourced from https://fogu.com/hm9/item-profit-list.php',
+        link: '/seasons/ds-bazaar-windmill-product',
+        export: {
+          exportType: ALL_EXPORTS_WITH_INSERT,
+          route: API_ROUTE.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT
+        }
+      },
+      {
+        id: 'ds-bazaar-wild-product',
+        name: 'DS Bazaar Wild Product',
+        image: '/image/quick_link/sos_ds_bazaar_wild_product.png',
+        description: 'Harvest Moon: Grand Bazaar Town DS wild products. Sourced from https://fogu.com/hm9/item-profit-list.php',
+        link: '/seasons/ds-bazaar-wild-product',
+        export: {
+          exportType: ALL_EXPORTS_WITH_INSERT,
+          route: API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT
+        }
+      },
     ]
   } as IData,
   'cygnus': {
@@ -374,7 +441,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/c_crop.png',
         link: '/cygnus/crop',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_WITH_INSERT,
           route: API_ROUTE.CYGNUS.CROP
         }
       },
