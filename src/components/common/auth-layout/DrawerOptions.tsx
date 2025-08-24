@@ -1,13 +1,11 @@
 import { ROUTES } from "@/constant/menu-route";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Typography from "@mui/material/Typography";
 import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -31,7 +29,7 @@ export function DrawerOptions({ onClose }: { onClose: () => void }) {
                         }} className={classNames('rounded p-0 mx-2', {
                           'bg-primary/60': path.startsWith(route.link)
                         })} disabled={route.inactive || path.startsWith(route.link)} component={Link} href={route.link}>
-                          <ListItemIcon className='flex justify-center items-center gap-3 w-full p-1 rounded text-inherit'>
+                          <ListItemIcon className='flex justify-center items-center gap-5 w-full p-1 px-2 rounded text-inherit'>
                             <route.icon className='text-lg' />
                             <ListItemText className='text-inherit!' secondary={route.name} />
                           </ListItemIcon>

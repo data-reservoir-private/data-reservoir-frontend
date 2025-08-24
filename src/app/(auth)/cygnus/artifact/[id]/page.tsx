@@ -31,7 +31,7 @@ export default async function ArtifactDetail(props: ArtifactDetailProps) {
   if (!data) return notFound();
 
   return (
-    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['cygnus-artifact-detail'], { label: data.name }]}>
+    <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['cygnus-artifact-detail'], { label: data.name, link: undefined }]}>
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>

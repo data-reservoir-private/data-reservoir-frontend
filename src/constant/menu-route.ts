@@ -9,18 +9,23 @@ import { IoIosDocument } from "react-icons/io";
 import { GiCrystalGrowth, GiPolarStar } from "react-icons/gi";
 import { GrTransaction } from "react-icons/gr";
 import { TbAtom2Filled } from "react-icons/tb";
+import { Route } from 'next';
+import { BiSolidLeaf } from "react-icons/bi";
+import { PiBarnFill } from "react-icons/pi";
+import { FaCookieBite } from "react-icons/fa";
+
 
 export type ROUTE =
   "dashboard" | "transjakarta" | "hayday" |
   "the-sims" | "pizza-frenzy" | "farm-frenzy" | "element" |
-  "nasi-goreng" | "quartz" | "cygnus" | "transaction" |
+  "nasi-goreng" | "seasons" | "cygnus" | "transaction" |
   "docs" | "export";
 
 export type ROUTE_TYPE = {
   id: ROUTE,
   name: string,
   icon: IconType,
-  link: string,
+  link: Route,
   inactive?: boolean,
   beta?: boolean,
   new?: boolean,
@@ -43,13 +48,13 @@ export const ROUTES: ROUTE_TYPE[][] = [
     {
       id: 'hayday',
       name: 'Hayday',
-      icon: CiWheat,
+      icon: FaCookieBite,
       link: '/hayday'
     },
     {
       id: 'farm-frenzy',
       name: 'Farm Frenzy',
-      icon: PiBarn,
+      icon: PiBarnFill,
       link: '/farm-frenzy'
     },
     {
@@ -65,10 +70,10 @@ export const ROUTES: ROUTE_TYPE[][] = [
       link: '/nasi-goreng'
     },
     {
-      id: 'quartz',
-      name: 'Quartz',
-      icon: GiCrystalGrowth,
-      link: '/quartz'
+      id: 'seasons',
+      name: 'Seasons',
+      icon: BiSolidLeaf,
+      link: '/seasons'
     },
     {
       id: 'cygnus',

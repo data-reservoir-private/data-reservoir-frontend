@@ -10,7 +10,7 @@ import { VscJson } from "react-icons/vsc";
 import { RiCodeSSlashFill } from "react-icons/ri";
 import { FaFileCsv, FaTruck } from "react-icons/fa6";
 import { SiYaml } from "react-icons/si";
-import { Metadata } from 'next'
+import { Metadata, Route } from 'next'
 import { DiMsqlServer } from "react-icons/di";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { SiSqlite } from "react-icons/si";
@@ -70,7 +70,7 @@ export default function ExportPage() {
                     <Box className="flex justify-end gap-2 flex-wrap">
                       {
                         l.export!.exportType.map(et => (
-                          <Link passHref href={`/export/${categoryKey}/${l.id}/${et}`} key={et} target='_blank'>
+                          <Link passHref href={`/export/${categoryKey}/${l.id}/${et}` as Route} key={et} target='_blank'>
                             <Button size='small' type='button' variant="contained" startIcon={getType(et)}>{et}</Button>
                           </Link>
                         ))

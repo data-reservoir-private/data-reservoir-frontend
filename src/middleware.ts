@@ -1,23 +1,32 @@
-import { clerkMiddleware } from '@clerk/nextjs/server';
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { Route } from 'next';
 import { NextResponse } from 'next/server';
 
-export default clerkMiddleware(async (_, req) => {
+const notProtectedRoute = createRouteMatcher(['/login(.*)', '/']);
+
+export default clerkMiddleware(async (auth, req) => {
+  const { userId } = await auth()
+
+  if (!userId && !notProtectedRoute(req)) {
+    return NextResponse.redirect(new URL('/login' satisfies Route, req.url));
+  }
+  else if (userId && notProtectedRoute(req)) {
+    return NextResponse.redirect(new URL('/dashboard' satisfies Route, req.url));
+  }
+
   const r = NextResponse.next({ ...req, headers: {} });
-  r.cookies.set('QueryParam', req.nextUrl.search.slice(1))
-  return r
+  r.cookies.set('QueryParam', req.nextUrl.search.slice(1));
+  return r;
+
 }, {
   afterSignInUrl: '/dashboard',
 });
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * Feel free to modify this pattern to include more paths.
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
   ],
 };

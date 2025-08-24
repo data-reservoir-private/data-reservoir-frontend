@@ -12,6 +12,7 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
+import { Route } from 'next';
 
 interface NasiGorengFriedRiceDetailProps {
   params: Promise<{ id: string }>
@@ -73,7 +74,7 @@ export default async function NasiGorengFriedRiceDetail(props: NasiGorengFriedRi
       }
 
       {/* Recipe */}
-      {data.recipe.length > 0 && <Grids name='Recipe' data={data.recipe} link='/nasi-goreng/ingredient' />}
+      {data.recipe.length > 0 && <Grids name='Recipe' data={data.recipe} />}
 
       {/* Levels */}
       {data.recipe.length > 0 && <Levels level={data.level} />}
@@ -110,7 +111,7 @@ function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['
                             <Paper className="flex overflow-hidden">
                               <Link passHref href={`/nasi-goreng/upgrade/${up.id}`}>
                                 <Box className="w-10 h-full min-h-10 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                                  <SimpleImage quality={20} src={up.image} alt={up.name} />
+                                  <SimpleImage quality={50} src={up.image} alt={up.name} />
                                 </Box>
                               </Link>
                               <Box className="grow flex">
@@ -137,7 +138,7 @@ function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['
                             <Paper className="flex overflow-hidden">
                               <Link passHref href={`/nasi-goreng/ingredient/${ing.id}`}>
                                 <Box className="w-10 h-full min-h-10 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                                  <SimpleImage quality={20} src={ing.image} alt={ing.name} />
+                                  <SimpleImage quality={50} src={ing.image} alt={ing.name} />
                                 </Box>
                               </Link>
                               <Box className="grow flex">
@@ -164,7 +165,7 @@ function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['
   )
 }
 
-function Grids({ name, data, link }: { name: string, link: string, data: { name: string, image: string, id: string }[] }) {
+function Grids<T extends string>({ name, data }: { name: string, data: { name: string, image: string, id: string }[] }) {
   return (
     <Section name={name} variant='h6' className="flex flex-col gap-2">
       <Grid container columns={{ md: 3, xs: 1 }} spacing={'.5rem'}>
@@ -172,9 +173,9 @@ function Grids({ name, data, link }: { name: string, link: string, data: { name:
           data.map(ing => (
             <Grid size={1} key={ing.id}>
               <Paper className="flex overflow-hidden">
-                <Link passHref href={`${link}/${ing.id}`}>
+                <Link passHref href={`/nasi-goreng/ingredient/${ing.id}`}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                    <SimpleImage quality={20} src={ing.image} alt={ing.name} />
+                    <SimpleImage quality={50} src={ing.image} alt={ing.name} />
                   </Box>
                 </Link>
                 <Box className="grow flex">

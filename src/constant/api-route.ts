@@ -59,10 +59,17 @@ const API_SHORTHAND = Object.freeze({
     BUS_STOP: 'bus-stop',
     STYLE: 'style'
   },
-  QUARTZ: {
-    SHIPPABLE: 'shippable',
-    RECIPE: 'recipe',
-    UTENSIL: 'utensil'
+  SEASONS: {
+    DS_MINERAL_SHIPPABLE: 'ds-mineral-shippable',
+    DS_MINERAL_CROP: 'ds-mineral-crop',
+    DS_MINERAL_RECIPE: 'ds-mineral-recipe',
+    DS_MINERAL_UTENSIL: 'ds-mineral-utensil',
+    DS_BAZAAR_RECIPE: 'ds-bazaar-recipe',
+    DS_BAZAAR_SEED: 'ds-bazaar-seed',
+    DS_BAZAAR_CROP: 'ds-bazaar-crop',
+    DS_BAZAAR_WINDMILL_PRODUCT: 'ds-bazaar-windmill-product',
+    DS_BAZAAR_ANIMAL_PRODUCT: 'ds-bazaar-animal-product',
+    DS_BAZAAR_WILD_PRODUCT: 'ds-bazaar-wild-product',
   },
   CYGNUS: {
     ARTIFACT: 'artifact',
@@ -141,10 +148,18 @@ export const API_ROUTE = Object.freeze({
     BUS_STOP: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,
     STYLE: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}/${API_SHORTHAND.TRANSJAKARTA.STYLE}`
   },
-  QUARTZ: {
-    SHIPPABLE: `/quartz/${API_SHORTHAND.QUARTZ.SHIPPABLE}`,
-    RECIPE: `/quartz/${API_SHORTHAND.QUARTZ.RECIPE}`,
-    UTENSIL: `/quartz/${API_SHORTHAND.QUARTZ.UTENSIL}`
+  SEASONS: {
+    DS_MINERAL_SHIPPABLE: `/seasons/${API_SHORTHAND.SEASONS.DS_MINERAL_SHIPPABLE}`,
+    DS_MINERAL_CROP: `/seasons/${API_SHORTHAND.SEASONS.DS_MINERAL_CROP}`,
+    DS_MINERAL_RECIPE: `/seasons/${API_SHORTHAND.SEASONS.DS_MINERAL_RECIPE}`,
+    DS_MINERAL_UTENSIL: `/seasons/${API_SHORTHAND.SEASONS.DS_MINERAL_UTENSIL}`,
+
+    DS_BAZAAR_RECIPE: `/seasons/${API_SHORTHAND.SEASONS.DS_BAZAAR_RECIPE}`,
+    DS_BAZAAR_SEED: `/seasons/${API_SHORTHAND.SEASONS.DS_BAZAAR_SEED}`,
+    DS_BAZAAR_CROP: `/seasons/${API_SHORTHAND.SEASONS.DS_BAZAAR_CROP}`,
+    DS_BAZAAR_WINDMILL_PRODUCT: `/seasons/${API_SHORTHAND.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT}`,
+    DS_BAZAAR_ANIMAL_PRODUCT: `/seasons/${API_SHORTHAND.SEASONS.DS_BAZAAR_ANIMAL_PRODUCT}`,
+    DS_BAZAAR_WILD_PRODUCT: `/seasons/${API_SHORTHAND.SEASONS.DS_BAZAAR_WILD_PRODUCT}`,
   },
   CYGNUS: {
     ARTIFACT: `/cygnus/${API_SHORTHAND.CYGNUS.ARTIFACT}`,
