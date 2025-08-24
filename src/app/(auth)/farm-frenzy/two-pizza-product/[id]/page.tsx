@@ -13,10 +13,13 @@ import SimpleImage from '@/components/common/SimpleImage';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+import { getStaticParams } from '@/utilities/static';
 
 interface TwoPizzaProductDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['two-pizza']>(API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT);
 
 const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['two-pizza-detail'] | null>(`${API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT}/${id}`));
 

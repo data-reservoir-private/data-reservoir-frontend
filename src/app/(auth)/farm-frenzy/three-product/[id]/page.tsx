@@ -9,10 +9,13 @@ import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
+import { getStaticParams } from '@/utilities/static';
 
 interface ThreeProductDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['three']>(API_ROUTE.FARM_FRENZY.THREE_PRODUCT);
 
 const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['three'] | null>(`${API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/${id}`));
 

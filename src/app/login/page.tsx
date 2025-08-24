@@ -1,13 +1,11 @@
 import Paper from '@/components/common/paper/Paper';
 import React from 'react';
-import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { SignInButton } from '@clerk/nextjs';
 import Button from '@mui/material/Button';
 import { FaGithub } from 'react-icons/fa6';
-import { currentUser } from '@clerk/nextjs/server';
 
 export const metadata: Metadata = {
   title: 'Login - Data Reservoir'
@@ -17,10 +15,6 @@ type searchParamsType = Promise<{ message: string }>
 
 export default async function LoginPage(props: { searchParams: searchParamsType }) {
   const searchP = await props.searchParams;
-
-  const user = await currentUser();
-  if (user) redirect('/dashboard');
-
   return (
     <>
       <Box className='w-full h-[100svh] flex items-center justify-center'>

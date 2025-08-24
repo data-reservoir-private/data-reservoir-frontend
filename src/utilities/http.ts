@@ -5,7 +5,6 @@ import 'server-only'
 import queryString from 'query-string';
 import { cookies } from 'next/headers';
 import { parseSearchParam } from './general';
-// import { auth } from '@clerk/nextjs/server';
 
 export async function grabData<TData>(url: string, params?: Record<string, any>): Promise<{
   pagination?: IPaginationResponse,

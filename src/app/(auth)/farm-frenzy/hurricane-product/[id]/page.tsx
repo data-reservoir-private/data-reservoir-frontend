@@ -13,10 +13,13 @@ import SimpleImage from '@/components/common/SimpleImage';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+import { getStaticParams } from '@/utilities/static';
 
 interface HurricaneProductDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['hurricane']>(API_ROUTE.FARM_FRENZY.HURRICANE);
 
 const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['hurricane-detail'] | null>(`${API_ROUTE.FARM_FRENZY.HURRICANE}/${id}`));
 
