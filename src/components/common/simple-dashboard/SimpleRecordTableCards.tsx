@@ -18,7 +18,7 @@ export default function SimpleRecordTableCards(props: SimpleRecordTableCardsProp
         <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none gap-2'>
           <Box flexDirection='column'>
             <Typography variant='h4' fontWeight='bold'>{props.response.rows}</Typography>
-            <Typography variant='subtitle2'>Records</Typography>
+            <Typography variant='subtitle2' component='h5'>Records</Typography>
           </Box>
           <Box component='div' className='h-full flex items-center justify-center text-5xl'>
             <FaThList />

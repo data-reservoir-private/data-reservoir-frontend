@@ -17,7 +17,7 @@ export default async function LoginPage(props: { searchParams: searchParamsType 
   const searchP = await props.searchParams;
   return (
     <>
-      <Box className='w-full h-[100svh] flex items-center justify-center'>
+      <Box className='w-full h-[100svh] flex items-center justify-center p-10'>
         <Paper className='w-fit px-12 py-7'>
           <Box className='flex gap-2 flex-col'>
             {
@@ -27,15 +27,15 @@ export default async function LoginPage(props: { searchParams: searchParamsType 
                 </div>
               )
             }
-            <Box className='flex justify-between items-center'>
+            <Box className='flex justify-between items-center max-md:flex-col max-md:gap-2'>
               <Typography variant='h5' textAlign='center' fontWeight='bold'>Data Reservoir</Typography>
               <SignInButton oauthFlow='redirect' fallbackRedirectUrl={'/dashboard'} forceRedirectUrl={'/dashboard'}>
-                <Button startIcon={<FaGithub />} className='pl-4 pr-4' variant='contained'>
+                <Button startIcon={<FaGithub />} className='pl-4 pr-4 max-md:w-full' variant='contained'>
                   Github Login
                 </Button>
               </SignInButton>
             </Box>
-            <Typography variant='subtitle1'>
+            <Typography variant='subtitle1' className='text-center'>
               This is a private app. Please ask the (sole) dev to give you access hehe
             </Typography>
           </Box>

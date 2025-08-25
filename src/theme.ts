@@ -31,7 +31,16 @@ export const themeOptions = createTheme({
     fontFamily: 'pt sans',
   },
   components: {
-    
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {
+          backgroundColor: '#1E5076',
+          ":hover": {
+            backgroundColor: '#164569'
+          }
+        }
+      }
+    }
     // MuiToolbar: {
     //   styleOverrides: {
     //     dense: {

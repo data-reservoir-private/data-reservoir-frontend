@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -25,7 +24,7 @@ export default function TableDetail(props: GridDetailProps) {
                 <TableCell size='small' className='text-sm bg-white/20 w-[20%] font-bold'>{key}</TableCell>
                 <TableCell className='text-sm overflow-clip'>
                   {
-                    typeof (value) === 'boolean' ? (<Checkbox className='p-0' disabled checked={value} />) : 
+                    typeof (value) === 'boolean' ? (<Checkbox aria-label={key} className='p-0' disabled checked={value} />) : 
                       (key === "ID" && typeof(value) === 'string') ? (
                         <Box className="flex justify-between">
                           <Typography className='text-sm' fontFamily='inconsolata'>{ value }</Typography>

@@ -28,7 +28,7 @@ export default function SimpleGrid<TData extends { id: string, name: string, ima
       }
       {
         props.data.length > 0 && (
-          <Grid container spacing='1rem' columns={props.columns ?? 12} className="justify-evenly">
+          <Grid container className="justify-evenly gap-4 max-md:gap-2 grid-cols-12">
             {
               props.data.map((d) => (
                 <Grid key={d.id}>

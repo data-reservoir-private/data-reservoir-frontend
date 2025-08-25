@@ -12,7 +12,6 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
-import { Route } from 'next';
 
 interface NasiGorengFriedRiceDetailProps {
   params: Promise<{ id: string }>
@@ -87,8 +86,8 @@ function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['
     <Section name='Levels' variant='h6' className='flex flex-col gap-2'>
       {
         level.map(l => (
-          <Paper className='flex p-1' key={l.id}>
-            <Box className='flex flex-col gap-5'>
+          <Paper className='flex p-1 max-md:flex-col' key={l.id}>
+            <Box className='flex flex-col gap-5 max-md:justify-center max-md:items-center'>
               <Box className='w-40 h-40 relative flex flex-col'>
                 <SimpleImage src={l.image} alt={l.id} />
               </Box>
