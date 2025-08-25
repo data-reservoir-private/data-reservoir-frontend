@@ -17,6 +17,9 @@ export default clerkMiddleware(async (auth, req, e) => {
   const r = NextResponse.next({ ...req, headers: {} });
   r.cookies.set({
     domain: process.env.DOMAIN,
+    secure: process.env.ENVIRONMENT === 'Production',
+    sameSite: process.env.ENVIRONMENT === 'Production' ? 'none' : 'lax',
+    httpOnly: true,
     name: 'query_params',
     value: req.nextUrl.search.slice(1)
   });
