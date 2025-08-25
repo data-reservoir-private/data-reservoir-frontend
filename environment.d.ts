@@ -7,7 +7,8 @@ declare global {
       NEXT_PUBLIC_SUPABASE_HOST: string,
       NEXT_PUBLIC_SUPABASE_API_KEY: string,
       ENVIRONMENT: "Development" | "Production",
-      API_KEY: string
+      API_KEY: string,
+      DOMAIN: string
     }
   }
 }

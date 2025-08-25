@@ -3,16 +3,13 @@
 import { IPaginationResponse } from '@/model/response/base';
 import 'server-only'
 import queryString from 'query-string';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { parseSearchParam } from './general';
 
 export async function grabData<TData>(url: string, params?: Record<string, any>): Promise<{
   pagination?: IPaginationResponse,
   data: TData
 }> {
-  // const { getToken } = await auth();
-  // const token = await getToken();
-
   let urlFinal = `${process.env.NEXT_PUBLIC_API}${url}`;
   if (!!params) {
     urlFinal = urlFinal + '?' + queryString.stringify(params, {
@@ -26,7 +23,6 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
     method: 'GET',
     cache: 'force-cache',
     headers: {
-      // Authorization: `Bearer ${token}`
       'X-API-Key': process.env.API_KEY
     },
     next: {
@@ -50,6 +46,9 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
  * @returns Search param as TResult
  */
 export async function getSearchParam<TResult>(): Promise<TResult> {
-  // return parseSearchParam<TResult>((await headers()).get('X-Query-Param')!);
-  return parseSearchParam<TResult>((await cookies()).get('QueryParam')!.value);
+  const head = (await headers()).get('X-Query-Param')
+  if (head) return parseSearchParam<TResult>(head);
+
+  const cook = (await cookies()).get('query_params');
+  return parseSearchParam<TResult>(cook!.value);
 }
