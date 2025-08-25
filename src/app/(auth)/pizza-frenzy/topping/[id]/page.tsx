@@ -10,10 +10,13 @@ import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { IPizzaFrenzyResponse } from '@/model/response/pizza-frenzy';
 import Grid from '@mui/material/Grid';
+import { getStaticParams } from '@/utilities/static';
 
 interface ToppingDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<IPizzaFrenzyResponse['topping']>(API_ROUTE.PIZZA_FRENZY.TOPPING);
 
 const grabDetail = cache(async (id: string) => await grabData<IPizzaFrenzyResponse['topping-complete'] | null>(`${API_ROUTE.PIZZA_FRENZY.TOPPING}/${id}`));
 

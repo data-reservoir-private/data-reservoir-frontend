@@ -36,7 +36,7 @@ export default async function Dashboard() {
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none'>
             <Box flexDirection='column'>
               <Typography variant='h4' fontWeight='bold'>{totalRecord()}</Typography>
-              <Typography variant='subtitle2'>Records</Typography>
+              <Typography variant='subtitle2' component='h5'>Records</Typography>
             </Box>
             <Box component='div' className='h-full flex items-center justify-center text-5xl'>
               <FaThList />
@@ -47,7 +47,7 @@ export default async function Dashboard() {
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-green-700 to-green-400 border-none'>
             <Box flexDirection='column'>
               <Typography variant='h4' fontWeight='bold'>{totalTable()}</Typography>
-              <Typography variant='subtitle2'>Tables</Typography>
+              <Typography variant='subtitle2' component='h5'>Tables</Typography>
             </Box>
             <Box component='div' className='h-full flex items-center justify-center text-5xl'>
               <BsFillGrid3X3GapFill />
@@ -58,7 +58,7 @@ export default async function Dashboard() {
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-slate-600 to-slate-400 border-none'>
             <Box flexDirection='column'>
               <Typography variant='h4' fontWeight='bold'>{totalPages}</Typography>
-              <Typography variant='subtitle2'>Pages</Typography>
+              <Typography variant='subtitle2' component='h5'>Pages</Typography>
             </Box>
             <Box component='div' className='h-full flex items-center justify-center text-5xl'>
               <IoMdDocument />
@@ -69,7 +69,7 @@ export default async function Dashboard() {
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-sky-600 to-sky-400 border-none'>
             <Box flexDirection='column'>
               <Typography variant='h4' fontWeight='bold'>{totalCategory}</Typography>
-              <Typography variant='subtitle2'>Categories</Typography>
+              <Typography variant='subtitle2' component='h5'>Categories</Typography>
             </Box>
             <Box component='div' className='h-full flex items-center justify-center text-5xl'>
               <MdCategory />

@@ -12,10 +12,11 @@ const ptSansFont = PT_Sans({ weight: ['400', '700'], subsets: ['latin'], display
 const inconsolata = Inconsolata({ weight: ['400', '700'], subsets: ['latin'], display: 'swap' });
 
 export const metadata: Metadata = {
-  title: "Data Reservoir"
+  title: "Data Reservoir",
+  description: "Places where you can see mined data structured in (somewhat) tabular format. Perfect for data seeding or just observability."
 };
 
-export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>

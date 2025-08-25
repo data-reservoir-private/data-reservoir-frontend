@@ -23,6 +23,7 @@ export default function CopyButton({ value } : { value: string }) {
 
   return (
     <Button
+      title='Copy ID'
       size='small'
       color={copied === 'success' ? 'success' : copied === 'failed' ? 'error' : 'info'}
       variant={copied !== 'awaiting' ? 'contained' : 'outlined'}

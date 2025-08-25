@@ -75,7 +75,7 @@ function Grids({ name, data }: { name: string, data: IHaydayResponse['hayday-bui
               <Box className="grow p-3">
                 <Typography className='text-lg font-bold'>{item.name}</Typography>
                 <Typography className='text-sm'>Level {item.level}</Typography>
-                <Box className="flex gap-2">
+                <Box className="flex gap-2 flex-wrap">
                   {
                     item.ingredients.map(ing => (
                       <Link key={ing.id} href={`/hayday/product/${ing.id}`} className='group'>
