@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 const notProtectedRoute = createRouteMatcher(['/login(.*)', '/']);
 
-export default clerkMiddleware(async (auth, req) => {
+export default clerkMiddleware(async (auth, req, e) => {
   const { userId } = await auth()
 
   if (!userId && !notProtectedRoute(req)) {
@@ -15,7 +15,14 @@ export default clerkMiddleware(async (auth, req) => {
   }
 
   const r = NextResponse.next({ ...req, headers: {} });
-  r.cookies.set('QueryParam', req.nextUrl.search.slice(1));
+  r.cookies.set({
+    domain: process.env.DOMAIN,
+    name: 'query_params',
+    value: req.nextUrl.search.slice(1)
+  });
+
+  r.headers.set('X-Query-Param', req.nextUrl.search.slice(1));
+
   return r;
 
 }, {
