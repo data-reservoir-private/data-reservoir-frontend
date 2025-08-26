@@ -75,7 +75,6 @@ export default function BustinOutCareerTable({ data }: BustinOutCareerTableProps
           cell: (x) => x.getValue(),
           header: 'Friends'
         }),
-
       ]
     })
   ]);

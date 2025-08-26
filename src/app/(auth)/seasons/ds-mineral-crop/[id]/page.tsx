@@ -9,10 +9,13 @@ import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { ISeasonsResponse } from '@/model/response/seasons';
+import { getStaticParams } from '@/utilities/static';
 
 interface DSMineralCropDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<ISeasonsResponse['ds-mineral-crop']>(API_ROUTE.SEASONS.DS_MINERAL_CROP);
 
 const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-crop'] | null>(`${API_ROUTE.SEASONS.DS_MINERAL_CROP}/${id}`));
 

@@ -3,10 +3,10 @@ import { API_ROUTE } from "./api-route";
 import { BsBuildingFill } from "react-icons/bs";
 import 'server-only'
 
-export type ExportType = 'json' | 'csv' | 'yaml' | 'xml' | 'html' | 'postgresql' | 'sql_server' | 'sqlite';
+export type ExportType = 'json' | 'csv' | 'yaml' | 'xml' | 'html' | 'postgresql' | 'sql_server' | 'sqlite' | 'ndjson';
 
-const ALL_EXPORTS: ExportType[] = ['json', 'csv', 'xml', 'yaml'];
-const ALL_EXPORTS_WITH_INSERT: ExportType[] = ['json', 'csv', 'xml', 'yaml', 'html', 'postgresql', 'sql_server', 'sqlite'];
+const ALL_EXPORTS: ExportType[] = ['json', 'ndjson', 'csv', 'xml', 'yaml'];
+const ALL_EXPORTS_WITH_INSERT: ExportType[] = ['json', 'ndjson', 'csv', 'xml', 'yaml', 'html', 'postgresql', 'sql_server', 'sqlite'];
 export interface IData {
   name: string,
   categories: {

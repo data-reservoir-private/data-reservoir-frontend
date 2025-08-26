@@ -3,7 +3,6 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import React, { cache } from 'react'
@@ -12,10 +11,13 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
+import { getStaticParams } from '@/utilities/static';
 
 interface NasiGorengRelicDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<INasiGorengResponse['relic']>(API_ROUTE.NASI_GORENG.RELIC);
 
 const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['relic'] | null>(`${API_ROUTE.NASI_GORENG.RELIC}/${id}`));
 

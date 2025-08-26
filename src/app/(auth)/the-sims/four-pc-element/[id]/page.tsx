@@ -15,10 +15,13 @@ import Link from 'next/link';
 import { convertTheSimsRarity } from '@/utilities/general';
 import { notFound } from 'next/navigation';
 import { Route } from 'next';
+import { getStaticParams } from '@/utilities/static';
 
 interface FourPCElementDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<ITheSimsResponse['four-pc-element']>(API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT);
 
 const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-element-complete'] | null>(`${API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT}/${id}`));
 

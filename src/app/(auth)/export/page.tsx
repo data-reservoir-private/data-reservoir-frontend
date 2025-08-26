@@ -24,6 +24,7 @@ export const metadata: Metadata = {
 function getType(exportType: ExportType) {
   switch (exportType) {
     case 'json': return <VscJson />
+    case 'ndjson': return <VscJson />
     case 'xml': return <RiCodeSSlashFill />
     case 'csv': return <FaFileCsv />
     case 'yaml': return <SiYaml />

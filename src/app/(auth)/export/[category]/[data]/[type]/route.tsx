@@ -29,6 +29,11 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
   const { data: res } = await c();
 
   if (type === 'json') return NextResponse.json(res);
+  if (type === 'ndjson') return new NextResponse(res.map(x => JSON.stringify(x)).join('\n'), {
+    headers: {
+      'Content-Type': 'text/plain'
+    }
+  });
   else if (type === 'xml') return new NextResponse(XML.js2xml({
     "_declaration": { "_attributes": { "version": "1.0", "encoding": "utf-8" } },
     content: { data: res }
@@ -54,9 +59,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
     }
   });
 
-  // Not supported for now. Too many bugs :(
   else if (type === 'html') {
-    
     return new NextResponse(await toHtmlTable(res), {
       headers: {
         'Content-Type': 'text/html',
@@ -218,3 +221,4 @@ function toDatabase(data: object[], flavour: Extract<ExportType, 'postgresql' | 
 
   return '';
 }
+

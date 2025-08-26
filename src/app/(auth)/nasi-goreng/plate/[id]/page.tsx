@@ -12,11 +12,13 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
-import { Route } from 'next';
+import { getStaticParams } from '@/utilities/static';
 
 interface NasiGorengPlateDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<INasiGorengResponse['relic']>(API_ROUTE.NASI_GORENG.RELIC);
 
 const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['plate-complete'] | null>(`${API_ROUTE.NASI_GORENG.PLATE}/${id}`));
 
