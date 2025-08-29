@@ -15,7 +15,9 @@ import { DiMsqlServer } from "react-icons/di";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { SiSqlite } from "react-icons/si";
 import { FaHtml5 } from "react-icons/fa";
+import { SiApacheparquet } from "react-icons/si";
 import { DATA_AVAILABLE, ExportType } from '@/constant/data'
+import { FaFileExcel } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: 'Export Data - Data Reservoir'
@@ -27,11 +29,14 @@ function getType(exportType: ExportType) {
     case 'ndjson': return <VscJson />
     case 'xml': return <RiCodeSSlashFill />
     case 'csv': return <FaFileCsv />
+    case 'tsv': return <FaFileCsv />
     case 'yaml': return <SiYaml />
     case 'postgresql': return <BiLogoPostgresql />
     case 'sql_server': return <DiMsqlServer />
     case 'sqlite': return <SiSqlite />
     case 'html': return <FaHtml5 />
+    case 'parquet': return <SiApacheparquet />
+    case 'xlsx': return <FaFileExcel />
     default: return <></>
   }
 }
