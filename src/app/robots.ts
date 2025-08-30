@@ -17,6 +17,6 @@ export default function robots(): MetadataRoute.Robots {
         '/the-sims'
       ] as Route[],
     },
-    sitemap: `https://${process.env.DOMAIN}/login`
+    sitemap: `https://${process.env.DOMAIN}/sitemap.xml`
   }
 }
