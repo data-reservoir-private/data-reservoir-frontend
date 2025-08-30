@@ -13,10 +13,13 @@ import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
 import { Route } from 'next';
+import { getStaticParams } from '@/utilities/static';
 
 interface NasiGorengToolDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<INasiGorengResponse['tool']>(API_ROUTE.NASI_GORENG.TOOL);
 
 const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['tool-complete'] | null>(`${API_ROUTE.NASI_GORENG.TOOL}/${id}`));
 

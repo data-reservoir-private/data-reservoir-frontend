@@ -14,10 +14,13 @@ import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { convertTheSimsRarity } from '@/utilities/general';
 import { notFound } from 'next/navigation';
+import { getStaticParams } from '@/utilities/static';
 
 interface FourPCMetalDetailProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<ITheSimsResponse['four-pc-metal']>(API_ROUTE.THE_SIMS.FOUR_PC_METAL);
 
 const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-metal-complete'] | null>(`${API_ROUTE.THE_SIMS.FOUR_PC_METAL}/${id}`));
 

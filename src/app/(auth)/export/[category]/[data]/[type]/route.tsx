@@ -6,6 +6,8 @@ import YAML from 'yaml'
 import { json2csv } from 'json-2-csv';
 import { cache } from "react";
 import { DATA_AVAILABLE, ExportType, IData } from "@/constant/data";
+import { ByteWriter, ColumnSource, parquetWrite } from 'hyparquet-writer';
+import * as ExcelJS from 'exceljs'
 
 interface IParam {
   category: string,
@@ -29,6 +31,11 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
   const { data: res } = await c();
 
   if (type === 'json') return NextResponse.json(res);
+  if (type === 'ndjson') return new NextResponse(res.map(x => JSON.stringify(x)).join('\n'), {
+    headers: {
+      'Content-Type': 'text/plain'
+    }
+  });
   else if (type === 'xml') return new NextResponse(XML.js2xml({
     "_declaration": { "_attributes": { "version": "1.0", "encoding": "utf-8" } },
     content: { data: res }
@@ -44,22 +51,31 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
       'Content-Disposition': 'attachment; filename="result.yaml"'
     }
   });
-  else if (type === 'csv') return new NextResponse(
+  else if (type === 'csv' || type === 'tsv') return new NextResponse(
     json2csv(res, {
+      delimiter: {
+        field: type === 'csv' ? ',' : '\t'
+      },
 
     }), {
     headers: {
       'Content-Type': 'application/csv',
-      'Content-Disposition': 'attachment; filename="result.csv"'
+      'Content-Disposition': `attachment; filename="result.${type}"`
     }
   });
 
-  // Not supported for now. Too many bugs :(
   else if (type === 'html') {
-    
     return new NextResponse(await toHtmlTable(res), {
       headers: {
         'Content-Type': 'text/html',
+      }
+    });
+  }
+  else if (type === 'xlsx') {
+    return new NextResponse(await toExcel(res), {
+      headers: {
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'Content-Disposition': `attachment; filename="result.xlsx"`
       }
     });
   }
@@ -69,6 +85,21 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
         'Content-Type': 'text/plain',
       }
     });
+  }
+  else if (type === 'parquet') {
+    return new NextResponse((await toParquet(
+      res as Record<string, any>[],
+      {
+        webName: 'Data Reservoir',
+        webSite: process.env.DOMAIN,
+        dataName: d.name
+      }
+    )) as BodyInit, {
+      headers: {
+        'Content-Type': 'application/vnd.apache.parquet',
+        'Content-Disposition': 'attachment; filename="result.parquet"'
+      }
+    })
   }
 
   return notFound();
@@ -93,8 +124,8 @@ async function toHtmlTable(data: object[]) {
               {
                 Object.values(row).map((v, idx) => (
                   <td style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={idx}>{
-                    (typeof v === 'string' && v.startsWith('http')) ? 
-                      (<img width={50} src={v}/>) : (typeof v === 'boolean') ? (<input type="checkbox" disabled checked={v}/>) : v
+                    (typeof v === 'string' && v.startsWith('http')) ?
+                      (<img width={50} src={v} />) : (typeof v === 'boolean') ? (<input type="checkbox" disabled checked={v} />) : v
                   }</td>
                 ))
               }
@@ -217,4 +248,41 @@ function toDatabase(data: object[], flavour: Extract<ExportType, 'postgresql' | 
   }
 
   return '';
+}
+
+async function toParquet(data: Record<string, any>[], metadata: Record<string, string>) {
+  const writer = new ByteWriter();
+  const schema = Object.keys(data[0]).map(key => {
+    const values = data.map(x => x[key]);
+    return {
+      name: key,
+      data: values
+    } satisfies ColumnSource
+  });
+
+  parquetWrite({
+    writer,
+    columnData: schema,
+    kvMetadata: Object.entries(metadata).map(([k, v]) => ({ key: k, value: v }))
+  });
+
+  return writer.getBuffer();
+}
+
+async function toExcel(data: Record<string, any>[]) {
+  const workbook = new ExcelJS.Workbook();
+  const sheet = workbook.addWorksheet('Data');
+
+  sheet.addTable({
+    name: 'Data',
+    ref: 'A1',
+    headerRow: true,
+    style: {
+      theme: 'TableStyleMedium2',
+      showRowStripes: true,
+    },
+    columns: Object.keys(data[0]).map(x => ({ name: x })),
+    rows: data.map(row => Object.values(row)),
+  }).commit();
+  return await workbook.xlsx.writeBuffer();
 }

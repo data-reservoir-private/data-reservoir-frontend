@@ -26,7 +26,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
       'X-API-Key': process.env.API_KEY
     },
     next: {
-      revalidate: 3600
+      revalidate: 3600 * 24 * 2
     }
   });
 

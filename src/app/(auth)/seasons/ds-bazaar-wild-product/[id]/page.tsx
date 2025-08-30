@@ -9,10 +9,13 @@ import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { ISeasonsResponse } from '@/model/response/seasons';
+import { getStaticParams } from '@/utilities/static';
 
 interface BazaarWildProductProps {
   params: Promise<{ id: string }>
 }
+
+export const generateStaticParams = getStaticParams<ISeasonsResponse['ds-bazaar-wild-product']>(API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT);
 
 const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-wild-product'] | null>(`${API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT}/${id}`));
 
