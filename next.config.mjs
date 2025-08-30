@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typedRoutes: true,
+  reactStrictMode: true,
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   images: {
     qualities: [50],
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       {
         hostname: "img.clerk.com",
