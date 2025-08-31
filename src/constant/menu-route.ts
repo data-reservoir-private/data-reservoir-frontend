@@ -112,12 +112,11 @@ export const ROUTES: ROUTE_TYPE[][] = [
       icon: BsDatabaseFillDown,
       link: '/export',
     },
-    // {
-    //   id: 'docs',
-    //   name: 'Documentation',
-    //   icon: IoIosDocument,
-    //   link: '/docs',
-    //   inactive: true,
-    // },
+    {
+      id: 'docs',
+      name: 'Documentation',
+      icon: IoIosDocument,
+      link: '/docs',
+    },
   ]
 ];
