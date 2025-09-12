@@ -17,8 +17,8 @@ export default function SimpleRecordTableCards(props: SimpleRecordTableCardsProp
       <Grid size={1}>
         <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none gap-2'>
           <Box flexDirection='column'>
-            <Typography variant='h4' fontWeight='bold'>{props.response.rows}</Typography>
-            <Typography variant='subtitle2' component='h5'>Records</Typography>
+            <Typography variant='h4' fontWeight='bold'>{props.response.dataTotal}</Typography>
+            <Typography variant='subtitle2' component='h5'>Entries</Typography>
           </Box>
           <Box component='div' className='h-full flex items-center justify-center text-5xl'>
             <FaThList />
@@ -28,8 +28,8 @@ export default function SimpleRecordTableCards(props: SimpleRecordTableCardsProp
       <Grid size={1}>
         <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-green-700 to-green-400 border-none'>
           <Box flexDirection='column'>
-            <Typography variant='h4' fontWeight='bold'>{props.response.tables.length}</Typography>
-            <Typography variant='subtitle2'>Tables</Typography>
+            <Typography variant='h4' fontWeight='bold'>{props.response.datasets.length}</Typography>
+            <Typography variant='subtitle2'>Datasets</Typography>
           </Box>
           <Box component='div' className='h-full flex items-center justify-center text-5xl'>
             <BsFillGrid3X3GapFill />

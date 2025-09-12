@@ -54,6 +54,7 @@ const API_SHORTHAND = Object.freeze({
     FRIED_RICE: 'fried-rice',
     UPGRADE: 'upgrade'
   },
+  PERIODIC_TABLE_ELEMENT: 'element',
   TRANSJAKARTA: {
     CORRIDOR: 'corridor',
     BUS_STOP: 'bus-stop',
@@ -143,6 +144,7 @@ export const API_ROUTE = Object.freeze({
     FRIED_RICE: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.FRIED_RICE}`,
     UPGRADE: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.UPGRADE}`
   },
+  PERIODIC_TABLE_ELEMENT: `/periodic-table/${API_SHORTHAND.PERIODIC_TABLE_ELEMENT}`,
   TRANSJAKARTA: {
     CORRIDOR: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
     BUS_STOP: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,

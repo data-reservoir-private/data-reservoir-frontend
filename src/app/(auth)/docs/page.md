@@ -1,7 +1,20 @@
-
 # **Documentation**
+Welcome to Data Reservoir where I present all of my data mined from various sources.
+
+## **Overview**
+
+So, there is a lot to be talked about, especially when you just landed on dashboard. Congrats. The (solo) dev has already trusted you to use this website accordingly. I am keeping my eyes to make sure you are not blowing up my website.
+
+So there are four terms
+
+- Entries = Total entry of master data (not including transactions). For example, 10 products with 5 tags will be counted as 10 entries
+- Rows = Actual row count inside a database's table. 10 products with 5 tags each will be considered 10 (products) + 50 (product -> tag) + 5 (tag) = 65 rows
+- Datasets = Total datasets that are downloadable
+- Tables = Total tables inside database
+
+That's it. More will be added later. But now, I will just document the appendix.
+
 ## **Hayday Effort Score**
------
 
 Effort score is a rough score measuring the difficulty on getting such products. Rules are described as follows:
 
@@ -65,6 +78,8 @@ Effort score is a rough score measuring the difficulty on getting such products.
           E = [\Sigma_{i=1}^k(E' * n)] + (\frac{t * ln(1 + t)}{600})
           \end{equation}
         $$
+        The change is inside the `t` variable where we will multiple a product's producing time by a penalty that will increase logarithmically. So, jelly beans, which needs a whopping 24 hours will face significant penalty increase. Why am I using ln? because why not lol.
+
         To make my data a bit unopinionated, I will include the first and second effort score inside my data. Keep in mind that this calculation is only for processed products. Rest will still stick on usual algorithm.
         
 - Others

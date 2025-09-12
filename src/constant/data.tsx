@@ -9,11 +9,13 @@ const ALL_EXPORTS: ExportType[] = ['json', 'ndjson', 'csv', 'tsv', 'xml', 'yaml'
 const ALL_EXPORTS_COMPLETE: ExportType[] = ['json', 'ndjson', 'csv', 'tsv', 'xml', 'yaml', 'html', 'postgresql', 'sql_server', 'sqlite', 'parquet', 'xlsx'];
 export interface IData {
   name: string,
+  displayName?: string,
   categories: {
     id: string,
     name: string,
     description: string,
     link: Route,
+    minedByMe?: true
     image?: string | (() => React.ReactNode),
     export?: {
       route: string,
@@ -22,7 +24,7 @@ export interface IData {
   }[]
 }
 
-export const DATA_AVAILABLE = Object.freeze(({
+export const DATASETS_AVAILABLE = Object.freeze(({
   'the-sims': {
     name: 'The Sims',
     categories: [
@@ -32,6 +34,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts_castaway_product.png',
         link: '/the-sims/castaway-product',
         description: 'Products gathered from The Sims Castaway console game. Including fishes and crafted products that are stored inside inventory',
+        minedByMe: true,
         export: {
           route: API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT,
           exportType: ALL_EXPORTS_COMPLETE
@@ -43,6 +46,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts2p_product.png',
         link: '/the-sims/two-pets-console-product',
         description: 'Ingredients gathered from fridge. Includes harvested products such as veggies, fruits, and seafood. Oh, also golden egg',
+        minedByMe: true,
         export: {
           route: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT,
           exportType: ALL_EXPORTS_COMPLETE
@@ -50,10 +54,11 @@ export const DATA_AVAILABLE = Object.freeze(({
       },
       {
         id: 'two-pets-console-career',
-        name: "Two Pets Console career",
+        name: "Two Pets Console Career",
         image: () => (<BsBuildingFill className="text-4xl" />),
         link: '/the-sims/two-pets-console-career',
         description: 'TS 2 Pets PS2 careers available. Data sourced from my own digging and The Sims Wikia',
+        minedByMe: true,
         export: {
           route: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_CAREER,
           exportType: ALL_EXPORTS_COMPLETE
@@ -61,7 +66,7 @@ export const DATA_AVAILABLE = Object.freeze(({
       },
       {
         id: 'two-console-career',
-        name: "Two Console career",
+        name: "Two Console Career",
         image: () => (<BsBuildingFill className="text-4xl" />),
         link: '/the-sims/two-console-career',
         description: 'TS 2 PS2 careers available. Data sourced from my own digging and The Sims Wikia',
@@ -87,6 +92,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/the-sims/bustin-out-career',
         image: () => (<BsBuildingFill className="text-4xl" />),
         description: 'TS Bustin Out\'s career path and job. Including the story mode and freeplay mode\'s careers',
+        minedByMe: true,
         export: {
           route: `${API_ROUTE.THE_SIMS.BUSTIN_OUT_CAREER}`,
           exportType: ALL_EXPORTS_COMPLETE
@@ -180,6 +186,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/farm-frenzy/one-product',
         image: '/image/quick_link/ff_one_product.png',
         description: 'Farm Frenzy One products',
+        minedByMe: true,
         export: {
           route: API_ROUTE.FARM_FRENZY.ONE_PRODUCT,
           exportType: ALL_EXPORTS_COMPLETE
@@ -191,6 +198,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/farm-frenzy/two-product',
         image: '/image/quick_link/ff_two_product.png',
         description: 'Farm Frenzy Two products',
+        minedByMe: true,
         export: {
           route: API_ROUTE.FARM_FRENZY.TWO_PRODUCT,
           exportType: ALL_EXPORTS_COMPLETE
@@ -202,6 +210,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/farm-frenzy/two-pizza-product',
         image: '/image/quick_link/ff_two_pizza_product.png',
         description: 'Farm Frenzy Two Pizza Party products',
+        minedByMe: true,
         export: {
           route: API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT,
           exportType: ALL_EXPORTS_COMPLETE
@@ -213,6 +222,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/farm-frenzy/three-product',
         image: '/image/quick_link/ff_three_product.png',
         description: 'Farm Frenzy Three products (All franchises)',
+        minedByMe: true,
         export: {
           route: API_ROUTE.FARM_FRENZY.THREE_PRODUCT,
           exportType: ALL_EXPORTS_COMPLETE
@@ -224,6 +234,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         link: '/farm-frenzy/hurricane-product',
         image: '/image/quick_link/ff_hurricane_product.png',
         description: 'Farm Frenzy Hurricane Seasons products',
+        minedByMe: true,
         export: {
           route: API_ROUTE.FARM_FRENZY.HURRICANE,
           exportType: ALL_EXPORTS_COMPLETE
@@ -239,7 +250,12 @@ export const DATA_AVAILABLE = Object.freeze(({
         name: "Topping",
         link: '/pizza-frenzy/topping',
         image: '/image/quick_link/pf_topping.png',
-        description: ''
+        minedByMe: true,
+        description: '',
+        export: {
+          route: API_ROUTE.PIZZA_FRENZY.TOPPING,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
       },
     ]
   } as IData,
@@ -252,6 +268,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_ingredient.png',
         description: 'Bahan2 yang bisa didapatkan atau dibuat',
         link: '/nasi-goreng/ingredient',
+        minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
           route: API_ROUTE.NASI_GORENG.INGREDIENT
@@ -263,6 +280,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_fried_rice.png',
         description: 'Semua nasi goreng yang bisa dimasak',
         link: '/nasi-goreng/fried-rice',
+        minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
           route: API_ROUTE.NASI_GORENG.FRIED_RICE
@@ -274,6 +292,11 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_upgrade.png',
         description: 'Pretelan2 yang biasa ditambahkan di nasi goreng. Ini cuma bentuk doang ya hehe',
         link: '/nasi-goreng/upgrade',
+        minedByMe: true,
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.NASI_GORENG.UPGRADE
+        }
       },
       {
         id: 'tool',
@@ -281,6 +304,11 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_tool.png',
         description: 'Alat2 masak yang bakal kalian pakai untuk bereksperimen',
         link: '/nasi-goreng/tool',
+        minedByMe: true,
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.NASI_GORENG.TOOL
+        }
       },
       {
         id: 'relic',
@@ -288,6 +316,11 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_relic.png',
         description: 'Burned Food versi langka because we love gacha hehe',
         link: '/nasi-goreng/relic',
+        minedByMe: true,
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.NASI_GORENG.RELIC
+        }
       },
       {
         id: 'burned-food',
@@ -295,6 +328,11 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_burned_food.png',
         description: 'Aduh? Salah resep kali :/',
         link: '/nasi-goreng/burned-food',
+        minedByMe: true,
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.NASI_GORENG.BURNED_FOOD
+        }
       },
       {
         id: 'plate',
@@ -302,11 +340,17 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ng_plate.png',
         description: 'Walau nga dimakan, tapi ingat kalau dalam culinary, plating itu faktor dalam rating makanan kalian',
         link: '/nasi-goreng/plate',
+        minedByMe: true,
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.NASI_GORENG.PLATE
+        }
       },
     ]
   } as IData,
   'seasons': {
-    name: 'Story of Seasons',
+    name: 'Seasons',
+    displayName: 'Story of Seasons',
     categories: [
       {
         id: 'ds-mineral-recipe',
@@ -343,7 +387,7 @@ export const DATA_AVAILABLE = Object.freeze(({
       },
       {
         id: 'ds-mineral-crop',
-        name: 'DS Mineral Crops',
+        name: 'DS Mineral Crop',
         image: '/image/quick_link/sos_ds_mineral_crop.png',
         description: 'Harvest Moon: Friends of Mineral Town GBA crop. Sourced from https://fogu.com/hm4/',
         link: '/seasons/ds-mineral-crop',
@@ -355,7 +399,7 @@ export const DATA_AVAILABLE = Object.freeze(({
 
       {
         id: 'ds-bazaar-crop',
-        name: 'DS Bazaar Crops',
+        name: 'DS Bazaar Crop',
         image: '/image/quick_link/sos_ds_bazaar_crop.png',
         description: 'Harvest Moon: Grand Bazaar Town DS crops. Sourced from https://fogu.com/hm9/item-profit-list.php',
         link: '/seasons/ds-bazaar-crop',
@@ -366,7 +410,7 @@ export const DATA_AVAILABLE = Object.freeze(({
       },
       {
         id: 'ds-bazaar-recipe',
-        name: 'DS Bazaar Recipes',
+        name: 'DS Bazaar Recipe',
         image: '/image/quick_link/sos_ds_bazaar_recipe.png',
         description: 'Harvest Moon: Grand Bazaar Town DS recipes. Sourced from https://fogu.com/hm9/item-profit-list.php',
         link: '/seasons/ds-bazaar-recipe',
@@ -452,7 +496,7 @@ export const DATA_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/c_dish.png',
         link: '/cygnus/dish',
         export: {
-          exportType: ALL_EXPORTS,
+          exportType: ALL_EXPORTS_COMPLETE,
           route: API_ROUTE.CYGNUS.DISH
         }
       },

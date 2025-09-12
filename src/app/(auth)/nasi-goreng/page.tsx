@@ -4,7 +4,7 @@ import { grabData } from '@/utilities/http'
 import React from 'react'
 import Section from '@/components/common/paper/Section'
 import { Metadata } from 'next'
-import { DATA_AVAILABLE } from '@/constant/data'
+import { DATASETS_AVAILABLE } from '@/constant/data'
 import Alert from '@mui/material/Alert'
 import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleRecordTableCards'
 import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart'
@@ -22,7 +22,7 @@ export default async function Page() {
       <Alert severity="warning" variant='filled'>🇮🇩 These data is sourced from non-English language. I have decided to NOT translate them 🇮🇩</Alert>
       <SimpleRecordTableCards response={data}/>
       <SimpleBarTableChart response={data}/>
-      <SimpleQuickLink quickLink={DATA_AVAILABLE['nasi-goreng']}/>
+      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['nasi-goreng']}/>
     </Section>
   )
 }

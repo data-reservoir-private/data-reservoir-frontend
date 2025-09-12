@@ -20,10 +20,10 @@ export function DrawerOptions({ onClose }: { onClose: () => void }) {
           {
             ROUTES.map((x, idx) => (
               <Fragment key={idx}>
-                <List className='py-.5' key={idx}>
+                <List className='py-0.5' key={idx}>
                   {
                     x.map((route) => (
-                      <ListItem key={route.id} onClick={() => onClose()} className='p-0'>
+                      <ListItem key={route.id} onClick={() => onClose ()} className='p-0'>
                         <ListItemButton classes={{
                           disabled: 'opacity-100 text-white/60'
                         }} className={classNames('rounded p-0 mx-2', {

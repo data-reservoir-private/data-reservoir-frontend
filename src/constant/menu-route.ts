@@ -1,5 +1,5 @@
 import { PiBarn } from 'react-icons/pi';
-import { TransjakartaIcon } from "@/components/icon/icons";
+import { ElementIcon, TransjakartaIcon } from "@/components/icon/icons";
 import { IconType } from "react-icons";
 import { BiSolidHome } from "react-icons/bi";
 import { BsFillSuitDiamondFill, BsDatabaseFillDown } from "react-icons/bs";
@@ -81,13 +81,12 @@ export const ROUTES: ROUTE_TYPE[][] = [
       icon: GiPolarStar,
       link: '/cygnus'
     },
-    // {
-    //   id: 'element',
-    //   name: 'Element',
-    //   icon: TbAtom2Filled,
-    //   link: '/element',
-    //   inactive: true
-    // },
+    {
+      id: 'element',
+      name: 'Element',
+      icon: ElementIcon,
+      link: '/periodic-table'
+    },
     // {
     //   id: 'transaction',
     //   name: 'Transaction',

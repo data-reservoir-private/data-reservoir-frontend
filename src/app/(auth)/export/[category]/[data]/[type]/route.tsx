@@ -5,7 +5,7 @@ import * as XML from 'xml-js'
 import YAML from 'yaml'
 import { json2csv } from 'json-2-csv';
 import { cache } from "react";
-import { DATA_AVAILABLE, ExportType, IData } from "@/constant/data";
+import { DATASETS_AVAILABLE, ExportType, IData } from "@/constant/data";
 import { ByteWriter, ColumnSource, parquetWrite } from 'hyparquet-writer';
 import * as ExcelJS from 'exceljs'
 
@@ -18,7 +18,7 @@ interface IParam {
 export async function GET(_: NextRequest, { params }: { params: Promise<IParam> }) {
   const { category, data, type } = await params;
 
-  const cat = DATA_AVAILABLE[category as keyof typeof DATA_AVAILABLE] as IData | undefined;
+  const cat = DATASETS_AVAILABLE[category as keyof typeof DATASETS_AVAILABLE] as IData | undefined;
   if (!cat) return notFound();
 
   const d = cat.categories.find(x => x.id === data);
@@ -56,7 +56,8 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
       delimiter: {
         field: type === 'csv' ? ',' : '\t'
       },
-
+      expandNestedObjects: false,
+      expandArrayObjects: false
     }), {
     headers: {
       'Content-Type': 'application/csv',
@@ -125,7 +126,18 @@ async function toHtmlTable(data: object[]) {
                 Object.values(row).map((v, idx) => (
                   <td style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={idx}>{
                     (typeof v === 'string' && v.startsWith('http')) ?
-                      (<img width={50} src={v} />) : (typeof v === 'boolean') ? (<input type="checkbox" disabled checked={v} />) : v
+                      (<img width={50} src={v} />) : (typeof v === 'boolean') ? (<input type="checkbox" disabled checked={v} />) :
+                        typeof v === 'object' && !Array.isArray(v) ? (
+                          <ul style={{ margin: 0 }}>
+                            {
+                              Object.entries(v).map(([key, value]) => (
+                                <li key={key}>
+                                  <span>{key}: {value as any}</span>
+                                </li>
+                              ))
+                            }
+                          </ul>
+                        ) : Array.isArray(v) ? (v.join(", ")) : v
                   }</td>
                 ))
               }
@@ -282,7 +294,10 @@ async function toExcel(data: Record<string, any>[]) {
       showRowStripes: true,
     },
     columns: Object.keys(data[0]).map(x => ({ name: x })),
-    rows: data.map(row => Object.values(row)),
+    rows: data.map(row => Object.values(row).map(x => {
+      if (typeof x === 'object') return JSON.stringify(x);
+      return x;
+    })),
   }).commit();
   return await workbook.xlsx.writeBuffer();
 }
