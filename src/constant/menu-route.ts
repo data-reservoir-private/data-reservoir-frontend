@@ -1,19 +1,15 @@
-import { PiBarn } from 'react-icons/pi';
 import { ElementIcon, TransjakartaIcon } from "@/components/icon/icons";
 import { IconType } from "react-icons";
 import { BiSolidHome } from "react-icons/bi";
 import { BsFillSuitDiamondFill, BsDatabaseFillDown } from "react-icons/bs";
-import { CiWheat } from "react-icons/ci";
 import { FaBowlFood, FaPizzaSlice } from "react-icons/fa6";
 import { IoIosDocument } from "react-icons/io";
-import { GiCrystalGrowth, GiPolarStar } from "react-icons/gi";
+import { GiPolarStar } from "react-icons/gi";
 import { GrTransaction } from "react-icons/gr";
-import { TbAtom2Filled } from "react-icons/tb";
 import { Route } from 'next';
 import { BiSolidLeaf } from "react-icons/bi";
 import { PiBarnFill } from "react-icons/pi";
 import { FaCookieBite } from "react-icons/fa";
-
 
 export type ROUTE =
   "dashboard" | "transjakarta" | "hayday" |
@@ -87,14 +83,12 @@ export const ROUTES: ROUTE_TYPE[][] = [
       icon: ElementIcon,
       link: '/periodic-table'
     },
-    // {
-    //   id: 'transaction',
-    //   name: 'Transaction',
-    //   icon: GrTransaction,
-    //   inactive: true,
-    //   link: '/transaction',
-    //   beta: true
-    // },
+    {
+      id: 'transaction',
+      name: 'Transaction',
+      icon: GrTransaction,
+      link: '/transaction',
+    },
     // {
     //   id: 'transjakarta',
     //   name: 'Transjakarta',

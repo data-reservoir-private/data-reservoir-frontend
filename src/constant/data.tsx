@@ -508,5 +508,16 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/cygnus/node'
       }
     ]
-  } as IData
-}))
+  } as IData,
+  'transaction': {
+    name: 'Transaction',
+    categories: [
+      {
+        id: 'monthly',
+        name: "Monthly",
+        link: '/transaction/monthly',
+        description: '',
+      },
+    ]
+  } as IData,
+}) as Record<string, IData>);

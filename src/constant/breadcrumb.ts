@@ -343,4 +343,9 @@ export const BREADCRUMBS = Object.freeze({
     { label: "Cygnus", link: '/cygnus' },
     { label: "Cygnus Crop", link: '/cygnus/crop' }
   ] satisfies IBreadcrumb[],
+
+  'transaction-monthly': [
+    { label: "Transaction", link: '/transaction' },
+    { label: "Monthly" }
+  ] satisfies IBreadcrumb[],
 });
