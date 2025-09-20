@@ -27,3 +27,5 @@ export const MonthsArray = [
   { label: "November", value: 11 },
   { label: "December", value: 12 },
 ]
+
+export const DaysArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

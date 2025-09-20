@@ -13,14 +13,14 @@ export default function SimpleBarTableChart(props : SimpleBarTableChartProps) {
     xAxis: {
       type: 'category',
       show: false,
-      data: props.response.tables.map(x => x.tableURL)
+      data: props.response.datasets.map(x => x.name)
     },
     yAxis: {
       type: 'value',
     },
     series: [
       {
-        data: props.response.tables.map(x => x.rowCount),
+        data: props.response.datasets.map(x => x.total),
         type: 'bar',
         label: {
           show: true,

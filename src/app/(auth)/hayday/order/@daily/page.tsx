@@ -25,7 +25,6 @@ export default async function DailyPage() {
     tooltip: {
       show: true
     },
-
     series: [
       {
         name: 'Revenue',

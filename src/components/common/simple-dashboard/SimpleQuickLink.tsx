@@ -7,18 +7,19 @@ import React from 'react'
 import { BsTable } from 'react-icons/bs'
 import Section from '../paper/Section'
 import Paper from '../paper/Paper'
-import Image from 'next/image'
 import { Route } from 'next'
 import SimpleImage from '../SimpleImage'
+import { Breakpoint } from '@mui/material/styles'
 
 interface SimpleQuickLinkProps {
   quickLink: IData;
+  columns?: { [key in Breakpoint]?: number } | number;
 }
 
-export default function SimpleQuickLink({ quickLink }: SimpleQuickLinkProps) {
+export default function SimpleQuickLink({ quickLink, columns }: SimpleQuickLinkProps) {
   return (
     <Section variant='h6' name='Quick Link'>
-      <Grid container spacing='1rem' columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
+      <Grid container spacing='1rem' columns={columns ?? { xs: 1, sm: 2, md: 3, lg: 4 }}>
         {
           quickLink.categories.map((nav) => (
             <Grid size={1} key={nav.name}>

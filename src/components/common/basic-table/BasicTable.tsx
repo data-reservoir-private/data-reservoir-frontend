@@ -5,6 +5,13 @@ import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, get
 import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
 import { saveAs } from 'file-saver';
+import Box from '@mui/material/Box';
+import TableContainer from '@mui/material/TableContainer';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableBody from '@mui/material/TableBody';
 
 export interface BasicTableProps<T> {
   data: T[],
@@ -56,27 +63,27 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
   }
 
   return (
-    <div className='rounded-md relative overflow-auto scrollbar-default'>
+    <TableContainer className='rounded-md relative overflow-auto scrollbar-default'>
       {
         props.exportType && props.exportType.length >= 1 &&
-        <div className='w-fit border-slate-700 border-2 border-b-0 overflow-hidden border-solid p-2 bg-bluish-200 gap-5 flex items-center text-white text-xs'>
+        <Box className='w-fit border-slate-700 border-2 border-b-0 overflow-hidden border-solid p-2 bg-bluish-200 gap-5 flex items-center text-white text-xs'>
           {(props.exportType.find(x => x === 'json')) &&
-            <div className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('json')}>
+            <Box className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('json')}>
               Export to JSON
-            </div>
+            </Box>
           }
           {(props.exportType.find(x => x === 'csv')) &&
-            <div className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('csv')}>
+            <Box className='hover:bg-slate-700 cursor-pointer rounded-sm p-1' onClick={_ => exportData('csv')}>
               Export to CSV
-            </div>
+            </Box>
           }
-        </div>
+        </Box>
       }
-      <table className='min-h-30 rounded-md min-w-full border-2 border-slate-700 border-collapse'>
-        <thead className='sticky top-0 bg-bluish-200 z-20'>
+      <Table className='min-h-30 rounded-md min-w-full border-none '>
+        <TableHead className='sticky top-0 bg-bluish-200 z-20'>
           {
             reactTable.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id}>
+              <TableRow key={headerGroup.id}>
                 {
                   headerGroup.headers.map(header => {
                     const sortSymbol =
@@ -85,12 +92,12 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                     const v = header.column.columnDef.meta?.filterVariant;
                     const hasFilter = header.column.getCanFilter() && !!v;
                     return (
-                      <th key={header.id} className='p-2' colSpan={header.colSpan}>
+                      <TableCell key={header.id} className='p-2' colSpan={header.colSpan}>
                         {
-                          header.isPlaceholder ? null : <div className={classNames('flex flex-col', {
+                          header.isPlaceholder ? null : <Box className={classNames('flex flex-col', {
                             'min-w-32 gap-2': hasFilter
                           })}>
-                            <div className='flex justify-center gap-2'>
+                            <Box className='flex justify-center gap-2'>
                               {flexRender(header.column.columnDef.header, header.getContext())}
                               {
                                 header.column.columnDef.enableSorting && (
@@ -99,52 +106,52 @@ export default function BasicTable<T>(props : BasicTableProps<T>) {
                                   </div>
                                 )
                               }
-                            </div>
-                            <div>
+                            </Box>
+                            <Box>
                               {(hasFilter) && <BasicTableFilter column={header.column}/>}
-                            </div>
-                          </div>
+                            </Box>
+                          </Box>
                         }
-                      </th>
+                      </TableCell>
                     );
                   })
                 }
-              </tr>
+              </TableRow>
             ))
           }
-        </thead>
-        <tbody>
+        </TableHead>
+        <TableBody>
           {
             reactTable.getRowModel().rows.map(row => (
               <Fragment key={row.id}>
-                <tr>
+                <TableHead>
                   {
                     row.getVisibleCells().map(cell => (
-                      <td key={cell.id} className={classNames('px-2 py-2 text-xs', cell.column.columnDef.meta?.classes?.td ?? "", {
+                      <TableCell key={cell.id} className={classNames('px-2 py-2 text-xs', cell.column.columnDef.meta?.classes?.td ?? "", {
                         'text-center': (typeof cell.getValue() === 'number')
                       })}>
                         { cell.getIsPlaceholder() ? null : flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
+                      </TableCell>
                     ))
                   }
-                </tr>
+                </TableHead>
                 {
                   ((!!props.expandElement && row.getIsExpanded()) && (
-                    <tr>
-                      <td colSpan={row.getVisibleCells().length}>
-                        <div>
+                    <TableRow>
+                      <TableCell colSpan={row.getVisibleCells().length}>
+                        <Box>
                           {props.expandElement(row)}
-                        </div>
-                      </td>
-                    </tr>
+                        </Box>
+                      </TableCell>
+                    </TableRow>
                   ))
                 }
               </Fragment>
             ))
           }
-        </tbody>
-      </table>
-    </div>
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

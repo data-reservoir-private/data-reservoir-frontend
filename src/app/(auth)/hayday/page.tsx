@@ -4,7 +4,7 @@ import { grabData } from '@/utilities/http'
 import React from 'react'
 import Section from '@/components/common/paper/Section'
 import { Metadata } from 'next'
-import { DATA_AVAILABLE } from '@/constant/data'
+import { DATASETS_AVAILABLE } from '@/constant/data'
 import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleRecordTableCards'
 import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart'
 import SimpleQuickLink from '@/components/common/simple-dashboard/SimpleQuickLink'
@@ -20,7 +20,7 @@ export default async function Page() {
     <Section variant='h4' name='Hayday'>
       <SimpleRecordTableCards response={data}/>
       <SimpleBarTableChart response={data}/>
-      <SimpleQuickLink quickLink={DATA_AVAILABLE['hayday']}/>
+      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['hayday']} columns={{ xs: 1, sm: 2, md: 3 }}/>
     </Section>
   )
 }

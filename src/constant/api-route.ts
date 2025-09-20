@@ -54,6 +54,7 @@ const API_SHORTHAND = Object.freeze({
     FRIED_RICE: 'fried-rice',
     UPGRADE: 'upgrade'
   },
+  PERIODIC_TABLE_ELEMENT: 'element',
   TRANSJAKARTA: {
     CORRIDOR: 'corridor',
     BUS_STOP: 'bus-stop',
@@ -80,9 +81,13 @@ const API_SHORTHAND = Object.freeze({
     NODE: 'node'
   },
   TRANSACTION: {
-    SUMMARY: 'summary',
-    CATEGORY: 'category',
-    MONTHLY: 'monthly',
+    ANNUAL: 'annual',
+    MONTHLY: {
+      TOP: 'top',
+      INCOME: 'income',
+      DAILY: 'daily',
+      CATEGORY: 'category',
+    },
   }
 } as const);
 
@@ -143,6 +148,7 @@ export const API_ROUTE = Object.freeze({
     FRIED_RICE: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.FRIED_RICE}`,
     UPGRADE: `/nasi-goreng/${API_SHORTHAND.NASI_GORENG.UPGRADE}`
   },
+  PERIODIC_TABLE_ELEMENT: `/periodic-table/${API_SHORTHAND.PERIODIC_TABLE_ELEMENT}`,
   TRANSJAKARTA: {
     CORRIDOR: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.CORRIDOR}`,
     BUS_STOP: `/transjakarta/${API_SHORTHAND.TRANSJAKARTA.BUS_STOP}`,
@@ -170,8 +176,12 @@ export const API_ROUTE = Object.freeze({
     NODE: `/cygnus/${API_SHORTHAND.CYGNUS.NODE}`
   },
   TRANSACTION: {
-    SUMMARY: `/transaction/${API_SHORTHAND.TRANSACTION.SUMMARY}`,
-    CATEGORY: `/transaction/${API_SHORTHAND.TRANSACTION.CATEGORY}`,
-    MONTHLY: `/transaction/${API_SHORTHAND.TRANSACTION.MONTHLY}`,
+    ANNUAL: `/transaction/${API_SHORTHAND.TRANSACTION.ANNUAL}`,
+    MONTHLY: {
+      TOP: `/transaction/monthly/${API_SHORTHAND.TRANSACTION.MONTHLY.TOP}`,
+      INCOME: `/transaction/monthly/${API_SHORTHAND.TRANSACTION.MONTHLY.INCOME}`,
+      DAILY: `/transaction/monthly/${API_SHORTHAND.TRANSACTION.MONTHLY.DAILY}`,
+      CATEGORY: `/transaction/monthly/${API_SHORTHAND.TRANSACTION.MONTHLY.CATEGORY}`,
+    }
   }
 } as const);

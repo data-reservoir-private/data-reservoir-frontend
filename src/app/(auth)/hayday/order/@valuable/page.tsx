@@ -34,13 +34,11 @@ export default async function ValuableOrder() {
                 <Typography variant='body2' className='font-bold'>{v.clientName}</Typography>
                 <Box className='flex gap-3'>
                   <Box className='flex gap-1 items-center'>
-                    {/* <Box className='w-7 h-7 relative'><SimpleImage src='/image/hayday/coins.png' alt='Coins'/></Box> */}
                     <GiTwoCoins/>
                     <Typography variant='subtitle2'>{v.coin}</Typography>
                   </Box>
                   <Box className='flex gap-1 items-center'>
                     <BsStarFill/>
-                    {/* <Box className='w-7 h-7 relative'><SimpleImage src='/image/hayday/xp.png' alt='XP'/></Box> */}
                     <Typography variant='subtitle2'>{v.xp}</Typography>
                   </Box>
                   <Box className='flex gap-1 items-center'>

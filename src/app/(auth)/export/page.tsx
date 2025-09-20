@@ -16,8 +16,12 @@ import { BiLogoPostgresql } from "react-icons/bi";
 import { SiSqlite } from "react-icons/si";
 import { FaHtml5 } from "react-icons/fa";
 import { SiApacheparquet } from "react-icons/si";
-import { DATA_AVAILABLE, ExportType } from '@/constant/data'
+import { DATASETS_AVAILABLE, ExportType } from '@/constant/data'
 import { FaFileExcel } from "react-icons/fa";
+import { grabData } from '@/utilities/http'
+import { IDashboardResponse } from '@/model/response/dashboard'
+import { API_ROUTE } from '@/constant/api-route'
+import Chip from '@mui/material/Chip'
 
 export const metadata: Metadata = {
   title: 'Export Data - Data Reservoir'
@@ -41,7 +45,19 @@ function getType(exportType: ExportType) {
   }
 }
 
-export default function ExportPage() {
+interface Dataset {
+  name: string,
+  total: number,
+  owner: string
+}
+
+export default async function ExportPage() {
+
+  const { data } = await grabData<IDashboardResponse[]>(`${API_ROUTE.DASHBOARD}`);
+  const datasets = data.reduce((acc, curr) =>
+    [...acc, ...curr.datasets.map(x => ({ name: `${curr.category} ${x.name}`, total: x.total, owner: curr.owner }))]
+    , [] as Dataset[]);
+
   return (
     <Section name='Export Data' variant='h4'>
       <Typography textAlign='justify'>Please note that your data might be incomplete and some of data provided by this export utility might be cached, resulting in delayed updates.</Typography>
@@ -52,8 +68,8 @@ export default function ExportPage() {
 
       <Section name='Data Store' variant='h5'>
         {
-          Object.entries(DATA_AVAILABLE).filter(([_, value]) => value.categories.some(y => y.export)).map(([categoryKey, categoryValue]) => (
-            <Section name={categoryValue.name} key={categoryKey} variant='h6'>
+          Object.entries(DATASETS_AVAILABLE).filter(([_, value]) => value.categories.some(y => y.export)).map(([categoryKey, categoryValue]) => (
+            <Section name={categoryValue.displayName ?? categoryValue.name} key={categoryKey} variant='h6'>
               {
                 categoryValue.categories.filter(x => x.export).map(l => (
                   <Paper className='flex flex-col gap-2 p-1' key={l.id}>
@@ -70,6 +86,14 @@ export default function ExportPage() {
                       <Box className='flex grow flex-col'>
                         <Typography variant='body1' className='font-bold'>{l.name}</Typography>
                         <Typography variant='subtitle2'>{l.description}</Typography>
+                        <Box className='flex gap-2 pt-2'>
+                          <Chip variant='outlined' size='small' label={`Entries: ${datasets.find(x => `${categoryValue.name} ${l.name}` === x.name)?.total ?? 0}`}/>
+                          <Chip variant='outlined' size='small' label={`Owner: ${datasets.find(x => `${categoryValue.name} ${l.name}` === x.name)?.owner ?? ""}`} />
+                          {
+                            l.minedByMe &&
+                            <Chip variant='outlined' size='small' label="Mined by the (sole) dev"/>
+                          }
+                        </Box>
                       </Box>
                     </Box>
 
