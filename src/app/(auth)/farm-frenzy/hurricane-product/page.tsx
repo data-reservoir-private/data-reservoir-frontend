@@ -18,7 +18,7 @@ export default async function HurricaneProduct() {
 
   return (
     <Section name='Farm Frenzy Hurricane Seasons Product' variant='h4' breadcrumbs={BREADCRUMBS['farm-frenzy-hurricane-product']}>
-      <SimpleGrid data={data} link='/farm-frenzy/hurricane-product'/>
+      <SimpleGrid data={data} link='/farm-frenzy/hurricane-product' unoptimizedImage/>
     </Section>
   )
 }

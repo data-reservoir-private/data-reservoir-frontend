@@ -18,7 +18,7 @@ export default async function DSMineralCrop() {
 
   return (
     <Section name='Seasons DS Mineral Crop' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-mineral-crop']}>
-      <SimpleGrid data={data} link='/seasons/ds-mineral-crop'/>
+      <SimpleGrid data={data} link='/seasons/ds-mineral-crop' pixelated unoptimizedImage/>
     </Section>
   )
 }

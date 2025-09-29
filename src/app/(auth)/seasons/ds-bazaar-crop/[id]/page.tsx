@@ -9,6 +9,7 @@ import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { ISeasonsResponse } from '@/model/response/seasons';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface BazaarCropProps {
   params: Promise<{ id: string }>
@@ -34,10 +35,10 @@ export default async function BazaarCrop(props: BazaarCropProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5 gap-5 max-md:flex-col items-center'>
         <Box className='w-50 h-50 relative items-center object-center flex gap-10 max-md:flex-col'>
-          <Image src={data.image} alt={data.name} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={data.name} unoptimized pixelated/>
         </Box>
         <Box className='w-50 h-50 relative items-center object-center flex gap-10 max-md:flex-col'>
-          <Image src={data.seedImage} alt={data.seedName} fill className='object-contain' />
+          <SimpleImage src={data.seedImage} alt={data.seedName} unoptimized pixelated/>
         </Box>
       </Paper>
 

@@ -18,7 +18,7 @@ export default async function BazaarAnimal() {
 
   return (
     <Section name='Seasons DS Bazaar Animal Product' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-bazaar-animal-product']}>
-      <SimpleGrid data={data} link='/seasons/ds-bazaar-animal-product'/>
+      <SimpleGrid data={data} link='/seasons/ds-bazaar-animal-product' unoptimizedImage pixelated />
     </Section>
   )
 }

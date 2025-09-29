@@ -20,7 +20,7 @@ export default async function Page() {
     <Section variant='h4' name='Farm Frenzy'>
       <SimpleRecordTableCards response={data}/>
       <SimpleBarTableChart response={data}/>
-      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['farm-frenzy']}/>
+      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['farm-frenzy']} unoptimized/>
     </Section>
   )
 }

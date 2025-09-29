@@ -77,7 +77,7 @@ export default async function ExportPage() {
                       <Box>
                         <Box className='h-[80px] w-[80px] flex justify-center items-center relative'>
                           {
-                            (l.image && typeof (l.image) === 'string') ? <SimpleImage src={l.image} alt={l.name} className='rounded-sm' />
+                            (l.image && typeof (l.image) === 'string') ? <SimpleImage src={l.image} alt={l.name} className='rounded-sm' unoptimized />
                               : (l.image && typeof (l.image) !== 'string') ? l.image() :
                                 <FaTruck className='text-[60px] text-gray-500' />
                           }

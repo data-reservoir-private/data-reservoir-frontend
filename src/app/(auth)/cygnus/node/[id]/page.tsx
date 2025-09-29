@@ -9,6 +9,7 @@ import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { ICygnusResponse } from '@/model/response/cygnus';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface NodeDetailProps {
   params: Promise<{ id: string }>
@@ -36,7 +37,7 @@ export default async function NodeDetail(props: NodeDetailProps) {
         {
           data.image.map((x, idx) => (
             <Box key={idx} className='w-50 h-50 relative items-center object-center'>
-              <Image src={x} alt={data.name} fill className='object-contain' />
+              <SimpleImage src={x} alt={data.name} unoptimized pixelated/>
             </Box>
           ))
         }
