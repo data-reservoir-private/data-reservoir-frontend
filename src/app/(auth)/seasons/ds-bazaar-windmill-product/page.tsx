@@ -18,7 +18,7 @@ export default async function BazaarWindmill() {
 
   return (
     <Section name='Seasons DS Bazaar Windmill Product' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-bazaar-windmill-product']}>
-      <SimpleGrid data={data} link='/seasons/ds-bazaar-windmill-product'/>
+      <SimpleGrid data={data} link='/seasons/ds-bazaar-windmill-product' pixelated unoptimizedImage/>
     </Section>
   )
 }

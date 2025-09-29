@@ -10,6 +10,7 @@ import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { ISeasonsResponse } from '@/model/response/seasons';
 import { getStaticParams } from '@/utilities/static';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface UtensilDetailProps {
   params: Promise<{ id: string }>
@@ -37,7 +38,7 @@ export default async function UtensilDetail(props: UtensilDetailProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
-          <Image src={data.image} alt={data.name} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={data.name} pixelated unoptimized />
         </Box>
       </Paper>
 

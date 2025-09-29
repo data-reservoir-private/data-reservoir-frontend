@@ -18,7 +18,7 @@ export default async function TwoProduct() {
 
   return (
     <Section name='Pizza Frenzy Topping' variant='h4' breadcrumbs={BREADCRUMBS['pizza-frenzy-topping']}>
-      <SimpleGrid data={data.map(x => ({ ...x, name: x.generalName }))} link='/pizza-frenzy/topping'/>
+      <SimpleGrid data={data.map(x => ({ ...x, name: x.generalName }))} link='/pizza-frenzy/topping' unoptimizedImage/>
     </Section>
   )
 }

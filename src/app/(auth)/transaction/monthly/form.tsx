@@ -38,11 +38,6 @@ export default function TransactionMonthlyForm({ param }: { param: TransactionMo
     }
   });
 
-  const handleResetValue = () => {
-    form.setFieldValue('month', null);
-    form.setFieldValue('year', null);
-  }
-
   return (
     <Box
       component='form'
