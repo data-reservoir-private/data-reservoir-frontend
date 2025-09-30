@@ -66,5 +66,26 @@ export const CATEGORIES = Object.freeze({
     'Ores',
     'Geodes',
     'Bars',
+  ],
+  'the-sims-four-pc-dish-type': [
+    'Gourmet Pet',
+    'Pit',
+    'Cupcake',
+    'Grand',
+    'Off The Grid',
+    'Gourmet',
+    'Pet',
+    'Waffle',
+    'Food Stall',
+    'Standard',
+    'Pizza',
+    'Outdoor Grill',
+  ],
+  'three-pc-harvestable-plant-type': [
+    'Bush',
+    'Dirt Mound',
+    'Crystal Plant',
+    'Tree',
+    'Vine'
   ]
 })
