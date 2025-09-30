@@ -173,4 +173,87 @@ export type ITheSimsResponse = {
       image: string
     }[]
   }),
+  'four-pc-dish': {
+    id: string
+    name: string
+    image: string
+    category: string
+  },
+  'three-pc-harvestable': {
+    id: string,
+    name: string,
+    image: string,
+    rarity: THE_SIMS_RARITY,
+    value: number,
+    maxProduce: number,
+    fertilizerValue: number,
+    fertilizerDays: number,
+    plantType: string,
+    nectarValue: number | null
+  },
+  'three-pc-gem-cut': {
+    id: string
+    name: string
+    image: string
+    price: number
+    worthChangePercentage: number
+    breakEven: number
+    requirement: string
+  },
+  'three-pc-gem-cut-complete': (ITheSimsResponse['three-pc-gem-cut'] & {
+    gems: {
+      id: string
+      name: string
+      image: string
+    }[]
+  }),
+  'three-pc-raw-gem': {
+    id: string
+    name: string
+    image: string
+    rarity: THE_SIMS_RARITY
+    minPrice: number
+    maxPrice: number
+  },
+  'three-pc-raw-gem-complete': (ITheSimsResponse['three-pc-raw-gem'] & {
+    gemCuts: {
+      id: string
+      name: string
+      image: string
+    }[]
+  }),
+  'three-pc-preserve-dish': {
+    id: string
+    name: string
+    image: string
+    harvestable: {
+      id: string
+      name: string
+      image: string
+    }
+  },
+  'three-pc-spread-dish': {
+    id: string
+    name: string
+    image: string
+    harvestable: {
+      id: string
+      name: string
+      image: string
+    }
+  },
+  'three-pc-metal': {
+    id: string,
+    name: string,
+    oreImage: string,
+    ingotImage: string,
+    otherImage: string | null,
+    rarity: THE_SIMS_RARITY,
+    minWeight: number,
+    maxWeight: number,
+    minOreValue: number,
+    maxOreValue: number,
+    minIngotValue: number,
+    maxIngotValue: number
+  }
 }

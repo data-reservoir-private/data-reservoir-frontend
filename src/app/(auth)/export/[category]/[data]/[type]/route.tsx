@@ -8,6 +8,7 @@ import { cache } from "react";
 import { DATASETS_AVAILABLE, ExportType, IData } from "@/constant/data";
 import { ByteWriter, ColumnSource, parquetWrite } from 'hyparquet-writer';
 import * as ExcelJS from 'exceljs'
+import { ITheSimsResponse } from "@/model/response/the-sims";
 
 interface IParam {
   category: string,
@@ -15,28 +16,71 @@ interface IParam {
   type: string
 }
 
-export async function GET(_: NextRequest, { params }: { params: Promise<IParam> }) {
-  const { category, data, type } = await params;
+const Transformer: Record<keyof typeof DATASETS_AVAILABLE, Record<string, (res: object[]) => object[]>> = {
+  'the-sims': {
+    'three-pc-gem': (res) => res.map(x => {
+      const r = x as ITheSimsResponse['three-pc-gem'];
+      return {
+        id: r.id,
+        image: r.image,
+        name: `${r.rawGem.name} (${r.gemCut.name})`,
+        rawGemID: r.rawGem.id,
+        rawGemName: r.rawGem.name,
+        rawGemImage: r.rawGem.image,
+        gemCutID: r.gemCut.id,
+        gemCutName: r.gemCut.name,
+        gemCutImage: r.gemCut.image,
+      }
+    }),
+    'three-pc-spread-dish': (res) => res.map(x => {
+      const r = x as ITheSimsResponse['three-pc-spread-dish'];
+      return {
+        id: r.id,
+        name: r.name,
+        image: r.image,
+        harvestableID: r.harvestable.id,
+        harvestableName: r.harvestable.name,
+        harvestableImage: r.harvestable.image,
+      }
+    }),
+    'three-pc-preserve-dish': (res) => res.map(x => {
+      const r = x as ITheSimsResponse['three-pc-preserve-dish'];
+      return {
+        id: r.id,
+        name: r.name,
+        image: r.image,
+        harvestableID: r.harvestable.id,
+        harvestableName: r.harvestable.name,
+        harvestableImage: r.harvestable.image,
+      }
+    }),
+  }
+}
 
-  const cat = DATASETS_AVAILABLE[category as keyof typeof DATASETS_AVAILABLE] as IData | undefined;
+export async function GET(_: NextRequest, { params }: { params: Promise<IParam> }) {
+  const { category: categoryStr, data: dataIDStr, type: exportType } = await params;
+
+  const cat = DATASETS_AVAILABLE[categoryStr as keyof typeof DATASETS_AVAILABLE] as IData | undefined;
   if (!cat) return notFound();
 
-  const d = cat.categories.find(x => x.id === data);
-  if (!d || !d.export || !d.export.exportType.includes(type as ExportType)) return notFound();
+  const d = cat.categories.find(x => x.id === dataIDStr);
+  if (!d || !d.export || !d.export.exportType.includes(exportType as ExportType)) return notFound();
 
   const c = cache(async () => await grabData<object[]>(d.export!.route, {
     PageSize: 0
   }))
 
-  const { data: res } = await c();
+  const { data: resTemp } = await c();
+  const transformer = Transformer[categoryStr as keyof typeof Transformer]?.[dataIDStr];
+  const res = transformer ? transformer(resTemp) : resTemp;
 
-  if (type === 'json') return NextResponse.json(res);
-  if (type === 'ndjson') return new NextResponse(res.map(x => JSON.stringify(x)).join('\n'), {
+  if (exportType === 'json') return NextResponse.json(res);
+  if (exportType === 'ndjson') return new NextResponse(res.map(x => JSON.stringify(x)).join('\n'), {
     headers: {
       'Content-Type': 'text/plain'
     }
   });
-  else if (type === 'xml') return new NextResponse(XML.js2xml({
+  else if (exportType === 'xml') return new NextResponse(XML.js2xml({
     "_declaration": { "_attributes": { "version": "1.0", "encoding": "utf-8" } },
     content: { data: res }
   }, { spaces: 2, compact: true }), {
@@ -44,35 +88,35 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
       'Content-Type': 'application/xml',
     }
   });
-  else if (type === 'yaml') return new NextResponse(
+  else if (exportType === 'yaml') return new NextResponse(
     YAML.stringify(res, null, { indent: 2 }), {
     headers: {
       'Content-Type': 'application/yaml',
       'Content-Disposition': 'attachment; filename="result.yaml"'
     }
   });
-  else if (type === 'csv' || type === 'tsv') return new NextResponse(
+  else if (exportType === 'csv' || exportType === 'tsv') return new NextResponse(
     json2csv(res, {
       delimiter: {
-        field: type === 'csv' ? ',' : '\t'
+        field: exportType === 'csv' ? ',' : '\t'
       },
       expandNestedObjects: false,
       expandArrayObjects: false
     }), {
     headers: {
       'Content-Type': 'application/csv',
-      'Content-Disposition': `attachment; filename="result.${type}"`
+      'Content-Disposition': `attachment; filename="result.${exportType}"`
     }
   });
 
-  else if (type === 'html') {
+  else if (exportType === 'html') {
     return new NextResponse(await toHtmlTable(res), {
       headers: {
         'Content-Type': 'text/html',
       }
     });
   }
-  else if (type === 'xlsx') {
+  else if (exportType === 'xlsx') {
     return new NextResponse(await toExcel(res), {
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -80,14 +124,14 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
       }
     });
   }
-  else if (type === 'postgresql' || type === 'sql_server' || type === 'sqlite') {
-    return new NextResponse(toDatabase(res, type), {
+  else if (exportType === 'postgresql' || exportType === 'sql_server' || exportType === 'sqlite') {
+    return new NextResponse(toDatabase(res, exportType), {
       headers: {
         'Content-Type': 'text/plain',
       }
     });
   }
-  else if (type === 'parquet') {
+  else if (exportType === 'parquet') {
     return new NextResponse((await toParquet(
       res as Record<string, any>[],
       {
@@ -109,6 +153,31 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
 async function toHtmlTable(data: object[]) {
   const ReactDOMServer = (await import('react-dom/server')).default
 
+  const convertToString = (v: any) => {
+    if (v === null || v === undefined) return '';
+    if (typeof v === 'string' && v.startsWith('http')) return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img width={50} src={v} />
+      </div>
+    )
+    if (typeof v === 'boolean') return <input type="checkbox" disabled checked={v} />
+    if (typeof v === 'object' && !Array.isArray(v)) {
+      return (
+        <ul style={{ margin: 0 }}>
+          {
+            Object.entries(v).map(([key, value]) => (
+              <li key={key}>
+                <span>{key}: {value as any}</span>
+              </li>
+            ))
+          }
+        </ul>
+      )
+    }
+    if (Array.isArray(v)) return v.join(", ");
+    return v;
+  }
+
   const comp = ReactDOMServer.renderToStaticMarkup(
     <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
       <thead>
@@ -124,21 +193,9 @@ async function toHtmlTable(data: object[]) {
             <tr key={idx}>
               {
                 Object.values(row).map((v, idx) => (
-                  <td style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={idx}>{
-                    (typeof v === 'string' && v.startsWith('http')) ?
-                      (<img width={50} src={v} />) : (typeof v === 'boolean') ? (<input type="checkbox" disabled checked={v} />) :
-                        typeof v === 'object' && !Array.isArray(v) ? (
-                          <ul style={{ margin: 0 }}>
-                            {
-                              Object.entries(v).map(([key, value]) => (
-                                <li key={key}>
-                                  <span>{key}: {value as any}</span>
-                                </li>
-                              ))
-                            }
-                          </ul>
-                        ) : Array.isArray(v) ? (v.join(", ")) : v
-                  }</td>
+                  <td style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={idx}>
+                    { convertToString(v) }
+                  </td>
                 ))
               }
             </tr>

@@ -18,7 +18,7 @@ export default async function ThreeProduct() {
 
   return (
     <Section name='Farm Frenzy Three Product' variant='h4' breadcrumbs={BREADCRUMBS['farm-frenzy-three-product']}>
-      <SimpleGrid data={data} link='/farm-frenzy/three-product'/>
+      <SimpleGrid data={data} link='/farm-frenzy/three-product' unoptimizedImage/>
     </Section>
   )
 }

@@ -18,7 +18,7 @@ export default async function TwoProduct() {
 
   return (
     <Section name='Cygnus Node' variant='h4' breadcrumbs={BREADCRUMBS['cygnus-node']}>
-      <SimpleGrid data={data.map(x => ({ ...x, image: x.image[0] }))} link='/cygnus/node'/>
+      <SimpleGrid data={data.map(x => ({ ...x, image: x.image[0] }))} link='/cygnus/node' unoptimizedImage pixelated/>
     </Section>
   )
 }

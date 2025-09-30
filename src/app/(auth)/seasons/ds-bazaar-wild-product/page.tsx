@@ -18,7 +18,7 @@ export default async function WildAnimal() {
 
   return (
     <Section name='Seasons DS Wild Animal Product' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-bazaar-wild-product']}>
-      <SimpleGrid data={data} link='/seasons/ds-bazaar-wild-product'/>
+      <SimpleGrid data={data} link='/seasons/ds-bazaar-wild-product' unoptimizedImage pixelated />
     </Section>
   )
 }

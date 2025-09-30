@@ -10,7 +10,10 @@ import Paper from '@/components/common/paper/Paper';
 
 export default async function TransactionTop() {
   const sp = await getSearchParam<TransactionMonthlyFormSchema>();
-  const { data: topData } = await grabData<ITransactionMonthlyResponse['top'][]>(API_ROUTE.TRANSACTION.MONTHLY.TOP, sp);
+  const { data: topData } = await grabData<ITransactionMonthlyResponse['top'][]>(API_ROUTE.TRANSACTION.MONTHLY.TOP, {
+    year: sp.year ?? new Date().getFullYear(),
+    month: sp.month ?? (new Date().getMonth() + 1)
+  });
 
   return (
     <Section name='Daily Expense' variant='h6'>

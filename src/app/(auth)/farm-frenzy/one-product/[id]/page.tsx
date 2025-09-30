@@ -41,7 +41,7 @@ export default async function OneProductDetail(props: OneProductDetailProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
-          <Image src={data.image} alt={data.name} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={data.name} unoptimized />
         </Box>
       </Paper>
 
@@ -74,7 +74,7 @@ function Grids({ name, data }: { name: string, data: { name: string, image: stri
               <Paper className="flex overflow-hidden">
                 <Link passHref href={`/farm-frenzy/one-product/${ing.id}`}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                    <SimpleImage quality={50} src={ing.image} alt={ing.name}/>
+                    <SimpleImage quality={50} src={ing.image} alt={ing.name} unoptimized/>
                   </Box>
                 </Link>
                 <Box className="grow flex">

@@ -87,6 +87,17 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         }
       },
       {
+        id: 'four-pc-dish',
+        name: "Four PC Dish",
+        link: '/the-sims/four-pc-dish',
+        image: '/image/quick_link/ts4_pc_dish.png',
+        description: 'All of dishes that can be made inside TS4 PC game. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.FOUR_PC_DISH,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
         id: 'bustin-out-career',
         name: "Bustin Out Career",
         link: '/the-sims/bustin-out-career',
@@ -106,6 +117,83 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'All of TS4 PC\'s harvestable product',
         export: {
           route: `${API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE}`,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'three-pc-harvestable',
+        name: "Three PC Harvestable",
+        link: '/the-sims/three-pc-harvestable',
+        image: '/image/quick_link/ts3_pc_harvestable.png',
+        description: 'All of TS3 PC\'s harvestable product',
+        export: {
+          route: `${API_ROUTE.THE_SIMS.THREE_PC_HARVESTABLE}`,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'three-pc-gem',
+        name: "Three PC Gem",
+        link: '/the-sims/three-pc-gem',
+        image: '/image/quick_link/ts3_pc_gem.png',
+        description: 'All of TS3 PC\'s Gem product',
+        export: {
+          route: `${API_ROUTE.THE_SIMS.THREE_PC_GEM}`,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'three-pc-gem-cut',
+        name: "Three PC Gem Cut",
+        link: '/the-sims/three-pc-gem-cut',
+        image: '/image/quick_link/ts3_pc_gem_cut.png',
+        description: 'All of TS3 PC\'s Gem Cut product',
+        export: {
+          route: `${API_ROUTE.THE_SIMS.THREE_PC_GEM_CUT}`,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'three-pc-raw-gem',
+        name: "Three PC Raw Gem",
+        link: '/the-sims/three-pc-raw-gem',
+        image: '/image/quick_link/ts3_pc_raw_gem.png',
+        description: 'All of TS3 PC\'s Raw Gem product',
+        export: {
+          route: `${API_ROUTE.THE_SIMS.THREE_PC_RAW_GEM}`,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'three-pc-preserve-dish',
+        name: "Three PC Preserve Dish",
+        link: '/the-sims/three-pc-preserve-dish',
+        image: '/image/quick_link/ts3_pc_preserve_dish.png',
+        description: 'All of TS3 PC\'s preserve dish collectibles. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.THREE_PC_PRESERVE_DISH,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'three-pc-spread-dish',
+        name: "Three PC Spread Dish",
+        link: '/the-sims/three-pc-spread-dish',
+        image: '/image/quick_link/ts3_pc_spread_dish.png',
+        description: 'All of TS3 PC\'s spread dish collectibles. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.THREE_PC_SPREAD_DISH,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'three-pc-metal',
+        name: "Three PC Metal",
+        link: '/the-sims/three-pc-metal',
+        image: '/image/quick_link/ts3_pc_metal.png',
+        description: 'All of TS3 metal collectibles. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.THREE_PC_METAL,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },

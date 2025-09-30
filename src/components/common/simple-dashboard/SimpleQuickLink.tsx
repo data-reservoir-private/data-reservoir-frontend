@@ -14,9 +14,11 @@ import { Breakpoint } from '@mui/material/styles'
 interface SimpleQuickLinkProps {
   quickLink: IData;
   columns?: { [key in Breakpoint]?: number } | number;
+  unoptimized?: boolean;
+  pixelated?: boolean;
 }
 
-export default function SimpleQuickLink({ quickLink, columns }: SimpleQuickLinkProps) {
+export default function SimpleQuickLink({ quickLink, columns, unoptimized, pixelated }: SimpleQuickLinkProps) {
   return (
     <Section variant='h6' name='Quick Link'>
       <Grid container spacing='1rem' columns={columns ?? { xs: 1, sm: 2, md: 3, lg: 4 }}>
@@ -30,7 +32,7 @@ export default function SimpleQuickLink({ quickLink, columns }: SimpleQuickLinkP
                     (
                       <Box className='h-20 w-auto min-w-20 flex items-center relative justify-center'>
                         {
-                          (typeof (nav.image) === 'string') ? <SimpleImage src={nav.image} alt={nav.name} className='rounded-sm object-contain' /> : nav.image()
+                          (typeof (nav.image) === 'string') ? <SimpleImage src={nav.image} alt={nav.name} className='rounded-sm object-contain' unoptimized={unoptimized} pixelated={pixelated} /> : nav.image()
                         }
                       </Box>
                     )

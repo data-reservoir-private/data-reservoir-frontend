@@ -23,7 +23,7 @@ export default async function TwoProduct() {
   return (
     <Section name='Seasons DS Bazaar Recipe' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-bazaar-recipe']}>
       <TwoProductForm param={sp} totalData={pagination?.totalData ?? 0} />
-      <SimpleGrid data={data} link='/seasons/ds-bazaar-recipe'/>
+      <SimpleGrid data={data} link='/seasons/ds-bazaar-recipe' unoptimizedImage pixelated/>
     </Section>
   )
 }
