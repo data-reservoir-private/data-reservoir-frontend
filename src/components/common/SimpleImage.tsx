@@ -7,7 +7,9 @@ interface SimpleImageProps {
   src: string,
   alt: string,
   sizes?: string,
-  quality?: number
+  quality?: number,
+  unoptimized?: boolean,
+  pixelated?: boolean
 }
 
 export default function SimpleImage(props: SimpleImageProps) {
@@ -16,9 +18,11 @@ export default function SimpleImage(props: SimpleImageProps) {
       src={props.src}
       alt={props.alt}
       fill
+      unoptimized={props.unoptimized ?? false}
       sizes={props.sizes ?? '10vw'}
       quality={props.quality ?? 50}
       className={classNames('p-1 object-contain', props.className)}
+      style={props.pixelated ? { imageRendering: 'pixelated' } : {}}
     />
   )
 }

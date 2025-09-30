@@ -70,7 +70,7 @@ export default async function CropDetail(props: CropDetailProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
-          <Image src={data.image} alt={data.name} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={data.name} unoptimized pixelated/>
         </Box>
       </Paper>
 
@@ -95,7 +95,7 @@ export default async function CropDetail(props: CropDetailProps) {
               <Paper key={idx} className='flex flex-col gap-2 p-2 grow'>
                 <Box className='w-full flex justify-center'>
                   <Box className='w-14 h-auto min-h-14 p-2 relative'>
-                    <SimpleImage src={x.image} alt="Growth" />
+                    <SimpleImage src={x.image} alt="Growth" unoptimized pixelated />
                   </Box>
                 </Box>
                 {

@@ -24,7 +24,7 @@ export default async function TwoProduct() {
   return (
     <Section name='Cygnus Crop' variant='h4' breadcrumbs={BREADCRUMBS['cygnus-crop']}>
       <TwoProductForm param={sp} totalData={pagination?.totalData ?? 0} />
-      <SimpleGrid data={data} link='/cygnus/crop'/>
+      <SimpleGrid data={data} link='/cygnus/crop' unoptimizedImage pixelated/>
     </Section>
   )
 }

@@ -12,7 +12,10 @@ import Typography from '@mui/material/Typography';
 
 export default async function TransactionDaily() {
   const sp = await getSearchParam<TransactionMonthlyFormSchema>();
-  const { data: dailyData } = await grabData<ITransactionMonthlyResponse['daily'][]>(API_ROUTE.TRANSACTION.MONTHLY.DAILY, sp);
+  const { data: dailyData } = await grabData<ITransactionMonthlyResponse['daily'][]>(API_ROUTE.TRANSACTION.MONTHLY.DAILY, {
+    year: sp.year ?? new Date().getFullYear(),
+    month: sp.month ?? (new Date().getMonth() + 1)
+  });
 
   // Echarts pie option for expense by category
   const dailyBarChartOption: EChartsOption = {
@@ -20,7 +23,7 @@ export default async function TransactionDaily() {
       type: 'category',
       data: dailyData.map(item => {
         const d = new Date(item.date);
-        const month = MonthsArray.find(x => x.value === d.getMonth())!.label;
+        const month = MonthsArray.find(x => x.value === d.getMonth() + 1)!.label;
         const dayName = DaysArray[d.getDay()];
         return `${dayName}, ${d.getDate()} ${month}`;
       }),

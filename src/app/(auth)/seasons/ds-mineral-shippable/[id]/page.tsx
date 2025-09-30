@@ -9,6 +9,7 @@ import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { ISeasonsResponse } from '@/model/response/seasons';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface ShippableDetailProps {
   params: Promise<{ id: string }>
@@ -34,7 +35,7 @@ export default async function ShippableDetail(props: ShippableDetailProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
-          <Image src={data.image} alt={data.name} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={data.name} pixelated unoptimized />
         </Box>
       </Paper>
 

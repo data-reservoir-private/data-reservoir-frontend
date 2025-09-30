@@ -18,7 +18,7 @@ export default async function TwoProduct() {
 
   return (
     <Section name='Seasons DS Mineral Utensil' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-mineral-utensil']}>
-      <SimpleGrid data={data} link='/seasons/ds-mineral-utensil'/>
+      <SimpleGrid data={data} link='/seasons/ds-mineral-utensil' pixelated unoptimizedImage />
     </Section>
   )
 }

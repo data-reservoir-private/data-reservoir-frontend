@@ -23,7 +23,7 @@ export default async function DSMineralShippable() {
   return (
     <Section name='Seasons DS Mineral Shippable' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-mineral-shippable']}>
       <DSMineralShippableForm param={sp} totalData={pagination?.totalData ?? 0} />
-      <SimpleGrid data={data} link='/seasons/ds-mineral-shippable'/>
+      <SimpleGrid data={data} link='/seasons/ds-mineral-shippable' pixelated unoptimizedImage />
     </Section>
   )
 }

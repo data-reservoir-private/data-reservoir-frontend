@@ -12,7 +12,9 @@ interface SimpleGridProps<TData extends { id: string, name: string, image: strin
   data: TData[],
   link: Route,
   boxClassName?: string,
-  columns?: number
+  columns?: number,
+  unoptimizedImage?: boolean,
+  pixelated?: boolean
 }
 
 export default function SimpleGrid<TData extends { id: string, name: string, image: string }>(props: SimpleGridProps<TData>) {
@@ -28,14 +30,20 @@ export default function SimpleGrid<TData extends { id: string, name: string, ima
       }
       {
         props.data.length > 0 && (
-          <Grid container className="justify-evenly gap-4 max-md:gap-2 grid-cols-12">
+          <Grid container className="justify-evenly gap-1 max-md:gap-2 grid-cols-12">
             {
               props.data.map((d) => (
                 <Grid key={d.id}>
                   <Link passHref href={`${props.link}/${d.id}` as Route} title={d.name}>
                     <Paper className='p-1 flex relative'>
                       <Box className={classNames('w-20 h-20 relative', props.boxClassName)}>
-                        <SimpleImage src={d.image} alt={d.name} className='rounded-sm h-auto object-contain' />
+                        <SimpleImage
+                          src={d.image}
+                          alt={d.name}
+                          className='rounded-sm h-auto object-contain'
+                          unoptimized={props.unoptimizedImage}
+                          pixelated={props.pixelated}
+                        />
                       </Box>
                     </Paper>
                   </Link>

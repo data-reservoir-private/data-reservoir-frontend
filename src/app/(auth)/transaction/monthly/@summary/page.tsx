@@ -11,8 +11,14 @@ import Typography from '@mui/material/Typography';
 
 export default async function TransactionMonthlySummary() {
   const sp = await getSearchParam<TransactionMonthlyFormSchema>();
-  const { data: categoryData } = await grabData<ITransactionMonthlyResponse['category'][]>(API_ROUTE.TRANSACTION.MONTHLY.CATEGORY, sp);
-  const { data: incomeData } = await grabData<ITransactionMonthlyResponse['income'][]>(API_ROUTE.TRANSACTION.MONTHLY.INCOME, sp);
+  const { data: categoryData } = await grabData<ITransactionMonthlyResponse['category'][]>(API_ROUTE.TRANSACTION.MONTHLY.CATEGORY, {
+    year: sp.year ?? new Date().getFullYear(),
+    month: sp.month ?? (new Date().getMonth() + 1)
+  });
+  const { data: incomeData } = await grabData<ITransactionMonthlyResponse['income'][]>(API_ROUTE.TRANSACTION.MONTHLY.INCOME, {
+    year: sp.year ?? new Date().getFullYear(),
+    month: sp.month ?? (new Date().getMonth() + 1)
+  });
 
   const hasData = categoryData.length > 0 || incomeData.length > 0;
 

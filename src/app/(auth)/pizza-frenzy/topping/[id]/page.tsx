@@ -11,6 +11,7 @@ import { notFound } from 'next/navigation';
 import { IPizzaFrenzyResponse } from '@/model/response/pizza-frenzy';
 import Grid from '@mui/material/Grid';
 import { getStaticParams } from '@/utilities/static';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface ToppingDetailProps {
   params: Promise<{ id: string }>
@@ -38,7 +39,7 @@ export default async function ToppingDetail(props: ToppingDetailProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
-          <Image src={data.image} alt={data.generalName} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={data.generalName} unoptimized />
         </Box>
       </Paper>
 

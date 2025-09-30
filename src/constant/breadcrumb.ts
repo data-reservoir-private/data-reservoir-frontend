@@ -68,6 +68,62 @@ export const BREADCRUMBS = Object.freeze({
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Four PC Harvestable", link: '/the-sims/four-pc-harvestable' }
   ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-harvestable': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Harvestable" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-harvestable-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Harvestable", link: '/the-sims/three-pc-harvestable' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-gem-cut': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Gem Cut" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-gem-cut-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Gem Cut", link: '/the-sims/three-pc-gem-cut' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-gem': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Gem" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-gem-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Gem", link: '/the-sims/three-pc-gem' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-raw-gem': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Raw Gem" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-raw-gem-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Raw Gem", link: '/the-sims/three-pc-raw-gem' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-metal': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Metal" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-metal-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Metal", link: '/the-sims/three-pc-metal' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-spread-dish': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Spread Dish" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-spread-dish-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Spread Dish", link: '/the-sims/three-pc-spread-dish' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-preserve-dish': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Preserve Dish" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-preserve-dish-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Preserve Dish", link: '/the-sims/three-pc-preserve-dish' }
+  ] satisfies IBreadcrumb[],
   'the-sims-four-pc-metal': [
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Four PC Metal" }
@@ -99,6 +155,14 @@ export const BREADCRUMBS = Object.freeze({
   'the-sims-three-pc-dish-detail': [
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Three PC Dish", link: '/the-sims/three-pc-dish' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-four-pc-dish': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Four PC Dish" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-four-pc-dish-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Four PC Dish", link: '/the-sims/four-pc-dish' }
   ] satisfies IBreadcrumb[],
   'the-sims-bustin-out-career': [
     { label: "The Sims", link: '/the-sims' },

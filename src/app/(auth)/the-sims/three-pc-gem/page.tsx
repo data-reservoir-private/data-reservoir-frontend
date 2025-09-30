@@ -1,37 +1,29 @@
-import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route'
 import { ITheSimsResponse } from '@/model/response/the-sims';
-import { grabData } from '@/utilities/http'
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Image from 'next/image';
-import Link from 'next/link';
+import { getSearchParam, grabData } from '@/utilities/http'
+import { Metadata } from 'next';
 import React from 'react'
+import Section from '@/components/common/paper/Section';
+import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
+import ThreePCGemForm, { ThreePCGemFormSchema } from './form';
+
+export const metadata: Metadata = {
+  title: 'The Sims Three PC Gem - Data Reservoir'
+}
 
 export default async function ThreePCGem() {
-  const { data } = await grabData<ITheSimsResponse['three-pc-gem'][]>(API_ROUTE.THE_SIMS.THREE_PC_GEM, { pageSize: 0 });
+  const sp = await getSearchParam<ThreePCGemFormSchema>();
+  const { data, pagination } = await grabData<ITheSimsResponse['three-pc-gem'][]>(API_ROUTE.THE_SIMS.THREE_PC_GEM, {
+    name: sp.name ?? "",
+    currentPage: Math.max(1, sp.currentPage ?? 1),
+    pageSize: sp.pageSize ?? 50,
+  });
 
   return (
-    <Box display='flex' gap='1rem' flexDirection='column'>
-      <Typography variant='h4' fontWeight='bold'>Three PC Gems</Typography>
-      <Divider />
-      <Grid container spacing='1rem' columns={12}>
-        {
-          data.map((d) => (
-            <Grid key={d.id}>
-              <Link passHref href={`/the-sims/castaway-product/${d.id}`}>
-                <Paper className='p-1 flex relative'>
-                  <Box className='w-20 h-20 relative'>
-                    <Image src={d.image} alt={d.id} fill quality={90} className='rounded-sm object-contain'/>
-                  </Box>
-                </Paper>
-              </Link>
-            </Grid>
-          ))
-        }
-      </Grid>
-    </Box>
+    <Section name='The Sims Three PC Gem' variant='h4' breadcrumbs={BREADCRUMBS['the-sims-three-pc-gem']}>
+      <ThreePCGemForm param={sp} totalData={pagination?.totalData ?? 0} />
+      <SimpleGrid data={data.map(x => ({ id: x.id, name: `${x.rawGem.name} (${x.gemCut.name})`, image: x.image }))} link='/the-sims/three-pc-gem' />
+    </Section>
   )
 }

@@ -18,7 +18,7 @@ export default async function BazaarCrop() {
 
   return (
     <Section name='Seasons DS Bazaar Crop' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-bazaar-crop']}>
-      <SimpleGrid data={data} link='/seasons/ds-bazaar-crop'/>
+      <SimpleGrid data={data} link='/seasons/ds-bazaar-crop' unoptimizedImage pixelated />
     </Section>
   )
 }
