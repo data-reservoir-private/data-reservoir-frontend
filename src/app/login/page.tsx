@@ -1,5 +1,5 @@
 import Paper from '@/components/common/paper/Paper';
-import React from 'react';
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -14,19 +14,15 @@ export const metadata: Metadata = {
 type searchParamsType = Promise<{ message: string }>
 
 export default async function LoginPage(props: { searchParams: searchParamsType }) {
-  const searchP = await props.searchParams;
+  const searchP = props.searchParams;
   return (
     <>
       <Box className='w-full h-[100svh] flex items-center justify-center p-10'>
         <Paper className='w-fit px-12 py-7'>
           <Box className='flex gap-2 flex-col'>
-            {
-              searchP.message && (
-                <div color='failure' className='p-2 text-sm'>
-                  <span>{searchP.message}</span>
-                </div>
-              )
-            }
+            <Suspense fallback={<></>}>
+              <Message message={searchP} />
+            </Suspense>
             <Box className='flex justify-between items-center max-md:flex-col max-md:gap-2'>
               <Typography variant='h5' textAlign='center' fontWeight='bold'>Data Reservoir</Typography>
               <SignInButton oauthFlow='redirect' fallbackRedirectUrl={'/dashboard'} forceRedirectUrl={'/dashboard'}>
@@ -43,4 +39,13 @@ export default async function LoginPage(props: { searchParams: searchParamsType 
       </Box>
     </>
   );
+}
+
+async function Message({ message }: { message: searchParamsType }) {
+  const msg = await message;
+  return msg.message && (
+    <Box color='failure' className='p-2 text-sm'>
+      <Box component='span'>{msg.message}</Box>
+    </Box>
+  )
 }

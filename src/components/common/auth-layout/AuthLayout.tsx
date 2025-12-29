@@ -13,7 +13,7 @@ import { BsMenuApp } from 'react-icons/bs';
 import { DrawerOptions } from './DrawerOptions';
 import PersonalInfo from './PersonalInfo';
 
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default function AuthLayout() {
   const [open, setOpen] = useState(false);
   const handleOnClose = () => { setOpen(false) }
   const smol = useMediaQuery(themeOptions.breakpoints.down('sm'), {
@@ -57,12 +57,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <Toolbar variant='dense' />
         <DrawerOptions onClose={handleOnClose} />
       </Drawer>
-      <Box className='relative min-sm:left-[250px] min-sm:w-[calc(100%-250px)] p-2 min-h-[100svh]'>
-        <Toolbar variant='dense' />
-        <Box className='p-4'>
-          {children}
-        </Box>
-      </Box>
     </Box>
   );
 }
