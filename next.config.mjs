@@ -5,9 +5,18 @@ const nextConfig = {
   typedRoutes: true,
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  cacheComponents: true,
+  reactCompiler: true,
+  turbopack: true,
   images: {
     qualities: [50],
+    dangerouslyAllowLocalIP: true,
     minimumCacheTTL: 2678400,
+    localPatterns: [
+      {
+        pathname: '/image/**',
+      },
+    ],
     remotePatterns: [
       {
         hostname: "img.clerk.com",
@@ -24,12 +33,15 @@ const nextConfig = {
         port: "40000",
         protocol: "http",
         pathname: '/**/*'
+      },
+      {
+        hostname: "127.0.0.1",
+        port: "40000",
+        protocol: "http",
+        pathname: '/**/*'
       }
     ],
     imageSizes: [32, 48, 64, 72, 128, 256, 512]
-  },
-  eslint: {
-    ignoreDuringBuilds: true
   }
 };
 
