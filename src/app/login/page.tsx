@@ -25,7 +25,7 @@ export default async function LoginPage(props: { searchParams: searchParamsType 
             </Suspense>
             <Box className='flex justify-between items-center max-md:flex-col max-md:gap-2'>
               <Typography variant='h5' textAlign='center' fontWeight='bold'>Data Reservoir</Typography>
-              <SignInButton oauthFlow='redirect' fallbackRedirectUrl={'/dashboard'} forceRedirectUrl={'/dashboard'}>
+              <SignInButton component='div' oauthFlow='redirect' fallbackRedirectUrl={'/dashboard'} forceRedirectUrl={'/dashboard'}>
                 <Button startIcon={<FaGithub />} className='pl-4 pr-4 max-md:w-full' variant='contained'>
                   Github Login
                 </Button>
