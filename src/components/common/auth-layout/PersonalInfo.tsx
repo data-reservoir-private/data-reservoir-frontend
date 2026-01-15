@@ -23,7 +23,7 @@ export default function PersonalInfo() {
               <Typography variant='subtitle2'>{user.firstName}</Typography>
             </Box>
           }
-          <SignOutButton redirectUrl='/login'>
+          <SignOutButton component='div' redirectUrl='/login'>
             <Button variant='contained' title='Logout' color='error' size='small' className='w-fit min-w-0 aspect-square'>
               <FaPowerOff />
             </Button>
