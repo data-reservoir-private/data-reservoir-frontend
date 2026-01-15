@@ -1,6 +1,4 @@
-'use client'
-
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { init, getInstanceByDom, EChartsOption } from 'echarts'
 import Box from '@mui/material/Box'
 import classNames from 'classnames'

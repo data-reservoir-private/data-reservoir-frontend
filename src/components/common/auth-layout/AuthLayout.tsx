@@ -1,6 +1,3 @@
-'use client'
-
-import { themeOptions } from '@/theme';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -8,10 +5,11 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BsMenuApp } from 'react-icons/bs';
 import { DrawerOptions } from './DrawerOptions';
 import PersonalInfo from './PersonalInfo';
+import themeOptions from '@/theme';
 
 export default function AuthLayout() {
   const [open, setOpen] = useState(false);
@@ -21,7 +19,7 @@ export default function AuthLayout() {
   });
 
   return (
-    <Box className='flex-grow'>
+    <Box className='grow'>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundImage: 'none' }} className='bg-background-paper shadow-none border-b-divider border-b' >
         <Toolbar variant='dense'>
           {
@@ -36,8 +34,8 @@ export default function AuthLayout() {
               <BsMenuApp />
             </IconButton>
           }
-          <Typography variant='h6' component="div" className='flex-grow font-bold'>Data Reservoir</Typography>
-          <PersonalInfo/>
+          <Typography variant='h6' component="div" className='grow font-bold!'>Data Reservoir</Typography>
+          <PersonalInfo />
         </Toolbar>
       </AppBar>
       <Drawer variant={smol ? 'temporary' : 'permanent'}

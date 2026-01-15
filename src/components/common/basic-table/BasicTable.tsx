@@ -1,8 +1,5 @@
-'use client'
-
 import React, { Fragment, useMemo, useState } from 'react';
 import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
-import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
 import { saveAs } from 'file-saver';
 import Box from '@mui/material/Box';

@@ -2,14 +2,12 @@ import { IData } from '@/constant/data'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
-import Link from 'next/link'
-import React from 'react'
 import { BsTable } from 'react-icons/bs'
 import Section from '../paper/Section'
 import Paper from '../paper/Paper'
-import { Route } from 'next'
 import SimpleImage from '../SimpleImage'
 import { Breakpoint } from '@mui/material/styles'
+import { Link } from '@tanstack/react-router'
 
 interface SimpleQuickLinkProps {
   quickLink: IData;
@@ -25,14 +23,14 @@ export default function SimpleQuickLink({ quickLink, columns, unoptimized, pixel
         {
           quickLink.categories.map((nav) => (
             <Grid size={1} key={nav.name}>
-              <Link passHref href={nav.link as Route}>
+              <Link to={nav.link}>
                 <Paper className='p-2 cursor-pointer hover:bg-background-paper/50 flex flex-col gap-3 items-center justify-center'>
                   {
                     nav.image &&
                     (
                       <Box className='h-20 w-auto min-w-20 flex items-center relative justify-center'>
                         {
-                          (typeof (nav.image) === 'string') ? <SimpleImage src={nav.image} alt={nav.name} className='rounded-sm object-contain' unoptimized={unoptimized} pixelated={pixelated} /> : nav.image()
+                          (typeof (nav.image) === 'string') ? <img src={nav.image} className='h-20'/> : nav.image()
                         }
                       </Box>
                     )

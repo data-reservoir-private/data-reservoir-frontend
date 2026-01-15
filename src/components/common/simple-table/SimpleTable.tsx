@@ -1,5 +1,3 @@
-'use client'
-
 import React, { Fragment, useMemo, useState } from 'react';
 import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
 import classNames from 'classnames';

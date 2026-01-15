@@ -1,9 +1,13 @@
-'use client'
-
 import { createTheme } from '@mui/material/styles';
 
-export const themeOptions = createTheme({
+const themeOptions = createTheme({
   cssVariables: true,
+  typography: {
+    fontFamily: '"PT Sans"',
+    h6: {
+      fontWeight: 'bold'
+    }
+  },
   palette: {
     mode: 'dark',
     primary: {
@@ -14,8 +18,8 @@ export const themeOptions = createTheme({
       main: '#fbc02d',
     },
     background: {
-      default: '#202125',
-      paper: '#19191c',
+      paper: '#202125',
+      default: '#19191c',
     },
     error: {
       main: '#ff3e31',
@@ -27,9 +31,6 @@ export const themeOptions = createTheme({
       main: '#ffb300',
     },
   },
-  typography: {
-    fontFamily: 'pt sans',
-  },
   components: {
     MuiButton: {
       styleOverrides: {
@@ -40,14 +41,13 @@ export const themeOptions = createTheme({
           }
         }
       }
+    },
+    MuiToolbar: {
+      defaultProps: {
+        variant: 'dense'
+      }
     }
-    // MuiToolbar: {
-    //   styleOverrides: {
-    //     dense: {
-    //       height: '2rem',
-    //       minHeight: '2rem'
-    //     }
-    //   }
-    // }
   }
 });
+
+export default themeOptions;

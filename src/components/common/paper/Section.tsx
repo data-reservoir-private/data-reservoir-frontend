@@ -4,10 +4,10 @@ import Divider from '@mui/material/Divider'
 import { TypographyVariant } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import classNames from 'classnames'
-import Link from 'next/link'
 import React from 'react'
 import BackButton from '../BackButton'
 import { IBreadcrumb } from '@/constant/breadcrumb'
+import { Link } from '@tanstack/react-router'
 
 interface SectionProps {
   variant: TypographyVariant,
@@ -29,7 +29,7 @@ export default function Section(props: SectionProps) {
                 props.breadcrumbs.map((bc, idx) => (
                   <Box key={idx}>
                     {
-                      bc.link ? (<Link className='hover:underline' href={bc.link}>{bc.label}</Link>) :
+                      bc.link ? (<Link className='hover:underline' to={bc.link}>{bc.label}</Link>) :
                         (<Typography className='text-white'>{bc.label}</Typography>)
                     }
                   </Box>

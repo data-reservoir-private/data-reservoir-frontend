@@ -1,11 +1,9 @@
-'use client'
-
-import Box from '@mui/material/Box'
-import { SignOutButton, useUser } from '@clerk/nextjs';
+import { SignOutButton, useUser } from '@clerk/tanstack-react-start';
 import Button from '@mui/material/Button';
 import { FaPowerOff } from "react-icons/fa";
 import Typography from '@mui/material/Typography';
 import SimpleImage from '../SimpleImage';
+import { Box } from '@mui/material';
 
 export default function PersonalInfo() {
   const { user } = useUser();
@@ -24,9 +22,11 @@ export default function PersonalInfo() {
             </Box>
           }
           <SignOutButton redirectUrl='/login'>
-            <Button variant='contained' title='Logout' color='error' size='small' className='w-fit min-w-0 aspect-square'>
-              <FaPowerOff />
-            </Button>
+            <Box>
+              <Button variant='contained' title='Logout' color='error' size='small' className='aspect-square min-w-0!'>
+                <FaPowerOff />
+              </Button>
+            </Box>
           </SignOutButton>
         </Box>
       </Box>

@@ -1,8 +1,6 @@
-import { Route } from "next";
-
 export interface IBreadcrumb {
   label: string,
-  link?: Route
+  link?: string
 }
 
 export const BREADCRUMBS = Object.freeze({

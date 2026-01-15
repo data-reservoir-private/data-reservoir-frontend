@@ -1,11 +1,10 @@
 import { IDashboardResponse } from '@/model/response/dashboard'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-import React from 'react'
 import { BsFillGrid3X3GapFill } from 'react-icons/bs'
 import { FaThList } from 'react-icons/fa'
+import Paper from '../paper/Paper'
 
 interface SimpleRecordTableCardsProps {
   response: IDashboardResponse

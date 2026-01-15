@@ -1,4 +1,3 @@
-import React from 'react'
 import { EChart } from '../chart/Chart';
 import { EChartsOption } from 'echarts';
 import { IDashboardResponse } from '@/model/response/dashboard';

@@ -1,11 +1,8 @@
-import { Route } from "next";
 import { API_ROUTE } from "./api-route";
 import { BsBuildingFill } from "react-icons/bs";
-import 'server-only'
 
 export type ExportType = 'json' | 'csv' | 'tsv' | 'yaml' | 'xml' | 'html' | 'postgresql' | 'sql_server' | 'sqlite' | 'ndjson' | 'parquet' | 'xlsx';
 
-const ALL_EXPORTS: ExportType[] = ['json', 'ndjson', 'csv', 'tsv', 'xml', 'yaml'];
 const ALL_EXPORTS_COMPLETE: ExportType[] = ['json', 'ndjson', 'csv', 'tsv', 'xml', 'yaml', 'html', 'postgresql', 'sql_server', 'sqlite', 'parquet', 'xlsx'];
 export interface IData {
   name: string,
@@ -14,7 +11,7 @@ export interface IData {
     id: string,
     name: string,
     description: string,
-    link: Route,
+    link: string,
     minedByMe?: true
     image?: string | (() => React.ReactNode),
     export?: {

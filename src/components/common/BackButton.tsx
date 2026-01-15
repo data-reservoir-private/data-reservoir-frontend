@@ -1,15 +1,12 @@
-'use client'
-
 import ButtonBase from '@mui/material/ButtonBase'
-import { useRouter } from 'next/navigation'
-import React from 'react'
+import { useNavigate } from '@tanstack/react-router';
 import { FaAngleLeft } from 'react-icons/fa6'
 
 export default function BackButton() {
-  const router = useRouter();
+  const router = useNavigate();
   
   return (
-    <ButtonBase title='Back to Previous Page' className='w-7 rounded-sm' onClick={() => router.back()}>
+    <ButtonBase title='Back to Previous Page' className='w-7 rounded-sm' onClick={() => router({ to: '..' })}>
       <FaAngleLeft />
     </ButtonBase>
   )

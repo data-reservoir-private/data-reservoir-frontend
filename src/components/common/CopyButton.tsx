@@ -1,7 +1,5 @@
-'use client'
-
 import Button from '@mui/material/Button'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BsCheck, BsCopy, BsX } from 'react-icons/bs'
 
 export default function CopyButton({ value } : { value: string }) {

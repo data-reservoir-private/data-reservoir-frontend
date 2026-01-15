@@ -6,7 +6,6 @@ import { FaBowlFood, FaPizzaSlice } from "react-icons/fa6";
 import { IoIosDocument } from "react-icons/io";
 import { GiPolarStar } from "react-icons/gi";
 import { GrTransaction } from "react-icons/gr";
-import { Route } from 'next';
 import { BiSolidLeaf } from "react-icons/bi";
 import { PiBarnFill } from "react-icons/pi";
 import { FaCookieBite } from "react-icons/fa";
@@ -21,7 +20,7 @@ export type ROUTE_TYPE = {
   id: ROUTE,
   name: string,
   icon: IconType,
-  link: Route,
+  link: string,
   inactive?: boolean,
   beta?: boolean,
   new?: boolean,
@@ -33,13 +32,14 @@ export const ROUTES: ROUTE_TYPE[][] = [
       id: 'dashboard',
       name: 'Dashboard',
       icon: BiSolidHome,
-      link: '/dashboard'
+      link: '/dashboard',
     },
     {
       id: 'the-sims',
       name: 'The Sims',
       icon: BsFillSuitDiamondFill,
-      link: '/the-sims'
+      link: '/the-sims',
+      inactive: true,
     },
     {
       id: 'hayday',
@@ -51,43 +51,50 @@ export const ROUTES: ROUTE_TYPE[][] = [
       id: 'farm-frenzy',
       name: 'Farm Frenzy',
       icon: PiBarnFill,
-      link: '/farm-frenzy'
+      link: '/farm-frenzy',
+      inactive: true,
     },
     {
       id: 'pizza-frenzy',
       name: 'Pizza Frenzy',
       icon: FaPizzaSlice,
-      link: '/pizza-frenzy'
+      link: '/pizza-frenzy',
+      inactive: true,
     },
     {
       id: 'nasi-goreng',
       name: 'Nasi Goreng',
       icon: FaBowlFood,
-      link: '/nasi-goreng'
+      link: '/nasi-goreng',
+      inactive: true,
     },
     {
       id: 'seasons',
       name: 'Seasons',
       icon: BiSolidLeaf,
-      link: '/seasons'
+      link: '/seasons',
+      inactive: true,
     },
     {
       id: 'cygnus',
       name: 'Cygnus',
       icon: GiPolarStar,
-      link: '/cygnus'
+      link: '/cygnus',
+      inactive: true,
     },
     {
       id: 'element',
       name: 'Element',
       icon: ElementIcon,
-      link: '/periodic-table'
+      link: '/periodic-table',
+      inactive: true,
     },
     {
       id: 'transaction',
       name: 'Transaction',
       icon: GrTransaction,
       link: '/transaction',
+      inactive: true,
     },
     // {
     //   id: 'transjakarta',
