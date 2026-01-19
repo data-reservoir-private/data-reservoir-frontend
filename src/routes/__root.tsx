@@ -1,11 +1,11 @@
-import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/theme";
 import { createRootRoute, Scripts, HeadContent, Outlet } from "@tanstack/react-router";
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 
 import globalCss from "@/globals.css?url";
-import { CssBaseline, GlobalStyles } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { ClerkProvider } from "@clerk/tanstack-react-start";
 import React from "react";
 
@@ -51,16 +51,13 @@ function Component() {
 }
 
 function Providers({ children }: { children: React.ReactNode }) {
-  const emotionCache = createCache({ key: 'css', prepend: true });
+  const emotionCache = createCache({ key: 'css' });
   return (
     <ClerkProvider>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
-          <StyledEngineProvider enableCssLayer>
-            <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
-            <CssBaseline />
-            {children}
-          </StyledEngineProvider>
+          <CssBaseline />
+          {children}
         </ThemeProvider>
       </CacheProvider>
     </ClerkProvider>

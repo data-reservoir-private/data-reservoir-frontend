@@ -1,7 +1,6 @@
-import { useCustomFormContext } from '@/utilities/form';
 import Box from '@mui/material/Box';
 import TablePagination from '@mui/material/TablePagination';
-import React from 'react'
+import React from 'react';
 
 interface SimplePageNavigationProps {
   currentPage: number,
@@ -28,10 +27,10 @@ export default function SimplePageNavigation(props: SimplePageNavigationProps) {
   };
 
   return (
-    <Box className="">
+    <Box>
       <TablePagination
         component='div'
-        rowsPerPageOptions={props.pageSizeOptions ?? [25, 50, 100]}
+        rowsPerPageOptions={props.pageSizeOptions ?? [0, 25, 50, 100]}
         count={props.totalData}
         page={Math.max(0, props.currentPage - 1)}
         rowsPerPage={props.pageSize}

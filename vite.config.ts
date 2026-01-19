@@ -4,6 +4,7 @@ import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import tailwindcss from '@tailwindcss/vite'
+import { nitro } from "nitro/vite"
 
 export default defineConfig({
   server: {
@@ -16,10 +17,23 @@ export default defineConfig({
     tsconfigPaths({
       projects: ['./tsconfig.json'],
     }),
-    tailwindcss(),
-    tanstackStart(),
+    tailwindcss({
+      optimize: true
+    }),
+    tanstackStart({
+      prerender: {
+        enabled: false,
+        filter: ({ path }) => [
+          '/cygnus/crop'
+        ].includes(path)
+      }
+    }),
+    nitro(),
     viteReact(),
   ],
+  nitro: {
+    serverDir: './'
+  },
   optimizeDeps: {
     include: ['@clerk/tanstack-react-start', 'cookie']
   },

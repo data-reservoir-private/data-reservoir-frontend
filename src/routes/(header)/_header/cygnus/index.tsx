@@ -8,12 +8,13 @@ import { DATASETS_AVAILABLE } from '@/constant/data';
 import { IDashboardResponse } from '@/model/response/dashboard';
 import { grabData } from '@/utilities/http';
 import { createFileRoute } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
+import { createServerFn } from '@tanstack/react-start';
 
 const apiCall = createServerFn()
-  .handler(async () => await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/hayday`));
+  .handler(async () => await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/cygnus`));
 
-export const Route = createFileRoute('/(header)/_header/hayday/')({
+
+export const Route = createFileRoute('/(header)/_header/cygnus/')({
   component: RouteComponent,
   loader: () => apiCall(),
   pendingComponent: () => (<IndexSkeleton />)
@@ -23,10 +24,10 @@ function RouteComponent() {
   const { data } = Route.useLoaderData();
 
   return (
-    <Section variant='h4' name='Hayday'>
+    <Section variant='h4' name='Cygnus'>
       <SimpleRecordTableCards response={data} />
       <SimpleBarTableChart response={data} />
-      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['hayday']} columns={{ xs: 1, sm: 2, md: 3 }} />
+      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['cygnus']} columns={{ xs: 1, sm: 2, md: 3 }} />
     </Section>
   );
 }

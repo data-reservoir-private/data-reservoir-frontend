@@ -128,7 +128,7 @@ export const Route = createFileRoute('/(header)/_header/export/$category/$data/$
             res as Record<string, any>[],
             {
               webName: 'Data Reservoir',
-              webSite: process.env.DOMAIN,
+              webSite: process.env.NITRO_DOMAIN,
               dataName: d.name
             }
           )) as BodyInit, {

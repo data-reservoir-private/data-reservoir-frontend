@@ -7,7 +7,6 @@ interface SimpleImageProps {
   alt: string,
   sizes?: string,
   quality?: number,
-  unoptimized?: boolean,
   pixelated?: boolean
 }
 

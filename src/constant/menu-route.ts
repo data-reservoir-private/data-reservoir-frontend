@@ -79,8 +79,7 @@ export const ROUTES: ROUTE_TYPE[][] = [
       id: 'cygnus',
       name: 'Cygnus',
       icon: GiPolarStar,
-      link: '/cygnus',
-      inactive: true,
+      link: '/cygnus'
     },
     {
       id: 'element',

@@ -27,6 +27,7 @@ const searchSchema = formSchema.extend({
 
 type SubmitMeta = { resetPagination?: boolean };
 export type HaydayProductFormSchema = z.infer<typeof formSchema>;
+
 const apiCall = createServerFn({ method: 'GET' })
   .inputValidator(searchSchema)
   .handler(async ({ data }) => {
@@ -34,12 +35,12 @@ const apiCall = createServerFn({ method: 'GET' })
       name: data.name ?? "",
       category: data.category ?? [],
       currentPage: Math.max(1, data.currentPage ?? 1),
-      pageSize: data.pageSize ?? 50,
+      pageSize: data.pageSize ?? 100,
       level: data.level
     })
   })
 
-export const Route = createFileRoute('/(header)/_header/hayday/product')({
+export const Route = createFileRoute('/(header)/_header/hayday/product/')({
   validateSearch: (d) => searchSchema.parse(d),
   component: RouteComponent,
 })
@@ -60,7 +61,7 @@ function RouteComponent() {
       level: search.level ?? 0,
       category: (search.category && !Array.isArray(search.category)) ? [search.category] : (search.category ?? []),
       currentPage: search.currentPage ?? 1,
-      pageSize: search.pageSize ?? 50
+      pageSize: search.pageSize ?? 100
     } as HaydayProductFormSchema,
     validators: {
       onChange: formSchema

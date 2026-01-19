@@ -15,7 +15,11 @@ import { Route as headerHeaderIndexRouteImport } from './routes/(header)/_header
 import { Route as headerHeaderDashboardRouteImport } from './routes/(header)/_header/dashboard'
 import { Route as headerHeaderHaydayIndexRouteImport } from './routes/(header)/_header/hayday/index'
 import { Route as headerHeaderExportIndexRouteImport } from './routes/(header)/_header/export/index'
-import { Route as headerHeaderHaydayProductRouteImport } from './routes/(header)/_header/hayday/product'
+import { Route as headerHeaderCygnusIndexRouteImport } from './routes/(header)/_header/cygnus/index'
+import { Route as headerHeaderHaydayProductIndexRouteImport } from './routes/(header)/_header/hayday/product.index'
+import { Route as headerHeaderCygnusCropIndexRouteImport } from './routes/(header)/_header/cygnus/crop/index'
+import { Route as headerHeaderHaydayProductIdRouteImport } from './routes/(header)/_header/hayday/product.$id'
+import { Route as headerHeaderCygnusCropIdRouteImport } from './routes/(header)/_header/cygnus/crop/$id'
 import { Route as headerHeaderExportCategoryDataTypeRouteImport } from './routes/(header)/_header/export/$category.$data.$type'
 
 const noHeaderLoginRoute = noHeaderLoginRouteImport.update({
@@ -47,10 +51,33 @@ const headerHeaderExportIndexRoute = headerHeaderExportIndexRouteImport.update({
   path: '/export/',
   getParentRoute: () => headerHeaderRouteRoute,
 } as any)
-const headerHeaderHaydayProductRoute =
-  headerHeaderHaydayProductRouteImport.update({
-    id: '/hayday/product',
-    path: '/hayday/product',
+const headerHeaderCygnusIndexRoute = headerHeaderCygnusIndexRouteImport.update({
+  id: '/cygnus/',
+  path: '/cygnus/',
+  getParentRoute: () => headerHeaderRouteRoute,
+} as any)
+const headerHeaderHaydayProductIndexRoute =
+  headerHeaderHaydayProductIndexRouteImport.update({
+    id: '/hayday/product/',
+    path: '/hayday/product/',
+    getParentRoute: () => headerHeaderRouteRoute,
+  } as any)
+const headerHeaderCygnusCropIndexRoute =
+  headerHeaderCygnusCropIndexRouteImport.update({
+    id: '/cygnus/crop/',
+    path: '/cygnus/crop/',
+    getParentRoute: () => headerHeaderRouteRoute,
+  } as any)
+const headerHeaderHaydayProductIdRoute =
+  headerHeaderHaydayProductIdRouteImport.update({
+    id: '/hayday/product/$id',
+    path: '/hayday/product/$id',
+    getParentRoute: () => headerHeaderRouteRoute,
+  } as any)
+const headerHeaderCygnusCropIdRoute =
+  headerHeaderCygnusCropIdRouteImport.update({
+    id: '/cygnus/crop/$id',
+    path: '/cygnus/crop/$id',
     getParentRoute: () => headerHeaderRouteRoute,
   } as any)
 const headerHeaderExportCategoryDataTypeRoute =
@@ -64,18 +91,26 @@ export interface FileRoutesByFullPath {
   '/login': typeof noHeaderLoginRoute
   '/dashboard': typeof headerHeaderDashboardRoute
   '/': typeof headerHeaderIndexRoute
-  '/hayday/product': typeof headerHeaderHaydayProductRoute
+  '/cygnus': typeof headerHeaderCygnusIndexRoute
   '/export': typeof headerHeaderExportIndexRoute
   '/hayday': typeof headerHeaderHaydayIndexRoute
+  '/cygnus/crop/$id': typeof headerHeaderCygnusCropIdRoute
+  '/hayday/product/$id': typeof headerHeaderHaydayProductIdRoute
+  '/cygnus/crop': typeof headerHeaderCygnusCropIndexRoute
+  '/hayday/product': typeof headerHeaderHaydayProductIndexRoute
   '/export/$category/$data/$type': typeof headerHeaderExportCategoryDataTypeRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof noHeaderLoginRoute
   '/dashboard': typeof headerHeaderDashboardRoute
   '/': typeof headerHeaderIndexRoute
-  '/hayday/product': typeof headerHeaderHaydayProductRoute
+  '/cygnus': typeof headerHeaderCygnusIndexRoute
   '/export': typeof headerHeaderExportIndexRoute
   '/hayday': typeof headerHeaderHaydayIndexRoute
+  '/cygnus/crop/$id': typeof headerHeaderCygnusCropIdRoute
+  '/hayday/product/$id': typeof headerHeaderHaydayProductIdRoute
+  '/cygnus/crop': typeof headerHeaderCygnusCropIndexRoute
+  '/hayday/product': typeof headerHeaderHaydayProductIndexRoute
   '/export/$category/$data/$type': typeof headerHeaderExportCategoryDataTypeRoute
 }
 export interface FileRoutesById {
@@ -84,9 +119,13 @@ export interface FileRoutesById {
   '/(no-header)/login': typeof noHeaderLoginRoute
   '/(header)/_header/dashboard': typeof headerHeaderDashboardRoute
   '/(header)/_header/': typeof headerHeaderIndexRoute
-  '/(header)/_header/hayday/product': typeof headerHeaderHaydayProductRoute
+  '/(header)/_header/cygnus/': typeof headerHeaderCygnusIndexRoute
   '/(header)/_header/export/': typeof headerHeaderExportIndexRoute
   '/(header)/_header/hayday/': typeof headerHeaderHaydayIndexRoute
+  '/(header)/_header/cygnus/crop/$id': typeof headerHeaderCygnusCropIdRoute
+  '/(header)/_header/hayday/product/$id': typeof headerHeaderHaydayProductIdRoute
+  '/(header)/_header/cygnus/crop/': typeof headerHeaderCygnusCropIndexRoute
+  '/(header)/_header/hayday/product/': typeof headerHeaderHaydayProductIndexRoute
   '/(header)/_header/export/$category/$data/$type': typeof headerHeaderExportCategoryDataTypeRoute
 }
 export interface FileRouteTypes {
@@ -95,18 +134,26 @@ export interface FileRouteTypes {
     | '/login'
     | '/dashboard'
     | '/'
-    | '/hayday/product'
+    | '/cygnus'
     | '/export'
     | '/hayday'
+    | '/cygnus/crop/$id'
+    | '/hayday/product/$id'
+    | '/cygnus/crop'
+    | '/hayday/product'
     | '/export/$category/$data/$type'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
     | '/dashboard'
     | '/'
-    | '/hayday/product'
+    | '/cygnus'
     | '/export'
     | '/hayday'
+    | '/cygnus/crop/$id'
+    | '/hayday/product/$id'
+    | '/cygnus/crop'
+    | '/hayday/product'
     | '/export/$category/$data/$type'
   id:
     | '__root__'
@@ -114,9 +161,13 @@ export interface FileRouteTypes {
     | '/(no-header)/login'
     | '/(header)/_header/dashboard'
     | '/(header)/_header/'
-    | '/(header)/_header/hayday/product'
+    | '/(header)/_header/cygnus/'
     | '/(header)/_header/export/'
     | '/(header)/_header/hayday/'
+    | '/(header)/_header/cygnus/crop/$id'
+    | '/(header)/_header/hayday/product/$id'
+    | '/(header)/_header/cygnus/crop/'
+    | '/(header)/_header/hayday/product/'
     | '/(header)/_header/export/$category/$data/$type'
   fileRoutesById: FileRoutesById
 }
@@ -169,11 +220,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof headerHeaderExportIndexRouteImport
       parentRoute: typeof headerHeaderRouteRoute
     }
-    '/(header)/_header/hayday/product': {
-      id: '/(header)/_header/hayday/product'
+    '/(header)/_header/cygnus/': {
+      id: '/(header)/_header/cygnus/'
+      path: '/cygnus'
+      fullPath: '/cygnus'
+      preLoaderRoute: typeof headerHeaderCygnusIndexRouteImport
+      parentRoute: typeof headerHeaderRouteRoute
+    }
+    '/(header)/_header/hayday/product/': {
+      id: '/(header)/_header/hayday/product/'
       path: '/hayday/product'
       fullPath: '/hayday/product'
-      preLoaderRoute: typeof headerHeaderHaydayProductRouteImport
+      preLoaderRoute: typeof headerHeaderHaydayProductIndexRouteImport
+      parentRoute: typeof headerHeaderRouteRoute
+    }
+    '/(header)/_header/cygnus/crop/': {
+      id: '/(header)/_header/cygnus/crop/'
+      path: '/cygnus/crop'
+      fullPath: '/cygnus/crop'
+      preLoaderRoute: typeof headerHeaderCygnusCropIndexRouteImport
+      parentRoute: typeof headerHeaderRouteRoute
+    }
+    '/(header)/_header/hayday/product/$id': {
+      id: '/(header)/_header/hayday/product/$id'
+      path: '/hayday/product/$id'
+      fullPath: '/hayday/product/$id'
+      preLoaderRoute: typeof headerHeaderHaydayProductIdRouteImport
+      parentRoute: typeof headerHeaderRouteRoute
+    }
+    '/(header)/_header/cygnus/crop/$id': {
+      id: '/(header)/_header/cygnus/crop/$id'
+      path: '/cygnus/crop/$id'
+      fullPath: '/cygnus/crop/$id'
+      preLoaderRoute: typeof headerHeaderCygnusCropIdRouteImport
       parentRoute: typeof headerHeaderRouteRoute
     }
     '/(header)/_header/export/$category/$data/$type': {
@@ -189,18 +268,26 @@ declare module '@tanstack/react-router' {
 interface headerHeaderRouteRouteChildren {
   headerHeaderDashboardRoute: typeof headerHeaderDashboardRoute
   headerHeaderIndexRoute: typeof headerHeaderIndexRoute
-  headerHeaderHaydayProductRoute: typeof headerHeaderHaydayProductRoute
+  headerHeaderCygnusIndexRoute: typeof headerHeaderCygnusIndexRoute
   headerHeaderExportIndexRoute: typeof headerHeaderExportIndexRoute
   headerHeaderHaydayIndexRoute: typeof headerHeaderHaydayIndexRoute
+  headerHeaderCygnusCropIdRoute: typeof headerHeaderCygnusCropIdRoute
+  headerHeaderHaydayProductIdRoute: typeof headerHeaderHaydayProductIdRoute
+  headerHeaderCygnusCropIndexRoute: typeof headerHeaderCygnusCropIndexRoute
+  headerHeaderHaydayProductIndexRoute: typeof headerHeaderHaydayProductIndexRoute
   headerHeaderExportCategoryDataTypeRoute: typeof headerHeaderExportCategoryDataTypeRoute
 }
 
 const headerHeaderRouteRouteChildren: headerHeaderRouteRouteChildren = {
   headerHeaderDashboardRoute: headerHeaderDashboardRoute,
   headerHeaderIndexRoute: headerHeaderIndexRoute,
-  headerHeaderHaydayProductRoute: headerHeaderHaydayProductRoute,
+  headerHeaderCygnusIndexRoute: headerHeaderCygnusIndexRoute,
   headerHeaderExportIndexRoute: headerHeaderExportIndexRoute,
   headerHeaderHaydayIndexRoute: headerHeaderHaydayIndexRoute,
+  headerHeaderCygnusCropIdRoute: headerHeaderCygnusCropIdRoute,
+  headerHeaderHaydayProductIdRoute: headerHeaderHaydayProductIdRoute,
+  headerHeaderCygnusCropIndexRoute: headerHeaderCygnusCropIndexRoute,
+  headerHeaderHaydayProductIndexRoute: headerHeaderHaydayProductIndexRoute,
   headerHeaderExportCategoryDataTypeRoute:
     headerHeaderExportCategoryDataTypeRoute,
 }

@@ -6,7 +6,7 @@ export const grabData = createServerOnlyFn(async <TData>(url: string, params?: R
   pagination?: IPaginationResponse,
   data: TData
 }> => {
-  let urlFinal = `${process.env.API_URL}${url}`;
+  let urlFinal = `${process.env.NITRO_API_URL}${url}`;
   if (!!params) {
     urlFinal = urlFinal + '?' + queryString.stringify(params, {
       arrayFormat: 'none',
@@ -19,7 +19,7 @@ export const grabData = createServerOnlyFn(async <TData>(url: string, params?: R
     method: 'GET',
     cache: 'force-cache',
     headers: {
-      'X-API-Key': process.env.API_KEY
+      'X-API-Key': process.env.NITRO_API_KEY
     },
   });
 
