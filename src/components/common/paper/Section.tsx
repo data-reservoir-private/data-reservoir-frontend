@@ -5,7 +5,7 @@ import { TypographyVariant } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 import BackButton from '../BackButton'
 import { IBreadcrumb } from '@/constant/breadcrumb'
 

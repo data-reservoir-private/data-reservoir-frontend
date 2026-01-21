@@ -7,7 +7,7 @@ import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import React, { cache } from 'react'
+import { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';

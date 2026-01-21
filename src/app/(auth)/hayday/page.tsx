@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  'use cache'
   const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/hayday`);
 
   return (

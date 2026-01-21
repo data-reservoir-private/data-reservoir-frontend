@@ -6,19 +6,21 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import React, { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
 import { Route } from 'next';
+import { cacheLife, cacheTag } from 'next/cache';
 
 interface NasiGorengUpgradeDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['upgrade-complete'] | null>(`${API_ROUTE.NASI_GORENG.UPGRADE}/${id}`));
+const grabDetail = async (id: string) => {
+  return await grabData<INasiGorengResponse['upgrade-complete'] | null>(`${API_ROUTE.NASI_GORENG.UPGRADE}/${id}`);
+};
 
 export async function generateMetadata(props: NasiGorengUpgradeDetailProps) {
   const post = await grabDetail((await props.params).id);

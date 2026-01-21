@@ -14,8 +14,6 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  'use cache';
-  // cacheLife('hours');
   const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/farm_frenzy`);
 
   return (
