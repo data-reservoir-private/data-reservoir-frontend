@@ -29,7 +29,6 @@ export async function generateMetadata(props: NasiGorengIngredientDetailProps) {
 }
 
 export default async function NasiGorengIngredientDetail(props: NasiGorengIngredientDetailProps) {
-  "use cache"
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

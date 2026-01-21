@@ -4,11 +4,12 @@ import TextField from '@mui/material/TextField'
 import React from 'react'
 
 export default function SimpleTextbox({ label } : { label: string }) {
-  const field = useCustomFieldContext<number>();
+  const field = useCustomFieldContext<number | null>();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const v = parseInt(e.currentTarget.value);
     if (!isNaN(v)) field.handleChange(v)
+    else field.handleChange(null);
   }
 
   return (

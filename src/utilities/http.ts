@@ -10,7 +10,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
   pagination?: IPaginationResponse,
   data: TData
 }> {
-  let urlFinal = `${process.env.NEXT_PUBLIC_API}${url}`;
+  let urlFinal = `${process.env.NEXT_PUBLIC_API_URL}${url}`;
   if (!!params) {
     urlFinal = urlFinal + '?' + queryString.stringify(params, {
       arrayFormat: 'none',

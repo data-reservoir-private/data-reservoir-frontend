@@ -3,13 +3,13 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { ICygnusResponse } from '@/model/response/cygnus';
 import Typography from '@mui/material/Typography';
 import SimpleImage from '@/components/common/SimpleImage';
+import { cacheLife, cacheTag } from 'next/cache';
 
 interface CropDetailProps {
   params: Promise<{ id: string }>
@@ -32,7 +32,9 @@ type IStage = {
   }
 )
 
-const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['crop-complete'] | null>(`${API_ROUTE.CYGNUS.CROP}/${id}`));
+const grabDetail = async (id: string) => {
+  return await grabData<ICygnusResponse['crop-complete'] | null>(`${API_ROUTE.CYGNUS.CROP}/${id}`);
+};
 
 export async function generateMetadata(props: CropDetailProps) {
   const post = await grabDetail((await props.params).id);

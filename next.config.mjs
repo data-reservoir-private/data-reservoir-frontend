@@ -5,7 +5,7 @@ const nextConfig = {
   typedRoutes: true,
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  cacheComponents: true,
+  // cacheComponents: true,
   reactCompiler: true,
   turbopack: true,
   images: {
