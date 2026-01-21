@@ -15,7 +15,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
       {
@@ -37,8 +37,13 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "noeslint.config.mjs"
-, "drizzle.config.ts", "src/app/(auth)/docs/page.mdx"  ],
+    "noeslint.config.mjs",
+    "drizzle.config.ts",
+    "src/app/(auth)/docs/page.mdx",
+    ".next\\dev/types/**/*.ts",
+    ".next\\dev/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

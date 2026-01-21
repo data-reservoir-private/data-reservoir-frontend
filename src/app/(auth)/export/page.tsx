@@ -5,7 +5,6 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Link from 'next/link'
-import React from 'react'
 import { VscJson } from "react-icons/vsc";
 import { RiCodeSSlashFill } from "react-icons/ri";
 import { FaFileCsv, FaTruck } from "react-icons/fa6";
@@ -63,7 +62,6 @@ export default async function ExportPage() {
       <Typography textAlign='justify'>Please note that your data might be incomplete and some of data provided by this export utility might be cached, resulting in delayed updates.</Typography>
       <Typography textAlign='justify'>Exported data might be simpler than your detail menu (might just be its ID, image, and name). If you need more data (relations for example), please contact me personally and I will query it all for you.</Typography>
       <Typography textAlign='justify'>Not every data that you can view can be exported due to complexity of those data. I will try my best to support it all, but for now, you just have to wait :(</Typography>
-      <Typography textAlign='justify'>I suggest you to keep looking at indicator on the top right. Those might indicate your chance of success of getting these data.</Typography>
       <Typography textAlign='justify'>The structure of the data is similar to the one you usually found inside detail endpoint (endpoint that ends with GUID like <code>00000000-0000-0000-0000-000000000000</code>).</Typography>
 
       <Section name='Data Store' variant='h5'>
