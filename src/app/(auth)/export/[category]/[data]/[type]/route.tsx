@@ -54,7 +54,7 @@ const Transformer: Record<keyof typeof DATASETS_AVAILABLE, Record<string, (res: 
         harvestableImage: r.harvestable.image,
       }
     }),
-  }
+  },
 }
 
 export async function GET(_: NextRequest, { params }: { params: Promise<IParam> }) {

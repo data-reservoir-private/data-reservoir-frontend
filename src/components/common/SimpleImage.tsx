@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import Image from 'next/image'
-import React from 'react'
 
 interface SimpleImageProps {
   className?: string,

@@ -555,9 +555,13 @@ export const DATASETS_AVAILABLE = Object.freeze(({
       {
         id: 'mineral',
         name: 'Mineral',
-        description: '',
+        description: 'Stardew\'s minerals that are collectible.',
         image: '/image/quick_link/c_mineral.png',
-        link: '/cygnus/mineral'
+        link: '/cygnus/mineral',
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.CYGNUS.MINERAL
+        }
       },
       {
         id: 'forage',
