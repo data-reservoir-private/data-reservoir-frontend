@@ -277,10 +277,10 @@
     font: var(--mui-font-body1);
     letter-spacing: 0.00938em;
   }
-  span {
+  /* span {
     font: var(--mui-font-body2);
     letter-spacing: 0.01071em;
-  }
+  } */
 }
 
 /* Material UI typography utilities */

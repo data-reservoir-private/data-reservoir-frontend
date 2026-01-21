@@ -7,7 +7,6 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   // cacheComponents: true,
   reactCompiler: true,
-  turbopack: true,
   images: {
     qualities: [50],
     dangerouslyAllowLocalIP: true,
