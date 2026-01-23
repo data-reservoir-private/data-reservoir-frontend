@@ -6,6 +6,17 @@ const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   // cacheComponents: true,
+  headers: async () => [
+    {
+      source: '/(.*?)',
+      headers: [
+        { key: 'X-Frame-Options', value: 'DENY' },
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'Strict-Transport-Security', value: 'Strict-Transport-Security: max-age=31536000; includeSubDomains' },
+        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' }
+      ]
+    }
+  ],
   reactCompiler: true,
   images: {
     qualities: [50],
