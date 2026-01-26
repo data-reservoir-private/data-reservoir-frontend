@@ -39,12 +39,8 @@ export default function TransactionMonthlyForm({ param }: { param: TransactionMo
   });
 
   return (
-    <Box
-      component='form'
-      onSubmit={e => { e.preventDefault(); e.stopPropagation(); form.handleSubmit() }}
-      className="flex flex-col grow gap-2"
-    >
-      <Box className="gap-2 flex grow">
+    <form.AppForm>
+      <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
         <form.AppField name='month' validators={{
           onChangeListenTo: ['year'],
           onChange: ({ value, fieldApi }) => {
@@ -62,12 +58,8 @@ export default function TransactionMonthlyForm({ param }: { param: TransactionMo
         }}>
           {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
         </form.AppField>
-      </Box>
-      <Box className='flex gap-2'>
-        <form.AppForm>
-          <form.SimpleSubmitButton className='w-full' label='Search' />
-        </form.AppForm>
-      </Box>
-    </Box>
+        <form.SimpleSubmitButton className='w-full' label='Search' />
+      </form.SimpleContainer>
+    </form.AppForm>
   )
 }

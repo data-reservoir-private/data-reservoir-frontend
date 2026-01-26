@@ -39,19 +39,17 @@ export default function HaydayProductClient({ data }: { data: IHaydayResponse['h
   return (
     <Section name='Hayday Products' variant='h4' breadcrumbs={BREADCRUMBS['hayday-product']}>
       <form.AppForm>
-        <form.SimpleContainer className="flex flex-col grow gap-2">
-          <Box className="gap-2 flex grow">
-            <form.AppField name='level' children={(field) => (
-              <field.SimpleNumberbox label='Level' />
-            )} />
-            <form.AppField name='name' children={(field) => (
-              <field.SimpleTextbox label='Name' />
-            )} />
-            <form.AppField name='category' children={(field) => (
-              <field.SimpleMultiselectString label='Category' choices={CATEGORIES['hayday-product']} />
-            )} />
-            <form.SimpleSubmitButton label='Search'/>
-          </Box>
+        <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
+          <form.AppField name='level' children={(field) => (
+            <field.SimpleNumberbox label='Level' />
+          )} />
+          <form.AppField name='name' children={(field) => (
+            <field.SimpleTextbox label='Name' />
+          )} />
+          <form.AppField name='category' children={(field) => (
+            <field.SimpleMultiselectString label='Category' choices={CATEGORIES['hayday-product']} />
+          )} />
+          <form.SimpleSubmitButton label='Search' />
         </form.SimpleContainer>
       </form.AppForm>
       <SimpleGrid data={realData} link='/hayday/product' />

@@ -20,7 +20,7 @@ export default function PersonalInfo() {
               <Box className='w-10 h-10 rounded-full relative'>
                 <SimpleImage src={user.imageUrl} className='rounded-full' alt='Picture' unoptimized/>
               </Box>
-              <Typography variant='subtitle2'>{user.firstName}</Typography>
+              <Typography variant='subtitle2' className='max-sm:hidden'>{user.firstName}</Typography>
             </Box>
           }
           <SignOutButton component='div' redirectUrl='/login'>

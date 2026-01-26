@@ -34,20 +34,18 @@ export default function NasiGorengIngredientClient({ data }: { data: INasiGoreng
 
   return (
     <form.AppForm>
-      <form.SimpleContainer className="flex flex-col grow gap-2">
-        <Box className="gap-2 flex grow">
-          <form.AppField name='name' children={(field) => (
-            <field.SimpleTextbox label='Name'/>
-          )} />
-          <form.AppField name='category' children={(field) => (
-            <field.SimpleMultiselectString label='Category' choices={CATEGORIES['nasi-goreng-ingredient']}/>
-          )} />
-          <form.AppForm>
-            <form.SimpleSubmitButton label='Search'/>
-          </form.AppForm>
-        </Box>
+      <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
+        <form.AppField name='name' children={(field) => (
+          <field.SimpleTextbox label='Name' />
+        )} />
+        <form.AppField name='category' children={(field) => (
+          <field.SimpleMultiselectString label='Category' choices={CATEGORIES['nasi-goreng-ingredient']} />
+        )} />
+        <form.AppForm>
+          <form.SimpleSubmitButton label='Search' />
+        </form.AppForm>
       </form.SimpleContainer>
-      <SimpleGrid data={realData} link='/nasi-goreng/ingredient'/>
+      <SimpleGrid data={realData} link='/nasi-goreng/ingredient' />
     </form.AppForm>
   )
 }

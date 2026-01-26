@@ -31,17 +31,15 @@ export default function DSBazaarRecipeClient({ data }: { data: ISeasonsResponse[
 
   return (
     <form.AppForm>
-      <form.SimpleContainer className="flex flex-col grow gap-2">
-        <Box className="gap-2 flex grow">
-          <form.AppField name='name' children={(field) => (
-            <field.SimpleTextbox label='Name'/>
-          )} />
-          <form.AppForm>
-            <form.SimpleSubmitButton label='Search'/>
-          </form.AppForm>
-        </Box>
+      <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
+        <form.AppField name='name' children={(field) => (
+          <field.SimpleTextbox label='Name' />
+        )} />
+        <form.AppForm>
+          <form.SimpleSubmitButton label='Search' />
+        </form.AppForm>
       </form.SimpleContainer>
-      <SimpleGrid data={realData} link='/seasons/ds-bazaar-recipe' unoptimizedImage pixelated/>
+      <SimpleGrid data={realData} link='/seasons/ds-bazaar-recipe' unoptimizedImage pixelated />
     </form.AppForm>
   )
 }

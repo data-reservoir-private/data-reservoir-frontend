@@ -35,20 +35,18 @@ export default function FourPCMetalClient({ data }: { data: ITheSimsResponse['fo
 
   return (
     <form.AppForm>
-      <form.SimpleContainer className="flex flex-col grow gap-2">
-        <Box className="gap-2 flex grow">
-          <form.AppField name='name' children={(field) => (
-            <field.SimpleTextbox label='Name'/>
-          )} />
-          <form.AppField name='rarity' children={(field) => (
-            <field.SimpleSelect label='Rarity' choices={CATEGORIES['the-sims-rarity']}/>
-          )} />
-          <form.AppForm>
-            <form.SimpleSubmitButton label='Search'/>
-          </form.AppForm>
-        </Box>
+      <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
+        <form.AppField name='name' children={(field) => (
+          <field.SimpleTextbox label='Name' />
+        )} />
+        <form.AppField name='rarity' children={(field) => (
+          <field.SimpleSelect label='Rarity' choices={CATEGORIES['the-sims-rarity']} />
+        )} />
+        <form.AppForm>
+          <form.SimpleSubmitButton label='Search' />
+        </form.AppForm>
       </form.SimpleContainer>
-      <SimpleGrid data={realData} link='/the-sims/four-pc-metal'/>
+      <SimpleGrid data={realData} link='/the-sims/four-pc-metal' />
     </form.AppForm>
   )
 }
