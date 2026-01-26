@@ -35,7 +35,7 @@ export default function SimpleGrid<TData extends { id: string, name: string, ima
                 props.data.map((d) => (
                   <Box key={d.id}>
                     <Link passHref href={`${props.link}/${d.id}` as Route} title={d.name}>
-                      <Box className={classNames('w-20 h-20 relative rounded hover:outline-2 hover:outline-white/15', props.boxClassName)}>
+                      <Box className={classNames('w-20 h-20 max-md:w-14 max-md:h-14 relative rounded hover:outline-2 hover:outline-white/15', props.boxClassName)}>
                         <SimpleImage
                           src={d.image}
                           alt={d.name}

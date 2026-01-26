@@ -31,17 +31,15 @@ export default function ThreePCGemClient({ data }: { data: ITheSimsResponse['thr
 
   return (
     <form.AppForm>
-      <form.SimpleContainer className="flex flex-col grow gap-2">
-        <Box className="gap-2 flex grow">
-          <form.AppField name='name' children={(field) => (
-            <field.SimpleTextbox label='Name'/>
-          )} />
-          <form.AppForm>
-            <form.SimpleSubmitButton label='Search'/>
-          </form.AppForm>
-        </Box>
+      <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
+        <form.AppField name='name' children={(field) => (
+          <field.SimpleTextbox label='Name' />
+        )} />
+        <form.AppForm>
+          <form.SimpleSubmitButton label='Search' />
+        </form.AppForm>
       </form.SimpleContainer>
-      <SimpleGrid data={realData.map(x => ({ id: x.id, name: `${x.rawGem.name} (${x.gemCut.name})`, image: x.image }))} link='/the-sims/three-pc-gem'/>
+      <SimpleGrid data={realData.map(x => ({ id: x.id, name: `${x.rawGem.name} (${x.gemCut.name})`, image: x.image }))} link='/the-sims/three-pc-gem' />
     </form.AppForm>
   )
 }

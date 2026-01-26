@@ -21,7 +21,7 @@ export default function PeriodicTableClient({ data }: { data: IPeriodicTableElem
 
   return (
     <Section name='Periodic Table Elements' variant='h4'>
-      <Box className='grid grid-rows-10 grid-cols-[repeat(18,minmax(0,1fr))] gap-0.5'>
+      <Box className='grid grid-rows-10 grid-cols-18 gap-0.5'>
         {
           data.map(el => <Element element={el} key={el.id} onClick={setElement} />)
         }
@@ -79,13 +79,13 @@ function Element({ element, className, onClick }: { element: IPeriodicTableEleme
       )}
         onClick={() => onClick(element)}
       >
-        <Typography className='text-lg font-bold max-md:text-xs max-lg:text-md min-lg:text-xl'>
+        <Typography className='text-lg font-bold max-md:text-xs max-lg:text-md lg:text-xl'>
           {element ? element.symbol : ""}
         </Typography>
-        <Typography className='text-[9px] min-xl:text-sm max-lg:hidden absolute bottom-0 w-full text-center'>
+        <Typography className='text-[9px] xl:text-sm max-lg:hidden absolute bottom-0 w-full text-center'>
           {element ? Math.round(element.atomicMass * 1000) / 1000 : ""}
         </Typography>
-        <Typography className='text-[9px] min-xl:text-sm max-lg:hidden absolute right-0 top-0 p-0.5 font-[inconsolata]'>
+        <Typography className='text-[9px] xl:text-sm max-lg:hidden absolute right-0 top-0 p-0.5 font-[inconsolata]'>
           {element.number}
         </Typography>
       </Box>

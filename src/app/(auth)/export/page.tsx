@@ -73,7 +73,7 @@ export default async function ExportPage() {
                   <Paper className='flex flex-col gap-2 p-1' key={l.id}>
                     <Box className='flex gap-2'>
                       <Box>
-                        <Box className='h-[80px] w-[80px] flex justify-center items-center relative'>
+                        <Box className='h-20 w-20 flex justify-center items-center relative'>
                           {
                             (l.image && typeof (l.image) === 'string') ? <SimpleImage src={l.image} alt={l.name} className='rounded-sm' unoptimized />
                               : (l.image && typeof (l.image) !== 'string') ? l.image() :
@@ -84,16 +84,27 @@ export default async function ExportPage() {
                       <Box className='flex grow flex-col gap-2'>
                         <Box className='flex justify-between items-center'>
                           <Typography variant='body1' className='font-bold text-lg'>{l.name}</Typography>
-                          <Box className='flex gap-2 items-center h-full flex-wrap justify-end'>
-                            <Chip variant='outlined' size='small' label={`Entries: ${datasets.find(x => `${categoryValue.name} ${l.name}` === x.name)?.total ?? 0}`}/>
+                          <Box className='flex gap-2 items-center h-full flex-wrap justify-end max-md:hidden'>
+                            <Chip variant='outlined' size='small' label={`Entries: ${datasets.find(x => `${categoryValue.name} ${l.name}` === x.name)?.total ?? 0}`} />
                             <Chip variant='outlined' size='small' label={`Owner: ${datasets.find(x => `${categoryValue.name} ${l.name}` === x.name)?.owner ?? ""}`} />
                             {
                               l.minedByMe &&
-                              <Chip variant='outlined' size='small' label="Mined by the (sole) dev"/>
+                              <Chip variant='outlined' size='small' label="Mined by the (sole) dev" />
                             }
                           </Box>
                         </Box>
                         <Typography variant='subtitle2'>{l.description}</Typography>
+                      </Box>
+                    </Box>
+
+                    <Box className='hidden max-md:flex justify-between items-center px-2'>
+                      <Box className='flex gap-2 items-center h-full flex-wrap justify-end'>
+                        <Chip variant='outlined' size='small' label={`Entries: ${datasets.find(x => `${categoryValue.name} ${l.name}` === x.name)?.total ?? 0}`} />
+                        <Chip variant='outlined' size='small' label={`Owner: ${datasets.find(x => `${categoryValue.name} ${l.name}` === x.name)?.owner ?? ""}`} />
+                        {
+                          l.minedByMe &&
+                          <Chip variant='outlined' size='small' label="Mined by the (sole) dev" />
+                        }
                       </Box>
                     </Box>
 

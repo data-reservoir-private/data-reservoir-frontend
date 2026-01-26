@@ -34,20 +34,18 @@ export default function CastawayProductClient({ data }: { data: ITheSimsResponse
 
   return (
     <form.AppForm>
-      <form.SimpleContainer className="flex flex-col grow gap-2">
-        <Box className="gap-2 flex grow">
-          <form.AppField name='name' children={(field) => (
-            <field.SimpleTextbox label='Name'/>
-          )} />
-          <form.AppField name='category' children={(field) => (
-            <field.SimpleMultiselectString label='Category' choices={CATEGORIES['the-sims-castaway-product']}/>
-          )} />
-          <form.AppForm>
-            <form.SimpleSubmitButton label='Search' meta={{ resetPagination: true } as SubmitMeta}/>
-          </form.AppForm>
-        </Box>
+      <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
+        <form.AppField name='name' children={(field) => (
+          <field.SimpleTextbox label='Name' />
+        )} />
+        <form.AppField name='category' children={(field) => (
+          <field.SimpleMultiselectString label='Category' choices={CATEGORIES['the-sims-castaway-product']} />
+        )} />
+        <form.AppForm>
+          <form.SimpleSubmitButton label='Search' meta={{ resetPagination: true } as SubmitMeta} />
+        </form.AppForm>
       </form.SimpleContainer>
-      <SimpleGrid data={realData} link='/the-sims/castaway-product'/>
+      <SimpleGrid data={realData} link='/the-sims/castaway-product' />
     </form.AppForm>
   )
 }

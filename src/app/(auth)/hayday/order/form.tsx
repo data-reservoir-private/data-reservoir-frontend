@@ -48,56 +48,54 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
   }
 
   return (
-    <Box
-      component='form'
-      onSubmit={e => { e.preventDefault(); e.stopPropagation(); form.handleSubmit() }}
-      className="flex flex-col grow gap-2"
-    >
-      <Box className="gap-2 flex grow">
-        <form.AppField name='month' validators={{
-          onChangeListenTo: ['year'],
-          onChange: ({ value, fieldApi }) => {
-            return (!fieldApi.form.getFieldValue('year') && !!value) ? { message: 'Both must be filled' } : undefined;
-          }
-        }}>
-          {(field) => (<field.SimpleSelect label='Month' choices={MonthsArray} />)}
-        </form.AppField>
+    <form.AppForm>
+      <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
+        <Box className="flex max-md:flex-col gap-2 grow">
+          <form.AppField name='month' validators={{
+            onChangeListenTo: ['year'],
+            onChange: ({ value, fieldApi }) => {
+              return (!fieldApi.form.getFieldValue('year') && !!value) ? { message: 'Both must be filled' } : undefined;
+            }
+          }}>
+            {(field) => (<field.SimpleSelect label='Month' choices={MonthsArray} />)}
+          </form.AppField>
 
-        <form.AppField name='year' validators={{
-          onChangeListenTo: ['month'],
-          onChange: ({ value, fieldApi }) => {
-            return (!fieldApi.form.getFieldValue('month') && !!value) ? { message: 'Both must be filled' } : undefined;
-          }
-        }}>
-          {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
-        </form.AppField>
+          <form.AppField name='year' validators={{
+            onChangeListenTo: ['month'],
+            onChange: ({ value, fieldApi }) => {
+              return (!fieldApi.form.getFieldValue('month') && !!value) ? { message: 'Both must be filled' } : undefined;
+            }
+          }}>
+            {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
+          </form.AppField>
 
-        <form.AppField name='isProcessed'>
-          {
-            (field) => <field.SimpleHorizontalSwitch label='Processed Product Only' />
-          }
-        </form.AppField>
-      </Box>
-      <Box className='flex gap-2'>
-        <form.AppForm>
-          <form.Subscribe selector={(state) => state.isSubmitting}>
-            {(isSubmitting) => (
-              <Button type="button"
-                variant="contained"
-                color='error'
-                className='w-full'
-                disabled={isSubmitting}
-                onClick={e => { e.preventDefault(); handleResetValue() }}
-              >
-                Reset
-              </Button>
-            )}
-          </form.Subscribe>
-        </form.AppForm>
-        <form.AppForm>
-          <form.SimpleSubmitButton className='w-full' label='Search' />
-        </form.AppForm>
-      </Box>
-    </Box>
+          <form.AppField name='isProcessed'>
+            {
+              (field) => <field.SimpleHorizontalSwitch label='Processed Product Only' />
+            }
+          </form.AppField>
+        </Box>
+        <Box className='flex max-md:flex-col gap-2'>
+          <form.AppForm>
+            <form.Subscribe selector={(state) => state.isSubmitting}>
+              {(isSubmitting) => (
+                <Button type="button"
+                  variant="contained"
+                  color='error'
+                  className='w-full'
+                  disabled={isSubmitting}
+                  onClick={e => { e.preventDefault(); handleResetValue() }}
+                >
+                  Reset
+                </Button>
+              )}
+            </form.Subscribe>
+          </form.AppForm>
+          <form.AppForm>
+            <form.SimpleSubmitButton className='w-full' label='Search' />
+          </form.AppForm>
+        </Box>
+      </form.SimpleContainer>
+    </form.AppForm>
   )
 }
