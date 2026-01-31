@@ -5,6 +5,7 @@ const API_SHORTHAND = Object.freeze({
   THE_SIMS: {
     BUSTIN_OUT_CAREER: `bustin-out-career`,
     CASTAWAY_PRODUCT: `castaway-product`,
+    FOUR_PC_CANNED_DISH: `four-pc-canned-dish`,
     FOUR_PC_DISH: `four-pc-dish`,
     FOUR_PC_ELEMENT: `four-pc-element`,
     FOUR_PC_METAL: `four-pc-metal`,
@@ -99,6 +100,7 @@ export const API_ROUTE = Object.freeze({
   THE_SIMS: {
     BUSTIN_OUT_CAREER: `/the-sims/${API_SHORTHAND.THE_SIMS.BUSTIN_OUT_CAREER}`,
     CASTAWAY_PRODUCT: `/the-sims/${API_SHORTHAND.THE_SIMS.CASTAWAY_PRODUCT}`,
+    FOUR_PC_CANNED_DISH: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_CANNED_DISH}`,
     FOUR_PC_DISH: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_DISH}`,
     FOUR_PC_ELEMENT: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_ELEMENT}`,
     FOUR_PC_METAL: `/the-sims/${API_SHORTHAND.THE_SIMS.FOUR_PC_METAL}`,

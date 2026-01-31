@@ -179,6 +179,15 @@ export type ITheSimsResponse = {
     image: string
     category: string
   },
+  'four-pc-canned-dish': {
+    id: string
+    name: string
+    image: string
+    skill: number
+    ingredients: string
+    price: number
+    notes: string | null
+  },
   'three-pc-harvestable': {
     id: string,
     name: string,
