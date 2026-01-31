@@ -98,6 +98,17 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         }
       },
       {
+        id: 'four-pc-canned-dish',
+        name: "Four PC Canned Dish",
+        link: '/the-sims/four-pc-canned-dish',
+        image: '/image/quick_link/ts4_pc_canned_dish.png',
+        description: 'All of canned dishes that can be made inside TS4 PC game',
+        export: {
+          route: API_ROUTE.THE_SIMS.FOUR_PC_CANNED_DISH,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
         id: 'bustin-out-career',
         name: "Bustin Out Career",
         link: '/the-sims/bustin-out-career',

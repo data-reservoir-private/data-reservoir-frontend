@@ -164,6 +164,14 @@ export const BREADCRUMBS = Object.freeze({
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Four PC Dish", link: '/the-sims/four-pc-dish' }
   ] satisfies IBreadcrumb[],
+  'the-sims-four-pc-canned-dish': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Four PC Canned Dish" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-four-pc-canned-dish-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Four PC Canned Dish", link: '/the-sims/four-pc-canned-dish' }
+  ] satisfies IBreadcrumb[],
   'the-sims-bustin-out-career': [
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Bustin Out Career" }
