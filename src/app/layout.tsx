@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themeOptions } from "@/theme";
 import classNames from "classnames";
 import { ClerkProvider } from '@clerk/nextjs';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               {children}
             </ThemeProvider>
           </AppRouterCacheProvider>
+          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider>

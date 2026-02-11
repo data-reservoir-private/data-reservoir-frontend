@@ -91,7 +91,7 @@ export default async function OrderSummary() {
       <Grid container spacing='1rem' columns={{ xs: 1, md: 2 }}>
         {/* Material */}
         <Grid size={1}>
-          <Paper className='flex flex-col p-2 gap-2 min-h-[220px]'>
+          <Paper className='flex flex-col p-2 gap-2 min-h-55'>
             {
               (!data?.materials || data.materials.length === 0) && (
                 <Box className='flex w-full h-full justify-center items-center'>
@@ -121,7 +121,7 @@ export default async function OrderSummary() {
 
         {/* Pie Chart */}
         <Grid size={1}>
-          <Paper className='min-h-[220px]'>
+          <Paper className='min-h-55'>
             <PieAccRejChart accept={data?.acceptedOrder ?? 0} reject={data?.rejectedOrder ?? 0}/>
           </Paper>
         </Grid>
@@ -149,5 +149,5 @@ function PieAccRejChart({ accept, reject }: { accept: number, reject: number }) 
     color: ['#008236', '#c10007']
   }
 
-  return <EChart option={opt} className='w-full min-h-[200px]'/>
+  return <EChart option={opt} className='w-full min-h-50'/>
 }

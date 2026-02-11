@@ -70,8 +70,8 @@ export default async function WeeklyPage() {
 
   return (
     <Section name='Weekly Revenue' variant='h6'>
-      <Paper className='min-h-[300px] w-full'>
-        <EChart option={opt} className='min-h-[300px]' />
+      <Paper className='min-h-75 w-full'>
+        <EChart option={opt} className='min-h-75' />
       </Paper>
     </Section>
   )

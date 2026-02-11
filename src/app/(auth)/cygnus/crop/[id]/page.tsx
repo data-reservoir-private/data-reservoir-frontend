@@ -125,9 +125,7 @@ export default async function CropDetail(props: CropDetailProps) {
             ))
           }
         </Box>
-
       </Section>
-
     </Section>
   )
 }

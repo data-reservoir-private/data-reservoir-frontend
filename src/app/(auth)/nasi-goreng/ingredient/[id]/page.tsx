@@ -3,7 +3,6 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import React, { cache } from 'react'
@@ -12,7 +11,7 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
-import { Route } from 'next';
+import DetailGrid from '@/components/detail-grid';
 
 interface NasiGorengIngredientDetailProps {
   params: Promise<{ id: string }>
@@ -76,74 +75,38 @@ export default async function NasiGorengIngredientDetail(props: NasiGorengIngred
       }
 
       {/* Recipe */}
-      {data.recipe.length > 0 && <Grids name='Recipe' data={data.recipe} link='/nasi-goreng/ingredient' />}
+      {data.recipe.length > 0 && <DetailGrid name='Recipe' data={data.recipe.map(x => ({
+        id: x.id,
+        image: x.image,
+        title: x.name,
+        link: `/nasi-goreng/ingredient/${x.id}`
+      }))} />}
 
       {/* Usage */}
-      {data.usage.length > 0 && <Grids name='Usage' data={data.usage} link='/nasi-goreng/ingredient' />}
+      {data.usage.length > 0 && <DetailGrid name='Usage' data={data.usage.map(x => ({
+        id: x.id,
+        image: x.image,
+        title: x.name,
+        link: `/nasi-goreng/ingredient/${x.id}`
+      }))} />}
 
       {/* Fried Rice */}
-      {data.friedRice.length > 0 && <Grids name='Fried Rice Usage' data={data.friedRice} link='/nasi-goreng/fried-rice' />}
+      {data.friedRice.length > 0 && <DetailGrid name='Fried Rice Usage' data={data.friedRice.map(x => ({
+        id: x.id,
+        image: x.image,
+        title: x.name,
+        link: `/nasi-goreng/fried-rice/${x.id}`
+      }))} />}
 
       {/* Fried Rice Level */}
-      {data.friedRiceLevel.length > 0 && <GridLevel name='Fried Rice Level Usage' data={data.friedRiceLevel} link='/nasi-goreng/fried-rice' />}
+      {data.friedRiceLevel.length > 0 && <DetailGrid name='Fried Rice Level Usage' data={data.friedRiceLevel.map(x => ({
+        id: x.id,
+        image: x.image,
+        title: x.name,
+        subtitle: `Level ${x.level}`,
+        quantity: x.quantity,
+        link: `/nasi-goreng/fried-rice/${x.friedRiceID}`
+      }))} />}
     </Section>
   )
-}
-
-function Grids<T extends string>({ name, data, link }: { name: string, link: Route<T> | URL, data: { name: string, image: string, id: string }[] }) {
-  return (
-    <Section name={name} variant='h6' className="flex flex-col gap-2">
-      <Grid container columns={{ md: 3, xs: 1 }} spacing={'.5rem'}>
-        {
-          data.map(ing => (
-            <Grid size={1} key={ing.id}>
-              <Paper className="flex overflow-hidden">
-                <Link passHref href={`${link}/${ing.id}` as Route}>
-                  <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                    <SimpleImage quality={50} src={ing.image} alt={ing.name} />
-                  </Box>
-                </Link>
-                <Box className="grow flex">
-                  <Box className="grow p-3">
-                    <Typography>{ing.name}</Typography>
-                  </Box>
-                </Box>
-              </Paper>
-            </Grid>
-          ))
-        }
-      </Grid>
-    </Section>
-  );
-}
-
-function GridLevel({ name, data, link }: { name: string, link: string, data: INasiGorengResponse['ingredient-complete']['friedRiceLevel'] }) {
-  return (
-    <Section name={name} variant='h6' className="flex flex-col gap-2">
-      <Grid container columns={{ md: 3, xs: 1 }} spacing={'.5rem'}>
-        {
-          data.map(ing => (
-            <Grid size={1} key={ing.id}>
-              <Paper className="flex overflow-hidden">
-                <Link passHref href={`${link}/${ing.friedRiceID}` as Route}>
-                  <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                    <SimpleImage quality={50} src={ing.image} alt={ing.name} />
-                  </Box>
-                </Link>
-                <Box className="grow flex">
-                  <Box className="grow p-3">
-                    <Typography>{ing.name}</Typography>
-                    <Typography className='italic' variant='subtitle1'>Level {ing.level}</Typography>
-                  </Box>
-                </Box>
-                <Box className="p-3 flex items-center text-lg font-bold bg-secondary-dark min-w-16">
-                  <Typography>{ing.quantity}</Typography>
-                </Box>
-              </Paper>
-            </Grid>
-          ))
-        }
-      </Grid>
-    </Section>
-  );
 }

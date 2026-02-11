@@ -8,6 +8,8 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import CopyButton from '../CopyButton';
+import Tooltip from '@mui/material/Tooltip';
+import classNames from 'classnames';
 
 interface GridDetailProps {
   data: Record<string, React.ReactNode | boolean | string[]>
@@ -21,8 +23,19 @@ export default function TableDetail(props: GridDetailProps) {
           {
             Object.entries(props.data).filter(([_, value]) => !!value).map(([key, value]) => (
               <TableRow key={key} className='text-sm'>
-                <TableCell size='small' className='text-sm bg-white/20 w-[20%] font-bold'>{key}</TableCell>
-                <TableCell className='text-sm overflow-clip'>
+                {/* If it ends with *, it is non-canonical. Mark with special effects */}
+                <TableCell size='small' className={classNames('text-sm bg-white/20 w-[20%] font-bold', {
+                  'italic text-gray-500': key.endsWith('*')
+                })}>
+                  {key.endsWith('*') ? (
+                    <Tooltip title="Non-Canonical Data">
+                      <span>{key.slice(0, -1)}</span>
+                    </Tooltip>
+                  ) : key}
+                </TableCell>
+                <TableCell className={classNames('text-sm overflow-clip', {
+                  'italic text-gray-500': key.endsWith('*') 
+                })}>
                   {
                     typeof (value) === 'boolean' ? (<Checkbox aria-label={key} className='p-0' disabled checked={value} />) : 
                       (key === "ID" && typeof(value) === 'string') ? (

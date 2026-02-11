@@ -1,7 +1,6 @@
 'use client'
 
 import { useAppForm } from '@/utilities/form';
-import Box from '@mui/material/Box'
 import { z } from 'zod'
 import { CATEGORIES } from '@/constant/categories';
 import { ITheSimsResponse } from '@/model/response/the-sims';

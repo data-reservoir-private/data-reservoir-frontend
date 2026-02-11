@@ -34,7 +34,7 @@ export default async function ClientPage() {
         data.map(client => (
           <Grid size={1} key={client.name}>
             <Box className='relative'>
-              <Paper className='relative top-0 flex flex-col p-3 bg-transparent bg-gradient-to-r from-background-paper to-background-paper/80 z-2'>
+              <Paper className='relative top-0 flex flex-col p-3 bg-transparent bg-linear-to-r from-background-paper to-background-paper/80 z-2'>
                 <Box>
                   <Typography variant='h6' className='font-bold'>{client.name}</Typography>
                   <Box className='flex flex-col gap-.5'>

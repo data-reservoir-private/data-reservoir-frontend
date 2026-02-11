@@ -3,6 +3,6 @@ import React from 'react'
 
 export default function ProductLoadingPage() {
   return (
-    <Skeleton className='w-full h-[100px]' variant='rectangular'/>
+    <Skeleton className='w-full h-25' variant='rectangular'/>
   )
 }
