@@ -69,8 +69,8 @@ export default async function DailyPage() {
 
   return (
     <Section name='Daily Revenue' variant='h6'>
-      <Paper className='min-h-[300px] w-full'>
-        <EChart option={opt} className='min-h-[300px]' />
+      <Paper className='min-h-75 w-full'>
+        <EChart option={opt} className='min-h-75' />
       </Paper>
     </Section>
   )

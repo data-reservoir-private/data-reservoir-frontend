@@ -1,7 +1,6 @@
 'use client'
 
 import { useAppForm } from '@/utilities/form';
-import Box from '@mui/material/Box'
 import { z } from 'zod'
 import { IHaydayResponse } from '@/model/response/hayday';
 import { useState } from 'react';
@@ -42,8 +41,8 @@ export default function HaydayBuildingClient({ data }: { data: IHaydayResponse['
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' />
         </form.AppForm>
-        <SimpleGrid boxClassName='w-40 h-40' columns={6} data={realData} link='/hayday/building' />
       </form.SimpleContainer>
+      <SimpleGrid boxClassName='w-40 h-40 max-md:w-24 max-md:h-24' columns={6} data={realData} link='/hayday/building' />
     </form.AppForm>
   )
 }

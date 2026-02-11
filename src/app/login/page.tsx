@@ -17,7 +17,7 @@ export default async function LoginPage(props: { searchParams: searchParamsType 
   const searchP = props.searchParams;
   return (
     <>
-      <Box className='w-full h-[100svh] flex items-center justify-center p-10'>
+      <Box className='w-full h-svh flex items-center justify-center p-10'>
         <Paper className='w-fit px-12 py-7'>
           <Box className='flex gap-2 flex-col'>
             <Suspense fallback={<></>}>

@@ -44,7 +44,7 @@ export default async function RecipeDetail(props: RecipeDetailProps) {
         <TableDetail data={{
           ID: data.id,
           Name: data.name,
-          Location: data.recipe.join(', '),
+          Location: data.recipe,
         }} />
       </Section>
     </Section>

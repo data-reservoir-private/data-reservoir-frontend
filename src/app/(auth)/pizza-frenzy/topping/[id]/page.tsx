@@ -62,8 +62,8 @@ export default async function ToppingDetail(props: ToppingDetailProps) {
                     ID: td.id,
                     Name: td.name,
                     Level: td.level,
-                    Price: td.price,
                     Description: td.description,
+                    'Price*': td.price,
                   }} />
                 </Paper>
               </Grid>
