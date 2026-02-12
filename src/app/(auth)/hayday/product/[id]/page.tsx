@@ -10,7 +10,7 @@ import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
-import DetailGrid from '@/components/detail-grid';
+import DetailGrid from '@/components/common/detail-grid/DetailGrid';
 
 interface HaydayProductDetailProps {
   params: Promise<{ id: string }>

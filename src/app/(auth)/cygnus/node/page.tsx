@@ -1,7 +1,6 @@
 import { API_ROUTE } from '@/constant/api-route'
-import { getSearchParam, grabData } from '@/utilities/http'
+import { grabData } from '@/utilities/http'
 import { Metadata } from 'next';
-import React from 'react'
 import Section from '@/components/common/paper/Section';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
