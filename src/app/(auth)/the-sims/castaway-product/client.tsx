@@ -1,7 +1,6 @@
 'use client'
 
 import { useAppForm } from '@/utilities/form';
-import Box from '@mui/material/Box'
 import { useState } from 'react'
 import { z } from 'zod'
 import { CATEGORIES } from '@/constant/categories';
@@ -13,7 +12,6 @@ const schema = z.object({
   category: z.array(z.string()).optional()
 });
 
-type SubmitMeta = { resetPagination?: boolean };
 export type CastawayProductFormSchema = z.infer<typeof schema>;
 const defaultValue: CastawayProductFormSchema = { name: "", category: [] };
 
@@ -42,7 +40,7 @@ export default function CastawayProductClient({ data }: { data: ITheSimsResponse
           <field.SimpleMultiselectString label='Category' choices={CATEGORIES['the-sims-castaway-product']} />
         )} />
         <form.AppForm>
-          <form.SimpleSubmitButton label='Search' meta={{ resetPagination: true } as SubmitMeta} />
+          <form.SimpleSubmitButton label='Search' />
         </form.AppForm>
       </form.SimpleContainer>
       <SimpleGrid data={realData} link='/the-sims/castaway-product' />

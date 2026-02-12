@@ -293,76 +293,76 @@ export const BREADCRUMBS = Object.freeze({
 
   // Seasons
   'seasons-ds-mineral-shippable': [
-    { label: "Seasons DS Mineral", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Mineral Shippable", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-mineral-shippable-detail': [
-    { label: "Seasons DS Mineral", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Mineral Shippable", link: '/seasons/ds-mineral-shippable' },
   ] satisfies IBreadcrumb[],
   'seasons-ds-mineral-crop': [
-    { label: "Seasons DS Mineral", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Mineral Crop", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-mineral-crop-detail': [
-    { label: "Seasons DS Mineral", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Mineral Crop", link: '/seasons/ds-mineral-crop' }
   ] satisfies IBreadcrumb[],
   'seasons-ds-mineral-recipe': [
-    { label: "Seasons DS Mineral", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Mineral Recipe", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-mineral-recipe-detail': [
-    { label: "Seasons DS Mineral", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Mineral Recipe", link: '/seasons/ds-mineral-recipe' }
   ] satisfies IBreadcrumb[],
   'seasons-ds-mineral-utensil': [
-    { label: "Seasons DS Mineral", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Mineral Utensil", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-mineral-utensil-detail': [
-    { label: "Seasons DS Mineral", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Mineral Utensil", link: '/seasons/ds-mineral-utensil' }
   ] satisfies IBreadcrumb[],
 
   'seasons-ds-bazaar-crop': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Crop", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-crop-detail': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Crop", link: '/seasons/ds-bazaar-crop' }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-recipe': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Recipe", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-recipe-detail': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Recipe", link: '/seasons/ds-bazaar-recipe' }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-windmill-product': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Windmill Product", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-windmill-product-detail': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Windmill Product", link: '/seasons/ds-bazaar-windmill-product' }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-animal-product': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Animal Product", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-animal-product-detail': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Animal Product", link: '/seasons/ds-bazaar-animal-product' }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-wild-product': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Wild Product", }
   ] satisfies IBreadcrumb[],
   'seasons-ds-bazaar-wild-product-detail': [
-    { label: "Seasons DS Bazaar", link: '/seasons' },
+    { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Wild Product", link: '/seasons/ds-bazaar-wild-product' }
   ] satisfies IBreadcrumb[],
 

@@ -3,7 +3,7 @@ export type ISeasonsResponse = {
     id: string,
     name: string,
     image: string,
-    recipe: string[]
+    recipe: string
   },
   'ds-mineral-shippable': {
     id: string,

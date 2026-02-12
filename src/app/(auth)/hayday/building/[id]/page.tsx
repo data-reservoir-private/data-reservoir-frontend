@@ -12,6 +12,7 @@ import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
+import DetailGrid from '@/components/detail-grid';
 
 interface HaydayBuildingDetailProps {
   params: Promise<{ id: string }>
@@ -55,46 +56,30 @@ export default async function HaydayBuildingDetail(props: HaydayBuildingDetailPr
       </Section>
 
       {/* Products Made */}
-      {data.productsMade && data.productsMade.length > 0 && <Grids name='Products Made' data={data.productsMade} />}
+      {data.productsMade && data.productsMade.length > 0 && <DetailGrid noGrid name="Products Made" data={data.productsMade.map(x => ({
+        id: x.id,
+        image: x.image,
+        title: x.name,
+        subtitle: `Level ${x.level}`,
+        link: `/hayday/product/${x.id}`,
+        content: (
+          <Box className="flex gap-2 flex-wrap">
+            {
+              x.ingredients.map(ing => (
+                <Link key={ing.id} href={`/hayday/product/${ing.id}`} className='group'>
+                  <Paper className="flex gap-3 items-center h-full rounded-full overflow-hidden group-hover:bg-gray-600/20">
+                    <Box className="relative w-7 h-7">
+                      <SimpleImage sizes='28px' src={ing.image} alt={ing.name} className='bg-gray-500/20' />
+                    </Box>
+                    <Typography className='text-sm font-light'>{ing.name}</Typography>
+                    <Typography className='text-sm font-bold pr-2'>{ing.quantity}</Typography>
+                  </Paper>
+                </Link>
+              ))
+            }
+          </Box>
+        )
+      }))} />}
     </Section>
   )
-}
-
-function Grids({ name, data }: { name: string, data: IHaydayResponse['hayday-building-complete']['productsMade'] }) {
-  return (
-    <Section name={name} variant='h6' className="flex flex-col gap-2">
-      {
-        data.map(item => (
-          <Paper className="flex overflow-hidden" key={item.id}>
-            <Link passHref href={`/hayday/product/${item.id}`}>
-              <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                <SimpleImage src={item.image} alt={item.name} />
-              </Box>
-            </Link>
-            <Box className="grow flex">
-              <Box className="grow p-3">
-                <Typography className='text-lg font-bold'>{item.name}</Typography>
-                <Typography className='text-sm'>Level {item.level}</Typography>
-                <Box className="flex gap-2 flex-wrap">
-                  {
-                    item.ingredients.map(ing => (
-                      <Link key={ing.id} href={`/hayday/product/${ing.id}`} className='group'>
-                        <Paper className="flex gap-3 items-center h-full rounded-full overflow-hidden group-hover:bg-gray-600/20">
-                          <Box className="relative w-7 h-7">
-                            <SimpleImage sizes='28px' src={ing.image} alt={ing.name} className='bg-gray-500/20' />
-                          </Box>
-                          <Typography className='text-sm font-light'>{ing.name}</Typography>
-                          <Typography className='text-sm font-bold pr-2'>{ing.quantity}</Typography>
-                        </Paper>
-                      </Link>
-                    ))
-                  }
-                </Box>
-              </Box>
-            </Box>
-          </Paper>
-        ))
-      }
-    </Section>
-  );
 }

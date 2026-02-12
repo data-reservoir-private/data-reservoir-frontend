@@ -12,6 +12,7 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { INasiGorengResponse } from '@/model/response/nasi-goreng';
+import DetailGrid from '@/components/detail-grid';
 
 interface NasiGorengFriedRiceDetailProps {
   params: Promise<{ id: string }>
@@ -73,7 +74,12 @@ export default async function NasiGorengFriedRiceDetail(props: NasiGorengFriedRi
       }
 
       {/* Recipe */}
-      {data.recipe.length > 0 && <Grids name='Recipe' data={data.recipe} />}
+      {data.recipe.length > 0 && <DetailGrid name='Recipe' data={data.recipe.map(x => ({
+        id: x.id,
+        image: x.image,
+        title: x.name,
+        link: `/nasi-goreng/ingredient/${x.id}`
+      }))} />}
 
       {/* Levels */}
       {data.recipe.length > 0 && <Levels level={data.level} />}
@@ -162,31 +168,4 @@ function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['
       }
     </Section>
   )
-}
-
-function Grids<T extends string>({ name, data }: { name: string, data: { name: string, image: string, id: string }[] }) {
-  return (
-    <Section name={name} variant='h6' className="flex flex-col gap-2">
-      <Grid container columns={{ md: 3, xs: 1 }} spacing={'.5rem'}>
-        {
-          data.map(ing => (
-            <Grid size={1} key={ing.id}>
-              <Paper className="flex overflow-hidden">
-                <Link passHref href={`/nasi-goreng/ingredient/${ing.id}`}>
-                  <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                    <SimpleImage quality={50} src={ing.image} alt={ing.name} />
-                  </Box>
-                </Link>
-                <Box className="grow flex">
-                  <Box className="grow p-3">
-                    <Typography className=''>{ing.name}</Typography>
-                  </Box>
-                </Box>
-              </Paper>
-            </Grid>
-          ))
-        }
-      </Grid>
-    </Section>
-  );
 }

@@ -42,7 +42,7 @@ export default function SimpleBarTableChart(props : SimpleBarTableChartProps) {
 
   return (
     <Paper className='p-2'>
-      <EChart className='w-full h-[300px]' option={opt}/>
+      <EChart className='w-full h-75' option={opt}/>
     </Paper>
   );
 }

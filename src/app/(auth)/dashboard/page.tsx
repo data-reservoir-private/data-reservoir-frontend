@@ -178,7 +178,7 @@ function DatasetTreeChart({ data }: { data: IDashboardResponse[] }) {
   }
 
   return (
-    <EChart className='w-full h-[300px]' option={opt} />
+    <EChart className='w-full h-75' option={opt} />
   );
 }
 
@@ -242,6 +242,6 @@ function DBTreeChart({ data }: { data: IDashboardResponse[] }) {
   }
 
   return (
-    <EChart className='w-full h-[300px]' option={opt} />
+    <EChart className='w-full h-75' option={opt} />
   );
 }
