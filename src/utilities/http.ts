@@ -31,9 +31,6 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
   });
 
   const res = await response.json();
-  // SImulate loading
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  
   return {
     pagination: res.pagination,
     data: res.data

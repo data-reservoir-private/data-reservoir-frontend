@@ -9,7 +9,7 @@ import Section from '@/components/common/paper/Section';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
-import DetailGrid from '@/components/detail-grid';
+import DetailGrid from '@/components/common/detail-grid/DetailGrid';
 
 interface ThreePCGemCutProps {
   params: Promise<{ id: string }>

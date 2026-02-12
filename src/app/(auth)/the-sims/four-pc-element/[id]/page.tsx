@@ -11,7 +11,7 @@ import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { convertTheSimsRarity } from '@/utilities/general';
 import { notFound } from 'next/navigation';
 import { getStaticParams } from '@/utilities/static';
-import DetailGrid from '@/components/detail-grid';
+import DetailGrid from '@/components/common/detail-grid/DetailGrid';
 
 interface FourPCElementDetailProps {
   params: Promise<{ id: string }>

@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation';
 import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
 import SimpleImage from '@/components/common/SimpleImage';
 import { getStaticParams } from '@/utilities/static';
-import DetailGrid from '@/components/detail-grid';
+import DetailGrid from '@/components/common/detail-grid/DetailGrid';
 
 interface TwoProductDetailProps {
   params: Promise<{ id: string }>
