@@ -21,7 +21,7 @@ export default function AuthLayout() {
   });
 
   return (
-    <Box className='flex-grow'>
+    <Box className='grow'>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundImage: 'none' }} className='bg-background-paper shadow-none border-b-divider border-b' >
         <Toolbar variant='dense'>
           {
@@ -36,7 +36,7 @@ export default function AuthLayout() {
               <BsMenuApp />
             </IconButton>
           }
-          <Typography variant='h6' component="div" className='flex-grow font-bold'>Data Reservoir</Typography>
+          <Typography variant='h6' component="div" className='grow font-bold'>Data Reservoir</Typography>
           <PersonalInfo/>
         </Toolbar>
       </AppBar>
