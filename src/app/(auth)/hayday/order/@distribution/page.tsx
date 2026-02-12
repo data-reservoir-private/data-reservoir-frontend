@@ -64,8 +64,8 @@ export default async function DistributionPage() {
   }
 
   return (
-    <Paper className='min-h-[300px] w-full'>
-      <EChart option={opt} className='min-h-[300px] w-full' />
+    <Paper className='min-h-75 w-full'>
+      <EChart option={opt} className='min-h-75 w-full' />
     </Paper>
   )
 }

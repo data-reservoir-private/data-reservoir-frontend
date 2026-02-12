@@ -6,6 +6,37 @@ Welcome to Data Reservoir where I present all of my data mined from various sour
 
 So, there is a lot to be talked about, especially when you just landed on dashboard. Congrats. The (solo) dev has already trusted you to use this website accordingly. I am keeping my eyes to make sure you are not blowing up my website.
 
+## **Timeline**
+Some rough timeline of how this website and data came to be:
+* I collected the first every data by my own mining techniques (either mini-script or typing it manually inside spreadsheet). The first ever data I collected were `The Sims Castaway Product` and `The Sims Two Pets Console Product`.
+* Ok, I am satisfied with my collection. I was thinking of making some kind of website for display purposes. For the first iteration, it was called `Apify`, Because... it needs API... so, API-fy data???
+* The desire was there, so I started experimenting with Laravel at 2021 with simple table without authentication. However, as you might know how messy is PHP (sorry, Laravel is good, yet PHP was messier than I hoped), so the project was scrapped.
+* 2022, instead of making the website a reality, I was able to mine much more data, including `Pizza Frenzy`, `Farm Frenzy`, and `Hayday` (this was a pain documenting 350+ products with its recipes manually, yet thank goodness they did not really like updating their products frequently, mostly 3-5 months once so I can still catch up).
+* 2023 and yet another attempt to make anything but the website although progress was made. Website needs database so I need to focus on how to streamline my raw data (which I will call my datalake) into database.
+* Datalake was just a collection of spreadsheet and JSON (not many collections are as simple as rows and columns). So I need to make some kind of ETL (Extract, Transform, Load) process to make my datalake into database. First attempts was using Pentaho (Kettle) and it was heavy and too much learning curve for a simple task. Talend was also suffers the same problem (keep in mind that Talend was [free to use](https://www.talend.com/blog/update-on-the-future-of-talend-open-studio/) until 2024).
+* I read that any programming language can be used to make some kind of ETL. So I start experimenting with Bun (just released) for streamlining my data. I was satisfactory although it feels... kinda lacking. Like, support for Excel, even using third party package was too lacking. My spreadsheets had some sort of INDEX MATCH that needs to be read, which they obviously not gonna support anytime soon.
+* Maybe SvelteKit was an option? Nah scrap it!
+* My workplace uses C# and .NET for (almost) of their application. I decided to try using C# for ETL purpose and it did not disappoint me as `ClosedXML` was superb. Originally, I want my ETL to be able to streamline my datalake into three databases (SQL Server, PostgreSQL, and MongoDB), but you will see later why I only use PostgreSQL for now.
+* 2024 and I kinda like how NextJS works, so I pick it for my website. It was rough (I also have mature experience with React yet it feels... different). I made it work although with uncanny design, but at least it works well.
+* For ORM, I tried to use Prisma and it sucks because it is pretty slow for simple SELECT. Drizzle somehow works better, yet it was still not as fast as I hoped.
+* So I moved to MongoDB with the promise of no JOINS and better management for complex relations. It did not work well as I need to query too much collections and somehow filtering was a nightmare (name, getting relations) and intellisense was undeniable worse than SQL-based ORM. (I am a strict person in terms of code quality, so `any` type is a no-no for me).
+* With that in mind, I scrap the MongoDB integration from my ETL and website. Because SQL Server filtering was too lacking and also there are no free hosting for SQL Server, I decided to use PostgreSQL as my main database.
+* Ok, maybe having NextJS directly connect to my database was pretty messy since I hate how they were handling form data (no instant binding, no easily-to-config middleware, no ready-to-use swagger-like API docs). Maybe I can use .NET since it was well-equipped with those?
+* I decided to keep sticking with .NET with Clean Architecture since it feels... clean. API docs, middleware, authentication was nice. However, it turns out that I need too much work just for making a simple endpoint. Maybe clean architecture was not as good as I hoped (even for enterprise for me).
+* 2025 and I found this nice architecture as REPL and it was what I expected on how API should be (you make request, the app do some things, and it returns response). Together, I also discovered FastEndpoints which was superb for making simple API with minimal boilerplate. The maintainer(s) were also super nice and everything was well-documented. I build my API and it is finally done. **This is my backend to this very day**.
+* Oh, also I have an Azure account from somewhere I cannot tell. Nevertheless, they had free-tier Azure Web App. 
+* Along with developing the backend, I remake my frontend by scrapping Flowbite (no combobox) with MaterialUI. I kinda like how MUI works although it was rough trying to integrate them with Tailwind because I still want the Tailwind thing.
+* Two datasets were added in February 2025. I am mentioning this because this is the first two **transactional** datasets. Meaning, it has continuous transactions. Examples including `Hayday Orders` and `Transactions`. So I need an ETL that can continuously running, but that was for another time.
+* Hmm.. I have trust issues, so I want to lock my website behind an authentication while somehow making me able to easily allow someone to access my data. Clerk was a great choice back then and still is. The waiting list feature was what I really need.
+* 2025 of August approximately, I managed to deploy it fully. The result was satisfactory and I am so happy with the result. The website was public and it even has its own domain.
+* Also around this time, my project was renamed to `Data Reservoir`.
+* Previously the ETL is a console app. Because of the continuous sync need. I was thinking of buying new VPS and made them run using cronjob. However, I cannot seem to argue if I need to pay for just making my personal hobby datasets updated (no, this is not something I can monetize and I will never). Maybe on-demand ETL was a better choice. In the end, I remake the ETL so it has scalar API documentation as its GUI. Now, I can just visit the website, upload my spreadsheet, and send the request to update my database. No additional money spent.
+* NextJS was great. Moreover their ISR feature was a gamechanger in performance. January 2026, I decided to make most of the page to be statically rendered. Every non-detailed page (page without \[id\] param) are now statically rendered and revalidated every year (except transactional datasets which still using SSR). The performance boost was worth the time.
+
+Ok that's enough. In short, welcome.
+
+## **Terminologies**
+
 So there are four terms
 
 - Entries = Total entry of master data (not including transactions). For example, 10 products with 5 tags will be counted as 10 entries
@@ -14,6 +45,19 @@ So there are four terms
 - Tables = Total tables inside database
 
 That's it. More will be added later. But now, I will just document the appendix.
+
+## **Non-Canonical Data**
+
+Some data that I provided here are non-canonical. Some might be from calculations (for example, Hayday Effort Score), some might be from my own, unbased opinion (for example, Pizza Frenzy price). Data that are non-canonical will be marked with special effects. For example, non-canonical data inside table will be italicized.
+
+However, I will not categorize `ID` as non-canonical for the purpose of primary keys.
+
+Here are some non-canonical data that I provided:
+* Hayday Effort Score -> explained below, but it is an educated and calculated guess
+* The Sims 2 Pets Console Product Price -> Only for harvested products, since there is no official price for them
+* Pizza Frenzy Price -> Based on my own arbitrary opinion
+
+Others are canonical and taken from official sources (either from in-game or wiki).
 
 ## **Hayday Effort Score**
 

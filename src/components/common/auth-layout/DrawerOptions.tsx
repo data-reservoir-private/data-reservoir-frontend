@@ -14,7 +14,7 @@ import { Fragment } from "react";
 export function DrawerOptions({ onClose }: { onClose: () => void }) {
   const path = usePathname();
   return (
-    <Box className='w-[250px] h-full'>
+    <Box className='w-62.5 h-full'>
       <Box className='flex flex-col h-full p-3 max-sm:px-2 justify-between'>
         <Box className='gap-1'>
           {

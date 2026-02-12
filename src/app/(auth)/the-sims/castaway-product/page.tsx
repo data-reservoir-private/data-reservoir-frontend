@@ -3,8 +3,8 @@ import { ITheSimsResponse } from '@/model/response/the-sims';
 import { grabData } from '@/utilities/http'
 import { Metadata } from 'next';
 import Section from '@/components/common/paper/Section';
-import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
+import CastawayProductClient from './client';
 
 export const metadata: Metadata = {
   title: 'The Sims Castaway Product - Data Reservoir'
@@ -17,7 +17,7 @@ export default async function CastawayProduct() {
 
   return (
     <Section name='The Sims Castaway Product' variant='h4' breadcrumbs={BREADCRUMBS['the-sims-castaway-product']}>
-      <SimpleGrid data={data} link='/the-sims/castaway-product'/>
+      <CastawayProductClient data={data}/>
     </Section>
   )
 }
