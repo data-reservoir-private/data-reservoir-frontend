@@ -10,7 +10,7 @@ import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { convertTheSimsRarity } from '@/utilities/general';
-import DetailGrid from '@/components/detail-grid';
+import DetailGrid from '@/components/common/detail-grid/DetailGrid';
 
 interface ThreePCRawGemProps {
   params: Promise<{ id: string }>
