@@ -1,5 +1,4 @@
 import { getSearchParam, grabData } from '@/utilities/http';
-import React from 'react'
 import { HaydayOrderFormSchema } from '../form';
 import { IHaydayResponse } from '@/model/response/hayday';
 import { API_ROUTE } from '@/constant/api-route';
@@ -46,7 +45,8 @@ export default async function OrderSummary() {
         <Grid size={1}>
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-sky-600 to-sky-300 border-none'>
             <Box flexDirection='column'>
-              <Typography variant='h4' fontWeight='bold'>{data?.xp ?? 0}</Typography>
+              <Typography variant='h4' fontWeight='bold'>{data?.xpEvent ?? 0}</Typography>
+              <Typography variant='body1' fontWeight='bold' className='align-middle'>{data?.xp ?? 0}</Typography>
               <Typography variant='subtitle1'>Experiences</Typography>
             </Box>
             <Box component='div' className='h-full flex items-center justify-center text-5xl'>
@@ -57,7 +57,8 @@ export default async function OrderSummary() {
         <Grid size={1}>
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-500 to-yellow-500  border-none'>
             <Box flexDirection='column'>
-              <Typography variant='h4' fontWeight='bold'>{data?.coin ?? 0}</Typography>
+              <Typography variant='h4' fontWeight='bold'>{data?.coinEvent ?? 0}</Typography>
+              <Typography variant='body1' fontWeight='bold' className='align-middle'>{data?.coin ?? 0}</Typography>
               <Typography variant='subtitle1'>Coins</Typography>
             </Box>
             <Box component='div' className='h-full flex items-center justify-center text-5xl'>
@@ -75,7 +76,7 @@ export default async function OrderSummary() {
               <Paper className={classNames('flex justify-between p-1 px-3 items-center border-none bg-linear-to-r', x.className)} key={x.name}>
                 <Box className='flex flex-col'>
                   <Typography variant='h5' className='font-bold'>{x.total}</Typography>
-                  <Typography variant='subtitle2'>{x.name}</Typography>
+                  <Typography variant='subtitle2' className='max-sm:hidden'>{x.name}</Typography>
                 </Box>
 
                 <Box className='relative w-15 h-15'>
@@ -122,7 +123,8 @@ export default async function OrderSummary() {
         {/* Pie Chart */}
         <Grid size={1}>
           <Paper className='min-h-55'>
-            <PieAccRejChart accept={data?.acceptedOrder ?? 0} reject={data?.rejectedOrder ?? 0}/>
+            {/* <PieAccRejChart accept={data?.acceptedOrder ?? 0} reject={data?.rejectedOrder ?? 0}/> */}
+            <PieVoucher green={data?.voucher.green ?? 0} blue={data?.voucher.blue ?? 0} purple={data?.voucher.purple ?? 0} gold={data?.voucher.gold ?? 0}/>
           </Paper>
         </Grid>
 
@@ -130,6 +132,28 @@ export default async function OrderSummary() {
 
     </Box>
   )
+}
+
+function PieVoucher({ green, blue, purple, gold }: { green: number, blue: number, purple: number, gold: number }) {
+  const opt: EChartsOption = {
+    series: [
+      {
+        type: 'pie',
+        data: [
+          { value: green, name: 'Green', itemStyle: { color: '#00a63e' } },
+          { value: blue, name: 'Blue', itemStyle: { color: '#0084d1' } },
+          { value: purple, name: 'Purple', itemStyle: { color: '#9810fa' } },
+          { value: gold, name: 'Gold', itemStyle: { color: '#d08700' } },
+        ],
+        label: {
+          color: 'white',
+          formatter: '{b}: {d}%',
+        }
+      }
+    ]
+  }
+
+  return <EChart option={opt} className='w-full min-h-50'/>
 }
 
 function PieAccRejChart({ accept, reject }: { accept: number, reject: number }) {

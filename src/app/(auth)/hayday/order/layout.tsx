@@ -1,20 +1,20 @@
 import Section from '@/components/common/paper/Section'
 import { BREADCRUMBS } from '@/constant/breadcrumb'
-import React from 'react'
 
 export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
   return (
     <Section name='Hayday Orders' variant='h4' breadcrumbs={BREADCRUMBS['hayday-order']}>
       {props.children}
 
-      <Section name='Summary' variant='h6'>
+      <Section name='Summary' variant='h6' caption='Smaller number is revenue without accounting event or ad bonus'>
         {props.summary}
       </Section>
 
+      {props.monthly}
       {props.weekly}
       {props.daily}
 
-      <Section name='Distribution' variant='h6'>
+      <Section name='Distribution' variant='h6' caption='Only pure revenue'>
         {props.distribution}
       </Section>
 
@@ -22,7 +22,7 @@ export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
         {props.client}
       </Section>
 
-      <Section name='Top 10 Orders' variant='h6'>
+      <Section name='Top 10 Orders' variant='h6' caption='Only pure revenue'>
         {props.valuable}
       </Section>
 

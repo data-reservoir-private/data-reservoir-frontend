@@ -1,9 +1,8 @@
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
 import Section from '@/components/common/paper/Section';
-import React, { cache } from 'react'
+import { cache } from 'react'
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import { ITheSimsResponse } from '@/model/response/the-sims';
@@ -34,7 +33,7 @@ export default async function FourPCDishDetail(props: FourPCDishDetailProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
-          <Image src={data.image} alt={data.name} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={data.name}/>
         </Box>
       </Paper>
 

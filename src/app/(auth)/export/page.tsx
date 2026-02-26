@@ -21,6 +21,7 @@ import { grabData } from '@/utilities/http'
 import { IDashboardResponse } from '@/model/response/dashboard'
 import { API_ROUTE } from '@/constant/api-route'
 import Chip from '@mui/material/Chip'
+import ExportClient from './client'
 
 export const metadata: Metadata = {
   title: 'Export Data - Data Reservoir'
@@ -64,7 +65,9 @@ export default async function ExportPage() {
       <Typography textAlign='justify'>Not every data that you can view can be exported due to complexity of those data. I will try my best to support it all, but for now, you just have to wait :(</Typography>
       <Typography textAlign='justify'>The structure of the data is similar to the one you usually found inside detail endpoint (endpoint that ends with GUID like <code>00000000-0000-0000-0000-000000000000</code>).</Typography>
 
-      <Section name='Data Store' variant='h5'>
+      <ExportClient dataset={DATASETS_AVAILABLE} apiDataset={datasets} />
+
+      {/* <Section name='Data Store' variant='h5'>
         {
           Object.entries(DATASETS_AVAILABLE).filter(([_, value]) => value.categories.some(y => y.export)).map(([categoryKey, categoryValue]) => (
             <Section name={categoryValue.displayName ?? categoryValue.name} key={categoryKey} variant='h6'>
@@ -123,7 +126,7 @@ export default async function ExportPage() {
             </Section>
           ))
         }
-      </Section>
+      </Section> */}
     </Section>
   )
 }

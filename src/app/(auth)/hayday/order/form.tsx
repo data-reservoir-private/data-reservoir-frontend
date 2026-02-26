@@ -15,8 +15,7 @@ const yearChoices = [dj, dj - 1].reduce<{ label: string, value: number }[]>((acc
 
 const schema = z.object({
   year: z.union([z.null(), z.number().gte(2020)]).optional(),
-  month: z.union([z.null(), z.number().gte(1).lte(12)]).optional(),
-  isProcessed: z.literal([1, 0])
+  month: z.union([z.null(), z.number().gte(1).lte(12)]).optional()
 });
 
 export type HaydayOrderFormSchema = z.infer<typeof schema>;
@@ -25,8 +24,7 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
   const defaultValues = formOptions({
     defaultValues: {
       month: param.month,
-      year: param.year,
-      isProcessed: param.isProcessed ?? 0
+      year: param.year
     } as HaydayOrderFormSchema,
     validators: {
       onChange: schema
@@ -44,7 +42,6 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
   const handleResetValue = () => {
     form.setFieldValue('month', null);
     form.setFieldValue('year', null);
-    form.setFieldValue('isProcessed', 0);
   }
 
   return (
@@ -68,32 +65,22 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
           }}>
             {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
           </form.AppField>
-
-          <form.AppField name='isProcessed'>
-            {
-              (field) => <field.SimpleHorizontalSwitch label='Processed Product Only' />
-            }
-          </form.AppField>
         </Box>
         <Box className='flex max-md:flex-col gap-2'>
-          <form.AppForm>
-            <form.Subscribe selector={(state) => state.isSubmitting}>
-              {(isSubmitting) => (
-                <Button type="button"
-                  variant="contained"
-                  color='error'
-                  className='w-full'
-                  disabled={isSubmitting}
-                  onClick={e => { e.preventDefault(); handleResetValue() }}
-                >
-                  Reset
-                </Button>
-              )}
-            </form.Subscribe>
-          </form.AppForm>
-          <form.AppForm>
-            <form.SimpleSubmitButton className='w-full' label='Search' />
-          </form.AppForm>
+          <form.Subscribe selector={(state) => state.isSubmitting}>
+            {(isSubmitting) => (
+              <Button type="button"
+                variant="contained"
+                color='error'
+                className='w-full'
+                disabled={isSubmitting}
+                onClick={e => { e.preventDefault(); handleResetValue() }}
+              >
+                Reset
+              </Button>
+            )}
+          </form.Subscribe>
+          <form.SimpleSubmitButton className='w-full' label='Search' />
         </Box>
       </form.SimpleContainer>
     </form.AppForm>

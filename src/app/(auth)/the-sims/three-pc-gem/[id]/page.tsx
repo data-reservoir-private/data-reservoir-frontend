@@ -3,8 +3,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
-import React, { cache } from 'react'
+import { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -41,7 +40,7 @@ export default async function ThreePCGemDetail(props: ThreePCGemDetailProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
-          <Image src={data.image} alt={name} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={name}/>
         </Box>
       </Paper>
 

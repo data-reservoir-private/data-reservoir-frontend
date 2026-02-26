@@ -365,6 +365,46 @@ export const BREADCRUMBS = Object.freeze({
     { label: "Seasons", link: '/seasons' },
     { label: "Seasons DS Bazaar Wild Product", link: '/seasons/ds-bazaar-wild-product' }
   ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-crop': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Crop", }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-crop-detail': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Crop", link: '/seasons/ds-two-towns-crop' }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-fishing-catch': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Fishing Catch", }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-fishing-catch-detail': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Fishing Catch", link: '/seasons/ds-two-towns-fishing-catch' }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-product': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Product", }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-product-detail': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Product", link: '/seasons/ds-two-towns-product' }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-recipe': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Recipe", }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-recipe-detail': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Recipe", link: '/seasons/ds-two-towns-recipe' }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-tree': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Tree", }
+  ] satisfies IBreadcrumb[],
+  'seasons-ds-two-towns-tree-detail': [
+    { label: "Seasons", link: '/seasons' },
+    { label: "Seasons DS Two Towns Tree", link: '/seasons/ds-two-towns-tree' }
+  ] satisfies IBreadcrumb[],
 
   // Cygnus
   'cygnus-mineral': [
