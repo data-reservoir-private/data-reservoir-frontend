@@ -1,28 +1,10 @@
-import { Route } from "next";
 import { API_ROUTE } from "./api-route";
 import { BsBuildingFill } from "react-icons/bs";
 import 'server-only'
+import { ExportType, IData } from "@/model/dto/export";
 
 // Supported export types
-export type ExportType = 'json' | 'csv' | 'tsv' | 'yaml' | 'xml' | 'html' | 'postgresql' | 'sql_server' | 'sqlite' | 'ndjson' | 'parquet' | 'xlsx';
-
 const ALL_EXPORTS_COMPLETE: ExportType[] = ['json', 'ndjson', 'csv', 'tsv', 'xml', 'yaml', 'html', 'postgresql', 'sql_server', 'sqlite', 'parquet', 'xlsx'];
-export interface IData {
-  name: string,
-  displayName?: string,
-  categories: {
-    id: string,
-    name: string,
-    description: string,
-    link: Route,
-    minedByMe?: true
-    image?: string | (() => React.ReactNode),
-    export?: {
-      route: string,
-      exportType: ExportType[]
-    }
-  }[]
-}
 
 export const DATASETS_AVAILABLE = Object.freeze(({
   'the-sims': {
@@ -55,7 +37,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
       {
         id: 'two-pets-console-career',
         name: "Two Pets Console Career",
-        image: () => (<BsBuildingFill className="text-4xl" />),
+        image: 'building',
         link: '/the-sims/two-pets-console-career',
         description: 'TS 2 Pets PS2 careers available. Data sourced from my own digging and The Sims Wikia',
         minedByMe: true,
@@ -67,7 +49,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
       {
         id: 'two-console-career',
         name: "Two Console Career",
-        image: () => (<BsBuildingFill className="text-4xl" />),
+        image: 'building',
         link: '/the-sims/two-console-career',
         description: 'TS 2 PS2 careers available. Data sourced from my own digging and The Sims Wikia',
         export: {
@@ -112,7 +94,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'bustin-out-career',
         name: "Bustin Out Career",
         link: '/the-sims/bustin-out-career',
-        image: () => (<BsBuildingFill className="text-4xl" />),
+        image: 'building',
         description: 'TS Bustin Out\'s career path and job. Including the story mode and freeplay mode\'s careers',
         minedByMe: true,
         export: {
@@ -549,6 +531,61 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
           route: API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT
+        }
+      },
+      {
+        id: 'ds-two-towns-crop',
+        name: 'DS Two Towns Crop',
+        image: '/image/quick_link/sos_ds_two_towns_crop.png',
+        description: 'Story of Seasons: Tale of Two Towns crops. Sourced from https://fogu.com/hm10/',
+        link: '/seasons/ds-two-towns-crop',
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_CROP
+        }
+      },
+      {
+        id: 'ds-two-towns-fishing-catch',
+        name: 'DS Two Towns Fishing Catch',
+        image: '/image/quick_link/sos_ds_two_towns_fishing_catch.png',
+        description: 'Story of Seasons: Tale of Two Towns fishing catches. Sourced from https://fogu.com/hm10/',
+        link: '/seasons/ds-two-towns-fishing-catch',
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_FISHING_CATCH
+        }
+      },
+      {
+        id: 'ds-two-towns-product',
+        name: 'DS Two Towns Product',
+        image: '/image/quick_link/sos_ds_two_towns_product.png',
+        description: 'Story of Seasons: Tale of Two Towns products. Sourced from https://fogu.com/hm10/',
+        link: '/seasons/ds-two-towns-product',
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_PRODUCT
+        }
+      },
+      {
+        id: 'ds-two-towns-recipe',
+        name: 'DS Two Towns Recipe',
+        image: '/image/quick_link/sos_ds_two_towns_recipe.png',
+        description: 'Story of Seasons: Tale of Two Towns recipes. Sourced from https://fogu.com/hm10/',
+        link: '/seasons/ds-two-towns-recipe',
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_RECIPE
+        }
+      },
+      {
+        id: 'ds-two-towns-tree',
+        name: 'DS Two Towns Tree',
+        image: '/image/quick_link/sos_ds_two_towns_tree.png',
+        description: 'Story of Seasons: Tale of Two Towns trees. Sourced from https://fogu.com/hm10/',
+        link: '/seasons/ds-two-towns-tree',
+        export: {
+          exportType: ALL_EXPORTS_COMPLETE,
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_TREE
         }
       },
     ]

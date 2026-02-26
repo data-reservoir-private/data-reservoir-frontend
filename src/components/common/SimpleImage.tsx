@@ -17,7 +17,7 @@ export default function SimpleImage(props: SimpleImageProps) {
       src={props.src}
       alt={props.alt}
       fill
-      unoptimized={props.unoptimized ?? false}
+      unoptimized={props.unoptimized ?? true}
       sizes={props.sizes ?? '10vw'}
       quality={props.quality ?? 50}
       className={classNames('p-1 object-contain', props.className)}

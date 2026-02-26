@@ -11,6 +11,7 @@ import Link from 'next/link';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BsPlusCircleFill, BsStarFill } from 'react-icons/bs';
 import { GiTwoCoins } from 'react-icons/gi';
+import dayjs from 'dayjs';
 
 export default async function ValuableOrder() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
@@ -46,6 +47,9 @@ export default async function ValuableOrder() {
                     <Typography variant='subtitle2'>{v.coin + v.xp}</Typography>
                   </Box>
                 </Box>
+              </Box>
+              <Box>
+                <Typography variant='subtitle2' className='text-xs'>{dayjs(v.dateAccepted).format('YYYY-MM-DD HH:mm:ss')}</Typography>
               </Box>
               <Box className='flex justify-between'>
                 {

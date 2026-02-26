@@ -136,6 +136,21 @@ export type IHaydayResponse = {
       revenueEvent: number
       revenue: number
     },
+    'monthly': {
+      date: string
+      yearMonth: string
+      acceptedOrder: number
+      rejectedOrder: number
+      settledOrder: number
+      percentageAcceptedOrder: number
+      percentageRejectedOrder: number
+      coinEvent: number
+      coin: number
+      xpEvent: number
+      xp: number
+      revenueEvent: number
+      revenue: number
+    },
     'distribution': {
       boxplot: {
         min: number,

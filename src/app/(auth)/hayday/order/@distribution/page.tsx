@@ -20,7 +20,6 @@ export default async function DistributionPage() {
     )
   }
 
-
   const opt: EChartsOption = {
     xAxis: {
       type: 'value',

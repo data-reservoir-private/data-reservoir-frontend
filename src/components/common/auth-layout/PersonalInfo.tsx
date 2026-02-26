@@ -1,7 +1,7 @@
 'use client'
 
 import Box from '@mui/material/Box'
-import { SignOutButton, useUser } from '@clerk/nextjs';
+import { useClerk, useUser } from '@clerk/nextjs';
 import Button from '@mui/material/Button';
 import { FaPowerOff } from "react-icons/fa";
 import Typography from '@mui/material/Typography';
@@ -9,6 +9,7 @@ import SimpleImage from '../SimpleImage';
 
 export default function PersonalInfo() {
   const { user } = useUser();
+  const { signOut } = useClerk();
 
   return (
     <Box>
@@ -23,11 +24,16 @@ export default function PersonalInfo() {
               <Typography variant='subtitle2' className='max-sm:hidden'>{user.firstName}</Typography>
             </Box>
           }
-          <SignOutButton component='div' redirectUrl='/login'>
-            <Button variant='contained' title='Logout' color='error' size='small' className='w-fit min-w-0 aspect-square'>
-              <FaPowerOff />
-            </Button>
-          </SignOutButton>
+          <Button
+            variant='contained'
+            title='Logout'
+            color='error'
+            size='small'
+            className='w-fit min-w-0 aspect-square'
+            onClick={() => signOut({ redirectUrl: '/login' })}
+          >
+            <FaPowerOff />
+          </Button>
         </Box>
       </Box>
     </Box>

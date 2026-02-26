@@ -12,6 +12,7 @@ import { IBreadcrumb } from '@/constant/breadcrumb'
 interface SectionProps {
   variant: TypographyVariant,
   name: string,
+  caption?: string,
   children: React.ReactNode,
   className?: string,
   breadcrumbs?: readonly IBreadcrumb[]
@@ -42,6 +43,7 @@ export default function Section(props: SectionProps) {
       }
 
       <Typography variant={props.variant} fontWeight='bold'>{props.name}</Typography>
+      {props.caption && <Typography variant='body2' className='text-xs italic'>{props.caption}</Typography>}
       <Divider />
       {props.children}
     </Box>

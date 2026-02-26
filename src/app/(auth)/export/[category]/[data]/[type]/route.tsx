@@ -5,10 +5,12 @@ import * as XML from 'xml-js'
 import YAML from 'yaml'
 import { json2csv } from 'json-2-csv';
 import { cache } from "react";
-import { DATASETS_AVAILABLE, ExportType, IData } from "@/constant/data";
+import { DATASETS_AVAILABLE } from "@/constant/data";
 import { ByteWriter, ColumnSource, parquetWrite } from 'hyparquet-writer';
 import * as ExcelJS from 'exceljs'
 import { ITheSimsResponse } from "@/model/response/the-sims";
+import { ExportType, IData } from "@/model/dto/export";
+import z from "zod";
 
 interface IParam {
   category: string,
@@ -155,12 +157,26 @@ async function toHtmlTable(data: object[]) {
 
   const convertToString = (v: any) => {
     if (v === null || v === undefined) return '';
+    if (z.guid().safeParse(v).success) {
+      return <span style={{ fontFamily: 'consolas' }}>{v}</span>
+    }
+    if (typeof v === 'number' || typeof v === 'bigint') {
+      return (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <span style={{ textAlign: 'center' }}>{v}</span>
+        </div>
+      )
+    }
     if (typeof v === 'string' && v.startsWith('http')) return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <img width={50} src={v} />
       </div>
     )
-    if (typeof v === 'boolean') return <input type="checkbox" disabled checked={v} />
+    if (typeof v === 'boolean') return (
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <input type="checkbox" style={{ width: '1.25rem', height: '1.25rem' }} disabled checked={v} />
+      </div>
+    )
     if (typeof v === 'object' && !Array.isArray(v)) {
       return (
         <ul style={{ margin: 0 }}>
@@ -179,30 +195,42 @@ async function toHtmlTable(data: object[]) {
   }
 
   const comp = ReactDOMServer.renderToStaticMarkup(
-    <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
-      <thead>
-        <tr>
-          {
-            Object.keys(data[0]).map(x => (<th style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={x}>{x}</th>))
-          }
-        </tr>
-      </thead>
-      <tbody>
-        {
-          data.map((row, idx) => (
-            <tr key={idx}>
+    <>
+      <html lang="en">
+        <head>
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Exported Data</title>
+        </head>
+        <body>
+          <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                {
+                  Object.keys(data[0]).map(x => (<th style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={x}>{x}</th>))
+                }
+              </tr>
+            </thead>
+            <tbody>
               {
-                Object.values(row).map((v, idx) => (
-                  <td style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={idx}>
-                    { convertToString(v) }
-                  </td>
+                data.map((row, idx) => (
+                  <tr key={idx}>
+                    {
+                      Object.values(row).map((v, idx) => (
+                        <td style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={idx}>
+                          {convertToString(v)}
+                        </td>
+                      ))
+                    }
+                  </tr>
                 ))
               }
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
+            </tbody>
+          </table>
+        </body>
+      </html>
+
+    </>
   );
   return comp
 }
