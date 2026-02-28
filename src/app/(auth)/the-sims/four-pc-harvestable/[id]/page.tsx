@@ -9,6 +9,7 @@ import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { convertTheSimsRarity } from '@/utilities/general';
 import { notFound } from 'next/navigation';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface FourPCHarvestableDetailProps {
   params: Promise<{ id: string }>

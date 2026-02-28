@@ -10,6 +10,7 @@ import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { convertTheSimsRarity } from '@/utilities/general';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface ThreePCRawGemProps {
   params: Promise<{ id: string }>

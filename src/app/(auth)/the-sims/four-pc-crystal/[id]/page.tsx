@@ -11,6 +11,7 @@ import { convertTheSimsRarity } from '@/utilities/general';
 import { notFound } from 'next/navigation';
 import { getStaticParams } from '@/utilities/static';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface FourPCCrystalDetailProps {
   params: Promise<{ id: string }>

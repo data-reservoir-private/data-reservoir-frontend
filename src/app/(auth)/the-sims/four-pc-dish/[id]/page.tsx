@@ -8,6 +8,7 @@ import { grabData } from '@/utilities/http';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface FourPCDishDetailProps {
   params: Promise<{ id: string }>
