@@ -33,13 +33,12 @@ export default async function Dashboard() {
   const totalCategory = data.length;
 
   return (
-    <Section name='Dashboard' variant='h4'>
-
+    <Section name='Dashboard' variant='h4' textId='title'>
       <Grid container spacing='1rem' columns={{ xs: 1, md: 2, lg: 4 }}>
         <Grid size={1}>
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-orange-700 to-orange-400 border-none'>
             <Box flexDirection='column'>
-              <Typography variant='h4' fontWeight='bold'>{totalData()}</Typography>
+              <Typography variant='h4' fontWeight='bold' id="total-entries">{totalData()}</Typography>
               <Typography variant='subtitle2' component='h5'>Entries</Typography>
             </Box>
             <Box component='div' className='h-full flex items-center justify-center text-5xl'>

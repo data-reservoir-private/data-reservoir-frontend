@@ -9,6 +9,7 @@ import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface ThreePCGemCutProps {
   params: Promise<{ id: string }>

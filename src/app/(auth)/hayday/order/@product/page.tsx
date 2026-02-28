@@ -16,7 +16,6 @@ export default async function ProductPage() {
   const { data } = await grabData<IHaydayResponse['hayday-order']['product'][]>(API_ROUTE.HAY_DAY.ORDER.PRODUCT, {
     month: sp.month,
     year: sp.year,
-    isProcessed: sp.isProcessed === 1 ? 'true' : undefined
   });
 
   if (!data || data.length == 0) {

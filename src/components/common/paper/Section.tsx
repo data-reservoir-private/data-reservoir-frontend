@@ -5,13 +5,14 @@ import { TypographyVariant } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import classNames from 'classnames'
 import Link from 'next/link'
-import React, { Suspense } from 'react'
+import React from 'react'
 import BackButton from '../BackButton'
 import { IBreadcrumb } from '@/constant/breadcrumb'
 
 interface SectionProps {
   variant: TypographyVariant,
   name: string,
+  textId?: string,
   caption?: string,
   children: React.ReactNode,
   className?: string,
@@ -42,7 +43,7 @@ export default function Section(props: SectionProps) {
         )
       }
 
-      <Typography variant={props.variant} fontWeight='bold'>{props.name}</Typography>
+      <Typography variant={props.variant} fontWeight='bold' id={props.textId}>{props.name}</Typography>
       {props.caption && <Typography variant='body2' className='text-xs italic'>{props.caption}</Typography>}
       <Divider />
       {props.children}
