@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BsMenuApp } from 'react-icons/bs';
 import { DrawerOptions } from './DrawerOptions';
 import PersonalInfo from './PersonalInfo';
@@ -36,7 +36,7 @@ export default function AuthLayout() {
               <BsMenuApp />
             </IconButton>
           }
-          <Typography variant='h6' component="div" className='grow font-bold'>Data Reservoir</Typography>
+          <Typography variant='h6' component="div" className='grow font-bold' id="web-name">Data Reservoir</Typography>
           <PersonalInfo/>
         </Toolbar>
       </AppBar>
