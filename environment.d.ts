@@ -3,10 +3,15 @@ declare global {
     interface ProcessEnv {
       NEXT_PUBLIC_API_URL: string,
       ENVIRONMENT: "Development" | "Production",
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string,
       CLERK_SECRET_KEY: string,
       API_KEY: string,
-      DOMAIN: string
+      DOMAIN: string,
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string,
+      NEXT_PUBLIC_CLERK_SIGN_IN_URL: string,
+      NEXT_PUBLIC_CLERK_SIGN_IN_FORCE_REDIRECT_URL: string,
+      E2E_CLERK_USER_USERNAME: string,
+      E2E_CLERK_USER_PASSWORD: string,
+      CI: boolean
     }
   }
 }

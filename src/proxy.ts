@@ -25,8 +25,6 @@ export default clerkMiddleware(async (auth, req) => {
   });
   r.headers.set('X-Query-Param', req.nextUrl.search.slice(1));
   return r;
-}, {
-  afterSignInUrl: '/dashboard',
 });
 
 export const config = {
