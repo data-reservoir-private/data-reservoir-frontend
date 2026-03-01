@@ -30,6 +30,10 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
     }
   });
 
+  if (response.status >= 400) { 
+    console.error(await response.text())
+  }
+
   const res = await response.json();
   return {
     pagination: res.pagination,
