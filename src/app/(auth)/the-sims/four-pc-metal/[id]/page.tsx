@@ -3,8 +3,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
-import React, { cache } from 'react'
+import { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -12,6 +11,7 @@ import { convertTheSimsRarity } from '@/utilities/general';
 import { notFound } from 'next/navigation';
 import { getStaticParams } from '@/utilities/static';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
+import SimpleImage from '@/components/common/SimpleImage';
 
 interface FourPCMetalDetailProps {
   params: Promise<{ id: string }>
@@ -39,7 +39,7 @@ export default async function FourPCMetalDetail(props: FourPCMetalDetailProps) {
       {/* Image */}
       <Paper className='w-full flex justify-center py-5'>
         <Box className='w-50 h-50 relative items-center object-center'>
-          <Image src={data.image} alt={data.name} fill className='object-contain' />
+          <SimpleImage src={data.image} alt={data.name}/>
         </Box>
       </Paper>
 

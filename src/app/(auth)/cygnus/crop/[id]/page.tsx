@@ -9,7 +9,6 @@ import { notFound } from 'next/navigation';
 import { ICygnusResponse } from '@/model/response/cygnus';
 import Typography from '@mui/material/Typography';
 import SimpleImage from '@/components/common/SimpleImage';
-import { cacheLife, cacheTag } from 'next/cache';
 
 interface CropDetailProps {
   params: Promise<{ id: string }>
@@ -90,7 +89,7 @@ export default async function CropDetail(props: CropDetailProps) {
 
       {/* Growth */}
       <Section variant='h6' name='Growth'>
-        <Box className="flex gap-2">
+        <Box className="flex gap-2 flex-wrap">
           {
             arrGrowth.map((x, idx) => (
               <Paper key={idx} className='flex flex-col gap-2 p-2 grow'>

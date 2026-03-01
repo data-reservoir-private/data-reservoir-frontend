@@ -1,15 +1,14 @@
-import { IData } from '@/constant/data'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Link from 'next/link'
-import React from 'react'
-import { BsTable } from 'react-icons/bs'
+import { BsBuildingFill, BsTable } from 'react-icons/bs'
 import Section from '../paper/Section'
 import Paper from '../paper/Paper'
 import { Route } from 'next'
 import SimpleImage from '../SimpleImage'
 import { Breakpoint } from '@mui/material/styles'
+import { IData } from '@/model/dto/export'
 
 interface SimpleQuickLinkProps {
   quickLink: IData;
@@ -32,7 +31,8 @@ export default function SimpleQuickLink({ quickLink, columns, unoptimized, pixel
                     (
                       <Box className='h-20 w-auto min-w-20 flex items-center relative justify-center'>
                         {
-                          (typeof (nav.image) === 'string') ? <SimpleImage src={nav.image} alt={nav.name} className='rounded-sm object-contain' unoptimized={unoptimized} pixelated={pixelated} /> : nav.image()
+                          (nav.image === 'building') ? <BsBuildingFill className="text-4xl" /> :
+                            <SimpleImage src={nav.image} alt={nav.name} className='rounded-sm' unoptimized={unoptimized} pixelated={pixelated} />
                         }
                       </Box>
                     )

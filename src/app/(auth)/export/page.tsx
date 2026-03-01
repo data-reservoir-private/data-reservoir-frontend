@@ -1,13 +1,8 @@
-import Paper from '@/components/common/paper/Paper'
 import Section from '@/components/common/paper/Section'
-import SimpleImage from '@/components/common/SimpleImage'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import Link from 'next/link'
 import { VscJson } from "react-icons/vsc";
 import { RiCodeSSlashFill } from "react-icons/ri";
-import { FaFileCsv, FaTruck } from "react-icons/fa6";
+import { FaFileCsv } from "react-icons/fa6";
 import { SiYaml } from "react-icons/si";
 import { Metadata, Route } from 'next'
 import { DiMsqlServer } from "react-icons/di";
@@ -15,12 +10,14 @@ import { BiLogoPostgresql } from "react-icons/bi";
 import { SiSqlite } from "react-icons/si";
 import { FaHtml5 } from "react-icons/fa";
 import { SiApacheparquet } from "react-icons/si";
-import { DATASETS_AVAILABLE, ExportType } from '@/constant/data'
+import { DATASETS_AVAILABLE } from '@/constant/data'
 import { FaFileExcel } from "react-icons/fa";
 import { grabData } from '@/utilities/http'
 import { IDashboardResponse } from '@/model/response/dashboard'
 import { API_ROUTE } from '@/constant/api-route'
-import Chip from '@mui/material/Chip'
+import ExportClient from './client'
+import { ExportType } from '@/model/dto/export';
+import SimpleImage from '@/components/common/SimpleImage';
 
 export const metadata: Metadata = {
   title: 'Export Data - Data Reservoir'
@@ -64,7 +61,9 @@ export default async function ExportPage() {
       <Typography textAlign='justify'>Not every data that you can view can be exported due to complexity of those data. I will try my best to support it all, but for now, you just have to wait :(</Typography>
       <Typography textAlign='justify'>The structure of the data is similar to the one you usually found inside detail endpoint (endpoint that ends with GUID like <code>00000000-0000-0000-0000-000000000000</code>).</Typography>
 
-      <Section name='Data Store' variant='h5'>
+      <ExportClient dataset={DATASETS_AVAILABLE} apiDataset={datasets} />
+
+      {/* <Section name='Data Store' variant='h5'>
         {
           Object.entries(DATASETS_AVAILABLE).filter(([_, value]) => value.categories.some(y => y.export)).map(([categoryKey, categoryValue]) => (
             <Section name={categoryValue.displayName ?? categoryValue.name} key={categoryKey} variant='h6'>
@@ -123,7 +122,7 @@ export default async function ExportPage() {
             </Section>
           ))
         }
-      </Section>
+      </Section> */}
     </Section>
   )
 }

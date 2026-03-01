@@ -34,6 +34,7 @@ export const API_ROUTE = Object.freeze({
       PRODUCT: '/hayday/order/product',
       VALUABLE: '/hayday/order/valuable',
       WEEKLY: '/hayday/order/weekly',
+      MONTHLY: '/hayday/order/monthly',
       DAILY: '/hayday/order/daily',
     }
   },
@@ -74,6 +75,12 @@ export const API_ROUTE = Object.freeze({
     DS_BAZAAR_WINDMILL_PRODUCT: '/seasons/ds-bazaar-windmill-product',
     DS_BAZAAR_ANIMAL_PRODUCT: '/seasons/ds-bazaar-animal-product',
     DS_BAZAAR_WILD_PRODUCT: '/seasons/ds-bazaar-wild-product',
+
+    DS_TWO_TOWNS_CROP: '/seasons/ds-two-towns-crop',
+    DS_TWO_TOWNS_FISHING_CATCH: '/seasons/ds-two-towns-fishing-catch',
+    DS_TWO_TOWNS_PRODUCT: '/seasons/ds-two-towns-product',
+    DS_TWO_TOWNS_RECIPE: '/seasons/ds-two-towns-recipe',
+    DS_TWO_TOWNS_TREE: '/seasons/ds-two-towns-tree',
   },
   CYGNUS: {
     ARTIFACT: '/cygnus/artifact',

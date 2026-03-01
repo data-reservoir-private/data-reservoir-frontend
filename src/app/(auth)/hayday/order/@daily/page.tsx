@@ -27,9 +27,37 @@ export default async function DailyPage() {
     },
     series: [
       {
-        name: 'Revenue',
+        name: 'Coin',
+        type: 'bar',
+        data: data.map(x => x.coinEvent),
+        stack: 'event',
+        color: '#efb100',
+      },
+      {
+        name: 'XP',
+        type: 'bar',
+        data: data.map(x => x.xpEvent),
+        stack: 'event',
+        color: '#0084d1'
+      },
+      {
+        name: 'Coin (Event)',
+        type: 'bar',
+        data: data.map(x => x.coin),
+        stack: 'nonEvent',
+        color: '#c1860080'
+      },
+      {
+        name: 'XP (Event)',
+        type: 'bar',
+        data: data.map(x => x.xp),
+        stack: 'nonEvent',
+        color: '#005f8d80'
+      },
+      {
+        name: 'Revenue (Event)',
         type: 'line',
-        data: data.map(x => x.revenue),
+        data: data.map(x => x.revenueEvent),
         symbolSize: 12,
         color: '#05df72',
         lineStyle: {
@@ -38,19 +66,16 @@ export default async function DailyPage() {
         }
       },
       {
-        name: 'Coin',
-        type: 'bar',
-        data: data.map(x => x.coin),
-        stack: 'bar',
-        color: '#efb100'
+        name: 'Revenue',
+        type: 'line',
+        data: data.map(x => x.revenue),
+        symbolSize: 12,
+        color: '#028a4d',
+        lineStyle: {
+          width: 4,
+          color: '#028a4d80'
+        }
       },
-      {
-        name: 'XP',
-        type: 'bar',
-        data: data.map(x => x.xp),
-        stack: 'bar',
-        color: '#0084d1'
-      }
     ],
     grid: {
       top: 40,
@@ -68,7 +93,7 @@ export default async function DailyPage() {
   }
 
   return (
-    <Section name='Daily Revenue' variant='h6'>
+    <Section name='Daily Revenue' variant='h6' caption='Transluscent chart means revenue without event or ad bonus'>
       <Paper className='min-h-75 w-full'>
         <EChart option={opt} className='min-h-75' />
       </Paper>

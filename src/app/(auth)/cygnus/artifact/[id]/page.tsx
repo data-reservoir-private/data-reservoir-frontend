@@ -3,13 +3,11 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
-import React, { cache } from 'react'
+import { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { ICygnusResponse } from '@/model/response/cygnus';
-import Typography from '@mui/material/Typography';
 import SimpleImage from '@/components/common/SimpleImage';
 
 interface ArtifactDetailProps {
