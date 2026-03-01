@@ -21,12 +21,11 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
 
   const response = await fetch(urlFinal, {
     method: 'GET',
-    cache: 'force-cache',
     headers: {
       'X-API-Key': process.env.API_KEY
     },
     next: {
-      revalidate: 3600 * 24 * 2
+      revalidate: 3600 * 12 
     }
   });
 

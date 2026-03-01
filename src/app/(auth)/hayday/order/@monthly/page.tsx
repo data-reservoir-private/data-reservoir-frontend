@@ -16,7 +16,7 @@ export default async function MonthlyPage() {
   const opt: EChartsOption = {
     xAxis: {
       type: 'category',
-      data: data.map(x => x.yearMonth),
+      data: (data ?? []).map(x => x.yearMonth),
     },
     yAxis: {
       type: 'value',
@@ -29,35 +29,35 @@ export default async function MonthlyPage() {
       {
         name: 'Coin',
         type: 'bar',
-        data: data.map(x => x.coinEvent),
+        data: (data ?? []).map(x => x.coinEvent),
         stack: 'event',
         color: '#efb100',
       },
       {
         name: 'XP',
         type: 'bar',
-        data: data.map(x => x.xpEvent),
+        data: (data ?? []).map(x => x.xpEvent),
         stack: 'event',
         color: '#0084d1'
       },
       {
         name: 'Coin (Event)',
         type: 'bar',
-        data: data.map(x => x.coin),
+        data: (data ?? []).map(x => x.coin),
         stack: 'nonEvent',
         color: '#c1860080'
       },
       {
         name: 'XP (Event)',
         type: 'bar',
-        data: data.map(x => x.xp),
+        data: (data ?? []).map(x => x.xp),
         stack: 'nonEvent',
         color: '#005f8d80'
       },
       {
         name: 'Revenue (Event)',
         type: 'line',
-        data: data.map(x => x.revenueEvent),
+        data: (data ?? []).map(x => x.revenueEvent),
         symbolSize: 12,
         color: '#05df72',
         lineStyle: {
@@ -68,7 +68,7 @@ export default async function MonthlyPage() {
       {
         name: 'Revenue',
         type: 'line',
-        data: data.map(x => x.revenue),
+        data: (data ?? []).map(x => x.revenue),
         symbolSize: 12,
         color: '#028a4d',
         lineStyle: {
