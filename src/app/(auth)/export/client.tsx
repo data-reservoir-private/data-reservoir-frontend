@@ -169,13 +169,11 @@ export default function ExportClient({ dataset, apiDataset }: { dataset: Readonl
                 <Link passHref href={`/export/${ds.categoryKey}/${ds.id}/${state.type}` as Route} target='_blank' className="w-full">
                   <Button size='small' type='button' className="w-full" variant="contained" startIcon={getType(state.type)}>Export as {state.type}</Button>
                 </Link>
-
               </Paper>
             </Grid>
           ))
         }
       </Grid>
-
     </Section>
   )
 }
