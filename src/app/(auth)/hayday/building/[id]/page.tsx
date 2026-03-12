@@ -66,7 +66,7 @@ export default async function HaydayBuildingDetail(props: HaydayBuildingDetailPr
           <Box className="flex gap-2 flex-wrap">
             {
               x.ingredients.map(ing => (
-                <Link key={ing.id} href={`/hayday/product/${ing.id}`} className='group'>
+                <Link key={ing.id} href={`/hayday/product/${ing.id}`} className='group' prefetch={false} passHref>
                   <Paper className="flex gap-3 items-center h-full rounded-full overflow-hidden group-hover:bg-gray-600/20">
                     <Box className="relative w-7 h-7">
                       <SimpleImage sizes='28px' src={ing.image} alt={ing.name} className='bg-gray-500/20' />

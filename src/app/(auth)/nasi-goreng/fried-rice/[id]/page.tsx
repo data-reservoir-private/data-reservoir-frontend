@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import React, { cache } from 'react'
+import { cache } from 'react'
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -114,7 +114,7 @@ function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['
                         l.upgrades.map(up => (
                           <Grid size={1} key={up.id}>
                             <Paper className="flex overflow-hidden">
-                              <Link passHref href={`/nasi-goreng/upgrade/${up.id}`}>
+                              <Link passHref href={`/nasi-goreng/upgrade/${up.id}`} prefetch={false}>
                                 <Box className="w-10 h-full min-h-10 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
                                   <SimpleImage quality={50} src={up.image} alt={up.name} />
                                 </Box>
@@ -141,7 +141,7 @@ function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['
                         l.recipe.map(ing => (
                           <Grid size={1} key={ing.id}>
                             <Paper className="flex overflow-hidden">
-                              <Link passHref href={`/nasi-goreng/ingredient/${ing.id}`}>
+                              <Link passHref href={`/nasi-goreng/ingredient/${ing.id}`} prefetch={false}>
                                 <Box className="w-10 h-full min-h-10 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
                                   <SimpleImage quality={50} src={ing.image} alt={ing.name} />
                                 </Box>

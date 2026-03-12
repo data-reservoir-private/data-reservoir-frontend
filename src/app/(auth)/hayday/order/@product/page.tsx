@@ -32,7 +32,7 @@ export default async function ProductPage() {
       <Grid container gap='.25rem' columns={10} justifyContent={'space-evenly'}>
         {
           data.map(product => (
-            <Link passHref href={`/hayday/product/${product.id}`} key={product.id} title={product.name}>
+            <Link passHref href={`/hayday/product/${product.id}`} key={product.id} title={product.name} prefetch={false}>
               <ButtonBase type='button'>
                 <Paper className='flex flex-col'>
                   <Box className='w-15 h-15 relative bg-background-default p-1'><SimpleImage src={product.image} alt={product.name} /></Box>
