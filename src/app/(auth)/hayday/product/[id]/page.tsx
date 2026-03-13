@@ -5,7 +5,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -20,10 +20,10 @@ const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['h
 
 export async function generateMetadata(props: HaydayProductDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Hayday Product - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function HaydayProductDetail(props: HaydayProductDetailProps) {
@@ -48,7 +48,7 @@ export default async function HaydayProductDetail(props: HaydayProductDetailProp
           Category: data.category,
           Price: data.price,
           "Is Raw": data.isRaw,
-          Time: data.time == 0 ? '-' : secondToTimespan(data.time, true),
+          Time: data.time === 0 ? '-' : secondToTimespan(data.time, true),
           Level: data.level,
           XP: data.xp,
           "Effort*": data.effort,
@@ -82,5 +82,5 @@ export default async function HaydayProductDetail(props: HaydayProductDetailProp
         link: `/hayday/product/${x.id}`,
       }))} />}
     </Section>
-  )
+  );
 }

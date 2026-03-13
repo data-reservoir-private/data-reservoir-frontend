@@ -1,4 +1,4 @@
-import { ElementIcon, TransjakartaIcon } from "@/components/icon/icons";
+import { ElementIcon } from "@/components/icon/icons";
 import { IconType } from "react-icons";
 import { BiSolidHome } from "react-icons/bi";
 import { BsFillSuitDiamondFill, BsDatabaseFillDown } from "react-icons/bs";

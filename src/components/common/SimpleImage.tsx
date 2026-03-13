@@ -1,5 +1,5 @@
-import classNames from 'classnames'
-import Image from 'next/image'
+import classNames from 'classnames';
+import Image from 'next/image';
 
 interface SimpleImageProps {
   className?: string,
@@ -23,5 +23,5 @@ export default function SimpleImage(props: SimpleImageProps) {
       className={classNames('p-1 object-contain', props.className)}
       style={props.pixelated ? { imageRendering: 'pixelated' } : {}}
     />
-  )
+  );
 }

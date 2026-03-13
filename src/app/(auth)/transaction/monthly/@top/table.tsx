@@ -2,9 +2,8 @@
 
 import SimpleTable from '@/components/common/simple-table/SimpleTable';
 import { DaysArray, MonthsArray } from '@/constant/date';
-import { ITransactionMonthlyResponse } from '@/model/response/transaction'
-import { createColumns, createIndexColumn } from '@/utilities/table'
-import React from 'react'
+import { ITransactionMonthlyResponse } from '@/model/response/transaction';
+import { createColumns, createIndexColumn } from '@/utilities/table';
 
 export default function TopTable({ data }: { data: ITransactionMonthlyResponse['top'][] }) {
   const column = createColumns<ITransactionMonthlyResponse['top']>(col => [
@@ -36,9 +35,9 @@ export default function TopTable({ data }: { data: ITransactionMonthlyResponse['
       cell: x => Math.round(x.getValue() * 100) / 100,
       enableSorting: true,
     }),
-  ])
+  ]);
 
   return (
     <SimpleTable columns={column} data={data} />
-  )
+  );
 }

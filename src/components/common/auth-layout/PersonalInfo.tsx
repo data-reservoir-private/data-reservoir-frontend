@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import Box from '@mui/material/Box'
+import Box from '@mui/material/Box';
 import { useClerk, useUser } from '@clerk/nextjs';
 import Button from '@mui/material/Button';
 import { FaPowerOff } from "react-icons/fa";
@@ -37,5 +37,5 @@ export default function PersonalInfo() {
         </Box>
       </Box>
     </Box>
-  )
+  );
 }

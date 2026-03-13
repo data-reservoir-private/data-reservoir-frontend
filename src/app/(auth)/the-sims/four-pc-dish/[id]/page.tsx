@@ -2,7 +2,7 @@ import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
 import Section from '@/components/common/paper/Section';
-import { cache } from 'react'
+import { cache } from 'react';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import { ITheSimsResponse } from '@/model/response/the-sims';
@@ -18,10 +18,10 @@ const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['
 
 export async function generateMetadata(props: FourPCDishDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `The Sims Four PC Dish - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function FourPCDishDetail(props: FourPCDishDetailProps) {
@@ -47,5 +47,5 @@ export default async function FourPCDishDetail(props: FourPCDishDetailProps) {
         }} />
       </Section>
     </Section>
-  )
+  );
 }

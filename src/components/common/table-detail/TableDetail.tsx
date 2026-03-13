@@ -6,7 +6,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import React from 'react';
 import CopyButton from '../CopyButton';
 import Tooltip from '@mui/material/Tooltip';
 import classNames from 'classnames';

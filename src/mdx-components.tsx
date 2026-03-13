@@ -1,11 +1,11 @@
-import classNames from 'classnames'
-import type { MDXComponents } from 'mdx/types'
-import { inconsolata } from './app/layout'
-import Box from '@mui/material/Box'
+import classNames from 'classnames';
+import type { MDXComponents } from 'mdx/types';
+import { inconsolata } from './app/layout';
+import Box from '@mui/material/Box';
 
-import '@/app/code.css'
-import Divider from '@mui/material/Divider'
-import Typography from '@mui/material/Typography'
+import '@/app/code.css';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 
 const components: MDXComponents = {
   pre: ({ children }) =>
@@ -28,8 +28,8 @@ const components: MDXComponents = {
       </Typography>
       <Divider />
     </Box>
-}
+};
 
 export function useMDXComponents(): MDXComponents {
-  return components
+  return components;
 }

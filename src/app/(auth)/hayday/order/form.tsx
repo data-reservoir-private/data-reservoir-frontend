@@ -1,11 +1,10 @@
-'use client'
+'use client';
 
 import { useAppForm } from '@/utilities/form';
-import Box from '@mui/material/Box'
+import Box from '@mui/material/Box';
 import { formOptions } from '@tanstack/react-form';
 import { useRouter } from 'next/navigation';
-import React from 'react'
-import { z } from 'zod'
+import { z } from 'zod';
 import { MonthsArray } from '@/constant/date';
 import { makeSearchParam } from '@/utilities/general';
 import Button from '@mui/material/Button';
@@ -42,7 +41,7 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
   const handleResetValue = () => {
     form.setFieldValue('month', null);
     form.setFieldValue('year', null);
-  }
+  };
 
   return (
     <form.AppForm>
@@ -74,7 +73,7 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
                 color='error'
                 className='w-full'
                 disabled={isSubmitting}
-                onClick={e => { e.preventDefault(); handleResetValue() }}
+                onClick={e => { e.preventDefault(); handleResetValue(); }}
               >
                 Reset
               </Button>
@@ -84,5 +83,5 @@ export default function HaydayOrderForm({ param }: { param: HaydayOrderFormSchem
         </Box>
       </form.SimpleContainer>
     </form.AppForm>
-  )
+  );
 }

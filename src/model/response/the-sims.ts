@@ -1,4 +1,4 @@
-import { THE_SIMS_RARITY } from "@/constant/enums"
+import { THE_SIMS_RARITY } from "@/constant/enums";
 
 export type ITheSimsResponse = {
   'bustin-out-career': {

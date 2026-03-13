@@ -1,3 +1,5 @@
+import { HAYDAY_EVENT, HAYDAY_ORDER_STATUS,HAYDAY_VOUCHER } from "@/constant/enums";
+
 export type IHaydayResponse = {
   'hayday-product': {
     id: string
@@ -177,6 +179,24 @@ export type IHaydayResponse = {
       xpEvent: number
       revenue: number
       revenueEvent: number
-    }
+    },
+    'export': {
+      id: string
+      dateCompleted: string | null
+      orderStatus: HAYDAY_ORDER_STATUS
+      clientName: string
+      coin: number
+      xp: number
+      coinEvent: number
+      xpEvent: number
+      event: HAYDAY_EVENT
+      voucher: HAYDAY_VOUCHER
+      revenueAd: boolean
+      details: {
+        productName: string
+        productPrice: number
+        quantity: number
+      }[] | null
+    }[]
   }
 }

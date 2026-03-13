@@ -5,7 +5,7 @@ import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import React, { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -21,10 +21,10 @@ const grabDetail = cache(async (id: string) => await grabData<INasiGorengRespons
 
 export async function generateMetadata(props: NasiGorengIngredientDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Nasi Goreng Ingredient - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function NasiGorengIngredientDetail(props: NasiGorengIngredientDetailProps) {
@@ -108,5 +108,5 @@ export default async function NasiGorengIngredientDetail(props: NasiGorengIngred
         link: `/nasi-goreng/fried-rice/${x.friedRiceID}`
       }))} />}
     </Section>
-  )
+  );
 }

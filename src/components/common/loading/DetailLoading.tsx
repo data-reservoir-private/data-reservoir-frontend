@@ -1,5 +1,5 @@
-import Box from '@mui/material/Box'
-import Skeleton from '@mui/material/Skeleton'
+import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 
 export default function DetailLoading() {
   return (
@@ -37,5 +37,5 @@ export default function DetailLoading() {
         }
       </Box>
     </Box>
-  )
+  );
 }

@@ -1,7 +1,6 @@
 import { API_ROUTE } from '@/constant/api-route';
 import { IHaydayResponse } from '@/model/response/hayday';
 import { getSearchParam, grabData } from '@/utilities/http';
-import React from 'react'
 import { HaydayOrderFormSchema } from '../form';
 import Grid from '@mui/material/Grid';
 import Link from 'next/link';
@@ -18,12 +17,12 @@ export default async function ProductPage() {
     year: sp.year,
   });
 
-  if (!data || data.length == 0) {
+  if (!data || data.length === 0) {
     return (
       <Paper className='w-full flex justify-center items-center p-2'>
         <Typography>No data</Typography>
       </Paper>
-    )
+    );
   }
 
   return (
@@ -45,5 +44,5 @@ export default async function ProductPage() {
         }
       </Grid>
     </Box>
-  )
+  );
 }

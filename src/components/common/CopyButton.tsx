@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import Button from '@mui/material/Button'
-import React, { useEffect, useState } from 'react'
-import { BsCheck, BsCopy, BsX } from 'react-icons/bs'
+import Button from '@mui/material/Button';
+import { useEffect, useState } from 'react';
+import { BsCheck, BsCopy, BsX } from 'react-icons/bs';
 
 export default function CopyButton({ value } : { value: string }) {
   const [copied, setCopied] = useState<'awaiting' | 'success' | 'failed'>('awaiting');
 
   useEffect(() => {
-    if(copied !== 'awaiting') setTimeout(() => setCopied('awaiting'), 1000)
-  }, [copied])
+    if(copied !== 'awaiting') setTimeout(() => setCopied('awaiting'), 1000);
+  }, [copied]);
 
   const handleOnClick = () => {
     if ('clipboard' in navigator)
@@ -19,7 +19,7 @@ export default function CopyButton({ value } : { value: string }) {
         .catch(() => setCopied('failed'));
     }
     else setCopied('failed');
-  }
+  };
 
   return (
     <Button
@@ -32,5 +32,5 @@ export default function CopyButton({ value } : { value: string }) {
     >
       { copied === 'success' ? <BsCheck/> : copied === 'failed' ? <BsX/> : <BsCopy />}
     </Button>
-  )
+  );
 }

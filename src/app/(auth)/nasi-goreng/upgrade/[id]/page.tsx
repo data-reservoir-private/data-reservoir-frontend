@@ -20,10 +20,10 @@ const grabDetail = async (id: string) => {
 
 export async function generateMetadata(props: NasiGorengUpgradeDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Nasi Goreng Upgrade - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function NasiGorengUpgradeDetail(props: NasiGorengUpgradeDetailProps) {
@@ -58,5 +58,5 @@ export default async function NasiGorengUpgradeDetail(props: NasiGorengUpgradeDe
       }))} />}
 
     </Section>
-  )
+  );
 }

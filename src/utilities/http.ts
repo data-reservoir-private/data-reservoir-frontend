@@ -1,7 +1,7 @@
-'use server'
+'use server';
 
 import { IPaginationResponse } from '@/model/response/base';
-import 'server-only'
+import 'server-only';
 import queryString from 'query-string';
 import { cookies, headers } from 'next/headers';
 import { parseSearchParam } from './general';
@@ -11,7 +11,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
   data: TData
 }> {
   let urlFinal = `${process.env.NEXT_PUBLIC_API_URL}${url}`;
-  if (!!params) {
+  if (params) {
     urlFinal = urlFinal + '?' + queryString.stringify(params, {
       arrayFormat: 'none',
       skipEmptyString: true,
@@ -30,7 +30,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
   });
 
   if (response.status >= 400) { 
-    console.error(await response.text())
+    console.error(await response.text());
   }
 
   const res = await response.json();
@@ -46,7 +46,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
  * @returns Search param as TResult
  */
 export async function getSearchParam<TResult>(): Promise<TResult> {
-  const head = (await headers()).get('X-Query-Param')
+  const head = (await headers()).get('X-Query-Param');
   if (head) return parseSearchParam<TResult>(head);
 
   const cook = (await cookies()).get('query_params');

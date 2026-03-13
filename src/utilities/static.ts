@@ -9,5 +9,5 @@ export const getStaticParams = <TResponse extends { id: string }>(url: string) =
     return data.map(x => ({
       id: String(x.id)
     }));
-  }
-}
+  };
+};

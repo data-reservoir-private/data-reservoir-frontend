@@ -3,7 +3,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import React, { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
@@ -33,10 +33,10 @@ type IStage = {
 
 export async function generateMetadata(props: DSTwoTownsTreeDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Seasons DS Two Towns Tree - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function DSTwoTownsTreeDetail(props: DSTwoTownsTreeDetailProps) {
@@ -113,5 +113,5 @@ export default async function DSTwoTownsTreeDetail(props: DSTwoTownsTreeDetailPr
         </Box>
       </Section>
     </Section>
-  )
+  );
 }

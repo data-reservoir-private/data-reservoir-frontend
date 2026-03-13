@@ -1,6 +1,5 @@
-import GridLoading from '@/components/common/loading/GridLoading'
-import React from 'react'
+import GridLoading from '@/components/common/loading/GridLoading';
 
 export default function Loading() {
-  return <GridLoading/>
+  return <GridLoading/>;
 }

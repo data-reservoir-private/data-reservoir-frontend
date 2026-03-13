@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import React, { useRef, useEffect } from 'react'
-import { init, getInstanceByDom, EChartsOption } from 'echarts'
-import Box from '@mui/material/Box'
-import classNames from 'classnames'
+import { useRef, useEffect } from 'react';
+import { init, getInstanceByDom, EChartsOption } from 'echarts';
+import Box from '@mui/material/Box';
+import classNames from 'classnames';
 
 interface EChartProps {
   option: EChartsOption,
@@ -11,15 +11,15 @@ interface EChartProps {
 }
 
 export const EChart = (props: EChartProps) => {
-  const chartRef = useRef(null)
+  const chartRef = useRef(null);
 
   useEffect(() => {
     // Initialize chart
-    const chart = init(chartRef.current, null)
+    const chart = init(chartRef.current, null);
 
     return () => {
-      chart?.dispose()
-    }
+      chart?.dispose();
+    };
   }, []);
 
   useEffect(() => {
@@ -28,11 +28,11 @@ export const EChart = (props: EChartProps) => {
 
     window.addEventListener('resize', function () {
       chart.resize();
-    })
+    });
 
     chart.setOption(props.option);
   }, [props.option]);
 
 
-  return <Box className={classNames(props.className)} ref={chartRef} {...props} />
-}
+  return <Box className={classNames(props.className)} ref={chartRef} {...props} />;
+};

@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -22,10 +22,10 @@ const grabDetail = cache(async (id: string) => await grabData<INasiGorengRespons
 
 export async function generateMetadata(props: NasiGorengFriedRiceDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Nasi Goreng Fried Rice - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function NasiGorengFriedRiceDetail(props: NasiGorengFriedRiceDetailProps) {
@@ -84,7 +84,7 @@ export default async function NasiGorengFriedRiceDetail(props: NasiGorengFriedRi
       {/* Levels */}
       {data.recipe.length > 0 && <Levels level={data.level} />}
     </Section>
-  )
+  );
 }
 
 function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['level'] }) {
@@ -167,5 +167,5 @@ function Levels({ level }: { level: INasiGorengResponse['fried-rice-complete']['
         ))
       }
     </Section>
-  )
+  );
 }

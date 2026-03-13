@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { themeOptions } from '@/theme';
 import AppBar from '@mui/material/AppBar';
@@ -8,14 +8,14 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useState } from 'react'
+import { useState } from 'react';
 import { BsMenuApp } from 'react-icons/bs';
 import { DrawerOptions } from './DrawerOptions';
 import PersonalInfo from './PersonalInfo';
 
 export default function AuthLayout() {
   const [open, setOpen] = useState(false);
-  const handleOnClose = () => { setOpen(false) }
+  const handleOnClose = () => { setOpen(false); };
   const smol = useMediaQuery(themeOptions.breakpoints.down('sm'), {
     ssrMatchMedia: () => ({ matches: true })
   });

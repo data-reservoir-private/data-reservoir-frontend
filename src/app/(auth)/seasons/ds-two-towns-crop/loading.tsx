@@ -1,4 +1,4 @@
-import { Skeleton } from '@mui/material'
+import { Skeleton } from '@mui/material';
 
 export default function Loading() {
   return (
@@ -6,5 +6,5 @@ export default function Loading() {
       <Skeleton height={40} />
       <Skeleton height={200} />
     </div>
-  )
+  );
 }

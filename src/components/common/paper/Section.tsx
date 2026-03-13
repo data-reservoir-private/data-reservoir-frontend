@@ -1,13 +1,12 @@
-import Box from '@mui/material/Box'
-import Breadcrumbs from '@mui/material/Breadcrumbs'
-import Divider from '@mui/material/Divider'
-import { TypographyVariant } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-import classNames from 'classnames'
-import Link from 'next/link'
-import React from 'react'
-import BackButton from '../BackButton'
-import { IBreadcrumb } from '@/constant/breadcrumb'
+import Box from '@mui/material/Box';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Divider from '@mui/material/Divider';
+import { TypographyVariant } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import classNames from 'classnames';
+import Link from 'next/link';
+import BackButton from '../BackButton';
+import { IBreadcrumb } from '@/constant/breadcrumb';
 
 interface SectionProps {
   variant: TypographyVariant,
@@ -48,5 +47,5 @@ export default function Section(props: SectionProps) {
       <Divider />
       {props.children}
     </Box>
-  )
+  );
 }

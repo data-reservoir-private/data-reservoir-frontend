@@ -3,7 +3,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
@@ -22,10 +22,10 @@ const grabDetail = cache(async (id: string) => await grabData<IPizzaFrenzyRespon
 
 export async function generateMetadata(props: ToppingDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Pizza Frenzy Topping - ${post.data.generalName} - Data Reservoir`
-  }
+  };
 }
 
 export default async function ToppingDetail(props: ToppingDetailProps) {
@@ -71,5 +71,5 @@ export default async function ToppingDetail(props: ToppingDetailProps) {
         </Grid>
       </Section>
     </Section>
-  )
+  );
 }

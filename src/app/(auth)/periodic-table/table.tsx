@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Paper from '@/components/common/paper/Paper';
 import Section from '@/components/common/paper/Section';
@@ -9,11 +9,11 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import classNames from 'classnames';
 import { Metadata } from 'next';
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 export const metadata: Metadata = {
   title: 'Periodic Table Element - Data Reservoir'
-}
+};
 
 export default function PeriodicTableClient({ data }: { data: IPeriodicTableElementResponse[] }) {
 
@@ -48,7 +48,7 @@ export default function PeriodicTableClient({ data }: { data: IPeriodicTableElem
         }
       </Box>
     </Section>
-  )
+  );
 }
 
 function Element({ element, className, onClick }: { element: IPeriodicTableElementResponse, className?: string, sx?: SxProps<Theme>, onClick: (el: IPeriodicTableElementResponse) => void }) {
@@ -90,5 +90,5 @@ function Element({ element, className, onClick }: { element: IPeriodicTableEleme
         </Typography>
       </Box>
     </Tooltip>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box'
-import Link from 'next/link'
-import Paper from '../paper/Paper'
-import SimpleImage from '../SimpleImage'
-import classNames from 'classnames'
-import Typography from '@mui/material/Typography'
-import { Route } from 'next'
+import Box from '@mui/material/Box';
+import Link from 'next/link';
+import Paper from '../paper/Paper';
+import SimpleImage from '../SimpleImage';
+import classNames from 'classnames';
+import Typography from '@mui/material/Typography';
+import { Route } from 'next';
 
 interface SimpleGridProps<TData extends { id: string, name: string, image: string }> {
   data: TData[],
@@ -52,5 +52,5 @@ export default function SimpleGrid<TData extends { id: string, name: string, ima
         )
       }
     </>
-  )
+  );
 }

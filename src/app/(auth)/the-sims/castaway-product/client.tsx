@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
 import { useAppForm } from '@/utilities/form';
-import { useState } from 'react'
-import { z } from 'zod'
+import { useState } from 'react';
+import { z } from 'zod';
 import { CATEGORIES } from '@/constant/categories';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
@@ -33,17 +33,17 @@ export default function CastawayProductClient({ data }: { data: ITheSimsResponse
   return (
     <form.AppForm>
       <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
-        <form.AppField name='name' children={(field) => (
-          <field.SimpleTextbox label='Name' />
-        )} />
-        <form.AppField name='category' children={(field) => (
-          <field.SimpleMultiselectString label='Category' choices={CATEGORIES['the-sims-castaway-product']} />
-        )} />
+        <form.AppField name='name'>
+          {(field) => <field.SimpleTextbox label='Name' />}
+        </form.AppField>
+        <form.AppField name='category'>
+          {(field) => <field.SimpleMultiselectString label='Category' choices={CATEGORIES['the-sims-castaway-product']} />}
+        </form.AppField>
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' />
         </form.AppForm>
       </form.SimpleContainer>
       <SimpleGrid data={realData} link='/the-sims/castaway-product' />
     </form.AppForm>
-  )
+  );
 }

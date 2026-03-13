@@ -24,7 +24,7 @@ export default function SimpleMultiselectString(props: SimpleMultiselectStringPr
         options={props.choices}
         renderValue={(values, getItemProps) => (
           values.map((value, idx) => {
-            const { key, ...itemProps } = getItemProps({ index: idx });
+            const { key: _, ...itemProps } = getItemProps({ index: idx });
             return <Chip
               {...itemProps}
               size='small'
@@ -34,7 +34,7 @@ export default function SimpleMultiselectString(props: SimpleMultiselectStringPr
                 label: {
                   className: 'text-[9px]'
                 }
-              }} sx={{ borderRadius: 1, zIndex: 999 }} />
+              }} sx={{ borderRadius: 1, zIndex: 999 }} />;
           })
         )}
       />

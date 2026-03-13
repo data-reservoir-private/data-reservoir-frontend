@@ -1,10 +1,9 @@
 import { useCustomFormContext } from '@/utilities/form';
 import Button from '@mui/material/Button';
 import classNames from 'classnames';
-import React from 'react'
 
-export default function SimpleSubmitButton({ label = "Submit", className = "", meta }: { label: string, className?: string, meta?: object }) {
-  const form = useCustomFormContext()
+export default function SimpleSubmitButton({ label = "Submit", className = "" }: { label: string, className?: string, meta?: object }) {
+  const form = useCustomFormContext();
   return (
     <form.Subscribe selector={(state) => state.isSubmitting}>
       {(isSubmitting) => (
@@ -17,5 +16,5 @@ export default function SimpleSubmitButton({ label = "Submit", className = "", m
         </Button>
       )}
     </form.Subscribe>
-  )
+  );
 }
