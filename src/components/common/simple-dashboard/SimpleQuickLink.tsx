@@ -1,14 +1,14 @@
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Typography from '@mui/material/Typography'
-import Link from 'next/link'
-import { BsBuildingFill, BsTable } from 'react-icons/bs'
-import Section from '../paper/Section'
-import Paper from '../paper/Paper'
-import { Route } from 'next'
-import SimpleImage from '../SimpleImage'
-import { Breakpoint } from '@mui/material/styles'
-import { IData } from '@/model/dto/export'
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Link from 'next/link';
+import { BsBuildingFill, BsTable } from 'react-icons/bs';
+import Section from '../paper/Section';
+import Paper from '../paper/Paper';
+import { Route } from 'next';
+import SimpleImage from '../SimpleImage';
+import { Breakpoint } from '@mui/material/styles';
+import { IData } from '@/model/dto/export';
 
 interface SimpleQuickLinkProps {
   quickLink: IData;
@@ -52,5 +52,5 @@ export default function SimpleQuickLink({ quickLink, columns, unoptimized, pixel
         }
       </Grid>
     </Section>
-  )
+  );
 }

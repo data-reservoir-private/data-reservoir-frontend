@@ -95,5 +95,5 @@ export default async function TransactionMonthlySummary() {
         </Paper>
       </Box>
     </Section>
-  )
+  );
 }

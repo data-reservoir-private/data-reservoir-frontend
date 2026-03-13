@@ -88,4 +88,4 @@ export const CATEGORIES = Object.freeze({
     'Tree',
     'Vine'
   ]
-})
+});

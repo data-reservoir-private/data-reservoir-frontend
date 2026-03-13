@@ -131,7 +131,7 @@ export default async function OrderSummary() {
       </Grid>
 
     </Box>
-  )
+  );
 }
 
 function PieVoucher({ green, blue, purple, gold }: { green: number, blue: number, purple: number, gold: number }) {
@@ -151,27 +151,7 @@ function PieVoucher({ green, blue, purple, gold }: { green: number, blue: number
         }
       }
     ]
-  }
+  };
 
-  return <EChart option={opt} className='w-full min-h-50'/>
-}
-
-function PieAccRejChart({ accept, reject }: { accept: number, reject: number }) {
-  const opt: EChartsOption = {
-    series: [
-      {
-        type: 'pie',
-        data: [
-          { value: accept, name: 'Accepted' },
-          { value: reject, name: 'Rejected' },
-        ],
-        label: {
-          color: 'white',
-        }
-      }
-    ],
-    color: ['#008236', '#c10007']
-  }
-
-  return <EChart option={opt} className='w-full min-h-50'/>
+  return <EChart option={opt} className='w-full min-h-50'/>;
 }

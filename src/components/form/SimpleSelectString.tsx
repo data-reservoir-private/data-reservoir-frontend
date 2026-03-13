@@ -1,7 +1,6 @@
-import { useCustomFieldContext } from '@/utilities/form'
+import { useCustomFieldContext } from '@/utilities/form';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import React from 'react'
 
 interface SimpleSelectStringProps {
   label: string,
@@ -12,14 +11,11 @@ interface SimpleSelectStringProps {
 
 export default function SimpleSelectString(props: SimpleSelectStringProps) {
   const field = useCustomFieldContext<string | null>();
-  const picked = React.useMemo(() =>
-    props.choices.find(x => x === field.state.value) ?? null,
-    [field.state.value]
-  )
+  const picked = props.choices.find(x => x === field.state.value) ?? null;
 
   const handleOnChange = (_: React.SyntheticEvent, newValue: string | null) => {
     field.setValue(newValue ?? '');
-  }
+  };
 
   return (
     <Autocomplete
@@ -33,5 +29,5 @@ export default function SimpleSelectString(props: SimpleSelectStringProps) {
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label={props.label} />}
     />
-  )
+  );
 }

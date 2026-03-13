@@ -1,11 +1,11 @@
-import Section from '@/components/common/paper/Section'
+import Section from '@/components/common/paper/Section';
 import { API_ROUTE } from '@/constant/api-route';
 import { IDashboardResponse } from '@/model/response/dashboard';
 import { grabData } from '@/utilities/http';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import React, { cache } from 'react'
+import { cache } from 'react';
 import { BsFillGrid3X3GapFill } from 'react-icons/bs';
 import { IoMdDocument } from "react-icons/io";
 import { MdCategory } from "react-icons/md";
@@ -18,7 +18,7 @@ import { DATASETS_AVAILABLE } from '@/constant/data';
 
 export const metadata: Metadata = {
   title: 'Dashboard - Data Reservoir'
-}
+};
 
 export default async function Dashboard() {
   const { data } = await grabData<IDashboardResponse[]>(`${API_ROUTE.DASHBOARD}`);
@@ -26,7 +26,7 @@ export default async function Dashboard() {
   const totalRecord = cache(() => data.reduce((acc, curr) => acc + curr.tables.reduce((a, c) => a + c.rowCount, 0), 0));
   const totalTable = cache(() => data.reduce((acc, curr) => acc + curr.tables.length, 0));
 
-  const totalData = cache(() => data.reduce((acc, curr) => acc + curr.datasets.reduce((a, c) => a + c.total, 0), 0))
+  const totalData = cache(() => data.reduce((acc, curr) => acc + curr.datasets.reduce((a, c) => a + c.total, 0), 0));
   const totalDatasets = cache(() => data.reduce((acc, curr) => acc + curr.datasets.length, 0));
 
   const totalPages = Object.values(DATASETS_AVAILABLE).reduce((acc, curr) => acc + curr.categories.length, 0);
@@ -114,7 +114,7 @@ export default async function Dashboard() {
         </Paper>
       </Section>
     </Section>
-  )
+  );
 }
 
 function DatasetTreeChart({ data }: { data: IDashboardResponse[] }) {
@@ -174,7 +174,7 @@ function DatasetTreeChart({ data }: { data: IDashboardResponse[] }) {
       right: 40,
       bottom: 40,
     },
-  }
+  };
 
   return (
     <EChart className='w-full h-75' option={opt} />
@@ -238,7 +238,7 @@ function DBTreeChart({ data }: { data: IDashboardResponse[] }) {
       right: 40,
       bottom: 40,
     },
-  }
+  };
 
   return (
     <EChart className='w-full h-75' option={opt} />

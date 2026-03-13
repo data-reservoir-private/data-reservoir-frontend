@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 import { useAppForm } from '@/utilities/form';
-import { z } from 'zod'
+import { z } from 'zod';
 import { IHaydayResponse } from '@/model/response/hayday';
 import { useState } from 'react';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
@@ -32,17 +32,17 @@ export default function HaydayBuildingClient({ data }: { data: IHaydayResponse['
   return (
     <form.AppForm>
       <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
-        <form.AppField name='level' children={(field) => (
-          <field.SimpleNumberbox label='Level' />
-        )} />
-        <form.AppField name='name' children={(field) => (
-          <field.SimpleTextbox label='Name' />
-        )} />
+        <form.AppField name='level'>
+          {(field) => <field.SimpleNumberbox label='Level' />}
+        </form.AppField>
+        <form.AppField name='name'>
+          {(field) => <field.SimpleTextbox label='Name' />}
+        </form.AppField>
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' />
         </form.AppForm>
       </form.SimpleContainer>
       <SimpleGrid boxClassName='w-40 h-40 max-md:w-24 max-md:h-24' columns={6} data={realData} link='/hayday/building' />
     </form.AppForm>
-  )
+  );
 }

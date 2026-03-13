@@ -1,8 +1,7 @@
-import { useCustomFieldContext } from '@/utilities/form'
-import Autocomplete, { AutocompleteProps } from '@mui/material/Autocomplete';
+import { useCustomFieldContext } from '@/utilities/form';
+import Autocomplete from '@mui/material/Autocomplete';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import React from 'react'
 
 interface SimpleSelectProps<TValue> {
   label: string,
@@ -13,15 +12,12 @@ interface SimpleSelectProps<TValue> {
 
 export default function SimpleSelect<TValue>(props: SimpleSelectProps<TValue>) {
   const field = useCustomFieldContext<TValue | null>();
-  const picked = React.useMemo(() =>
-    props.choices.find(x => x.value === field.state.value) ?? null,
-    [field.state.value]
-  )
+  const picked = props.choices.find(x => x.value === field.state.value) ?? null;
 
   const handleOnChange = (_: React.SyntheticEvent, newValue: SimpleSelectProps<TValue>['choices'][0] | null) => {
     if (!newValue) field.setValue(null);
     else field.setValue(newValue.value);
-  }
+  };
 
   return (
     <FormControl className='flex flex-col w-full min-w-6'>
@@ -42,5 +38,5 @@ export default function SimpleSelect<TValue>(props: SimpleSelectProps<TValue>) {
       />
       {!field.state.meta.isValid && <span className='text-xs text-error-light'>{field.state.meta.errors.map(x => x?.message).join(', ')}</span>}
     </FormControl>
-  )
+  );
 }

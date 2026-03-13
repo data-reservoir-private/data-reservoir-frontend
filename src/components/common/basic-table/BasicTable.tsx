@@ -1,8 +1,7 @@
-'use client'
+'use client';
 
 import React, { Fragment, useMemo, useState } from 'react';
 import { Column, ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getExpandedRowModel, getFacetedRowModel, getFacetedUniqueValues, getFilteredRowModel, getSortedRowModel, Row, useReactTable } from '@tanstack/react-table';
-import { BiCheck } from 'react-icons/bi';
 import classNames from 'classnames';
 import { saveAs } from 'file-saver';
 import Box from '@mui/material/Box';
@@ -23,10 +22,11 @@ export interface BasicTableProps<T> {
 export default function BasicTable<T>(props : BasicTableProps<T>) {
   const cachedColumn = useMemo(() => props.columns, [props.columns]);
   // const [cachedData,] = useState(props.data);
-  const cachedData = useMemo(() => props.data, [props.data])
+  const cachedData = useMemo(() => props.data, [props.data]);
   const [canExpand, ] = useState(!!props.expandElement);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const reactTable = useReactTable({
     data: cachedData,
     columns: cachedColumn,

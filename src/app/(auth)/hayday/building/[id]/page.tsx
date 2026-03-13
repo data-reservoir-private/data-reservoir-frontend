@@ -7,7 +7,7 @@ import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -22,10 +22,10 @@ const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['h
 
 export async function generateMetadata(props: HaydayBuildingDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Hayday Building - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function HaydayBuildingDetail(props: HaydayBuildingDetailProps) {
@@ -66,7 +66,7 @@ export default async function HaydayBuildingDetail(props: HaydayBuildingDetailPr
           <Box className="flex gap-2 flex-wrap">
             {
               x.ingredients.map(ing => (
-                <Link key={ing.id} href={`/hayday/product/${ing.id}`} className='group'>
+                <Link key={ing.id} href={`/hayday/product/${ing.id}`} className='group' prefetch={false} passHref>
                   <Paper className="flex gap-3 items-center h-full rounded-full overflow-hidden group-hover:bg-gray-600/20">
                     <Box className="relative w-7 h-7">
                       <SimpleImage sizes='28px' src={ing.image} alt={ing.name} className='bg-gray-500/20' />
@@ -81,5 +81,5 @@ export default async function HaydayBuildingDetail(props: HaydayBuildingDetailPr
         )
       }))} />}
     </Section>
-  )
+  );
 }

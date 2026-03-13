@@ -1,5 +1,5 @@
 import { API_ROUTE } from "./api-route";
-import 'server-only'
+import 'server-only';
 import { ExportType, IData } from "@/model/dto/export";
 
 // Supported export types

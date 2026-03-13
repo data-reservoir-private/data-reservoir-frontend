@@ -72,5 +72,5 @@ export default async function TransactionDaily() {
         </Paper>
       </Box>
     </Section>
-  )
+  );
 }

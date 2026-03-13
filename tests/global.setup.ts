@@ -1,5 +1,5 @@
-import { clerk, clerkSetup } from '@clerk/testing/playwright'
-import { test as setup } from '@playwright/test'
+import { clerk, clerkSetup } from '@clerk/testing/playwright';
+import { test as setup } from '@playwright/test';
 
 setup.describe.configure({ mode: 'serial' });
 

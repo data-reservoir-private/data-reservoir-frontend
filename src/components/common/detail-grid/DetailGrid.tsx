@@ -34,7 +34,7 @@ export default function DetailGrid({ name, data, className, noGrid, pixelated }:
           data.map(item => (
             <Grid size={1} key={item.id}>
               <Paper className="flex overflow-hidden h-full">
-                <Link passHref href={item.link as Route}>
+                <Link passHref href={item.link as Route} prefetch={false}>
                   <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
                     <SimpleImage quality={50} src={item.image} alt={item.title} pixelated={pixelated} />
                   </Box>

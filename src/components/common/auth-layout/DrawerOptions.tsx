@@ -45,5 +45,5 @@ export function DrawerOptions({ onClose }: { onClose: () => void }) {
         </Box>
       </Box>
     </Box>
-  )
+  );
 }

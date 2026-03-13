@@ -7,7 +7,7 @@ export default async function MainLayout({ children }: Readonly<{ children: Reac
   return (
     <Box>
       <AuthLayout/>
-      <Box className='relative min-sm:left-[250px] min-sm:w-[calc(100%-250px)] p-2 min-h-[100svh]'>
+      <Box className='relative sm:left-62.5 sm:w-[calc(100%-250px)] p-2 min-h-svh'>
         <Toolbar variant='dense' />
         <Box className='p-4'>
           <Suspense fallback={<div>Loading...</div>}>
@@ -16,5 +16,5 @@ export default async function MainLayout({ children }: Readonly<{ children: Reac
         </Box>
       </Box>
     </Box>
-  )
+  );
 }

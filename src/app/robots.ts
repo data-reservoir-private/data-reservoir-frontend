@@ -1,4 +1,4 @@
-import type { MetadataRoute, Route } from 'next'
+import type { MetadataRoute, Route } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -18,5 +18,5 @@ export default function robots(): MetadataRoute.Robots {
       ] as Route[],
     },
     sitemap: `https://${process.env.DOMAIN}/sitemap.xml`
-  }
+  };
 }

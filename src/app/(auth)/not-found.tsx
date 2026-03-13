@@ -1,13 +1,12 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import { Metadata } from 'next'
-import Link from 'next/link'
-import React from 'react'
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: "404 Not Found - Data Reservoir"
-}
+};
 
 export default function NotFoundPage() {
   return (
@@ -18,5 +17,5 @@ export default function NotFoundPage() {
         <Button type='button' variant='contained'>Take me back</Button>
       </Link>
     </Box>
-  )
+  );
 }

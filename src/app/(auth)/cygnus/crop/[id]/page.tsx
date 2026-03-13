@@ -37,10 +37,10 @@ const grabDetail = async (id: string) => {
 
 export async function generateMetadata(props: CropDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Cygnus Crop - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function CropDetail(props: CropDetailProps) {
@@ -63,7 +63,7 @@ export default async function CropDetail(props: CropDetailProps) {
     status: 'regrow',
     duration: data.special!.regrowth,
     image: data.stages.done.regrowth
-  })
+  });
 
   return (
     <Section name={data.name} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['cygnus-crop-detail'], { label: data.name }]}>
@@ -126,5 +126,5 @@ export default async function CropDetail(props: CropDetailProps) {
         </Box>
       </Section>
     </Section>
-  )
+  );
 }

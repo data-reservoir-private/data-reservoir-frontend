@@ -3,7 +3,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -22,10 +22,10 @@ const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['
 export async function generateMetadata(props: ThreePCGemDetailProps) {
   const post = await grabDetail((await props.params).id);
   if (!post.data) return { title: 'Not Found - Data Reservoir' };
-  const name = `${post.data.rawGem.name} (${post.data.gemCut.name})`
+  const name = `${post.data.rawGem.name} (${post.data.gemCut.name})`;
   return {
     title: `The Sims Four PC Element - ${name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function ThreePCGemDetail(props: ThreePCGemDetailProps) {
@@ -85,5 +85,5 @@ export default async function ThreePCGemDetail(props: ThreePCGemDetailProps) {
       </Section>
 
     </Section>
-  )
+  );
 }

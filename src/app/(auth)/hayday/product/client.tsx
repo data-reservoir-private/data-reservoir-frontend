@@ -1,8 +1,7 @@
-'use client'
+'use client';
 
 import { useAppForm } from '@/utilities/form';
-import Box from '@mui/material/Box'
-import { z } from 'zod'
+import { z } from 'zod';
 import { CATEGORIES } from '@/constant/categories';
 import Section from '@/components/common/paper/Section';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
@@ -40,19 +39,19 @@ export default function HaydayProductClient({ data }: { data: IHaydayResponse['h
     <Section name='Hayday Products' variant='h4' breadcrumbs={BREADCRUMBS['hayday-product']}>
       <form.AppForm>
         <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
-          <form.AppField name='level' children={(field) => (
-            <field.SimpleNumberbox label='Level' />
-          )} />
-          <form.AppField name='name' children={(field) => (
-            <field.SimpleTextbox label='Name' />
-          )} />
-          <form.AppField name='category' children={(field) => (
-            <field.SimpleMultiselectString label='Category' choices={CATEGORIES['hayday-product']} />
-          )} />
+          <form.AppField name='level'>
+            {(field) => <field.SimpleNumberbox label='Level' />}
+          </form.AppField>
+          <form.AppField name='name'>
+            {(field) => <field.SimpleTextbox label='Name' />}
+          </form.AppField>
+          <form.AppField name='category'>
+            {(field) => <field.SimpleMultiselectString label='Category' choices={CATEGORIES['hayday-product']} />}
+          </form.AppField>
           <form.SimpleSubmitButton label='Search' />
         </form.SimpleContainer>
       </form.AppForm>
       <SimpleGrid data={realData} link='/hayday/product' />
     </Section>
-  )
+  );
 }

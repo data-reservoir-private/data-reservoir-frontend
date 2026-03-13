@@ -17,5 +17,28 @@ export type ITransactionMonthlyResponse = {
     order: string
     price: number
     category: string
+  },
+  'export': {
+    id: string
+    tenant: string
+    date: string
+    taxDiscount: number
+    details: {
+      category: string
+      order: string
+      quantity: number
+      price: number
+      subtotal: number
+    }[]
+    detailTotal: number
+  },
+  'export-flat': {
+    id: string
+    tenant: string
+    date: string
+    orderCategory: string
+    orderName: string
+    orderQuantity: number
+    orderPrice: number
   }
 }

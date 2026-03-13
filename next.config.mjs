@@ -5,7 +5,9 @@ const nextConfig = {
   typedRoutes: true,
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
-  // cacheComponents: true,
+  experimental: {
+    turbopackFileSystemCacheForDev: true,
+  },
   headers: async () => [
     {
       source: '/(.*?)',

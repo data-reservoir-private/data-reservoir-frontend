@@ -1,4 +1,4 @@
-import { z } from 'zod/v4'
+import { z } from 'zod/v4';
 
 const inArray = <TArg>(array: TArg[] = []) => (input: TArg) => array.includes(input);
 

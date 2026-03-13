@@ -41,6 +41,6 @@ export const MonthArray = [
   "October",
   "November",
   "December"
-]
+];
 
 export const DaysArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

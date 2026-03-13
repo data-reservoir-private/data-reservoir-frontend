@@ -1,6 +1,5 @@
-import Section from '@/components/common/paper/Section'
-import { BREADCRUMBS } from '@/constant/breadcrumb'
-import React from 'react'
+import Section from '@/components/common/paper/Section';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
 
 export default function TransactionMonthlyLayout(props: LayoutProps<'/transaction/monthly'>) {
   return (
@@ -13,5 +12,5 @@ export default function TransactionMonthlyLayout(props: LayoutProps<'/transactio
 
       {props.top}
     </Section>
-  )
+  );
 }

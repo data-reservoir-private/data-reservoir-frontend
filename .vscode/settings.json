@@ -6,26 +6,39 @@
     "class:list",
     ".*Classes"
   ],
-  "tailwindCSS.experimental.classRegex": [["className\\s*:\\s*['\"]([^'\"]*)['\"]"]],
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "className\\s*:\\s*['\"]([^'\"]*)['\"]"
+    ]
+  ],
   "eslint.useFlatConfig": true,
   "material-icon-theme.files.customClones": [
     {
       "name": "nextjs-pagetsx",
       "base": "react_ts",
       "color": "orange",
-      "fileNames": ["page.tsx"]
+      "fileNames": [
+        "page.tsx"
+      ]
     },
     {
       "name": "nextjs-layouttsx",
       "base": "react_ts",
       "color": "purple",
-      "fileNames": ["layout.tsx"]
+      "fileNames": [
+        "layout.tsx"
+      ]
     },
     {
       "name": "nextjs-errortsx",
       "base": "react_ts",
       "color": "red",
-      "fileNames": ["error.tsx"]
+      "fileNames": [
+        "error.tsx"
+      ]
     },
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
 }

@@ -8,8 +8,6 @@ import Paper from '@/components/common/paper/Paper';
 import Box from '@mui/material/Box';
 import { GiTwoCoins } from 'react-icons/gi';
 import { BsPlusCircleFill, BsStarFill } from 'react-icons/bs';
-import LinearProgress from '@mui/material/LinearProgress';
-import SimpleImage from '@/components/common/SimpleImage';
 
 const mapping: Record<string, string> = {
   "Ben's Brewery": '/image/hayday/client/ben.png',
@@ -22,7 +20,7 @@ const mapping: Record<string, string> = {
   "School": '/image/hayday/client/school.png',
   "Susan's Store": '/image/hayday/client/susan.png',
   "Grant's Graveyard": '/image/hayday/client/grant.png'
-}
+};
 
 export default async function ClientPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
@@ -67,5 +65,5 @@ export default async function ClientPage() {
       }
 
     </Grid>
-  )
+  );
 }

@@ -1,45 +1,17 @@
-'use client'
+'use client';
 
-import { VscJson } from "react-icons/vsc";
-import { RiCodeSSlashFill } from "react-icons/ri";
-import { FaFileCsv } from "react-icons/fa6";
-import { SiYaml } from "react-icons/si";
-import { DiMsqlServer } from "react-icons/di";
-import { BiLogoPostgresql } from "react-icons/bi";
-import { SiSqlite } from "react-icons/si";
-import { FaHtml5 } from "react-icons/fa";
-import { SiApacheparquet } from "react-icons/si";
-import { FaFileExcel } from "react-icons/fa";
 import { useAppForm } from "@/utilities/form";
 import z from "zod";
 import { useState } from "react";
 import Section from "@/components/common/paper/Section";
 import { Box, Button, Chip, Grid, Typography } from "@mui/material";
-import { ExportType, IData } from "@/model/dto/export";
+import { IData } from "@/model/dto/export";
 import Paper from "@/components/common/paper/Paper";
 import SimpleImage from "@/components/common/SimpleImage";
 import { BsBuildingFill } from "react-icons/bs";
 import Link from "next/link";
 import { Route } from "next";
-
-const ALL_EXPORTS_COMPLETE: ExportType[] = ['json', 'ndjson', 'csv', 'tsv', 'xml', 'yaml', 'html', 'postgresql', 'sql_server', 'sqlite', 'parquet', 'xlsx'];
-function getType(exportType: ExportType) {
-  switch (exportType) {
-    case 'json': return <VscJson />
-    case 'ndjson': return <VscJson />
-    case 'xml': return <RiCodeSSlashFill />
-    case 'csv': return <FaFileCsv />
-    case 'tsv': return <FaFileCsv />
-    case 'yaml': return <SiYaml />
-    case 'postgresql': return <BiLogoPostgresql />
-    case 'sql_server': return <DiMsqlServer />
-    case 'sqlite': return <SiSqlite />
-    case 'html': return <FaHtml5 />
-    case 'parquet': return <SiApacheparquet />
-    case 'xlsx': return <FaFileExcel />
-    default: return <></>
-  }
-}
+import { ALL_EXPORTS_COMPLETE, getTypeIcon } from "@/utilities/export-icon";
 
 interface Dataset {
   name: string,
@@ -65,12 +37,12 @@ type IExtendData = IData['categories'][0] & {
   owner: string
 }
 
-export default function ExportClient({ dataset, apiDataset }: { dataset: Readonly<Record<string, IData>>, apiDataset: Dataset[] }) {
+export default function ExportMasterDatasetClient({ dataset, apiDataset }: { dataset: Readonly<Record<string, IData>>, apiDataset: Dataset[] }) {
   const [state, setState] = useState<z.infer<typeof schema>>(DEFAULT_VALUE);
   const form = useAppForm({
     defaultValues: DEFAULT_VALUE,
     validators: { onChange: schema },
-    onSubmit: ({ value }) => { setState(value) }
+    onSubmit: ({ value }) => { setState(value); }
   });
 
   // Note: React Compiler doesn't need useMemo anymore
@@ -106,7 +78,7 @@ export default function ExportClient({ dataset, apiDataset }: { dataset: Readonl
                 label='Export Type'
                 renderOption={(option) =>
                   <Box className='flex gap-2 items-center'>
-                    {getType(option.value)}
+                    {getTypeIcon(option.value)}
                     {option.label}
                   </Box>
                 }
@@ -167,7 +139,7 @@ export default function ExportClient({ dataset, apiDataset }: { dataset: Readonl
 
                 {/* Export button */}
                 <Link passHref href={`/export/${ds.categoryKey}/${ds.id}/${state.type}` as Route} target='_blank' className="w-full">
-                  <Button size='small' type='button' className="w-full" variant="contained" startIcon={getType(state.type)}>Export as {state.type}</Button>
+                  <Button size='small' type='button' className="w-full" variant="contained" startIcon={getTypeIcon(state.type)}>Export as {state.type}</Button>
                 </Link>
               </Paper>
             </Grid>
@@ -175,5 +147,5 @@ export default function ExportClient({ dataset, apiDataset }: { dataset: Readonl
         }
       </Grid>
     </Section>
-  )
+  );
 }

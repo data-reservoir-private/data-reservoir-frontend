@@ -1,9 +1,8 @@
-'use client'
+'use client';
 
 import SimpleTable from '@/components/common/simple-table/SimpleTable';
-import { ITheSimsResponse } from '@/model/response/the-sims'
+import { ITheSimsResponse } from '@/model/response/the-sims';
 import { createColumns } from '@/utilities/table';
-import React from 'react'
 
 interface BustinOutCareerTableProps {
   data: ITheSimsResponse['bustin-out-career'][]
@@ -81,5 +80,5 @@ export default function BustinOutCareerTable({ data }: BustinOutCareerTableProps
 
   return (
     <SimpleTable columns={cols} data={data}/>
-  )
+  );
 }

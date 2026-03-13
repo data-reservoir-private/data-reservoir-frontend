@@ -1,4 +1,3 @@
-import React from 'react'
 import { EChart } from '../chart/Chart';
 import { EChartsOption } from 'echarts';
 import { IDashboardResponse } from '@/model/response/dashboard';
@@ -38,7 +37,7 @@ export default function SimpleBarTableChart(props : SimpleBarTableChartProps) {
       right: 40,
       bottom: 40,
     },
-  }
+  };
 
   return (
     <Paper className='p-2'>

@@ -1,11 +1,9 @@
-'use client'
+'use client';
 
 import { useAppForm } from '@/utilities/form';
-import Box from '@mui/material/Box'
 import { formOptions } from '@tanstack/react-form';
 import { useRouter } from 'next/navigation';
-import React from 'react'
-import { z } from 'zod'
+import { z } from 'zod';
 import { MonthsArray } from '@/constant/date';
 import { makeSearchParam } from '@/utilities/general';
 
@@ -61,5 +59,5 @@ export default function TransactionMonthlyForm({ param }: { param: TransactionMo
         <form.SimpleSubmitButton className='w-full' label='Search' />
       </form.SimpleContainer>
     </form.AppForm>
-  )
+  );
 }

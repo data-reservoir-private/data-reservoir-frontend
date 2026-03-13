@@ -3,7 +3,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -22,10 +22,10 @@ const grabDetail = cache(async (id: string) => await grabData<INasiGorengRespons
 
 export async function generateMetadata(props: NasiGorengToolDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Nasi Goreng Tool - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function NasiGorengToolDetail(props: NasiGorengToolDetailProps) {
@@ -63,5 +63,5 @@ export default async function NasiGorengToolDetail(props: NasiGorengToolDetailPr
       }))} />}
 
     </Section>
-  )
+  );
 }

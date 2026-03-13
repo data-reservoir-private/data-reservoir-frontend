@@ -1,5 +1,7 @@
+import { createFormHookContexts, createFormHook } from '@tanstack/react-form';
+
 import SimpleContainer from '@/components/form/SimpleContainer';
-import SimpleHorizontalSwitch from '@/components/form/SimpleHorizontalSwitch';
+import SimpleCheckbox from '@/components/form/SimpleCheckbox';
 import SimpleMultiselectString from '@/components/form/SimpleMultiselectString';
 import SimpleNumberbox from '@/components/form/SimpleNumberbox';
 import SimplePageNavigation from '@/components/form/SimplePageNavigation';
@@ -8,10 +10,10 @@ import SimpleSelect from '@/components/form/SimpleSelect';
 import SimpleSelectString from '@/components/form/SimpleSelectString';
 import SimpleSubmitButton from '@/components/form/SimpleSubmitButton';
 import SimpleTextbox from '@/components/form/SimpleTextbox';
-import { createFormHookContexts, createFormHook } from '@tanstack/react-form'
+import SimpleSwitch from '@/components/form/SimpleSwitch';
 
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
-  createFormHookContexts()
+  createFormHookContexts();
 
 // Placeholder untuk forms
 export const useCustomFieldContext = useFieldContext;
@@ -27,7 +29,8 @@ export const { useAppForm } = createFormHook({
     SimpleSelectString,
     SimpleNumberbox,
     SimpleMultiselectString,
-    SimpleHorizontalSwitch
+    SimpleSwitch,
+    SimpleCheckbox
   },
   formComponents: {
     SimpleSubmitButton,

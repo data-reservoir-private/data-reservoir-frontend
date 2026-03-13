@@ -1,9 +1,8 @@
-'use client'
+'use client';
 
 import SimpleTable from '@/components/common/simple-table/SimpleTable';
-import { ITheSimsResponse } from '@/model/response/the-sims'
+import { ITheSimsResponse } from '@/model/response/the-sims';
 import { createColumns } from '@/utilities/table';
-import React from 'react'
 
 interface TwoPetsConsoleCareerTableProps {
   data: ITheSimsResponse['two-pets-console-career'][]
@@ -86,5 +85,5 @@ export default function TwoPetsConsoleCareerTable({ data }: TwoPetsConsoleCareer
 
   return (
     <SimpleTable columns={cols} data={data}/>
-  )
+  );
 }

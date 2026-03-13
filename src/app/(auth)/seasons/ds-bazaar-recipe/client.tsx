@@ -1,8 +1,7 @@
-'use client'
+'use client';
 
 import { useAppForm } from '@/utilities/form';
-import Box from '@mui/material/Box'
-import { z } from 'zod'
+import { z } from 'zod';
 import { ISeasonsResponse } from '@/model/response/seasons';
 import { useState } from 'react';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
@@ -32,14 +31,14 @@ export default function DSBazaarRecipeClient({ data }: { data: ISeasonsResponse[
   return (
     <form.AppForm>
       <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
-        <form.AppField name='name' children={(field) => (
-          <field.SimpleTextbox label='Name' />
-        )} />
+        <form.AppField name='name'>
+          {(field) => <field.SimpleTextbox label='Name' />}
+        </form.AppField>
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' />
         </form.AppForm>
       </form.SimpleContainer>
       <SimpleGrid data={realData} link='/seasons/ds-bazaar-recipe' unoptimizedImage pixelated />
     </form.AppForm>
-  )
+  );
 }

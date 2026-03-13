@@ -1,9 +1,8 @@
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { IHaydayResponse } from '@/model/response/hayday';
 import { getSearchParam, grabData } from '@/utilities/http';
-import { EChartsOption } from 'echarts'
-import React from 'react'
+import { EChartsOption } from 'echarts';
 import { HaydayOrderFormSchema } from '../form';
 import { EChart } from '@/components/common/chart/Chart';
 import Section from '@/components/common/paper/Section';
@@ -90,7 +89,7 @@ export default async function DailyPage() {
         end: 100
       },
     ]
-  }
+  };
 
   return (
     <Section name='Daily Revenue' variant='h6' caption='Transluscent chart means revenue without event or ad bonus'>
@@ -98,5 +97,5 @@ export default async function DailyPage() {
         <EChart option={opt} className='min-h-75' />
       </Paper>
     </Section>
-  )
+  );
 }

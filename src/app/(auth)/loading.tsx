@@ -1,6 +1,5 @@
-import Box from '@mui/material/Box'
-import Skeleton from '@mui/material/Skeleton'
-import React from 'react'
+import Box from '@mui/material/Box';
+import Skeleton from '@mui/material/Skeleton';
 
 export default function Loading() {
   return (
@@ -16,5 +15,5 @@ export default function Loading() {
 
       <Skeleton variant='rounded' className='w-full h-72' />
     </Box>
-  )
+  );
 }

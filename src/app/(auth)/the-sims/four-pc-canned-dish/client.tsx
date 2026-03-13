@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
 import { useAppForm } from '@/utilities/form';
-import { z } from 'zod'
+import { z } from 'zod';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { useState } from 'react';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
@@ -31,14 +31,14 @@ export default function FourPCCannedDishClient({ data }: { data: ITheSimsRespons
   return (
     <form.AppForm>
       <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
-        <form.AppField name='name' children={(field) => (
-          <field.SimpleTextbox label='Name' />
-        )} />
+        <form.AppField name='name'>
+          {(field) => <field.SimpleTextbox label='Name' />}
+        </form.AppField>
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' />
         </form.AppForm>
       </form.SimpleContainer>
       <SimpleGrid data={realData} link='/the-sims/four-pc-canned-dish' />
     </form.AppForm>
-  )
+  );
 }

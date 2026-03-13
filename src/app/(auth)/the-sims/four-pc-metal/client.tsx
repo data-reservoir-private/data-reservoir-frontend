@@ -1,8 +1,7 @@
-'use client'
+'use client';
 
 import { useAppForm } from '@/utilities/form';
-import Box from '@mui/material/Box'
-import { z } from 'zod'
+import { z } from 'zod';
 import { CATEGORIES } from '@/constant/categories';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { useState } from 'react';
@@ -36,17 +35,17 @@ export default function FourPCMetalClient({ data }: { data: ITheSimsResponse['fo
   return (
     <form.AppForm>
       <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
-        <form.AppField name='name' children={(field) => (
-          <field.SimpleTextbox label='Name' />
-        )} />
-        <form.AppField name='rarity' children={(field) => (
-          <field.SimpleSelect label='Rarity' choices={CATEGORIES['the-sims-rarity']} />
-        )} />
+        <form.AppField name='name'>
+          {(field) => <field.SimpleTextbox label='Name' />}
+        </form.AppField>
+        <form.AppField name='rarity'>
+          {(field) => <field.SimpleSelect label='Rarity' choices={CATEGORIES['the-sims-rarity']} />}
+        </form.AppField>
         <form.AppForm>
           <form.SimpleSubmitButton label='Search' />
         </form.AppForm>
       </form.SimpleContainer>
       <SimpleGrid data={realData} link='/the-sims/four-pc-metal' />
     </form.AppForm>
-  )
+  );
 }

@@ -1,9 +1,8 @@
-import Paper from '@/components/common/paper/Paper'
+import Paper from '@/components/common/paper/Paper';
 import { API_ROUTE } from '@/constant/api-route';
 import { IHaydayResponse } from '@/model/response/hayday';
 import { getSearchParam, grabData } from '@/utilities/http';
-import { EChartsOption } from 'echarts'
-import React from 'react'
+import { EChartsOption } from 'echarts';
 import { HaydayOrderFormSchema } from '../form';
 import { EChart } from '@/components/common/chart/Chart';
 import Typography from '@mui/material/Typography';
@@ -17,7 +16,7 @@ export default async function DistributionPage() {
       <Paper className='w-full flex justify-center items-center p-2'>
         <Typography>No data</Typography>
       </Paper>
-    )
+    );
   }
 
   const opt: EChartsOption = {
@@ -60,11 +59,11 @@ export default async function DistributionPage() {
       right: 80,
       bottom: 40,
     },
-  }
+  };
 
   return (
     <Paper className='min-h-75 w-full'>
       <EChart option={opt} className='min-h-75 w-full' />
     </Paper>
-  )
+  );
 }

@@ -47,5 +47,5 @@ async function Message({ message }: { message: searchParamsType }) {
     <Box color='failure' className='p-2 text-sm'>
       <Box component='span'>{msg.message}</Box>
     </Box>
-  )
+  );
 }

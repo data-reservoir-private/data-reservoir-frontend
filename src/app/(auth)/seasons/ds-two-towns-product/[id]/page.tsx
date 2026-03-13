@@ -3,7 +3,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import React, { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
@@ -18,10 +18,10 @@ const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['
 
 export async function generateMetadata(props: DSTwoTownsProductDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `Seasons DS Two Towns Product - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function DSTwoTownsProductDetail(props: DSTwoTownsProductDetailProps) {
@@ -53,5 +53,5 @@ export default async function DSTwoTownsProductDetail(props: DSTwoTownsProductDe
         }} />
       </Section>
     </Section>
-  )
+  );
 }

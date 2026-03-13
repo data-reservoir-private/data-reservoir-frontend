@@ -1,5 +1,5 @@
-import Section from '@/components/common/paper/Section'
-import { BREADCRUMBS } from '@/constant/breadcrumb'
+import Section from '@/components/common/paper/Section';
+import { BREADCRUMBS } from '@/constant/breadcrumb';
 
 export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
   return (
@@ -30,5 +30,5 @@ export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
         {props.product}
       </Section>
     </Section>
-  )
+  );
 }

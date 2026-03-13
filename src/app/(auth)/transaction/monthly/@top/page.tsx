@@ -32,5 +32,5 @@ export default async function TransactionTop() {
         }
       </Box>
     </Section>
-  )
+  );
 }

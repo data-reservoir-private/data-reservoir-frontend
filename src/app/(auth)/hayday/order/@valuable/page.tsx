@@ -17,12 +17,12 @@ export default async function ValuableOrder() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
   const { data } = await grabData<IHaydayResponse['hayday-order']['valuable'][]>(API_ROUTE.HAY_DAY.ORDER.VALUABLE, sp);
 
-  if (!data || data.length == 0) {
+  if (!data || data.length === 0) {
     return (
       <Paper className='w-full flex justify-center items-center p-2'>
         <Typography>No data</Typography>
       </Paper>
-    )
+    );
   }
 
   return (
@@ -70,5 +70,5 @@ export default async function ValuableOrder() {
         ))
       }
     </Grid>
-  )
+  );
 }

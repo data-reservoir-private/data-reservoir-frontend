@@ -3,7 +3,7 @@ import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
-import { cache } from 'react'
+import { cache } from 'react';
 import Section from '@/components/common/paper/Section';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -18,10 +18,10 @@ const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['
 
 export async function generateMetadata(props: TwoPetsConsoleDetailProps) {
   const post = await grabDetail((await props.params).id);
-  if (!post.data) return { title: 'Not Found - Data Reservoir' }
+  if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {
     title: `The Sims Two Pets Console Product - ${post.data.name} - Data Reservoir`
-  }
+  };
 }
 
 export default async function TwoPetsConsoleDetail(props: TwoPetsConsoleDetailProps) {
@@ -53,5 +53,5 @@ export default async function TwoPetsConsoleDetail(props: TwoPetsConsoleDetailPr
         }} />
       </Section>
     </Section>
-  )
+  );
 }
