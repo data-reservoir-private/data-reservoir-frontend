@@ -36,6 +36,7 @@ export const API_ROUTE = Object.freeze({
       WEEKLY: '/hayday/order/weekly',
       MONTHLY: '/hayday/order/monthly',
       DAILY: '/hayday/order/daily',
+      EXPORT: '/hayday/order/export'
     }
   },
   FARM_FRENZY: {
@@ -92,6 +93,8 @@ export const API_ROUTE = Object.freeze({
   },
   TRANSACTION: {
     ANNUAL: '/transaction/annual',
+    EXPORT: '/transaction/export',
+    EXPORT_FLATTENED: '/transaction/export-flat',
     MONTHLY: {
       TOP: '/transaction/monthly/top',
       INCOME: '/transaction/monthly/income',

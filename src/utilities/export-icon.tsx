@@ -11,6 +11,7 @@ import { FaFileExcel } from "react-icons/fa";
 import { ExportType } from "@/model/dto/export";
 
 export const ALL_EXPORTS_COMPLETE: ExportType[] = ['json', 'ndjson', 'csv', 'tsv', 'xml', 'yaml', 'html', 'postgresql', 'sql_server', 'sqlite', 'parquet', 'xlsx'];
+export const ALL_EXPORTS_TRANSACTION: ExportType[] = ['json', 'ndjson', 'csv', 'tsv', 'xml', 'yaml', 'html', 'parquet', 'xlsx'];
 
 export function getTypeIcon(exportType: ExportType) {
   switch (exportType) {

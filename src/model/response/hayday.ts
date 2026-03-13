@@ -197,6 +197,6 @@ export type IHaydayResponse = {
         productPrice: number
         quantity: number
       }[] | null
-    }[]
+    }
   }
 }

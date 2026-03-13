@@ -2,36 +2,39 @@
 
 import Paper from '@/components/common/paper/Paper';
 import { MonthsArray } from '@/constant/date';
-import { ALL_EXPORTS_COMPLETE, getTypeIcon } from '@/utilities/export-icon';
+import { ALL_EXPORTS_TRANSACTION, getTypeIcon } from '@/utilities/export-icon';
 import { useAppForm } from '@/utilities/form';
 import { Box, Button, Typography } from '@mui/material';
 import { z } from 'zod';
+import { FaTruckPickup } from "react-icons/fa";
+import Link from 'next/link';
+import { Route } from 'next';
 
-const schema = z.object({
-  month: z.number().min(1).max(12),
-  year: z.number().min(2000),
-  type: z.enum(ALL_EXPORTS_COMPLETE),
+export const ExportHaydayOrderSchema = z.object({
+  month: z.number().gte(1).lte(12).nullable(),
+  year: z.number().gte(2020).nullable(),
+  type: z.enum(ALL_EXPORTS_TRANSACTION),
   acceptedOnly: z.boolean(),
   includeDetail: z.boolean()
 });
 
 export default function HaydayOrderExport() {
-
+  const date = new Date();
   const form = useAppForm({
     defaultValues: {
-      month: new Date().getMonth() + 1,
-      year: new Date().getFullYear(),
+      month: date.getMonth() + 1,
+      year: date.getFullYear(),
       type: 'json',
       acceptedOnly: false,
       includeDetail: false
-    } as z.infer<typeof schema>,
+    } as z.infer<typeof ExportHaydayOrderSchema>,
     validators: {
-      onChange: schema
+      onChange: ExportHaydayOrderSchema
     }
   });
 
   // yearChoices: [2024, 2025, ..., currentYear]. Start from 2024
-  const yearChoices = Array.from({ length: new Date().getFullYear() - 2023 }, (_, i) => 2024 + i)
+  const yearChoices = Array.from({ length: date.getFullYear() - 2023 }, (_, i) => 2024 + i)
     .map(year => ({ label: year.toString(), value: year }));
 
   return (
@@ -40,7 +43,7 @@ export default function HaydayOrderExport() {
       <Box className='flex gap-2 items-center w-full'>
         {/* Image */}
         <Box className='h-20 w-20 flex justify-center items-center relative'>
-          {/* Icon later */}
+          <FaTruckPickup size={40} />
         </Box>
 
         {/* Dataset name author etc */}
@@ -55,51 +58,73 @@ export default function HaydayOrderExport() {
 
       {/* Form */}
       <form.AppForm>
-        <form.SimpleContainer>
-          <form.AppField name='month' validators={{
-            onChangeListenTo: ['year'],
-            onChange: ({ value, fieldApi }) => {
-              return (!fieldApi.form.getFieldValue('year') && !!value) ? { message: 'Both must be filled' } : undefined;
-            }
-          }}>
-            {(field) => (<field.SimpleSelect label='Month' choices={MonthsArray} />)}
-          </form.AppField>
+        <form.SimpleContainer className="flex flex-col max-md:flex-col grow gap-2 w-full">
+          <Box className="flex flex-col gap-2 grow w-full">
+            <Box className="flex max-md:flex-col gap-2 grow w-full">
+              <form.AppField name="type">
+                {
+                  (field) => <field.SimpleSelect
+                    choices={ALL_EXPORTS_TRANSACTION.map(x => ({ label: x.toUpperCase(), value: x }))}
+                    label='Export Type'
+                    renderOption={(option) =>
+                      <Box className='flex gap-2 items-center'>
+                        {getTypeIcon(option.value)}
+                        {option.label}
+                      </Box>
+                    }
+                  />
+                }
+              </form.AppField>
 
-          <form.AppField name='year' validators={{
-            onChangeListenTo: ['month'],
-            onChange: ({ value, fieldApi }) => {
-              return (!fieldApi.form.getFieldValue('month') && !!value) ? { message: 'Both must be filled' } : undefined;
-            }
-          }}>
-            {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
-          </form.AppField>
+              <form.AppField name='month' validators={{
+                onChangeListenTo: ['year'],
+                onChange: ({ value, fieldApi }) => {
+                  return (!fieldApi.form.getFieldValue('year') && !!value) ? { message: 'Year and month must be filled if month is selected' } : undefined;
+                }
+              }}>
+                {(field) => (<field.SimpleSelect label='Month' choices={MonthsArray} />)}
+              </form.AppField>
 
-          <Box className='flex justify-between'>
-            <form.AppField name='acceptedOnly'>
-              {(field) => (
-              <field.SimpleSwitch label='Accepted Only' />
-              )}
-            </form.AppField>
+              <form.AppField name='year' validators={{
+                onChangeListenTo: ['month'],
+                onChange: ({ value, fieldApi }) => {
+                  return (!fieldApi.form.getFieldValue('month') && !!value) ? { message: 'Year and month must be filled if year is selected' } : undefined;
+                }
+              }}>
+                {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
+              </form.AppField>
+            </Box>
 
-            <form.AppField name='includeDetail'>
-              {(field) => (
-              <field.SimpleSwitch label='Include Detail' />
-              )}
-            </form.AppField>
+            <Box className='flex justify-between px-2'>
+              <form.AppField name='acceptedOnly'>
+                {(field) => (
+                  <field.SimpleSwitch label='Accepted Only' />
+                )}
+              </form.AppField>
+
+              <form.AppField name='includeDetail'>
+                {(field) => (
+                  <field.SimpleSwitch label='Include Detail' />
+                )}
+              </form.AppField>
+            </Box>
           </Box>
-
-          <form.Subscribe selector={(x) => x.values}>
+          <form.Subscribe selector={(x) => ({ values: x.values })}>
             {
-              ({ type }) => (
-                <Button
-                  size='small'
-                  type='submit'
-                  className="w-full"
-                  variant="contained"
-                  startIcon={getTypeIcon(type)}
-                  onClick={() => form.handleSubmit()}
-                >Export as {type}</Button>
-              )
+              ({ values }) => {
+                const param = new URLSearchParams({
+                  month: values.month?.toString() ?? '',
+                  year: values.year?.toString() ?? '',
+                  type: values.type,
+                  acceptedOnly: values.acceptedOnly.toString(),
+                  includeDetail: values.includeDetail.toString()
+                }).toString();
+                return (
+                  <Link passHref href={`/export/transaction/hayday-order?${param}` as Route} target='_blank' className="w-full">
+                    <Button size='small' type='button' className="w-full" variant="contained" startIcon={getTypeIcon(values.type)}>Export as {values.type}</Button>
+                  </Link>
+                );
+              }
             }
           </form.Subscribe>
         </form.SimpleContainer>

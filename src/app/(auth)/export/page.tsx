@@ -6,6 +6,8 @@ import { grabData } from '@/utilities/http';
 import { IDashboardResponse } from '@/model/response/dashboard';
 import { API_ROUTE } from '@/constant/api-route';
 import ExportMasterDatasetClient from './client';
+import HaydayOrderExport from './hayday-order';
+import TransactionExpenseExport from './transaction-expense';
 
 export const metadata: Metadata = {
   title: 'Export Data - Data Reservoir'
@@ -18,11 +20,9 @@ interface Dataset {
 }
 
 export default async function ExportPage() {
-
   const { data } = await grabData<IDashboardResponse[]>(`${API_ROUTE.DASHBOARD}`);
   const datasets = data.reduce((acc, curr) =>
-    [...acc, ...curr.datasets.map(x => ({ name: `${curr.category} ${x.name}`, total: x.total, owner: curr.owner }))]
-    , [] as Dataset[]);
+    [...acc, ...curr.datasets.map(x => ({ name: `${curr.category} ${x.name}`, total: x.total, owner: curr.owner }))], [] as Dataset[]);
 
   return (
     <Section name='Export Data' variant='h4'>
@@ -32,11 +32,11 @@ export default async function ExportPage() {
       <Typography textAlign='justify'>The structure of the data is similar to the one you usually found inside detail endpoint (endpoint that ends with GUID like <code>00000000-0000-0000-0000-000000000000</code>).</Typography>
 
       <ExportMasterDatasetClient dataset={DATASETS_AVAILABLE} apiDataset={datasets} />
-{/* 
+
       <Section name='Transactional Datasets' variant='h6'>
-
-
-      </Section> */}
+        <HaydayOrderExport/>
+        <TransactionExpenseExport/>
+      </Section>
 
     </Section>
   );
