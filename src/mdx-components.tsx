@@ -27,7 +27,18 @@ const components: MDXComponents = {
         {children}
       </Typography>
       <Divider />
-    </Box>
+    </Box>,
+  h3: ({ children }) =>
+    <Box>
+      <Typography variant='h6' className='font-bold text-[1.125rem]' component='h3'>
+        {children}
+      </Typography>
+      <Divider />
+    </Box>,
+  ul: ({ children }) =>
+    <Box component='ul' className='pb-2'>
+      {children}
+    </Box>,
 };
 
 export function useMDXComponents(): MDXComponents {

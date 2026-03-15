@@ -10,6 +10,8 @@ There are lots of points to be talked about, especially when you are newly lande
 - Yes, you can look at every data here
 - Basically, every visible datasets are free to use as you wish. You cannot see some datasets? No access for you. Please ask the solo dev to give you access.
 
+That's it. No payment needed.
+
 ## **Timeline**
 
 Some rough timeline of how this website and data came to be:
