@@ -114,7 +114,7 @@ export default function ExportMasterDatasetClient({ dataset, apiDataset }: { dat
                   <Box className='h-20 w-20 flex justify-center items-center relative'>
                     {
                       (ds.image === 'building') ? <BsBuildingFill className="text-4xl" /> :
-                        <SimpleImage src={ds.image} alt={ds.name} className='rounded-sm' unoptimized />
+                        <SimpleImage src={ds.image} alt={ds.name} className='rounded-sm' unoptimized pixelated={ds.pixelatedImage} />
                     }
                   </Box>
 

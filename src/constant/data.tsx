@@ -436,6 +436,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-mineral-recipe',
         name: 'DS Mineral Recipe',
         image: '/image/quick_link/sos_ds_mineral_recipe.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Friends of Mineral Town GBA recipes. Sourced from https://fogu.com/hm4/',
         link: '/seasons/ds-mineral-recipe',
         export: {
@@ -447,6 +448,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-mineral-shippable',
         name: 'DS Mineral Shippable',
         image: '/image/quick_link/sos_ds_mineral_shippable.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Friends of Mineral Town GBA shippable products (not including crops). Sourced from https://fogu.com/hm4/',
         link: '/seasons/ds-mineral-shippable',
         export: {
@@ -458,6 +460,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-mineral-utensil',
         name: 'DS Mineral Utensil',
         image: '/image/quick_link/sos_ds_mineral_utensil.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Friends of Mineral Town GBA utensils. Sourced from https://fogu.com/hm4/',
         link: '/seasons/ds-mineral-utensil',
         export: {
@@ -469,6 +472,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-mineral-crop',
         name: 'DS Mineral Crop',
         image: '/image/quick_link/sos_ds_mineral_crop.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Friends of Mineral Town GBA crop. Sourced from https://fogu.com/hm4/',
         link: '/seasons/ds-mineral-crop',
         export: {
@@ -481,6 +485,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-bazaar-crop',
         name: 'DS Bazaar Crop',
         image: '/image/quick_link/sos_ds_bazaar_crop.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Grand Bazaar Town DS crops. Sourced from https://fogu.com/hm9/item-profit-list.php',
         link: '/seasons/ds-bazaar-crop',
         export: {
@@ -492,6 +497,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-bazaar-recipe',
         name: 'DS Bazaar Recipe',
         image: '/image/quick_link/sos_ds_bazaar_recipe.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Grand Bazaar Town DS recipes. Sourced from https://fogu.com/hm9/item-profit-list.php',
         link: '/seasons/ds-bazaar-recipe',
         export: {
@@ -503,6 +509,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-bazaar-animal-product',
         name: 'DS Bazaar Animal Product',
         image: '/image/quick_link/sos_ds_bazaar_animal_product.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Grand Bazaar Town DS animal products. Sourced from https://fogu.com/hm9/item-profit-list.php',
         link: '/seasons/ds-bazaar-animal-product',
         export: {
@@ -514,6 +521,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-bazaar-windmill-product',
         name: 'DS Bazaar Windmill Product',
         image: '/image/quick_link/sos_ds_bazaar_windmill_product.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Grand Bazaar Town DS windmill products. Sourced from https://fogu.com/hm9/item-profit-list.php',
         link: '/seasons/ds-bazaar-windmill-product',
         export: {
@@ -525,6 +533,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-bazaar-wild-product',
         name: 'DS Bazaar Wild Product',
         image: '/image/quick_link/sos_ds_bazaar_wild_product.png',
+        pixelatedImage: true,
         description: 'Harvest Moon: Grand Bazaar Town DS wild products. Sourced from https://fogu.com/hm9/item-profit-list.php',
         link: '/seasons/ds-bazaar-wild-product',
         export: {
@@ -536,6 +545,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-two-towns-crop',
         name: 'DS Two Towns Crop',
         image: '/image/quick_link/sos_ds_two_towns_crop.png',
+        pixelatedImage: true,
         description: 'Story of Seasons: Tale of Two Towns crops. Sourced from https://fogu.com/hm10/',
         link: '/seasons/ds-two-towns-crop',
         export: {
@@ -547,6 +557,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-two-towns-fishing-catch',
         name: 'DS Two Towns Fishing Catch',
         image: '/image/quick_link/sos_ds_two_towns_fishing_catch.png',
+        pixelatedImage: true,
         description: 'Story of Seasons: Tale of Two Towns fishing catches. Sourced from https://fogu.com/hm10/',
         link: '/seasons/ds-two-towns-fishing-catch',
         export: {
@@ -558,6 +569,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-two-towns-product',
         name: 'DS Two Towns Product',
         image: '/image/quick_link/sos_ds_two_towns_product.png',
+        pixelatedImage: true,
         description: 'Story of Seasons: Tale of Two Towns products. Sourced from https://fogu.com/hm10/',
         link: '/seasons/ds-two-towns-product',
         export: {
@@ -569,6 +581,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-two-towns-recipe',
         name: 'DS Two Towns Recipe',
         image: '/image/quick_link/sos_ds_two_towns_recipe.png',
+        pixelatedImage: true,
         description: 'Story of Seasons: Tale of Two Towns recipes. Sourced from https://fogu.com/hm10/',
         link: '/seasons/ds-two-towns-recipe',
         export: {
@@ -580,6 +593,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'ds-two-towns-tree',
         name: 'DS Two Towns Tree',
         image: '/image/quick_link/sos_ds_two_towns_tree.png',
+        pixelatedImage: true,
         description: 'Story of Seasons: Tale of Two Towns trees. Sourced from https://fogu.com/hm10/',
         link: '/seasons/ds-two-towns-tree',
         export: {
@@ -597,6 +611,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         name: 'Artifact',
         description: '',
         image: '/image/quick_link/c_artifact.png',
+        pixelatedImage: true,
         link: '/cygnus/artifact'
       },
       {
@@ -604,6 +619,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         name: 'Mineral',
         description: 'Stardew\'s minerals that are collectible.',
         image: '/image/quick_link/c_mineral.png',
+        pixelatedImage: true,
         link: '/cygnus/mineral',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
@@ -615,6 +631,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         name: 'Forage',
         description: '',
         image: '/image/quick_link/c_forage.png',
+        pixelatedImage: true,
         link: '/cygnus/forage'
       },
       {
@@ -622,6 +639,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         name: 'Crop',
         description: 'Stardew\'s base vanilla crops. I will consider adding mod crops in the future, but let\'s just keep it simple hehe',
         image: '/image/quick_link/c_crop.png',
+        pixelatedImage: true,
         link: '/cygnus/crop',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
@@ -633,6 +651,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         name: 'Dish',
         description: 'Stardew\'s base vanilla dishes.',
         image: '/image/quick_link/c_dish.png',
+        pixelatedImage: true,
         link: '/cygnus/dish',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
@@ -644,6 +663,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         name: 'Node',
         description: '',
         image: '/image/quick_link/c_node.png',
+        pixelatedImage: true,
         link: '/cygnus/node'
       }
     ]

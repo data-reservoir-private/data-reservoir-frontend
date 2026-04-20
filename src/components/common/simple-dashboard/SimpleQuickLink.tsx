@@ -17,7 +17,7 @@ interface SimpleQuickLinkProps {
   pixelated?: boolean;
 }
 
-export default function SimpleQuickLink({ quickLink, columns, unoptimized, pixelated }: SimpleQuickLinkProps) {
+export default function SimpleQuickLink({ quickLink, columns, unoptimized }: SimpleQuickLinkProps) {
   return (
     <Section variant='h6' name='Quick Link'>
       <Grid container spacing='1rem' columns={columns ?? { xs: 1, sm: 2, md: 3, lg: 4 }}>
@@ -32,7 +32,7 @@ export default function SimpleQuickLink({ quickLink, columns, unoptimized, pixel
                       <Box className='h-20 w-auto min-w-20 flex items-center relative justify-center'>
                         {
                           (nav.image === 'building') ? <BsBuildingFill className="text-4xl" /> :
-                            <SimpleImage src={nav.image} alt={nav.name} className='rounded-sm' unoptimized={unoptimized} pixelated={pixelated} />
+                            <SimpleImage src={nav.image} alt={nav.name} className='rounded-sm' unoptimized={unoptimized} pixelated={nav.pixelatedImage} />
                         }
                       </Box>
                     )

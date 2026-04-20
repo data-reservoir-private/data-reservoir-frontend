@@ -33,7 +33,7 @@ export class Converter {
       expandArrayObjects: false
     });
   }
-  public static async toHTMLTable(data: object[]) {
+  public static async toHTMLTable(data: object[], pixelatedImage: boolean = false) {
     const ReactDOMServer = (await import('react-dom/server')).default;
 
     if (data.length === 0) {
@@ -54,7 +54,7 @@ export class Converter {
       }
       if (typeof v === 'string' && v.startsWith('http')) return (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <img width={50} src={v} alt="Image" />
+          <img width={50} src={v} alt="Image" style={{ imageRendering: pixelatedImage ? 'pixelated' : 'auto' }} />
         </div>
       );
       if (typeof v === 'boolean') return (
@@ -86,6 +86,7 @@ export class Converter {
           <head>
             <meta charSet="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="icon" type="image/svg+xml" href="favicon.svg"></link>
             <title>Exported Data</title>
           </head>
           <body>

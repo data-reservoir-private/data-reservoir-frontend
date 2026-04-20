@@ -97,7 +97,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<IParam> 
   });
 
   else if (exportType === 'html') {
-    return new NextResponse(await Converter.toHTMLTable(res), {
+    return new NextResponse(await Converter.toHTMLTable(res, d?.pixelatedImage ?? false), {
       headers: {
         'Content-Type': 'text/html',
       }

@@ -10,7 +10,7 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
   pagination?: IPaginationResponse,
   data: TData
 }> {
-  let urlFinal = `${process.env.NEXT_PUBLIC_API_URL}${url}`;
+  let urlFinal = `${process.env.API_URL}${url}`;
   if (params) {
     urlFinal = urlFinal + '?' + queryString.stringify(params, {
       arrayFormat: 'none',
@@ -23,16 +23,13 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
     method: 'GET',
     headers: {
       'X-API-Key': process.env.API_KEY
-    },
-    next: {
-      revalidate: 3600 * 12 
     }
   });
 
   if (response.status >= 400) { 
     console.error(await response.text());
   }
-
+  
   const res = await response.json();
   return {
     pagination: res.pagination,
