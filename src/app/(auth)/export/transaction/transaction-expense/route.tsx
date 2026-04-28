@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
   const requestParams = await ExportTransactionExpenseServerSchema.safeParseAsync(
     Object.fromEntries(req.nextUrl.searchParams.entries().map(([key, value]) => [key, value || undefined]).filter(([_, value]) => value !== undefined))
   );
-  console.log(Object.fromEntries(req.nextUrl.searchParams.entries().map(([key, value]) => [key, value || undefined]).filter(([_, value]) => value !== undefined)));
   if (!requestParams.success) return notFound();
 
   const isFlattened = FLATTENED_TYPE.includes(requestParams.data.type);

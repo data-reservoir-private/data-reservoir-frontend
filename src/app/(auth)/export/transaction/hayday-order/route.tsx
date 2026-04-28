@@ -59,8 +59,6 @@ export async function GET(req: NextRequest) {
   }));
   const { data } = await c();
 
-  console.log(requestParams.data);
-
   // Safe area for nested data
   if (type === 'json') {
     return new Response(JSON.stringify(data), {
