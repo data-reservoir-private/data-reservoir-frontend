@@ -31,16 +31,22 @@ type HaydayExportFlattened = Omit<IHaydayResponse['hayday-order']['export'], 'de
   product6Quantity: number | null,
 }
 
+// Validate please
+// Possible things are (year and month are null), (year is not null, month is null), (year is not null, month is not null)
 const ExportHaydayOrderSchema = z.object({
-  month: z.coerce.number().gte(1).lte(12).nullable(),
-  year: z.coerce.number().gte(2020).nullable(),
+  month: z.coerce.number().min(1).max(12).optional().default(undefined),
+  year: z.coerce.number().gte(2020).optional(),
   type: z.enum(ALL_EXPORTS_TRANSACTION),
-  acceptedOnly: z.coerce.boolean(),
-  includeDetail: z.coerce.boolean()
+  acceptedOnly: z.stringbool(),
+  includeDetail: z.stringbool()
+}).refine(d => d.month === undefined || d.year !== undefined, {
+  message: 'Year must be filled if month is filled',
 });
 
 export async function GET(req: NextRequest) {
-  const requestParams = await ExportHaydayOrderSchema.safeParseAsync(Object.fromEntries(req.nextUrl.searchParams.entries()));
+  const requestParams = await ExportHaydayOrderSchema.safeParseAsync(
+    Object.fromEntries(req.nextUrl.searchParams.entries().map(([key, value]) => [key, value || undefined]).filter(([_, value]) => value !== undefined))
+  );
   if (!requestParams.success) return notFound();
 
   const { month, year, type, acceptedOnly, includeDetail } = requestParams.data;
@@ -52,6 +58,8 @@ export async function GET(req: NextRequest) {
     IncludeDetail: includeDetail
   }));
   const { data } = await c();
+
+  console.log(requestParams.data);
 
   // Safe area for nested data
   if (type === 'json') {

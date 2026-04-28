@@ -66,6 +66,10 @@ export default function TransactionExpenseExport() {
               }
             </form.AppField>
 
+            <form.AppField name='year'>
+              {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
+            </form.AppField>
+
             <form.AppField name='month' validators={{
               onChangeListenTo: ['year'],
               onChange: ({ value, fieldApi }) => {
@@ -73,15 +77,6 @@ export default function TransactionExpenseExport() {
               }
             }}>
               {(field) => (<field.SimpleSelect label='Month' choices={MonthsArray} />)}
-            </form.AppField>
-
-            <form.AppField name='year' validators={{
-              onChangeListenTo: ['month'],
-              onChange: ({ value, fieldApi }) => {
-                return (!fieldApi.form.getFieldValue('month') && !!value) ? { message: 'Year and month must be filled if year is selected' } : undefined;
-              }
-            }}>
-              {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
             </form.AppField>
           </Box>
           <form.Subscribe selector={(x) => ({ values: x.values })}>

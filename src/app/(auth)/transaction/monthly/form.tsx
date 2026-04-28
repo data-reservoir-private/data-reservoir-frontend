@@ -39,22 +39,17 @@ export default function TransactionMonthlyForm({ param }: { param: TransactionMo
   return (
     <form.AppForm>
       <form.SimpleContainer className="flex max-md:flex-col grow gap-2">
-        <form.AppField name='month' validators={{
+        <form.AppField name='year'>
+          {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
+        </form.AppField>
+
+        <form.AppField name='month'validators={{
           onChangeListenTo: ['year'],
           onChange: ({ value, fieldApi }) => {
-            return (!fieldApi.form.getFieldValue('year') && !!value) ? { message: 'Both must be filled' } : undefined;
+            return (!fieldApi.form.getFieldValue('year') && !!value) ? { message: 'Year must be filled if month is selected' } : undefined;
           }
         }}>
           {(field) => (<field.SimpleSelect label='Month' choices={MonthsArray} />)}
-        </form.AppField>
-
-        <form.AppField name='year' validators={{
-          onChangeListenTo: ['month'],
-          onChange: ({ value, fieldApi }) => {
-            return (!fieldApi.form.getFieldValue('month') && !!value) ? { message: 'Both must be filled' } : undefined;
-          }
-        }}>
-          {(field) => (<field.SimpleSelect label='Year' choices={yearChoices} />)}
         </form.AppField>
         <form.SimpleSubmitButton className='w-full' label='Search' />
       </form.SimpleContainer>
