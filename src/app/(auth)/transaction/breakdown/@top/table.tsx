@@ -2,11 +2,11 @@
 
 import SimpleTable from '@/components/common/simple-table/SimpleTable';
 import { DaysArray, MonthsArray } from '@/constant/date';
-import { ITransactionMonthlyResponse } from '@/model/response/transaction';
+import { ITransactionBreakdownResponse } from '@/model/response/transaction';
 import { createColumns, createIndexColumn } from '@/utilities/table';
 
-export default function TopTable({ data }: { data: ITransactionMonthlyResponse['top'][] }) {
-  const column = createColumns<ITransactionMonthlyResponse['top']>(col => [
+export default function TopTable({ data }: { data: ITransactionBreakdownResponse['top'][] }) {
+  const column = createColumns<ITransactionBreakdownResponse['top']>(col => [
     createIndexColumn(col),
     col.accessor('date', {
       header: 'Date',
