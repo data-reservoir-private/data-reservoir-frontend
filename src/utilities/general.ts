@@ -1,6 +1,11 @@
 import { THE_SIMS_RARITY } from "@/constant/enums";
 import queryString from "query-string";
 
+export function round(num: number, decimalPlaces: number = 2): number {
+  const factor = Math.pow(10, decimalPlaces);
+  return Math.round(num * factor) / factor;
+}
+
 /**
  * Second to string timespan (d:HH:mm:ss)
  * @param p Time in seconds

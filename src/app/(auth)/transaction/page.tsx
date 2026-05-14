@@ -7,6 +7,7 @@ import { DATASETS_AVAILABLE } from '@/constant/data';
 import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleRecordTableCards';
 import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart';
 import SimpleQuickLink from '@/components/common/simple-dashboard/SimpleQuickLink';
+import { IData } from '@/model/dto/export';
 
 export const metadata: Metadata = {
   title: 'Transaction - Data Reservoir'
@@ -14,12 +15,22 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/transaction`);
+  const date = new Date();
+  const sets = {
+    ...DATASETS_AVAILABLE['transaction'],
+    categories: [
+      {
+        ...DATASETS_AVAILABLE['transaction'].categories[0],
+        link: `/transaction/breakdown?year=${date.getFullYear()}&month=${date.getMonth() + 1}`
+      }
+    ]
+  } as IData;
 
   return (
     <Section name="Transaction" variant='h4'>
       <SimpleRecordTableCards response={data}/>
       <SimpleBarTableChart response={data}/>
-      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['transaction']} columns={1}/>
+      <SimpleQuickLink quickLink={sets} columns={1}/>
     </Section>
   );
 }

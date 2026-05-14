@@ -14,7 +14,7 @@ export default function TopTable({ data }: { data: ITransactionMonthlyResponse['
         const d = new Date(x.getValue());
         const month = MonthsArray.find(x => x.value === d.getMonth() + 1)!.label;
         const dayName = DaysArray[d.getDay()];
-        return `${dayName}, ${d.getDate()} ${month}`;
+        return `${dayName}, ${d.getDate()} ${month} ${d.getFullYear()}`;
       },
       enableSorting: true,
     }),

@@ -672,9 +672,9 @@ export const DATASETS_AVAILABLE = Object.freeze(({
     name: 'Transaction',
     categories: [
       {
-        id: 'monthly',
-        name: "Monthly",
-        link: '/transaction/monthly',
+        id: 'breakdown',
+        name: "Breakdown",
+        link: '/transaction/breakdown',
         description: '',
       },
     ]
