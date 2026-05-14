@@ -95,11 +95,12 @@ export const API_ROUTE = Object.freeze({
     ANNUAL: '/transaction/annual',
     EXPORT: '/transaction/export',
     EXPORT_FLATTENED: '/transaction/export-flat',
-    MONTHLY: {
-      TOP: '/transaction/monthly/top',
-      INCOME: '/transaction/monthly/income',
-      DAILY: '/transaction/monthly/daily',
-      CATEGORY: '/transaction/monthly/category',
+    BREAKDOWN: {
+      TOP: '/transaction/breakdown/top',
+      INCOME: '/transaction/breakdown/income',
+      DAILY: '/transaction/breakdown/daily',
+      MONTHLY: '/transaction/breakdown/monthly',
+      CATEGORY: '/transaction/breakdown/category',
     }
   }
 } as const);

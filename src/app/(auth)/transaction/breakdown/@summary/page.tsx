@@ -1,6 +1,6 @@
 import { getSearchParam, grabData } from '@/utilities/http';
-import { TransactionMonthlyFormSchema } from '../form';
-import { ITransactionMonthlyResponse } from '@/model/response/transaction';
+import { TransactionBreakdownFormSchema } from '../form';
+import { ITransactionBreakdownResponse } from '@/model/response/transaction';
 import { API_ROUTE } from '@/constant/api-route';
 import Section from '@/components/common/paper/Section';
 import Box from '@mui/material/Box';
@@ -8,23 +8,24 @@ import { EChartsOption } from 'echarts';
 import { EChart } from '@/components/common/chart/Chart';
 import Paper from '@/components/common/paper/Paper';
 import Typography from '@mui/material/Typography';
+import { round } from '@/utilities/general';
 
-export default async function TransactionMonthlySummary() {
-  const sp = await getSearchParam<TransactionMonthlyFormSchema>();
-  const { data: categoryData } = await grabData<ITransactionMonthlyResponse['category'][]>(API_ROUTE.TRANSACTION.MONTHLY.CATEGORY, {
-    year: sp.year ?? new Date().getFullYear(),
-    month: sp.month ?? (new Date().getMonth() + 1)
+export default async function TransactionBreakdownSummary() {
+  const sp = await getSearchParam<TransactionBreakdownFormSchema>();
+  const { data: categoryData } = await grabData<ITransactionBreakdownResponse['category'][]>(API_ROUTE.TRANSACTION.BREAKDOWN.CATEGORY, {
+    year: sp.year,
+    month: sp.month
   });
-  const { data: incomeData } = await grabData<ITransactionMonthlyResponse['income'][]>(API_ROUTE.TRANSACTION.MONTHLY.INCOME, {
-    year: sp.year ?? new Date().getFullYear(),
-    month: sp.month ?? (new Date().getMonth() + 1)
+  const { data: incomeData } = await grabData<ITransactionBreakdownResponse['income'][]>(API_ROUTE.TRANSACTION.BREAKDOWN.INCOME, {
+    year: sp.year,
+    month: sp.month
   });
 
   const hasData = categoryData.length > 0 || incomeData.length > 0;
 
   // Expense total
-  const expenseTotal = categoryData?.reduce((acc, curr) => acc + curr.total, 0) ?? 0;
-  const incomeTotal = incomeData?.reduce((acc, curr) => acc + curr.total, 0) ?? 0;
+  const expenseTotal = round(categoryData?.reduce((acc, curr) => acc + curr.total, 0) ?? 0, 0);
+  const incomeTotal = round(incomeData?.reduce((acc, curr) => acc + curr.total, 0) ?? 0, 0);
 
   // Echarts pie optionn for income v expense
   const incomeExpenseOption: EChartsOption = {
@@ -53,7 +54,7 @@ export default async function TransactionMonthlySummary() {
       {
         type: 'pie',
         data: categoryData.map(item => ({
-          value: item.total,
+          value: round(item.total, 0),
           name: item.category
         })),
         label: {

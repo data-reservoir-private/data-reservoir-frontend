@@ -8,21 +8,24 @@ import { MonthsArray } from '@/constant/date';
 import { makeSearchParam } from '@/utilities/general';
 
 const dj = new Date().getFullYear();
-const yearChoices = [dj, dj - 1].reduce<{ label: string, value: number }[]>((acc, curr) => [...acc, { label: curr.toString(), value: curr }], []);
+const startYear = 2024;
+const yearChoices = Array
+  .from({ length: dj - startYear + 1 }, (_, i) => dj - i)
+  .reduce<{ label: string, value: number }[]>((acc, curr) => [...acc, { label: curr.toString(), value: curr }], []);
 
 const schema = z.object({
-  year: z.union([z.null(), z.number().gte(2020)]),
-  month: z.union([z.null(), z.number().gte(1).lte(12)])
+  year: z.union([z.null(), z.number().gte(2020)]).optional(),
+  month: z.union([z.null(), z.number().gte(1).lte(12)]).optional()
 });
 
-export type TransactionMonthlyFormSchema = z.infer<typeof schema>;
+export type TransactionBreakdownFormSchema = z.infer<typeof schema>;
 
-export default function TransactionMonthlyForm({ param }: { param: TransactionMonthlyFormSchema }) {
+export default function TransactionBreakdownForm({ param }: { param: TransactionBreakdownFormSchema }) {
   const defaultValues = formOptions({
     defaultValues: {
-      month: param.month ?? new Date().getMonth() + 1,
-      year: param.year ?? dj
-    } as TransactionMonthlyFormSchema,
+      month: param.month,
+      year: param.year
+    } as TransactionBreakdownFormSchema,
     validators: {
       onChange: schema
     }
@@ -32,7 +35,7 @@ export default function TransactionMonthlyForm({ param }: { param: TransactionMo
   const form = useAppForm({
     ...defaultValues,
     onSubmit: async ({ value }) => {
-      router.push(`/transaction/monthly?${makeSearchParam(value)}`);
+      router.push(`/transaction/breakdown?${makeSearchParam(value)}`);
     }
   });
 

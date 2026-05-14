@@ -1,9 +1,13 @@
-export type ITransactionMonthlyResponse = {
+export type ITransactionBreakdownResponse = {
   'category': {
     category: string
     total: number
   },
   'daily': {
+    date: string
+    total: number
+  },
+  'monthly': {
     date: string
     total: number
   },
