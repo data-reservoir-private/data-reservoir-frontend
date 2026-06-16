@@ -16,9 +16,9 @@ interface NasiGorengToolDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<INasiGorengResponse['tool']>(API_ROUTE.NASI_GORENG.TOOL);
+export const generateStaticParams = getStaticParams<INasiGorengResponse['tool']>(API_ROUTE.NASI_GORENG.TOOL.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['tool-complete'] | null>(`${API_ROUTE.NASI_GORENG.TOOL}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['tool-complete'] | null>(API_ROUTE.NASI_GORENG.TOOL.ID(id)));
 
 export async function generateMetadata(props: NasiGorengToolDetailProps) {
   const post = await grabDetail((await props.params).id);

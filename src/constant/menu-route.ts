@@ -1,4 +1,4 @@
-import { ElementIcon } from "@/components/icon/icons";
+import { ElementIcon, TransjakartaIcon } from "@/components/icon/icons";
 import { IconType } from "react-icons";
 import { BiSolidHome } from "react-icons/bi";
 import { BsFillSuitDiamondFill, BsDatabaseFillDown } from "react-icons/bs";
@@ -89,14 +89,12 @@ export const ROUTES: ROUTE_TYPE[][] = [
       icon: GrTransaction,
       link: '/transaction',
     },
-    // {
-    //   id: 'transjakarta',
-    //   name: 'Transjakarta',
-    //   icon: TransjakartaIcon,
-    //   inactive: true,
-    //   link: '/transjakarta',
-    //   beta: true
-    // },
+    {
+      id: 'transjakarta',
+      name: 'Transjakarta',
+      icon: TransjakartaIcon,
+      link: '/transjakarta',
+    },
   ],
   [
     {

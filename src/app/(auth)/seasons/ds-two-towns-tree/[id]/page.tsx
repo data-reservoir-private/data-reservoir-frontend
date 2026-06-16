@@ -15,7 +15,7 @@ interface DSTwoTownsTreeDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-two-towns-tree-detail'] | null>(`${API_ROUTE.SEASONS.DS_TWO_TOWNS_TREE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-two-towns-tree-detail'] | null>(API_ROUTE.SEASONS.DS_TWO_TOWNS_TREE.ID(id)));
 
 type IStage = {
   image: string,

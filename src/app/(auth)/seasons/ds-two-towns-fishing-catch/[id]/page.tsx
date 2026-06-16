@@ -14,7 +14,7 @@ interface DSTwoTownsFishingCatchDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-two-towns-fishing-catch'] | null>(`${API_ROUTE.SEASONS.DS_TWO_TOWNS_FISHING_CATCH}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-two-towns-fishing-catch'] | null>(API_ROUTE.SEASONS.DS_TWO_TOWNS_FISHING_CATCH.ID(id)));
 
 export async function generateMetadata(props: DSTwoTownsFishingCatchDetailProps) {
   const post = await grabDetail((await props.params).id);

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BazaarWindmill() {
-  const { data } = await grabData<ISeasonsResponse['ds-bazaar-windmill-product'][]>(API_ROUTE.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT, {
+  const { data } = await grabData<ISeasonsResponse['ds-bazaar-windmill-product'][]>(API_ROUTE.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT.BASE, {
     pageSize: 0,
   });
 

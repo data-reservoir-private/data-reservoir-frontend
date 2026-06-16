@@ -16,9 +16,9 @@ interface TwoPizzaProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['two-pizza']>(API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT);
+export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['two-pizza']>(API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['two-pizza-detail'] | null>(`${API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['two-pizza-detail'] | null>(API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: TwoPizzaProductDetailProps) {
   const post = await grabDetail((await props.params).id);

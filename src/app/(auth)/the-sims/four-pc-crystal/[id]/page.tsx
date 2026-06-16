@@ -17,9 +17,9 @@ interface FourPCCrystalDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<ITheSimsResponse['four-pc-crystal']>(API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL);
+export const generateStaticParams = getStaticParams<ITheSimsResponse['four-pc-crystal']>(API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-crystal-complete'] | null>(`${API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-crystal-complete'] | null>(API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL.ID(id)));
 
 export async function generateMetadata(props: FourPCCrystalDetailProps) {
   const post = await grabDetail((await props.params).id);

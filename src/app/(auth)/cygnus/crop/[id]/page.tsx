@@ -32,7 +32,7 @@ type IStage = {
 )
 
 const grabDetail = async (id: string) => {
-  return await grabData<ICygnusResponse['crop-complete'] | null>(`${API_ROUTE.CYGNUS.CROP}/${id}`);
+  return await grabData<ICygnusResponse['crop-complete'] | null>(API_ROUTE.CYGNUS.CROP.ID(id));
 };
 
 export async function generateMetadata(props: CropDetailProps) {

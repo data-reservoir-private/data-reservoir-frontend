@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TwoPetsConsoleProduct() {
-  const { data } = await grabData<ITheSimsResponse['two-pets-console-product'][]>(API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT, { pageSize: 0 });
+  const { data } = await grabData<ITheSimsResponse['two-pets-console-product'][]>(API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT.BASE, { pageSize: 0 });
 
   return (
     <Section name='The Sims Two Pets Console Product' variant='h4' breadcrumbs={BREADCRUMBS['the-sims-two-pets-console-product']}>

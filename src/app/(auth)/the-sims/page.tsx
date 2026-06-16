@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/the_sims`);
+  const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.THE_SIMS);
 
   return (
     <Section name="The Sims" variant='h4'>

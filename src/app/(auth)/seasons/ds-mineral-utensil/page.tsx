@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TwoProduct() {
-  const { data } = await grabData<ISeasonsResponse['ds-mineral-utensil'][]>(API_ROUTE.SEASONS.DS_MINERAL_UTENSIL, {
+  const { data } = await grabData<ISeasonsResponse['ds-mineral-utensil'][]>(API_ROUTE.SEASONS.DS_MINERAL_UTENSIL.BASE, {
     pageSize: 0,
   });
 

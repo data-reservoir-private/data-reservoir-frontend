@@ -15,9 +15,9 @@ interface NasiGorengBurnedFoodDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<INasiGorengResponse['burned-food']>(API_ROUTE.NASI_GORENG.BURNED_FOOD);
+export const generateStaticParams = getStaticParams<INasiGorengResponse['burned-food']>(API_ROUTE.NASI_GORENG.BURNED_FOOD.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['burned-food'] | null>(`${API_ROUTE.NASI_GORENG.BURNED_FOOD}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['burned-food'] | null>(API_ROUTE.NASI_GORENG.BURNED_FOOD.ID(id)));
 
 export async function generateMetadata(props: NasiGorengBurnedFoodDetailProps) {
   const post = await grabDetail((await props.params).id);

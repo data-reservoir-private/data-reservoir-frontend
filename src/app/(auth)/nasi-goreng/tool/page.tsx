@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function NasiGorengTool() {
-  const { data } = await grabData<INasiGorengResponse['tool'][]>(API_ROUTE.NASI_GORENG.TOOL, {
+  const { data } = await grabData<INasiGorengResponse['tool'][]>(API_ROUTE.NASI_GORENG.TOOL.BASE, {
     pageSize: 0,
   });
 

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/seasons`);
+  const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.SEASONS);
 
   return (
     <Section variant='h4' name='Story of Seasons'>

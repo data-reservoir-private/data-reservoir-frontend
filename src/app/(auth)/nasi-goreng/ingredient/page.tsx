@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function NasiGorengIngredient() {
-  const { data } = await grabData<INasiGorengResponse['ingredient'][]>(API_ROUTE.NASI_GORENG.INGREDIENT, { pageSize: 0 });
+  const { data } = await grabData<INasiGorengResponse['ingredient'][]>(API_ROUTE.NASI_GORENG.INGREDIENT.BASE, { pageSize: 0 });
 
   return (
     <Section name='Nasi Goreng Ingredients' variant='h4' breadcrumbs={BREADCRUMBS['nasi-goreng-ingredient']}>

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreeProduct() {
-  const { data } = await grabData<IFarmFrenzyResponse['three'][]>(API_ROUTE.FARM_FRENZY.THREE_PRODUCT, {
+  const { data } = await grabData<IFarmFrenzyResponse['three'][]>(API_ROUTE.FARM_FRENZY.THREE_PRODUCT.BASE, {
     pageSize: 0,
   });
 

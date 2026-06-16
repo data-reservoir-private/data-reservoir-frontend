@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HaydayProduct() {
-  const { data } = await grabData<IHaydayResponse['hayday-product'][]>(API_ROUTE.HAY_DAY.PRODUCT, {
+  const { data } = await grabData<IHaydayResponse['hayday-product'][]>(API_ROUTE.HAY_DAY.PRODUCT.BASE, {
     pageSize: 0,
   });
 

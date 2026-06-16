@@ -20,7 +20,7 @@ interface Dataset {
 }
 
 export default async function ExportPage() {
-  const { data } = await grabData<IDashboardResponse[]>(`${API_ROUTE.DASHBOARD}`);
+  const { data } = await grabData<IDashboardResponse[]>(API_ROUTE.DASHBOARD.BASE);
   const datasets = data.reduce((acc, curr) =>
     [...acc, ...curr.datasets.map(x => ({ name: `${curr.category} ${x.name}`, total: x.total, owner: curr.owner }))], [] as Dataset[]);
 

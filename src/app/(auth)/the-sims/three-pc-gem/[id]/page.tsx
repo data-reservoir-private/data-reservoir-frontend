@@ -17,7 +17,7 @@ interface ThreePCGemDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-gem'] | null>(`${API_ROUTE.THE_SIMS.THREE_PC_GEM}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-gem'] | null>(API_ROUTE.THE_SIMS.THREE_PC_GEM.ID(id)));
 
 export async function generateMetadata(props: ThreePCGemDetailProps) {
   const post = await grabDetail((await props.params).id);

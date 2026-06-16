@@ -15,7 +15,7 @@ interface ThreePCMetalProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-metal'] | null>(`${API_ROUTE.THE_SIMS.THREE_PC_METAL}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-metal'] | null>(API_ROUTE.THE_SIMS.THREE_PC_METAL.ID(id)));
 
 export async function generateMetadata(props: ThreePCMetalProps) {
   const post = await grabDetail((await props.params).id);

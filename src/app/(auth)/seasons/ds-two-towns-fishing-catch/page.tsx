@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DSTwoTownsFishingCatch() {
-  const { data } = await grabData<ISeasonsResponse['ds-two-towns-fishing-catch'][]>(API_ROUTE.SEASONS.DS_TWO_TOWNS_FISHING_CATCH, { pageSize: 0 });
+  const { data } = await grabData<ISeasonsResponse['ds-two-towns-fishing-catch'][]>(API_ROUTE.SEASONS.DS_TWO_TOWNS_FISHING_CATCH.BASE, { pageSize: 0 });
 
   return (
     <Section name='Seasons DS Two Towns Fishing Catch' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-two-towns-fishing-catch']}>

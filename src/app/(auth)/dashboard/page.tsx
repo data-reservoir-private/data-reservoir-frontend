@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Dashboard() {
-  const { data } = await grabData<IDashboardResponse[]>(`${API_ROUTE.DASHBOARD}`);
+  const { data } = await grabData<IDashboardResponse[]>(API_ROUTE.DASHBOARD.BASE);
 
   const totalRecord = cache(() => data.reduce((acc, curr) => acc + curr.tables.reduce((a, c) => a + c.rowCount, 0), 0));
   const totalTable = cache(() => data.reduce((acc, curr) => acc + curr.tables.length, 0));

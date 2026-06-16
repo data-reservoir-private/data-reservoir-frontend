@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HaydayBuilding() {
-  const { data } = await grabData<IHaydayResponse['hayday-building'][]>(API_ROUTE.HAY_DAY.BUILDING, {
+  const { data } = await grabData<IHaydayResponse['hayday-building'][]>(API_ROUTE.HAY_DAY.BUILDING.BASE, {
     pageSize: 0,
   });
 

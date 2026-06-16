@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BazaarAnimal() {
-  const { data } = await grabData<ISeasonsResponse['ds-bazaar-animal-product'][]>(API_ROUTE.SEASONS.DS_BAZAAR_ANIMAL_PRODUCT, {
+  const { data } = await grabData<ISeasonsResponse['ds-bazaar-animal-product'][]>(API_ROUTE.SEASONS.DS_BAZAAR_ANIMAL_PRODUCT.BASE, {
     pageSize: 0,
   });
 

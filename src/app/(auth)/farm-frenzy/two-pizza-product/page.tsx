@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TwoPizzaProduct() {
-  const { data } = await grabData<IFarmFrenzyResponse['two-pizza'][]>(API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT, {
+  const { data } = await grabData<IFarmFrenzyResponse['two-pizza'][]>(API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT.BASE, {
     pageSize: 0,
   });
 

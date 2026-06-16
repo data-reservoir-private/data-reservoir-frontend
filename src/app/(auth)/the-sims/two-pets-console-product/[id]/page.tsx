@@ -14,7 +14,7 @@ interface TwoPetsConsoleDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['two-pets-console-product'] | null>(`${API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['two-pets-console-product'] | null>(API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: TwoPetsConsoleDetailProps) {
   const post = await grabDetail((await props.params).id);

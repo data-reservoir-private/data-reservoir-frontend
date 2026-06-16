@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function NasiGorengBurnedFood() {
-  const { data } = await grabData<INasiGorengResponse['burned-food'][]>(API_ROUTE.NASI_GORENG.BURNED_FOOD, {
+  const { data } = await grabData<INasiGorengResponse['burned-food'][]>(API_ROUTE.NASI_GORENG.BURNED_FOOD.BASE, {
     pageSize: 0,
   });
 

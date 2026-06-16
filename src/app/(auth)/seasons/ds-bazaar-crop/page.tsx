@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function BazaarCrop() {
-  const { data } = await grabData<ISeasonsResponse['ds-bazaar-crop'][]>(API_ROUTE.SEASONS.DS_BAZAAR_CROP, {
+  const { data } = await grabData<ISeasonsResponse['ds-bazaar-crop'][]>(API_ROUTE.SEASONS.DS_BAZAAR_CROP.BASE, {
     pageSize: 0,
   });
 

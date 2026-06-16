@@ -15,9 +15,9 @@ interface DSMineralCropDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<ISeasonsResponse['ds-mineral-crop']>(API_ROUTE.SEASONS.DS_MINERAL_CROP);
+export const generateStaticParams = getStaticParams<ISeasonsResponse['ds-mineral-crop']>(API_ROUTE.SEASONS.DS_MINERAL_CROP.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-crop'] | null>(`${API_ROUTE.SEASONS.DS_MINERAL_CROP}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-crop'] | null>(API_ROUTE.SEASONS.DS_MINERAL_CROP.ID(id)));
 
 export async function generateMetadata(props: DSMineralCropDetailProps) {
   const post = await grabDetail((await props.params).id);

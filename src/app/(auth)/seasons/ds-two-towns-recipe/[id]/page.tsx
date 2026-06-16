@@ -14,7 +14,7 @@ interface DSTwoTownsRecipeDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-two-towns-recipe'] | null>(`${API_ROUTE.SEASONS.DS_TWO_TOWNS_RECIPE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-two-towns-recipe'] | null>(API_ROUTE.SEASONS.DS_TWO_TOWNS_RECIPE.ID(id)));
 
 export async function generateMetadata(props: DSTwoTownsRecipeDetailProps) {
   const post = await grabDetail((await props.params).id);

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TwoProduct() {
-  const { data } = await grabData<ICygnusResponse['forage'][]>(API_ROUTE.CYGNUS.FORAGE, {
+  const { data } = await grabData<ICygnusResponse['forage'][]>(API_ROUTE.CYGNUS.FORAGE.BASE, {
     pageSize: 0,
   });
 

@@ -16,9 +16,9 @@ interface ToppingDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<IPizzaFrenzyResponse['topping']>(API_ROUTE.PIZZA_FRENZY.TOPPING);
+export const generateStaticParams = getStaticParams<IPizzaFrenzyResponse['topping']>(API_ROUTE.PIZZA_FRENZY.TOPPING.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<IPizzaFrenzyResponse['topping-complete'] | null>(`${API_ROUTE.PIZZA_FRENZY.TOPPING}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IPizzaFrenzyResponse['topping-complete'] | null>(API_ROUTE.PIZZA_FRENZY.TOPPING.ID(id)));
 
 export async function generateMetadata(props: ToppingDetailProps) {
   const post = await grabDetail((await props.params).id);

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function NasiGorengRelic() {
-  const { data } = await grabData<INasiGorengResponse['relic'][]>(API_ROUTE.NASI_GORENG.RELIC, {
+  const { data } = await grabData<INasiGorengResponse['relic'][]>(API_ROUTE.NASI_GORENG.RELIC.BASE, {
     pageSize: 0,
   });
 

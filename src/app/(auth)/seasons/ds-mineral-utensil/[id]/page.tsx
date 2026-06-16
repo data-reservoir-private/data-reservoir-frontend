@@ -15,9 +15,9 @@ interface UtensilDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<ISeasonsResponse['ds-mineral-utensil']>(API_ROUTE.SEASONS.DS_MINERAL_UTENSIL);
+export const generateStaticParams = getStaticParams<ISeasonsResponse['ds-mineral-utensil']>(API_ROUTE.SEASONS.DS_MINERAL_UTENSIL.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-utensil'] | null>(`${API_ROUTE.SEASONS.DS_MINERAL_UTENSIL}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-utensil'] | null>(API_ROUTE.SEASONS.DS_MINERAL_UTENSIL.ID(id)));
 
 export async function generateMetadata(props: UtensilDetailProps) {
   const post = await grabDetail((await props.params).id);

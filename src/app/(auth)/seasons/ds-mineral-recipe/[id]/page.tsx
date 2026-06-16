@@ -14,7 +14,7 @@ interface RecipeDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-recipe'] | null>(`${API_ROUTE.SEASONS.DS_MINERAL_RECIPE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-recipe'] | null>(API_ROUTE.SEASONS.DS_MINERAL_RECIPE.ID(id)));
 
 export async function generateMetadata(props: RecipeDetailProps) {
   const post = await grabDetail((await props.params).id);

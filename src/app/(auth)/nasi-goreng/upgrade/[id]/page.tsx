@@ -15,7 +15,7 @@ interface NasiGorengUpgradeDetailProps {
 }
 
 const grabDetail = async (id: string) => {
-  return await grabData<INasiGorengResponse['upgrade-complete'] | null>(`${API_ROUTE.NASI_GORENG.UPGRADE}/${id}`);
+  return await grabData<INasiGorengResponse['upgrade-complete'] | null>(API_ROUTE.NASI_GORENG.UPGRADE.ID(id));
 };
 
 export async function generateMetadata(props: NasiGorengUpgradeDetailProps) {

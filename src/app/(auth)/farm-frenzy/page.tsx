@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/farm_frenzy`);
+  const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.FARM_FRENZY);
 
   return (
     <Section variant='h4' name='Farm Frenzy'>

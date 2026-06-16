@@ -18,7 +18,7 @@ interface HaydayBuildingDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['hayday-building-complete'] | null>(`${API_ROUTE.HAY_DAY.BUILDING}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IHaydayResponse['hayday-building-complete'] | null>(API_ROUTE.HAY_DAY.BUILDING.ID(id)));
 
 export async function generateMetadata(props: HaydayBuildingDetailProps) {
   const post = await grabDetail((await props.params).id);

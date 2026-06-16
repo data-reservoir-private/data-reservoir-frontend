@@ -28,7 +28,7 @@ type IStage = {
     }
   );
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-two-towns-crop-detail'] | null>(`${API_ROUTE.SEASONS.DS_TWO_TOWNS_CROP}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-two-towns-crop-detail'] | null>(API_ROUTE.SEASONS.DS_TWO_TOWNS_CROP.ID(id)));
 
 export async function generateMetadata(props: DSTwoTownsCropDetailProps) {
   const post = await grabDetail((await props.params).id);
