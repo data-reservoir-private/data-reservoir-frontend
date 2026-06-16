@@ -18,7 +18,7 @@ import { EChart } from '@/components/common/chart/Chart';
 
 export default async function OrderSummary() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['summary']>(API_ROUTE.HAY_DAY.ORDER.BASE.SUMMARY, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['summary']>(API_ROUTE.HAY_DAY.ORDER.SUMMARY, sp);
 
   const vouchers = [
     { name: 'Green Voucher', image: '/image/hayday/green.png', total: data?.voucher?.green ?? 0, className: 'from-green-700 to-green-600' },

@@ -11,12 +11,13 @@ import Tooltip from '@mui/material/Tooltip';
 import classNames from 'classnames';
 
 interface GridDetailProps {
-  data: Record<string, React.ReactNode | boolean | string[]>
+  data: Record<string, React.ReactNode | boolean | string[]>,
+  className?: string
 }
 
 export default function TableDetail(props: GridDetailProps) {
   return (
-    <TableContainer className='py-2'>
+    <TableContainer className={classNames('py-2', props.className)}>
       <Table size='small' className='text-sm w-full'>
         <TableBody>
           {

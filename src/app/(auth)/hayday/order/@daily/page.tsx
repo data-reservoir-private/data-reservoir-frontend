@@ -11,7 +11,7 @@ export default async function DailyPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
   if (!sp.month || !sp.year) return <></>;
 
-  const { data } = await grabData<IHaydayResponse['hayday-order']['daily'][]>(API_ROUTE.HAY_DAY.ORDER.BASE.DAILY, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['daily'][]>(API_ROUTE.HAY_DAY.ORDER.DAILY, sp);
 
   const opt: EChartsOption = {
     xAxis: {

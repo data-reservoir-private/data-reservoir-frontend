@@ -11,7 +11,7 @@ export default async function MonthlyPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
   if (sp.month && sp.year) return <></>;
 
-  const { data } = await grabData<IHaydayResponse['hayday-order']['monthly'][]>(API_ROUTE.HAY_DAY.ORDER.BASE.MONTHLY, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['monthly'][]>(API_ROUTE.HAY_DAY.ORDER.MONTHLY, sp);
 
   const opt: EChartsOption = {
     xAxis: {

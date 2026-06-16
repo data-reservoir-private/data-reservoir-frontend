@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 
 export default async function ProductPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['product'][]>(API_ROUTE.HAY_DAY.ORDER.BASE.PRODUCT, {
+  const { data } = await grabData<IHaydayResponse['hayday-order']['product'][]>(API_ROUTE.HAY_DAY.ORDER.PRODUCT, {
     month: sp.month,
     year: sp.year,
   });

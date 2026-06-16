@@ -11,7 +11,7 @@ export interface IData {
     description: string,
     link: Route,
     minedByMe?: true
-    image?: string | 'building',
+    image: string | 'building',
     pixelatedImage?: boolean,
     export?: {
       route: string,

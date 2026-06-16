@@ -15,7 +15,7 @@ import dayjs from 'dayjs';
 
 export default async function ValuableOrder() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['valuable'][]>(API_ROUTE.HAY_DAY.ORDER.BASE.VALUABLE, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['valuable'][]>(API_ROUTE.HAY_DAY.ORDER.VALUABLE, sp);
 
   if (!data || data.length === 0) {
     return (

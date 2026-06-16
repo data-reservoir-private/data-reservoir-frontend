@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
   if (!requestParams.success) return notFound();
 
   const { month, year, type, acceptedOnly, includeDetail } = requestParams.data;
-  const c = cache(async () => await grabData<IHaydayResponse['hayday-order']['export'][]>(API_ROUTE.HAY_DAY.ORDER.BASE.EXPORT, {
+  const c = cache(async () => await grabData<IHaydayResponse['hayday-order']['export'][]>(API_ROUTE.HAY_DAY.ORDER.EXPORT, {
     Month: month,
     Year: year,
     Type: type,

@@ -460,4 +460,13 @@ export const BREADCRUMBS = Object.freeze({
     { label: "Transaction", link: '/transaction' },
     { label: "Breakdown" }
   ] satisfies IBreadcrumb[],
+
+  'transjakarta-corridor': [
+    { label: "Transjakarta", link: '/transjakarta' },
+    { label: "Corridor" }
+  ] satisfies IBreadcrumb[],
+  'transjakarta-corridor-detail': [
+    { label: "Transjakarta", link: '/transjakarta' },
+    { label: "Corridor", link: '/transjakarta/corridor' }
+  ] satisfies IBreadcrumb[],
 });

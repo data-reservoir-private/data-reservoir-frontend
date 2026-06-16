@@ -11,7 +11,7 @@ export default async function WeeklyPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
   if (sp.month && sp.year) return <></>;
 
-  const { data } = await grabData<IHaydayResponse['hayday-order']['weekly'][]>(API_ROUTE.HAY_DAY.ORDER.BASE.WEEKLY, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['weekly'][]>(API_ROUTE.HAY_DAY.ORDER.WEEKLY, sp);
 
   const opt: EChartsOption = {
     xAxis: {
