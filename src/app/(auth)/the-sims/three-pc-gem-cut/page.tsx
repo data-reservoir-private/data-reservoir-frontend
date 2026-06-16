@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreePCGemCut() {
-  const { data } = await grabData<ITheSimsResponse['three-pc-gem-cut'][]>(API_ROUTE.THE_SIMS.THREE_PC_GEM_CUT, {
+  const { data } = await grabData<ITheSimsResponse['three-pc-gem-cut'][]>(API_ROUTE.THE_SIMS.THREE_PC_GEM_CUT.BASE, {
     pageSize: 50,
   });
 

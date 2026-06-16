@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DSTwoTownsTree() {
-  const { data } = await grabData<ISeasonsResponse['ds-two-towns-tree'][]>(API_ROUTE.SEASONS.DS_TWO_TOWNS_TREE, { pageSize: 0 });
+  const { data } = await grabData<ISeasonsResponse['ds-two-towns-tree'][]>(API_ROUTE.SEASONS.DS_TWO_TOWNS_TREE.BASE, { pageSize: 0 });
 
   return (
     <Section name='Seasons DS Two Towns Tree' variant='h4' breadcrumbs={BREADCRUMBS['seasons-ds-two-towns-tree']}>

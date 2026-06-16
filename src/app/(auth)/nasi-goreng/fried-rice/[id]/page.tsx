@@ -18,7 +18,7 @@ interface NasiGorengFriedRiceDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['fried-rice-complete'] | null>(`${API_ROUTE.NASI_GORENG.FRIED_RICE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['fried-rice-complete'] | null>(API_ROUTE.NASI_GORENG.FRIED_RICE.ID(id)));
 
 export async function generateMetadata(props: NasiGorengFriedRiceDetailProps) {
   const post = await grabDetail((await props.params).id);

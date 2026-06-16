@@ -14,7 +14,7 @@ interface ArtifactDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['artifact'] | null>(`${API_ROUTE.CYGNUS.ARTIFACT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['artifact'] | null>(API_ROUTE.CYGNUS.ARTIFACT.ID(id)));
 
 export async function generateMetadata(props: ArtifactDetailProps) {
   const post = await grabDetail((await props.params).id);

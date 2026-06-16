@@ -16,9 +16,9 @@ interface HurricaneProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['hurricane']>(API_ROUTE.FARM_FRENZY.HURRICANE);
+export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['hurricane']>(API_ROUTE.FARM_FRENZY.HURRICANE.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['hurricane-detail'] | null>(`${API_ROUTE.FARM_FRENZY.HURRICANE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['hurricane-detail'] | null>(API_ROUTE.FARM_FRENZY.HURRICANE.ID(id)));
 
 export async function generateMetadata(props: HurricaneProductDetailProps) {
   const post = await grabDetail((await props.params).id);

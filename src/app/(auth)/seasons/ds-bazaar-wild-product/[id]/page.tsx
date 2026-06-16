@@ -15,9 +15,9 @@ interface BazaarWildProductProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<ISeasonsResponse['ds-bazaar-wild-product']>(API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT);
+export const generateStaticParams = getStaticParams<ISeasonsResponse['ds-bazaar-wild-product']>(API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-wild-product'] | null>(`${API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-wild-product'] | null>(API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: BazaarWildProductProps) {
   const post = await grabDetail((await props.params).id);

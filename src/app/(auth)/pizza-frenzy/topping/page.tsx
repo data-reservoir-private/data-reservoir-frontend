@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function PizzaFrenzyTopping() {
-  const { data } = await grabData<IPizzaFrenzyResponse['topping'][]>(API_ROUTE.PIZZA_FRENZY.TOPPING, {
+  const { data } = await grabData<IPizzaFrenzyResponse['topping'][]>(API_ROUTE.PIZZA_FRENZY.TOPPING.BASE, {
     pageSize: 0,
   });
 

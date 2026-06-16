@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function TwoProduct() {
-  const { data } = await grabData<ICygnusResponse['mineral'][]>(API_ROUTE.CYGNUS.MINERAL, {
+  const { data } = await grabData<ICygnusResponse['mineral'][]>(API_ROUTE.CYGNUS.MINERAL.BASE, {
     pageSize: 0,
   });
 

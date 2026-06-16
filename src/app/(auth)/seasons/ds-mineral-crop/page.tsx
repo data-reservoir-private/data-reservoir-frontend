@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DSMineralCrop() {
-  const { data } = await grabData<ISeasonsResponse['ds-mineral-crop'][]>(API_ROUTE.SEASONS.DS_MINERAL_CROP, {
+  const { data } = await grabData<ISeasonsResponse['ds-mineral-crop'][]>(API_ROUTE.SEASONS.DS_MINERAL_CROP.BASE, {
     pageSize: 0,
   });
 

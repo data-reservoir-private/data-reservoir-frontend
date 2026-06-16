@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HurricaneProduct() {
-  const { data } = await grabData<IFarmFrenzyResponse['hurricane'][]>(API_ROUTE.FARM_FRENZY.HURRICANE, {
+  const { data } = await grabData<IFarmFrenzyResponse['hurricane'][]>(API_ROUTE.FARM_FRENZY.HURRICANE.BASE, {
     pageSize: 0,
   });
 

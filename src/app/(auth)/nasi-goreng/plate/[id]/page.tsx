@@ -16,9 +16,9 @@ interface NasiGorengPlateDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<INasiGorengResponse['relic']>(API_ROUTE.NASI_GORENG.RELIC);
+export const generateStaticParams = getStaticParams<INasiGorengResponse['relic']>(API_ROUTE.NASI_GORENG.RELIC.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['plate-complete'] | null>(`${API_ROUTE.NASI_GORENG.PLATE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['plate-complete'] | null>(API_ROUTE.NASI_GORENG.PLATE.ID(id)));
 
 export async function generateMetadata(props: NasiGorengPlateDetailProps) {
   const post = await grabDetail((await props.params).id);

@@ -15,9 +15,9 @@ interface ThreeProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['three']>(API_ROUTE.FARM_FRENZY.THREE_PRODUCT);
+export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['three']>(API_ROUTE.FARM_FRENZY.THREE_PRODUCT.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['three'] | null>(`${API_ROUTE.FARM_FRENZY.THREE_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['three'] | null>(API_ROUTE.FARM_FRENZY.THREE_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: ThreeProductDetailProps) {
   const post = await grabDetail((await props.params).id);

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreePCGem() {
-  const { data } = await grabData<ITheSimsResponse['three-pc-gem'][]>(API_ROUTE.THE_SIMS.THREE_PC_GEM, { pageSize: 0 });
+  const { data } = await grabData<ITheSimsResponse['three-pc-gem'][]>(API_ROUTE.THE_SIMS.THREE_PC_GEM.BASE, { pageSize: 0 });
 
   return (
     <Section name='The Sims Three PC Gem' variant='h4' breadcrumbs={BREADCRUMBS['the-sims-three-pc-gem']}>

@@ -17,9 +17,9 @@ interface NasiGorengRelicDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<INasiGorengResponse['relic']>(API_ROUTE.NASI_GORENG.RELIC);
+export const generateStaticParams = getStaticParams<INasiGorengResponse['relic']>(API_ROUTE.NASI_GORENG.RELIC.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['relic'] | null>(`${API_ROUTE.NASI_GORENG.RELIC}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<INasiGorengResponse['relic'] | null>(API_ROUTE.NASI_GORENG.RELIC.ID(id)));
 
 export async function generateMetadata(props: NasiGorengRelicDetailProps) {
   const post = await grabDetail((await props.params).id);

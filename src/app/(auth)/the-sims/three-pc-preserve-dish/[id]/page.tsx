@@ -17,7 +17,7 @@ interface ThreePCPreserveDishDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-preserve-dish'] | null>(`${API_ROUTE.THE_SIMS.THREE_PC_PRESERVE_DISH}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-preserve-dish'] | null>(API_ROUTE.THE_SIMS.THREE_PC_PRESERVE_DISH.ID(id)));
 
 export async function generateMetadata(props: ThreePCPreserveDishDetailProps) {
   const post = await grabDetail((await props.params).id);

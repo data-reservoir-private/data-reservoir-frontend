@@ -14,7 +14,7 @@ interface NodeDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['node'] | null>(`${API_ROUTE.CYGNUS.NODE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['node'] | null>(API_ROUTE.CYGNUS.NODE.ID(id)));
 
 export async function generateMetadata(props: NodeDetailProps) {
   const post = await grabDetail((await props.params).id);

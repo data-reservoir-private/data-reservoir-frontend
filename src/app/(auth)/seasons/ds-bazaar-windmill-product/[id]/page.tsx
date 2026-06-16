@@ -14,7 +14,7 @@ interface BazaarWindmillProductProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-windmill-product'] | null>(`${API_ROUTE.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-windmill-product'] | null>(API_ROUTE.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: BazaarWindmillProductProps) {
   const post = await grabDetail((await props.params).id);

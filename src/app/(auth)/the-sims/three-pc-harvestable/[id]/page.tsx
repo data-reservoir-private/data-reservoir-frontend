@@ -15,7 +15,7 @@ interface ThreePCHarvestableDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-harvestable'] | null>(`${API_ROUTE.THE_SIMS.THREE_PC_HARVESTABLE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['three-pc-harvestable'] | null>(API_ROUTE.THE_SIMS.THREE_PC_HARVESTABLE.ID(id)));
 
 export async function generateMetadata(props: ThreePCHarvestableDetailProps) {
   const post = await grabDetail((await props.params).id);

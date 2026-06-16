@@ -14,7 +14,7 @@ interface ShippableDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-shippable'] | null>(`${API_ROUTE.SEASONS.DS_MINERAL_SHIPPABLE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-mineral-shippable'] | null>(API_ROUTE.SEASONS.DS_MINERAL_SHIPPABLE.ID(id)));
 
 export async function generateMetadata(props: ShippableDetailProps) {
   const post = await grabDetail((await props.params).id);

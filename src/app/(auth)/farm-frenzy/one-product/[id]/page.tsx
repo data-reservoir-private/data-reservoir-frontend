@@ -16,9 +16,9 @@ interface OneProductDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['one']>(API_ROUTE.FARM_FRENZY.ONE_PRODUCT);
+export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['one']>(API_ROUTE.FARM_FRENZY.ONE_PRODUCT.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['one-detail'] | null>(`${API_ROUTE.FARM_FRENZY.ONE_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['one-detail'] | null>(API_ROUTE.FARM_FRENZY.ONE_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: OneProductDetailProps) {
   const post = await grabDetail((await props.params).id);

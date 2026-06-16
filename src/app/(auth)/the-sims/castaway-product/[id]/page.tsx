@@ -14,7 +14,7 @@ interface CastawayDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['castaway-product'] | null>(`${API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['castaway-product'] | null>(API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: CastawayDetailProps) {
   const post = await grabDetail((await props.params).id);

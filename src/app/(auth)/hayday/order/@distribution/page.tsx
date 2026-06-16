@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 
 export default async function DistributionPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['distribution']>(API_ROUTE.HAY_DAY.ORDER.DISTRIBUTION, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['distribution']>(API_ROUTE.HAY_DAY.ORDER.BASE.DISTRIBUTION, sp);
 
   if (!data) {
     return (

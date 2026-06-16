@@ -14,7 +14,7 @@ interface FourPCCannedDishDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-canned-dish'] | null>(`${API_ROUTE.THE_SIMS.FOUR_PC_CANNED_DISH}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-canned-dish'] | null>(API_ROUTE.THE_SIMS.FOUR_PC_CANNED_DISH.ID(id)));
 
 export async function generateMetadata(props: FourPCCannedDishDetailProps) {
   const post = await grabDetail((await props.params).id);

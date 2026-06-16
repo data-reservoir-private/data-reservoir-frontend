@@ -27,7 +27,10 @@ export async function grabData<TData>(url: string, params?: Record<string, any>)
   });
 
   if (response.status >= 400) { 
-    console.error(await response.text());
+    console.log("-------------------");
+    console.log(response.status);
+    console.log(await response.text());
+    throw new Error(`Failed to fetch data from ${urlFinal}`);
   }
   
   const res = await response.json();

@@ -15,7 +15,7 @@ interface DishDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['dish'] | null>(`${API_ROUTE.CYGNUS.DISH}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['dish'] | null>(API_ROUTE.CYGNUS.DISH.ID(id)));
 
 export async function generateMetadata(props: DishDetailProps) {
   const post = await grabDetail((await props.params).id);

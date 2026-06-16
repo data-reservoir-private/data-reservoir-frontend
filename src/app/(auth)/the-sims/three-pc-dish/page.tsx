@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreePCDish() {
-  const { data } = await grabData<ITheSimsResponse['three-pc-dish'][]>(API_ROUTE.THE_SIMS.THREE_PC_DISH, { pageSize: 0 });
+  const { data } = await grabData<ITheSimsResponse['three-pc-dish'][]>(API_ROUTE.THE_SIMS.THREE_PC_DISH.BASE, { pageSize: 0 });
 
   return (
     <Section name='The Sims Three PC Dish' variant='h4' breadcrumbs={BREADCRUMBS['the-sims-three-pc-dish']}>

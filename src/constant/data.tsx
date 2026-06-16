@@ -17,7 +17,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Products gathered from The Sims Castaway console game. Including fishes and crafted products that are stored inside inventory',
         minedByMe: true,
         export: {
-          route: API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT,
+          route: API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -29,7 +29,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Ingredients gathered from fridge. Includes harvested products such as veggies, fruits, and seafood. Oh, also golden egg',
         minedByMe: true,
         export: {
-          route: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT,
+          route: API_ROUTE.THE_SIMS.TWO_PETS_CONSOLE_PRODUCT.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -63,7 +63,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts3_pc_dish.png',
         description: 'All of dishes that can be made inside TS3 PC game. Sourced from The Sims Wikia',
         export: {
-          route: API_ROUTE.THE_SIMS.THREE_PC_DISH,
+          route: API_ROUTE.THE_SIMS.THREE_PC_DISH.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -74,7 +74,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts4_pc_dish.png',
         description: 'All of dishes that can be made inside TS4 PC game. Sourced from The Sims Wikia',
         export: {
-          route: API_ROUTE.THE_SIMS.FOUR_PC_DISH,
+          route: API_ROUTE.THE_SIMS.FOUR_PC_DISH.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -85,7 +85,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts4_pc_canned_dish.png',
         description: 'All of canned dishes that can be made inside TS4 PC game',
         export: {
-          route: API_ROUTE.THE_SIMS.FOUR_PC_CANNED_DISH,
+          route: API_ROUTE.THE_SIMS.FOUR_PC_CANNED_DISH.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -97,7 +97,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'TS Bustin Out\'s career path and job. Including the story mode and freeplay mode\'s careers',
         minedByMe: true,
         export: {
-          route: `${API_ROUTE.THE_SIMS.BUSTIN_OUT_CAREER}`,
+          route: API_ROUTE.THE_SIMS.BUSTIN_OUT_CAREER,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -108,7 +108,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts4_pc_harvestable.png',
         description: 'All of TS4 PC\'s harvestable product',
         export: {
-          route: `${API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE}`,
+          route: API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -119,7 +119,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts3_pc_harvestable.png',
         description: 'All of TS3 PC\'s harvestable product',
         export: {
-          route: `${API_ROUTE.THE_SIMS.THREE_PC_HARVESTABLE}`,
+          route: API_ROUTE.THE_SIMS.THREE_PC_HARVESTABLE.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -130,7 +130,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts3_pc_gem.png',
         description: 'All of TS3 PC\'s Gem product',
         export: {
-          route: `${API_ROUTE.THE_SIMS.THREE_PC_GEM}`,
+          route: API_ROUTE.THE_SIMS.THREE_PC_GEM.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -141,7 +141,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts3_pc_gem_cut.png',
         description: 'All of TS3 PC\'s Gem Cut product',
         export: {
-          route: `${API_ROUTE.THE_SIMS.THREE_PC_GEM_CUT}`,
+          route: API_ROUTE.THE_SIMS.THREE_PC_GEM_CUT.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -152,7 +152,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts3_pc_raw_gem.png',
         description: 'All of TS3 PC\'s Raw Gem product',
         export: {
-          route: `${API_ROUTE.THE_SIMS.THREE_PC_RAW_GEM}`,
+          route: API_ROUTE.THE_SIMS.THREE_PC_RAW_GEM.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -163,7 +163,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts3_pc_preserve_dish.png',
         description: 'All of TS3 PC\'s preserve dish collectibles. Sourced from The Sims Wikia',
         export: {
-          route: API_ROUTE.THE_SIMS.THREE_PC_PRESERVE_DISH,
+          route: API_ROUTE.THE_SIMS.THREE_PC_PRESERVE_DISH.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -174,7 +174,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts3_pc_spread_dish.png',
         description: 'All of TS3 PC\'s spread dish collectibles. Sourced from The Sims Wikia',
         export: {
-          route: API_ROUTE.THE_SIMS.THREE_PC_SPREAD_DISH,
+          route: API_ROUTE.THE_SIMS.THREE_PC_SPREAD_DISH.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -185,7 +185,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts3_pc_metal.png',
         description: 'All of TS3 metal collectibles. Sourced from The Sims Wikia',
         export: {
-          route: API_ROUTE.THE_SIMS.THREE_PC_METAL,
+          route: API_ROUTE.THE_SIMS.THREE_PC_METAL.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -196,7 +196,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts4_pc_metal.png',
         description: 'All of TS4 metal collectibles. Sourced from The Sims Wikia',
         export: {
-          route: API_ROUTE.THE_SIMS.FOUR_PC_METAL,
+          route: API_ROUTE.THE_SIMS.FOUR_PC_METAL.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -207,7 +207,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts4_pc_element.png',
         description: 'All of TS4 element collectibles. Sourced from The Sims Wikia',
         export: {
-          route: API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT,
+          route: API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -218,7 +218,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         image: '/image/quick_link/ts4_pc_crystal.png',
         description: 'All of TS4 crystal collectibles. Sourced from The Sims Wikia',
         export: {
-          route: API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL,
+          route: API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -241,7 +241,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Every products that harvested or processed via buildings. Accurate as of July 2025. All are sourced from Hayday Wiki',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.HAY_DAY.PRODUCT
+          route: API_ROUTE.HAY_DAY.PRODUCT.BASE
         }
       },
       {
@@ -252,7 +252,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Hayday\'s all production buildings. Accurate as of July 2025. All are sourced from Hayday Wiki',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.HAY_DAY.BUILDING
+          route: API_ROUTE.HAY_DAY.BUILDING.BASE
         }
       },
     ]
@@ -268,7 +268,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy One products',
         minedByMe: true,
         export: {
-          route: API_ROUTE.FARM_FRENZY.ONE_PRODUCT,
+          route: API_ROUTE.FARM_FRENZY.ONE_PRODUCT.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -280,7 +280,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy Two products',
         minedByMe: true,
         export: {
-          route: API_ROUTE.FARM_FRENZY.TWO_PRODUCT,
+          route: API_ROUTE.FARM_FRENZY.TWO_PRODUCT.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -292,7 +292,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy Two Pizza Party products',
         minedByMe: true,
         export: {
-          route: API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT,
+          route: API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -304,7 +304,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy Three products (All franchises)',
         minedByMe: true,
         export: {
-          route: API_ROUTE.FARM_FRENZY.THREE_PRODUCT,
+          route: API_ROUTE.FARM_FRENZY.THREE_PRODUCT.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -316,7 +316,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'Farm Frenzy Hurricane Seasons products',
         minedByMe: true,
         export: {
-          route: API_ROUTE.FARM_FRENZY.HURRICANE,
+          route: API_ROUTE.FARM_FRENZY.HURRICANE.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -333,7 +333,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         minedByMe: true,
         description: '',
         export: {
-          route: API_ROUTE.PIZZA_FRENZY.TOPPING,
+          route: API_ROUTE.PIZZA_FRENZY.TOPPING.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
@@ -351,7 +351,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.NASI_GORENG.INGREDIENT
+          route: API_ROUTE.NASI_GORENG.INGREDIENT.BASE
         }
       },
       {
@@ -363,7 +363,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.NASI_GORENG.FRIED_RICE
+          route: API_ROUTE.NASI_GORENG.FRIED_RICE.BASE
         }
       },
       {
@@ -375,7 +375,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.NASI_GORENG.UPGRADE
+          route: API_ROUTE.NASI_GORENG.UPGRADE.BASE
         }
       },
       {
@@ -387,7 +387,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.NASI_GORENG.TOOL
+          route: API_ROUTE.NASI_GORENG.TOOL.BASE
         }
       },
       {
@@ -399,7 +399,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.NASI_GORENG.RELIC
+          route: API_ROUTE.NASI_GORENG.RELIC.BASE
         }
       },
       {
@@ -411,7 +411,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.NASI_GORENG.BURNED_FOOD
+          route: API_ROUTE.NASI_GORENG.BURNED_FOOD.BASE
         }
       },
       {
@@ -423,7 +423,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         minedByMe: true,
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.NASI_GORENG.PLATE
+          route: API_ROUTE.NASI_GORENG.PLATE.BASE
         }
       },
     ]
@@ -441,7 +441,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-mineral-recipe',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_MINERAL_RECIPE
+          route: API_ROUTE.SEASONS.DS_MINERAL_RECIPE.BASE
         }
       },
       {
@@ -453,7 +453,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-mineral-shippable',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_MINERAL_SHIPPABLE
+          route: API_ROUTE.SEASONS.DS_MINERAL_SHIPPABLE.BASE
         }
       },
       {
@@ -465,7 +465,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-mineral-utensil',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_MINERAL_UTENSIL
+          route: API_ROUTE.SEASONS.DS_MINERAL_UTENSIL.BASE
         }
       },
       {
@@ -477,7 +477,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-mineral-crop',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_MINERAL_CROP
+          route: API_ROUTE.SEASONS.DS_MINERAL_CROP.BASE
         }
       },
 
@@ -490,7 +490,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-bazaar-crop',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_BAZAAR_CROP
+          route: API_ROUTE.SEASONS.DS_BAZAAR_CROP.BASE
         }
       },
       {
@@ -502,7 +502,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-bazaar-recipe',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_BAZAAR_RECIPE
+          route: API_ROUTE.SEASONS.DS_BAZAAR_RECIPE.BASE
         }
       },
       {
@@ -514,7 +514,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-bazaar-animal-product',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_BAZAAR_ANIMAL_PRODUCT
+          route: API_ROUTE.SEASONS.DS_BAZAAR_ANIMAL_PRODUCT.BASE
         }
       },
       {
@@ -526,7 +526,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-bazaar-windmill-product',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT
+          route: API_ROUTE.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT.BASE
         }
       },
       {
@@ -538,7 +538,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-bazaar-wild-product',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT
+          route: API_ROUTE.SEASONS.DS_BAZAAR_WILD_PRODUCT.BASE
         }
       },
       {
@@ -550,7 +550,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-two-towns-crop',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_CROP
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_CROP.BASE
         }
       },
       {
@@ -562,7 +562,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-two-towns-fishing-catch',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_FISHING_CATCH
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_FISHING_CATCH.BASE
         }
       },
       {
@@ -574,7 +574,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-two-towns-product',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_PRODUCT
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_PRODUCT.BASE
         }
       },
       {
@@ -586,7 +586,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-two-towns-recipe',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_RECIPE
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_RECIPE.BASE
         }
       },
       {
@@ -598,7 +598,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/seasons/ds-two-towns-tree',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_TREE
+          route: API_ROUTE.SEASONS.DS_TWO_TOWNS_TREE.BASE
         }
       },
     ]
@@ -623,7 +623,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/cygnus/mineral',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.CYGNUS.MINERAL
+          route: API_ROUTE.CYGNUS.MINERAL.BASE
         }
       },
       {
@@ -643,7 +643,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/cygnus/crop',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.CYGNUS.CROP
+          route: API_ROUTE.CYGNUS.CROP.BASE
         }
       },
       {
@@ -655,7 +655,7 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         link: '/cygnus/dish',
         export: {
           exportType: ALL_EXPORTS_COMPLETE,
-          route: API_ROUTE.CYGNUS.DISH
+          route: API_ROUTE.CYGNUS.DISH.BASE
         }
       },
       {
@@ -675,6 +675,17 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         id: 'breakdown',
         name: "Breakdown",
         link: '/transaction/breakdown',
+        description: '',
+      },
+    ]
+  } as IData,
+  'transjakarta': {
+    name: 'Transjakarta',
+    categories: [
+      {
+        id: 'corridor',
+        name: "Corridor",
+        link: '/transjakarta/corridor',
         description: '',
       },
     ]

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DSMineralShippable() {
-  const { data } = await grabData<ISeasonsResponse['ds-mineral-shippable'][]>(API_ROUTE.SEASONS.DS_MINERAL_SHIPPABLE, {
+  const { data } = await grabData<ISeasonsResponse['ds-mineral-shippable'][]>(API_ROUTE.SEASONS.DS_MINERAL_SHIPPABLE.BASE, {
     pageSize: 0,
   });
 

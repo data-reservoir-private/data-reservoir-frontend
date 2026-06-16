@@ -1,26 +1,25 @@
 import { API_ROUTE } from '@/constant/api-route';
 import { IDashboardResponse } from '@/model/response/dashboard';
 import { grabData } from '@/utilities/http';
-import Section from '@/components/common/paper/Section';
 import { Metadata } from 'next';
+import Section from '@/components/common/paper/Section';
 import { DATASETS_AVAILABLE } from '@/constant/data';
 import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleRecordTableCards';
 import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart';
 import SimpleQuickLink from '@/components/common/simple-dashboard/SimpleQuickLink';
-// import { cacheLife } from 'next/cache'
 
 export const metadata: Metadata = {
-  title: 'Farm Frenzy - Data Reservoir'
+  title: 'Transjakarta - Data Reservoir'
 };
 
 export default async function Page() {
-  const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.FARM_FRENZY);
+  const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.TRANSJAKARTA);
 
   return (
-    <Section variant='h4' name='Farm Frenzy'>
+    <Section name="Transjakarta" variant='h4'>
       <SimpleRecordTableCards response={data}/>
       <SimpleBarTableChart response={data}/>
-      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['farm-frenzy']} unoptimized/>
+      <SimpleQuickLink quickLink={DATASETS_AVAILABLE['transjakarta']} columns={1}/>
     </Section>
   );
 }

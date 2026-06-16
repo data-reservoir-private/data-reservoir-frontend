@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreePCSpreadDish() {
-  const { data } = await grabData<ITheSimsResponse['three-pc-spread-dish'][]>(API_ROUTE.THE_SIMS.THREE_PC_SPREAD_DISH, {
+  const { data } = await grabData<ITheSimsResponse['three-pc-spread-dish'][]>(API_ROUTE.THE_SIMS.THREE_PC_SPREAD_DISH.BASE, {
     pageSize: 50,
   });
 

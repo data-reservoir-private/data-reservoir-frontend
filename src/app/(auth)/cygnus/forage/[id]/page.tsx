@@ -14,7 +14,7 @@ interface ForageDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['forage'] | null>(`${API_ROUTE.CYGNUS.FORAGE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['forage'] | null>(API_ROUTE.CYGNUS.FORAGE.ID(id)));
 
 export async function generateMetadata(props: ForageDetailProps) {
   const post = await grabDetail((await props.params).id);

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CastawayProduct() {
-  const { data } = await grabData<ITheSimsResponse['castaway-product'][]>(API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT, {
+  const { data } = await grabData<ITheSimsResponse['castaway-product'][]>(API_ROUTE.THE_SIMS.CASTAWAY_PRODUCT.BASE, {
     pageSize: 0,
   });
 

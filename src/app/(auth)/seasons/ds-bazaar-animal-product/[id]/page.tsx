@@ -14,7 +14,7 @@ interface BazaarAnimalProductProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-animal-product'] | null>(`${API_ROUTE.SEASONS.DS_BAZAAR_ANIMAL_PRODUCT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-animal-product'] | null>(API_ROUTE.SEASONS.DS_BAZAAR_ANIMAL_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: BazaarAnimalProductProps) {
   const post = await grabDetail((await props.params).id);

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreePCPreserveDish() {
-  const { data } = await grabData<ITheSimsResponse['three-pc-preserve-dish'][]>(API_ROUTE.THE_SIMS.THREE_PC_PRESERVE_DISH, {
+  const { data } = await grabData<ITheSimsResponse['three-pc-preserve-dish'][]>(API_ROUTE.THE_SIMS.THREE_PC_PRESERVE_DISH.BASE, {
     pageSize: 50,
   });
 

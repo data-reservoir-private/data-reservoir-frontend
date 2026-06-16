@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function FourPCHarvestable() {
-  const { data } = await grabData<ITheSimsResponse['four-pc-harvestable'][]>(API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE, { pageSize: 0 });
+  const { data } = await grabData<ITheSimsResponse['four-pc-harvestable'][]>(API_ROUTE.THE_SIMS.FOUR_PC_HARVESTABLE.BASE, { pageSize: 0 });
 
   return (
     <Section name='The Sims Four PC Harvestable' variant='h4' breadcrumbs={BREADCRUMBS['the-sims-four-pc-harvestable']}>

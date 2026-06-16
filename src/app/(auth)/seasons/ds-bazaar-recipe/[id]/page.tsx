@@ -14,7 +14,7 @@ interface DSBazaarRecipeDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-recipe'] | null>(`${API_ROUTE.SEASONS.DS_BAZAAR_RECIPE}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-recipe'] | null>(API_ROUTE.SEASONS.DS_BAZAAR_RECIPE.ID(id)));
 
 export async function generateMetadata(props: DSBazaarRecipeDetailProps) {
   const post = await grabDetail((await props.params).id);

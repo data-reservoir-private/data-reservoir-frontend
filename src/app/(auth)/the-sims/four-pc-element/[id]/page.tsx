@@ -17,9 +17,9 @@ interface FourPCElementDetailProps {
   params: Promise<{ id: string }>
 }
 
-export const generateStaticParams = getStaticParams<ITheSimsResponse['four-pc-element']>(API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT);
+export const generateStaticParams = getStaticParams<ITheSimsResponse['four-pc-element']>(API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT.BASE);
 
-const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-element-complete'] | null>(`${API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ITheSimsResponse['four-pc-element-complete'] | null>(API_ROUTE.THE_SIMS.FOUR_PC_ELEMENT.ID(id)));
 
 export async function generateMetadata(props: FourPCElementDetailProps) {
   const post = await grabDetail((await props.params).id);

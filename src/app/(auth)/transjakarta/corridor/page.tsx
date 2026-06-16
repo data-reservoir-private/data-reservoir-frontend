@@ -1,13 +1,7 @@
-import { API_ROUTE } from '@/constant/api-route';
-import { grabData } from '@/utilities/http';
-import { Metadata } from 'next';
-import Section from '@/components/common/paper/Section';
-import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
-import { BREADCRUMBS } from '@/constant/breadcrumb';
-import { ISeasonsResponse } from '@/model/response/seasons';
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Seasons DS Bazaar Crops - Data Reservoir'
+  title: 'Transjakarta Corridor - Data Reservoir'
 };
 
 export default async function BazaarCrop() {

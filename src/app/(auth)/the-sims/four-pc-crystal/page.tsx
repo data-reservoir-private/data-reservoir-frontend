@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function FourPCCrystal() {
-  const { data } = await grabData<ITheSimsResponse['four-pc-crystal'][]>(API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL, { pageSize: 0 });
+  const { data } = await grabData<ITheSimsResponse['four-pc-crystal'][]>(API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL.BASE, { pageSize: 0 });
 
   return (
     <Section name='The Sims Four PC Crystal' variant='h4' breadcrumbs={BREADCRUMBS['the-sims-four-pc-crystal']}>

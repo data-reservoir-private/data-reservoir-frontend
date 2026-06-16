@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreePCMetal() {
-  const { data } = await grabData<ITheSimsResponse['three-pc-metal'][]>(API_ROUTE.THE_SIMS.THREE_PC_METAL, {
+  const { data } = await grabData<ITheSimsResponse['three-pc-metal'][]>(API_ROUTE.THE_SIMS.THREE_PC_METAL.BASE, {
     pageSize: 50,
   });
 

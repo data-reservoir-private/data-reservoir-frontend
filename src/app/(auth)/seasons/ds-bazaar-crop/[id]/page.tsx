@@ -14,7 +14,7 @@ interface BazaarCropProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-crop'] | null>(`${API_ROUTE.SEASONS.DS_BAZAAR_CROP}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ISeasonsResponse['ds-bazaar-crop'] | null>(API_ROUTE.SEASONS.DS_BAZAAR_CROP.ID(id)));
 
 export async function generateMetadata(props: BazaarCropProps) {
   const post = await grabDetail((await props.params).id);

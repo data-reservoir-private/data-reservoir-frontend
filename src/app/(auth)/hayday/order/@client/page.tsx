@@ -24,7 +24,7 @@ const mapping: Record<string, string> = {
 
 export default async function ClientPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['client'][]>(API_ROUTE.HAY_DAY.ORDER.CLIENT, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['client'][]>(API_ROUTE.HAY_DAY.ORDER.BASE.CLIENT, sp);
   return (
     <Grid container spacing='1rem' columns={{ xs: 1, lg: 2 }}>
       {

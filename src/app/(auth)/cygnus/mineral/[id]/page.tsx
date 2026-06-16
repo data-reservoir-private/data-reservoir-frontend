@@ -14,7 +14,7 @@ interface MineralDetailProps {
   params: Promise<{ id: string }>
 }
 
-const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['mineral'] | null>(`${API_ROUTE.CYGNUS.MINERAL}/${id}`));
+const grabDetail = cache(async (id: string) => await grabData<ICygnusResponse['mineral'] | null>(API_ROUTE.CYGNUS.MINERAL.ID(id)));
 
 export async function generateMetadata(props: MineralDetailProps) {
   const post = await grabDetail((await props.params).id);

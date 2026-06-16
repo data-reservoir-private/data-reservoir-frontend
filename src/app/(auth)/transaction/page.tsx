@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const { data } = await grabData<IDashboardResponse>(`${API_ROUTE.DASHBOARD}/transaction`);
+  const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.TRANSACTION);
   const date = new Date();
   const sets = {
     ...DATASETS_AVAILABLE['transaction'],
