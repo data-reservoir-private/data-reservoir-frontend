@@ -198,6 +198,7 @@ interface IProduct {
   time: number;
   isRaw: boolean;
   effort?: number;
+  effortLn?: number;
 }
 
 interface IProductIngredient {
@@ -224,16 +225,17 @@ DATA_PRODUCT.filter((x) => x.isRaw).forEach((x) => {
   } else if (x.category === "Ores") {
     RAW_STORAGE[x.id] = 2;
   } else if (x.category === "Animals") {
-    if (x.name === "Egg") RAW_STORAGE[x.id] = 24;
-    if (x.name === "Milk") RAW_STORAGE[x.id] = 70;
-    if (x.name === "Bacon") RAW_STORAGE[x.id] = 260;
-    if (x.name === "Wool") RAW_STORAGE[x.id] = 390;
-    if (x.name === "Fish Fillet") RAW_STORAGE[x.id] = 90;
-    if (x.name === "Goat Milk") RAW_STORAGE[x.id] = 520;
-    if (x.name === "Honeycomb") RAW_STORAGE[x.id] = 35;
-    if (x.name === "Lobster Tail") RAW_STORAGE[x.id] = 840;
-    if (x.name === "Duck Feather") RAW_STORAGE[x.id] = 480;
-    if (x.name === "Peanuts") RAW_STORAGE[x.id] = 300;
+    if (x.name === "Egg") RAW_STORAGE[x.id] = 2.4;
+    if (x.name === "Milk") RAW_STORAGE[x.id] = 7;
+    if (x.name === "Bacon") RAW_STORAGE[x.id] = 26;
+    if (x.name === "Wool") RAW_STORAGE[x.id] = 39;
+    if (x.name === "Fish Fillet") RAW_STORAGE[x.id] = 9;
+    if (x.name === "Goat Milk") RAW_STORAGE[x.id] = 52;
+    if (x.name === "Honeycomb") RAW_STORAGE[x.id] = 3.5;
+    if (x.name === "Lobster Tail") RAW_STORAGE[x.id] = 84;
+    if (x.name === "Duck Feather") RAW_STORAGE[x.id] = 48;
+    if (x.name === "Peanuts") RAW_STORAGE[x.id] = 30;
+    if (x.name === "Lamb Chop") RAW_STORAGE[x.id] = 4;
   } else RAW_STORAGE[x.id] = 0;
 });
 

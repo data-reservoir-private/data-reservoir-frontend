@@ -71,8 +71,12 @@ export default async function HaydayBuildingDetail(props: HaydayBuildingDetailPr
                     <Box className="relative w-7 h-7">
                       <SimpleImage sizes='28px' src={ing.image} alt={ing.name} className='bg-gray-500/20' />
                     </Box>
-                    <Typography className='text-sm font-light'>{ing.name}</Typography>
-                    <Typography className='text-sm font-bold pr-2'>{ing.quantity}</Typography>
+                    <Box className="flex gap-2 items-center justify-between grow pr-2">
+                      <Typography className='text-sm font-light'>{ing.name}</Typography>
+                      <Box className="flex items-center justify-center bg-gray-700/50 border border-gray-600/50 rounded-sm">
+                        <Typography className='text-sm font-bold pl-2 pr-2 w-full'>{ing.quantity}</Typography>
+                      </Box>
+                    </Box>
                   </Paper>
                 </Link>
               ))
