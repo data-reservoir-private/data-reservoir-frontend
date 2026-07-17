@@ -15,6 +15,8 @@ import { EChart } from '@/components/common/chart/Chart';
 import Paper from '@/components/common/paper/Paper';
 import { Metadata } from 'next';
 import { DATASETS_AVAILABLE } from '@/constant/data';
+import { friendlyFileSize } from '@/utilities/general';
+import { FaFolder } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: 'Dashboard - Data Reservoir'
@@ -25,6 +27,7 @@ export default async function Dashboard() {
 
   const totalRecord = cache(() => data.reduce((acc, curr) => acc + curr.tables.reduce((a, c) => a + c.rowCount, 0), 0));
   const totalTable = cache(() => data.reduce((acc, curr) => acc + curr.tables.length, 0));
+  const totalSize = cache(() => data.reduce((acc, curr) => acc + curr.tables.reduce((a, c) => a + c.size, 0), 0));
 
   const totalData = cache(() => data.reduce((acc, curr) => acc + curr.datasets.reduce((a, c) => a + c.total, 0), 0));
   const totalDatasets = cache(() => data.reduce((acc, curr) => acc + curr.datasets.length, 0));
@@ -111,6 +114,25 @@ export default async function Dashboard() {
         </Grid>
         <Paper>
           <DBTreeChart data={data} />
+        </Paper>
+      </Section>
+
+      <Section name='Size' variant='h6' className='flex flex-col gap-4'>
+        <Grid container spacing='1rem' columns={{ xs: 1, md: 1 }}>
+          <Grid size={1}>
+            <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-slate-700 to-slate-400 border-none'>
+              <Box flexDirection='column'>
+                <Typography variant='h4' fontWeight='bold'>{friendlyFileSize(totalSize())}</Typography>
+                <Typography variant='subtitle2' component='h5'>Size</Typography>
+              </Box>
+              <Box component='div' className='h-full flex items-center justify-center text-5xl'>
+                <FaFolder />
+              </Box>
+            </Paper>
+          </Grid>
+        </Grid>
+        <Paper>
+          <SizeTreeChart data={data} />
         </Paper>
       </Section>
     </Section>
@@ -202,6 +224,73 @@ function DBTreeChart({ data }: { data: IDashboardResponse[] }) {
           children: category.tables.map(table => ({
             name: table.tableURL,
             value: table.rowCount
+          }))
+        })),
+        levels: [
+          {
+            itemStyle: {
+              borderWidth: 0,
+              gapWidth: 5,
+              borderColor: 'transparent'
+            }
+          },
+          {
+            itemStyle: {
+              gapWidth: 1,
+              borderColor: 'transparent'
+            }
+          },
+          {
+            colorSaturation: [0.35, 0.5],
+            itemStyle: {
+              gapWidth: 1,
+              borderColorSaturation: 0.6,
+              borderColor: 'transparent'
+            }
+          }
+        ]
+      }
+    ],
+    tooltip: {
+      show: true
+    },
+    grid: {
+      top: 40,
+      left: 40,
+      right: 40,
+      bottom: 40,
+    },
+  };
+
+  return (
+    <EChart className='w-full h-75' option={opt} />
+  );
+}
+
+function SizeTreeChart({ data }: { data: IDashboardResponse[] }) {
+  const opt: EChartsOption = {
+    series: [
+      {
+        type: 'treemap',
+        scaleLimit: {
+          min: 1.1,
+          max: 12
+        },
+        zoom: 1.1,
+        visibleMin: 300,
+        label: {
+          show: true,
+          formatter: '{b}'
+        },
+        data: data.map(category => ({
+          name: category.prefix,
+
+          children: category.tables.map(table => ({
+            name: table.tableURL,
+            value: table.size,
+            label: {
+              formatter: `${table.tableURL} | ${friendlyFileSize(table.size)}`
+            }
           }))
         })),
         levels: [

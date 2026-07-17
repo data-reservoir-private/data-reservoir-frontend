@@ -26,6 +26,10 @@ export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
         {props.valuable}
       </Section>
 
+      <Section name='Composition' variant='h6' caption='Essentials used inside the order. Smaller-sized number is amount used to make another essential'>
+        {props.composition}
+      </Section>
+
       <Section name='Top 50 Products' variant='h6'>
         {props.product}
       </Section>

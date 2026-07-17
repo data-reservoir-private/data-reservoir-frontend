@@ -36,7 +36,7 @@ export default async function ProductPage() {
                 <Paper className='flex flex-col'>
                   <Box className='w-15 h-15 relative bg-background-default p-1'><SimpleImage src={product.image} alt={product.name} /></Box>
                   <Typography variant='body1' className='font-bold'>{product.average.toPrecision(3)}</Typography>
-                  <Typography variant='subtitle2'>{product.quantity}</Typography>
+                  <Typography variant='subtitle2' className='text-xs'>{product.quantity}</Typography>
                 </Paper>
               </ButtonBase>
             </Link>

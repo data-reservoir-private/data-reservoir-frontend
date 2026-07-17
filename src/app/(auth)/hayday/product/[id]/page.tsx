@@ -53,6 +53,7 @@ export default async function HaydayProductDetail(props: HaydayProductDetailProp
           XP: data.xp,
           "Effort*": data.effort,
           "Effort (ln)*": data.effortLn,
+          "Is Essential*": data.isEssential,
         }} />
 
       </Section>

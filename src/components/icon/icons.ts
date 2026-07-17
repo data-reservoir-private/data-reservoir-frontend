@@ -11,7 +11,7 @@ export const TransjakartaIcon = (props: IconBaseProps) => GenIcon({
   attr: {
     viewBox: '0 0 100 100',
     transformOrigin: "center",
-    transformBox: "fill-box",
+    transformbox: "fill-box",
     width: "18",
     height: "18",
     preserveAspectRatio: "xMaxYMax meet"

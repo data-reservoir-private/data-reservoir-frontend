@@ -35,6 +35,7 @@ export default async function OrderSummary() {
           <Paper className='flex h-full justify-between px-5 py-3 bg-linear-to-r from-green-700 to-green-400 border-none'>
             <Box flexDirection='column'>
               <Typography variant='h4' fontWeight='bold'>{data?.percentageAcceptedOrder ?? 0}%</Typography>
+              <Typography variant='body1' fontWeight='bold' className='align-middle'>{data?.acceptedOrder ?? 0} / {data?.settledOrder ?? 0}</Typography>
               <Typography variant='subtitle1'>Accepted</Typography>
             </Box>
             <Box component='div' className='h-full flex items-center justify-center text-5xl'>

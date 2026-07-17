@@ -72,3 +72,10 @@ export function convertTheSimsRarity(num: THE_SIMS_RARITY) {
       num === THE_SIMS_RARITY.RARE ? 'Rare' : 
         num === THE_SIMS_RARITY.UNCOMMON ? 'Uncommon': '';
 }
+
+export function friendlyFileSize(size: number): string {
+  if (size < 1024) return `${size} B`;
+  const i = Math.floor(Math.log(size) / Math.log(1024));
+  const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+  return `${(size / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`;
+}

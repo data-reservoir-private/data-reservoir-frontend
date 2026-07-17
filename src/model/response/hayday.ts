@@ -8,6 +8,7 @@ export type IHaydayResponse = {
     category: string
     price: number
     isRaw: boolean
+    isEssential: boolean
     time: number
     level: number
     xp: number
@@ -23,18 +24,7 @@ export type IHaydayResponse = {
     time: number
     xp: number
   },
-  'hayday-product-complete': {
-    id: string
-    name: string
-    image: string
-    category: string
-    price: number
-    isRaw: boolean
-    time: number
-    level: number
-    xp: number
-    effort: number
-    effortLn: number
+  'hayday-product-complete': IHaydayResponse['hayday-product'] & {
     ingredients: {
       id: string
       name: string
@@ -197,6 +187,14 @@ export type IHaydayResponse = {
         productPrice: number
         quantity: number
       }[] | null
-    }
+    },
+    'composition': {
+      id: string
+      name: string
+      image: string,
+      quantity: number,
+      additionalQuantity: number
+    },
   }
 }
+
