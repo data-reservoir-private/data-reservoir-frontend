@@ -49,7 +49,7 @@ export default async function BazaarCrop() {
       <Box>
         {
         categoryGroupOrdering.filter(category => groups.includes(category)).map(category => (
-          <Accordion defaultExpanded>
+          <Accordion defaultExpanded key={category} >
             <AccordionSummary
               expandIcon={<MdExpandMore />}
               aria-controls={`${category}-panel1-content`}
@@ -61,7 +61,7 @@ export default async function BazaarCrop() {
               {
                 groupedData[category].sort((a, b) => compareCategory(a.code, b.code)).map(corridor => (
                   <Link passHref key={corridor.code} href={`/transjakarta/corridor/${corridor.code}`}>
-                    <TransjakartaCodeIcon code={corridor.code} color={corridor.color}/>
+                    <TransjakartaCodeIcon code={corridor.code} color={corridor.color} isDeleted={corridor.isDeleted}/>
                   </Link>
                 ))
               }

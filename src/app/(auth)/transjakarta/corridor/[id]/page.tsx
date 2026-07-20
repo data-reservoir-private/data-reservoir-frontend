@@ -6,6 +6,7 @@ import { API_ROUTE } from "@/constant/api-route";
 import { BREADCRUMBS } from "@/constant/breadcrumb";
 import { ITransjakartaResponse } from "@/model/response/transjakarta";
 import { grabData } from "@/utilities/http";
+import { Alert } from "@mui/material";
 import Box from "@mui/material/Box";
 import { notFound } from "next/navigation";
 import { cache } from "react";
@@ -33,13 +34,20 @@ export default async function TransjakartaCorridorDetail(props: TransjakartaCorr
 
   const title = (
     <Box className='flex items-center gap-3'>
-      <TransjakartaCodeIcon code={latestData.code} color={latestData.color} size='sm' />
+      <TransjakartaCodeIcon code={latestData.code} color={latestData.color} size='sm' isDeleted={latestData.isDeleted} />
       <span className='text-2xl font-bold font-[PT_Sans]'>{latestData.name}</span>
     </Box>
   )
 
   return (
     <Section name={title} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['transjakarta-corridor-detail'], { label: latestData.code }]}>
+      {
+        latestData.isDeleted && (
+          <Alert severity="warning" className='flex items-center gap-2'>
+            This corridor has been deleted. The data shown here is the latest available data before deletion.
+          </Alert>
+        )
+      }
       {
         data.map((corridor, idx) => (
           <Paper key={idx} className='flex gap-4 p-4 max-md:flex-col'>
@@ -51,6 +59,7 @@ export default async function TransjakartaCorridorDetail(props: TransjakartaCorr
                 'Category': corridor.category,
                 'Color': corridor.color,
                 'Effective Date': corridor.effectiveDate,
+                'Picture Effective Date': corridor.pictureEffectiveDate,
               }} />
             </Box>
           </Paper>

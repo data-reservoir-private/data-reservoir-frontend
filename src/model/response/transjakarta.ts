@@ -4,7 +4,9 @@ export type ITransjakartaResponse = {
     category: string
     color: string
     name: string
-    image: string
-    effectiveDate: string
+    image: string,
+    isDeleted: boolean,
+    effectiveDate: string,
+    pictureEffectiveDate: string,
   }
 }
