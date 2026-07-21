@@ -40,16 +40,19 @@ export default async function ClientPage() {
                   <Box className='flex flex-col gap-.5'>
                     <Box className='flex gap-3 items-center'>
                       <Typography variant='subtitle1'><BsPlusCircleFill /></Typography>
-                      <Typography variant='subtitle1'>{client.revenue}</Typography>
+                      <Typography variant='subtitle1'>{client.revenueEvent}</Typography>
+                      <Typography variant='subtitle1' className='text-xs text-white/50'>({client.revenue})</Typography>
                     </Box>
                     <Box className='flex gap-3 items-center'>
                       <Typography variant='subtitle2'><GiTwoCoins /></Typography>
-                      <Typography variant='subtitle2'>{client.coin}</Typography>
+                      <Typography variant='subtitle2'>{client.coinEvent}</Typography>
+                      <Typography variant='subtitle1' className='text-xs text-white/50'>({client.coin})</Typography>
                     </Box>
 
                     <Box className='flex gap-3 items-center'>
                       <Typography variant='subtitle2'><BsStarFill /></Typography>
-                      <Typography variant='subtitle2'>{client.xp}</Typography>
+                      <Typography variant='subtitle2'>{client.xpEvent}</Typography>
+                      <Typography variant='subtitle1' className='text-xs text-white/50'>({client.xp})</Typography>
                     </Box>
                   </Box>
                 </Box>

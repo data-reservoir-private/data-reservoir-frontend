@@ -6,7 +6,7 @@ export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
     <Section name='Hayday Orders' variant='h4' breadcrumbs={BREADCRUMBS['hayday-order']}>
       {props.children}
 
-      <Section name='Summary' variant='h6' caption='Smaller number is revenue without accounting event or ad bonus'>
+      <Section name='Summary' variant='h6' caption='Smaller number on XP and coin cards are revenue without accounting event or ad bonus'>
         {props.summary}
       </Section>
 
@@ -18,11 +18,11 @@ export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
         {props.distribution}
       </Section>
 
-      <Section name='Clients' variant='h6'>
+      <Section name='Clients' variant='h6' caption='Smaller and transluscent number is revenue without accounting event or ad bonus'>
         {props.client}
       </Section>
 
-      <Section name='Top 10 Orders' variant='h6' caption='Only pure revenue'>
+      <Section name='Top 10 Orders' variant='h6' caption='Value in brackets is revenue without accounting event or ad bonus'>
         {props.valuable}
       </Section>
 
