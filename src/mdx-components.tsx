@@ -39,6 +39,10 @@ const components: MDXComponents = {
     <Box component='ul' className='pb-2'>
       {children}
     </Box>,
+  a: ({ children }) =>
+    <a {...children.props} className='text-blue-800 underline'>
+      {children}
+    </a>
 };
 
 export function useMDXComponents(): MDXComponents {

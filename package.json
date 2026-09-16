@@ -17,7 +17,7 @@
     "@mdx-js/react": "^3.1.1",
     "@mui/material": "^7.1.2",
     "@mui/material-nextjs": "^7.3.7",
-    "@next/mdx": "16.2.4",
+    "@next/mdx": "16.3.5",
     "@tailwindcss/postcss": "^4.1.18",
     "@tanstack/react-form": "^1.27.7",
     "@tanstack/react-table": "^8.19.3",
@@ -33,11 +33,11 @@
     "hyparquet-writer": "^0.6.1",
     "json-2-csv": "^5.5.9",
     "katex": "^0.16.22",
-    "next": "16.2.4",
+    "next": "16.3.5",
     "postcss": "^8.5.10",
     "query-string": "^9.2.2",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "react-icons": "^5.5.0",
     "rehype-katex": "^7.0.1",
     "rehype-pretty-code": "^0.14.1",
@@ -51,30 +51,17 @@
   "devDependencies": {
     "@clerk/testing": "^2.0.21",
     "@eslint/js": "^10.0.1",
-    "@next/eslint-plugin-next": "16.2.4",
+    "@next/eslint-plugin-next": "16.3.5",
     "@playwright/test": "^1.58.2",
     "@types/file-saver": "^2.0.7",
     "@types/node": "^20",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
     "baseline-browser-mapping": "^2.10.0",
-    "eslint": "^10.2.1",
-    "eslint-config-next": "16.2.4",
+    "eslint": "10.10.0",
+    "eslint-config-next": "16.3.5",
     "eslint-plugin-unused-imports": "^4.4.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.59.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.2.14",
-      "@types/react-dom": "19.2.3"
-    },
-    "ignoredBuiltDependencies": [
-      "sharp"
-    ],
-    "onlyBuiltDependencies": [
-      "@clerk/shared",
-      "@tailwindcss/oxide"
-    ]
   }
 }

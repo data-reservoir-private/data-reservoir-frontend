@@ -96,6 +96,7 @@ export const API_ROUTE = Object.freeze({
       SUMMARY: '/hayday/order/summary',
       CLIENT: '/hayday/order/client',
       DISTRIBUTION: '/hayday/order/distribution',
+      LEVEL: '/hayday/order/level',
       PRODUCT: '/hayday/order/product',
       VALUABLE: '/hayday/order/valuable',
       WEEKLY: '/hayday/order/weekly',

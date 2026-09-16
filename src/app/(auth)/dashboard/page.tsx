@@ -13,7 +13,7 @@ import { FaThList } from "react-icons/fa";
 import { EChartsOption } from 'echarts';
 import { EChart } from '@/components/common/chart/Chart';
 import Paper from '@/components/common/paper/Paper';
-import { Metadata } from 'next';
+import Metadata from 'next';
 import { DATASETS_AVAILABLE } from '@/constant/data';
 import { friendlyFileSize } from '@/utilities/general';
 import { FaFolder } from "react-icons/fa";

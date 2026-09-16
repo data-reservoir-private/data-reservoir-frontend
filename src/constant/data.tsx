@@ -227,12 +227,12 @@ export const DATASETS_AVAILABLE = Object.freeze(({
   'hayday': {
     name: 'Hayday',
     categories: [
-      {
-        id: 'order',
-        name: "Order",
-        link: '/hayday/order',
-        description: '',
-      },
+      // {
+      //   id: 'order',
+      //   name: "Order",
+      //   link: '/hayday/order',
+      //   description: '',
+      // },
       {
         id: 'product',
         name: "Product",
