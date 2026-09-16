@@ -9,36 +9,37 @@ import Section from '@/components/common/paper/Section';
 
 export default async function DistributionPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  if (!sp.month || !sp.year) return null;
+  if (sp.month || sp.year) return null;
 
-  const { data } = await grabData<IHaydayResponse['hayday-order']['level'][]>(API_ROUTE.HAY_DAY.ORDER.DISTRIBUTION, sp);
+  const { data } = await grabData<IHaydayResponse['hayday-order']['level'][]>(API_ROUTE.HAY_DAY.ORDER.LEVEL, sp);
   if (!data) return null;
 
   const opt: EChartsOption = {
-    xAxis: {
-      type: 'value',
-    },
     yAxis: {
+      type: 'value',
+      axisLine: {
+        show: true
+      }
+    },
+    xAxis: {
       type: 'category',
-      data: data.map(x => x.level)
+      data: data.filter(x => x.level > 0).map(x => x.level)
     },
     series: [
       {
         name: 'Revenue Boxplot',
         type: 'boxplot',
-        // data: [
-        //   [data.boxplot.min, data.boxplot.q1, data.boxplot.median, data.boxplot.q3, data.boxplot.max],
-        // ],
-        data: data.map(x => ([x.boxplot.min, x.boxplot.q1, x.boxplot.median, x.boxplot.q3, x.boxplot.max]))
+        data: data.filter(x => x.level > 0).map(x => ([x.boxplot.min, x.boxplot.q1, x.boxplot.median, x.boxplot.q3, x.boxplot.max]))
       },
-      // {
-      //   name: 'outliers',
-      //   type: 'scatter',
-      //   data: data.boxplot.outliers,
-      //   tooltip: {
-      //     show: false
-      //   }
-      // }
+      {
+        name: 'Outliers',
+        type: 'scatter',
+
+        data: data.filter(x => x.level > 0).flatMap(x => x.boxplot.outliers.map(y => [x.level.toString(), y ])),
+        tooltip: {
+          show: false
+        }
+      }
     ],
     tooltip: {
       trigger: 'axis',
@@ -55,12 +56,18 @@ export default async function DistributionPage() {
       right: 80,
       bottom: 40,
     },
+    dataZoom: [
+      {
+        show: true,
+        start: 50
+      },
+    ]
   };
 
   return (
     <Section name='Level Distribution' variant='h6' caption='Distribution on revenue based on level'>
-      <Paper className='min-h-75 w-full'>
-        <EChart option={opt} className='min-h-75' />
+      <Paper className='min-h-300 w-full'>
+        <EChart option={opt} className='min-h-300' />
       </Paper>
     </Section>
   );

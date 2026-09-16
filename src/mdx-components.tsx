@@ -39,9 +39,9 @@ const components: MDXComponents = {
     <Box component='ul' className='pb-2'>
       {children}
     </Box>,
-  a: ({ children }) =>
-    <a {...children.props} className='text-blue-800 underline'>
-      {children}
+  a: (props) =>  
+    <a {...props} target="_blank">
+      {props.children}
     </a>
 };
 
