@@ -86,15 +86,15 @@ export class Converter {
           <head>
             <meta charSet="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link rel="icon" type="image/svg+xml" href="favicon.svg"></link>
+            <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
             <title>Exported Data</title>
           </head>
-          <body>
-            <table style={{ border: '1px solid black', borderCollapse: 'collapse' }}>
-              <thead>
+          <body style={{ background: '#202125', color: 'white', fontFamily: '"PT Sans", sans-serif' }}>
+            <table style={{ border: '1px solid grey', borderCollapse: 'collapse' }}>
+              <thead style={{ background: '#121212' }}>
                 <tr>
                   {
-                    Object.keys(data[0]).map(x => (<th style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={x}>{x}</th>))
+                    Object.keys(data[0]).map(x => (<th style={{ border: '1px solid grey', borderCollapse: 'collapse', padding: '.5rem' }} key={x}>{x}</th>))
                   }
                 </tr>
               </thead>
@@ -104,7 +104,7 @@ export class Converter {
                     <tr key={idx}>
                       {
                         Object.values(row).map((v, idx) => (
-                          <td style={{ border: '1px solid black', borderCollapse: 'collapse', padding: '.5rem' }} key={idx}>
+                          <td style={{ border: '1px solid grey', borderCollapse: 'collapse', padding: '.5rem' }} key={idx}>
                             {convertToString(v)}
                           </td>
                         ))

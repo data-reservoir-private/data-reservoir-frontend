@@ -33,6 +33,8 @@ export default function HaydayOrderLayout(props: LayoutProps<'/hayday/order'>) {
       <Section name='Top 50 Products' variant='h6'>
         {props.product}
       </Section>
+
+      {props.level}
     </Section>
   );
 }

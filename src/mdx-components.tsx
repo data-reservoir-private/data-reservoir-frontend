@@ -39,6 +39,10 @@ const components: MDXComponents = {
     <Box component='ul' className='pb-2'>
       {children}
     </Box>,
+  a: (props) =>  
+    <a {...props} target="_blank">
+      {props.children}
+    </a>
 };
 
 export function useMDXComponents(): MDXComponents {
