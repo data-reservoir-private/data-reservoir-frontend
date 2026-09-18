@@ -15,11 +15,18 @@ import ButtonBase from '@mui/material/ButtonBase';
 import Link from 'next/link';
 import { EChartsOption } from 'echarts';
 import { EChart } from '@/components/common/chart/Chart';
+import { round } from '@/utilities/general';
 
 export default async function OrderSummary() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
   const { data } = await grabData<IHaydayResponse['hayday-order']['summary']>(API_ROUTE.HAY_DAY.ORDER.SUMMARY, sp);
 
+  const voucherTotal = (
+    (data?.voucher?.green ?? 0) +
+    (data?.voucher?.blue ?? 0) +
+    (data?.voucher?.purple ?? 0) +
+    (data?.voucher?.gold ?? 0)
+  );
   const vouchers = [
     { name: 'Green Voucher', image: '/image/hayday/green.png', total: data?.voucher?.green ?? 0, className: 'from-green-700 to-green-600' },
     { name: 'Blue Voucher', image: '/image/hayday/blue.png', total: data?.voucher?.blue ?? 0, className: 'from-sky-700 to-sky-600' },
@@ -77,6 +84,7 @@ export default async function OrderSummary() {
               <Paper className={classNames('flex justify-between p-1 px-3 items-center border-none bg-linear-to-r', x.className)} key={x.name}>
                 <Box className='flex flex-col'>
                   <Typography variant='h5' className='font-bold'>{x.total}</Typography>
+                  <Typography variant='subtitle2' className='text-xs font-light'>{voucherTotal == 0 ? 0 : round(x.total / voucherTotal * 100)}%</Typography>
                   <Typography variant='subtitle2' className='max-sm:hidden'>{x.name}</Typography>
                 </Box>
 
