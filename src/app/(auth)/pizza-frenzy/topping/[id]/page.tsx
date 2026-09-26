@@ -8,9 +8,17 @@ import Section from '@/components/common/paper/Section';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import { IPizzaFrenzyResponse } from '@/model/response/pizza-frenzy';
-import Grid from '@mui/material/Grid';
 import { getStaticParams } from '@/utilities/static';
 import SimpleImage from '@/components/common/SimpleImage';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import CopyButton from '@/components/common/CopyButton';
 
 interface ToppingDetailProps {
   params: Promise<{ id: string }>
@@ -32,6 +40,7 @@ export default async function ToppingDetail(props: ToppingDetailProps) {
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();
+  const toppingDetails = [...data.toppingDetails].sort((a, b) => a.level - b.level);
 
   return (
     <Section name={data.generalName} variant='h4' className='flex flex-col gap-3' breadcrumbs={[...BREADCRUMBS['pizza-frenzy-topping-detail'], { label: data.generalName }]}>
@@ -52,23 +61,49 @@ export default async function ToppingDetail(props: ToppingDetailProps) {
 
       {/* Upgrades */}
       <Section variant='h6' name='Upgrades'>
-        <Grid container columns={{ xs: 1, md: 2 }} spacing={2}>
-          {
-            data.toppingDetails.map(td => (
-              <Grid size={1} key={td.id}>
-                <Paper>
-                  <TableDetail data={{
-                    ID: td.id,
-                    Name: td.name,
-                    Level: td.level,
-                    Description: td.description,
-                    'Price*': td.price,
-                  }} />
-                </Paper>
-              </Grid>
-            ))
-          }
-        </Grid>
+        <Paper>
+          <TableContainer>
+            <Table size='small' className='text-sm min-w-150'>
+              <TableHead>
+                <TableRow>
+                  <TableCell className='w-[20%]' />
+                  {toppingDetails.map(td => (
+                    <TableCell key={td.id} align='center' className='font-bold'>Level {td.level}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell component='th' scope='row' className='bg-white/5 w-[20%] font-bold'>ID</TableCell>
+                  {toppingDetails.map(td => (
+                    <TableCell key={td.id}>
+                      <Box className='flex flex-col justify-between items-center gap-2 h-full'>
+                        <Typography className='text-xs break-all' fontFamily='Consolas'>{td.id}</Typography>
+                        <CopyButton className="w-full" value={td.id} />
+                      </Box>
+                    </TableCell>
+                  ))}
+                </TableRow>
+                <TableRow>
+                  <TableCell component='th' scope='row' className='bg-white/5 w-[20%] font-bold'>Name</TableCell>
+                  {toppingDetails.map(td => <TableCell key={td.id}>{td.name}</TableCell>)}
+                </TableRow>
+                <TableRow>
+                  <TableCell component='th' scope='row' className='bg-white/5 w-[20%] font-bold'>Description</TableCell>
+                  {toppingDetails.map(td => <TableCell key={td.id}>{td.description}</TableCell>)}
+                </TableRow>
+                <TableRow>
+                  <TableCell component='th' scope='row' className='bg-white/5 w-[20%] font-bold italic text-gray-500'>
+                    <Tooltip title='Non-Canonical Data'><span>Price</span></Tooltip>
+                  </TableCell>
+                  {toppingDetails.map(td => (
+                    <TableCell key={td.id} className='italic text-gray-500'>{td.price}</TableCell>
+                  ))}
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       </Section>
     </Section>
   );

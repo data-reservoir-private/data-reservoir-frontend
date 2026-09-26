@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
 import { BsCheck, BsCopy, BsX } from 'react-icons/bs';
 
-export default function CopyButton({ value } : { value: string }) {
+export default function CopyButton({ value, className } : { value: string, className?: string }) {
   const [copied, setCopied] = useState<'awaiting' | 'success' | 'failed'>('awaiting');
 
   useEffect(() => {
@@ -28,7 +28,8 @@ export default function CopyButton({ value } : { value: string }) {
       color={copied === 'success' ? 'success' : copied === 'failed' ? 'error' : 'info'}
       variant={copied !== 'awaiting' ? 'contained' : 'outlined'}
       onClick={handleOnClick}
-      disabled={copied !== 'awaiting'} 
+      disabled={copied !== 'awaiting'}
+      className={className}
     >
       { copied === 'success' ? <BsCheck/> : copied === 'failed' ? <BsX/> : <BsCopy />}
     </Button>

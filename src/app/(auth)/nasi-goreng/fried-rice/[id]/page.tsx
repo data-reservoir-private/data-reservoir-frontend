@@ -71,20 +71,16 @@ export default async function NasiGorengFriedRiceDetail(
 
       {/* Tool */}
       {data.tool && (
-        <Section name="Made In" variant="h6">
-          <Paper className="flex overflow-hidden">
-            <Link passHref href={`/nasi-goreng/tool/${data.tool.id}`}>
-              <Box className="w-20 h-full min-h-20 relative bg-gray-500/20 hover:bg-gray-600/20 hover:transition-colors">
-                <SimpleImage src={data.tool.image} alt={data.tool.name} />
-              </Box>
-            </Link>
-            <Box className="grow flex">
-              <Box className="grow p-3">
-                <Typography className="">{data.tool.name}</Typography>
-              </Box>
-            </Box>
-          </Paper>
-        </Section>
+        <DetailGrid
+          name="Made In"
+          noGrid
+          data={[{
+            id: data.tool.id,
+            image: data.tool.image,
+            title: data.tool.name,
+            link: `/nasi-goreng/tool/${data.tool.id}`,
+          }]}
+        />
       )}
 
       {/* Recipe */}
