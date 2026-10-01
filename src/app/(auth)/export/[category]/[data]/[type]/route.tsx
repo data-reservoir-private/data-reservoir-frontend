@@ -51,6 +51,26 @@ const Transformer: Record<keyof typeof DATASETS_AVAILABLE, Record<string, (res: 
         harvestableImage: r.harvestable.image,
       };
     }),
+    'three-pc-fish': (res) => res.map(x => {
+      const r = x as ITheSimsResponse['three-pc-fish'];
+      return {
+        id: r.id,
+        name: r.name,
+        image: r.image,
+        skill: r.skill,
+        habitat: r.habitat,
+        rarity: r.rarity,
+        minWeight: r.minWeight,
+        maxWeight: r.maxWeight,
+        minValue: r.minValue,
+        maxValue: r.maxValue,
+        groceryValue: r.groceryValue,
+        baitSource: r.baitSource,
+        baitID: r.bait.id,
+        baitName: r.bait.name,
+        baitImage: r.bait.image,
+      }
+    })
   },
 };
 

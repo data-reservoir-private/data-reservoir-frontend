@@ -44,6 +44,10 @@ export const API_ROUTE = Object.freeze({
       BASE: '/the-sims/four-pc-harvestable',
       ID: (id: string) => `/the-sims/four-pc-harvestable/${id}`
     },
+    FOUR_PC_FISH: {
+      BASE: '/the-sims/four-pc-fish',
+      ID: (id: string) => `/the-sims/four-pc-fish/${id}`
+    },
     THREE_PC_DISH: {
       BASE: '/the-sims/three-pc-dish',
       ID: (id: string) => `/the-sims/three-pc-dish/${id}`
@@ -75,6 +79,14 @@ export const API_ROUTE = Object.freeze({
     THREE_PC_SPREAD_DISH: {
       BASE: '/the-sims/three-pc-spread-dish',
       ID: (id: string) => `/the-sims/three-pc-spread-dish/${id}`
+    },
+    THREE_PC_FISH: {
+      BASE: '/the-sims/three-pc-fish',
+      ID: (id: string) => `/the-sims/three-pc-fish/${id}`
+    },
+    THREE_PC_GROCERY: {
+      BASE: '/the-sims/three-pc-grocery',
+      ID: (id: string) => `/the-sims/three-pc-grocery/${id}`
     },
     TWO_CONSOLE_CAREER: '/the-sims/two-console-career',
     TWO_PETS_CONSOLE_CAREER: '/the-sims/two-pets-console-career',

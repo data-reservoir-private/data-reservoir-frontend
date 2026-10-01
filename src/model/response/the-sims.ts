@@ -198,7 +198,8 @@ export type ITheSimsResponse = {
     fertilizerValue: number,
     fertilizerDays: number,
     plantType: string,
-    nectarValue: number | null
+    nectarValue: number | null,
+    groceryValue: number | null
   },
   'three-pc-gem-cut': {
     id: string
@@ -264,5 +265,43 @@ export type ITheSimsResponse = {
     maxOreValue: number,
     minIngotValue: number,
     maxIngotValue: number
+  },
+  'three-pc-grocery': {
+    id: string,
+    name: string,
+    image: string,
+    value: number
+  },
+  'three-pc-fish': {
+    id: string,
+    name: string,
+    image: string,
+    skill: number,
+    habitat: string,
+    rarity: THE_SIMS_RARITY,
+    minWeight: number,
+    maxWeight: number,
+    minValue: number,
+    maxValue: number,
+    groceryValue: number,
+    baitSource: "Harvestable" | "Grocery" | "Fish",
+    bait: {
+      id: string,
+      name: string,
+      image: string
+    }
+  },
+  'four-pc-fish': {
+    id: string,
+    name: string,
+    image: string,
+    skill: number,
+    description: string,
+    size: string,
+    rarity: THE_SIMS_RARITY,
+    value: number,
+    minValue: number,
+    maxValue: number,
+    fertilizerStrength: string,
   }
 }

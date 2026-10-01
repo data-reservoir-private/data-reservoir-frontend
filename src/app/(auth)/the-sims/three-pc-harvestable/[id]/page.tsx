@@ -47,6 +47,7 @@ export default async function ThreePCHarvestableDetail(props: ThreePCHarvestable
           Name: data.name,
           Rarity: convertTheSimsRarity(data.rarity),
           "Value": data.value,
+          "Grocery Value": data.groceryValue,
           "Plant Type": data.plantType,
           "Max Produce": data.maxProduce,
           "Nectar Value": data.nectarValue,

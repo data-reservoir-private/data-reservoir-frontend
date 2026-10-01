@@ -76,6 +76,30 @@ export const BREADCRUMBS = Object.freeze({
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Three PC Harvestable", link: '/the-sims/three-pc-harvestable' }
   ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-fish': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Fish" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-fish-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Fish", link: '/the-sims/three-pc-fish' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-grocery': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Grocery" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-three-pc-grocery-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Three PC Grocery", link: '/the-sims/three-pc-grocery' }
+  ] satisfies IBreadcrumb[],
+  'the-sims-four-pc-fish': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Four PC Fish" }
+  ] satisfies IBreadcrumb[],
+  'the-sims-four-pc-fish-detail': [
+    { label: "The Sims", link: '/the-sims' },
+    { label: "The Sims Four PC Fish", link: '/the-sims/four-pc-fish' }
+  ] satisfies IBreadcrumb[],
   'the-sims-three-pc-gem-cut': [
     { label: "The Sims", link: '/the-sims' },
     { label: "The Sims Three PC Gem Cut" }

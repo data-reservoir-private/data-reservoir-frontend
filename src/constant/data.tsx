@@ -179,6 +179,28 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         }
       },
       {
+        id: 'three-pc-fish',
+        name: "Three PC Fish",
+        link: '/the-sims/three-pc-fish',
+        image: '/image/quick_link/ts3_pc_fish.png',
+        description: 'All of TS3 fish collectibles. Sourced from The Sims Wikia + Carl\'s Sims 4 Guide',
+        export: {
+          route: API_ROUTE.THE_SIMS.THREE_PC_FISH.BASE,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'three-pc-grocery',
+        name: "Three PC Grocery",
+        link: '/the-sims/three-pc-grocery',
+        image: '/image/quick_link/ts3_pc_grocery.png',
+        description: 'All of TS3 grocery collectibles. Sourced from The Sims Wikia. Only includes product that are not in fish or harvestable.',
+        export: {
+          route: API_ROUTE.THE_SIMS.THREE_PC_GROCERY.BASE,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
         id: 'three-pc-metal',
         name: "Three PC Metal",
         link: '/the-sims/three-pc-metal',
@@ -219,6 +241,17 @@ export const DATASETS_AVAILABLE = Object.freeze(({
         description: 'All of TS4 crystal collectibles. Sourced from The Sims Wikia',
         export: {
           route: API_ROUTE.THE_SIMS.FOUR_PC_CRYSTAL.BASE,
+          exportType: ALL_EXPORTS_COMPLETE
+        }
+      },
+      {
+        id: 'four-pc-fish',
+        name: "Four PC Fish",
+        link: '/the-sims/four-pc-fish',
+        image: '/image/quick_link/ts4_pc_fish.png',
+        description: 'All of TS4 fish collectibles. Sourced from The Sims Wikia',
+        export: {
+          route: API_ROUTE.THE_SIMS.FOUR_PC_FISH.BASE,
           exportType: ALL_EXPORTS_COMPLETE
         }
       },
