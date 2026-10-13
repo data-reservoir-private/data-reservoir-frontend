@@ -8,6 +8,7 @@ import Paper from '@/components/common/paper/Paper';
 import Box from '@mui/material/Box';
 import { GiTwoCoins } from 'react-icons/gi';
 import { BsPlusCircleFill, BsStarFill } from 'react-icons/bs';
+import { cacheLife, cacheTag } from 'next/cache';
 
 const mapping: Record<string, string> = {
   "Ben's Brewery": '/image/hayday/client/ben.png',
@@ -24,7 +25,7 @@ const mapping: Record<string, string> = {
 
 export default async function ClientPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['client'][]>(API_ROUTE.HAY_DAY.ORDER.CLIENT, sp);
+  const { data } = await getData(sp);
   return (
     <Grid container spacing='1rem' columns={{ xs: 1, lg: 2 }}>
       {
@@ -69,4 +70,11 @@ export default async function ClientPage() {
 
     </Grid>
   );
+}
+
+async function getData(params: HaydayOrderFormSchema) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
+  return grabData<IHaydayResponse['hayday-order']['client'][]>(API_ROUTE.HAY_DAY.ORDER.CLIENT, params);
 }

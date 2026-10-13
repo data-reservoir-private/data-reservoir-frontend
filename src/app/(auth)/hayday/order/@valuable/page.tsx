@@ -9,15 +9,14 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Link from "next/link";
 import SimpleImage from "@/components/common/SimpleImage";
-import { BsPlusCircleFill, BsStarFill } from "react-icons/bs";
+import { BsStarFill } from "react-icons/bs";
 import { GiTwoCoins } from "react-icons/gi";
 import dayjs from "dayjs";
+import { cacheLife, cacheTag } from "next/cache";
 
 export default async function ValuableOrder() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<
-    IHaydayResponse["hayday-order"]["valuable"][]
-  >(API_ROUTE.HAY_DAY.ORDER.VALUABLE, sp);
+  const { data } = await getData(sp);
 
   if (!data || data.length === 0) {
     return (
@@ -82,5 +81,15 @@ export default async function ValuableOrder() {
         </Grid>
       ))}
     </Grid>
+  );
+}
+
+async function getData(params: HaydayOrderFormSchema) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
+  return grabData<IHaydayResponse["hayday-order"]["valuable"][]>(
+    API_ROUTE.HAY_DAY.ORDER.VALUABLE,
+    params,
   );
 }

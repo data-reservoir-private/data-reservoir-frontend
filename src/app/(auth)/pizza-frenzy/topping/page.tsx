@@ -5,12 +5,15 @@ import Section from '@/components/common/paper/Section';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { IPizzaFrenzyResponse } from '@/model/response/pizza-frenzy';
+import { cacheLife } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Pizza Frenzy Topping - Data Reservoir'
 };
 
 export default async function PizzaFrenzyTopping() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IPizzaFrenzyResponse['topping'][]>(API_ROUTE.PIZZA_FRENZY.TOPPING.BASE, {
     pageSize: 0,
   });

@@ -8,10 +8,11 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { BsMenuApp } from 'react-icons/bs';
 import { DrawerOptions } from './DrawerOptions';
 import PersonalInfo from './PersonalInfo';
+import { ClerkProvider } from '@clerk/nextjs';
 
 export default function AuthLayout() {
   const [open, setOpen] = useState(false);
@@ -37,7 +38,11 @@ export default function AuthLayout() {
             </IconButton>
           }
           <Typography variant='h6' component="div" className='grow font-bold' id="web-name">Data Reservoir</Typography>
-          <PersonalInfo/>
+          <Suspense>
+            <ClerkProvider>
+              <PersonalInfo />
+            </ClerkProvider>
+          </Suspense>
         </Toolbar>
       </AppBar>
       <Drawer variant={smol ? 'temporary' : 'permanent'}

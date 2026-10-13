@@ -17,12 +17,15 @@ import { Metadata } from 'next';
 import { DATASETS_AVAILABLE } from '@/constant/data';
 import { friendlyFileSize } from '@/utilities/general';
 import { FaFolder } from "react-icons/fa";
+import { cacheLife } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Dashboard - Data Reservoir'
 };
 
 export default async function Dashboard() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IDashboardResponse[]>(API_ROUTE.DASHBOARD.BASE);
 
   const totalRecord = cache(() => data.reduce((acc, curr) => acc + curr.tables.reduce((a, c) => a + c.rowCount, 0), 0));

@@ -5,12 +5,15 @@ import Section from '@/components/common/paper/Section';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
+import { cacheLife } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Farm Frenzy Hurricane Seasons Product - Data Reservoir'
 };
 
 export default async function HurricaneProduct() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IFarmFrenzyResponse['hurricane'][]>(API_ROUTE.FARM_FRENZY.HURRICANE.BASE, {
     pageSize: 0,
   });

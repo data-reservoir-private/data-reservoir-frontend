@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { grabData } from '@/utilities/http';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function FourPCDish() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ITheSimsResponse['four-pc-dish'][]>(API_ROUTE.THE_SIMS.FOUR_PC_DISH.BASE, { pageSize: 0 });
 
   return (

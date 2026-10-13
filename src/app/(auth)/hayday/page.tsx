@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { IDashboardResponse } from '@/model/response/dashboard';
 import { grabData } from '@/utilities/http';
@@ -8,12 +9,16 @@ import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleR
 import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart';
 import SimpleQuickLink from '@/components/common/simple-dashboard/SimpleQuickLink';
 import { IData } from '@/model/dto/export';
+import InvalidationButton from '@/components/common/invalidation-button/InvalidationButton';
 
 export const metadata: Metadata = {
   title: 'Hayday - Data Reservoir'
 };
 
 export default async function Page() {
+  'use cache';
+  cacheLife('days');
+  cacheTag('hayday');
   const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.HAYDAY);
   const date = new Date();
   const listLink = {
@@ -30,10 +35,10 @@ export default async function Page() {
   } as IData;
 
   return (
-    <Section variant='h4' name='Hayday'>
+    <Section variant='h4' name='Hayday' side={<InvalidationButton type='hayday'/>}>
       <SimpleRecordTableCards response={data}/>
       <SimpleBarTableChart response={data}/>
-      <SimpleQuickLink quickLink={listLink} columns={{ xs: 1, sm: 2, md: 3 }}/>
+      <SimpleQuickLink quickLink={listLink} columns={{ xs: 1, sm: 2, md: 3 }} />
     </Section>
   );
 }

@@ -7,13 +7,15 @@ import { DATASETS_AVAILABLE } from '@/constant/data';
 import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleRecordTableCards';
 import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart';
 import SimpleQuickLink from '@/components/common/simple-dashboard/SimpleQuickLink';
-// import { cacheLife } from 'next/cache'
+import { cacheLife } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Farm Frenzy - Data Reservoir'
 };
 
 export default async function Page() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.FARM_FRENZY);
 
   return (

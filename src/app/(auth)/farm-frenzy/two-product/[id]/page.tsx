@@ -11,6 +11,7 @@ import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
 import SimpleImage from '@/components/common/SimpleImage';
 import { getStaticParams } from '@/utilities/static';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
+import { cacheLife } from 'next/cache';
 
 interface TwoProductDetailProps {
   params: Promise<{ id: string }>
@@ -21,6 +22,8 @@ export const generateStaticParams = getStaticParams<IFarmFrenzyResponse['two']>(
 const grabDetail = cache(async (id: string) => await grabData<IFarmFrenzyResponse['two-detail'] | null>(API_ROUTE.FARM_FRENZY.TWO_PRODUCT.ID(id)));
 
 export async function generateMetadata(props: TwoProductDetailProps) {
+  'use cache';
+  cacheLife('days');
   const post = await grabDetail((await props.params).id);
   if (!post.data) return { title: 'Not Found - Data Reservoir' };
   return {

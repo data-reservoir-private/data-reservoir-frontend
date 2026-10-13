@@ -10,15 +10,24 @@ import Paper from '@/components/common/paper/Paper';
 import { DaysArray, MonthsArray } from '@/constant/date';
 import Typography from '@mui/material/Typography';
 import { round } from '@/utilities/general';
+import { cacheLife, cacheTag } from 'next/cache';
+
+const getData = async (year?: number, month?: number) => {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('transaction');
+  const { data: dailyData } = await grabData<ITransactionBreakdownResponse['daily'][]>(API_ROUTE.TRANSACTION.BREAKDOWN.DAILY, {
+    year: year,
+    month: month
+  });
+  return dailyData;
+};
 
 export default async function TransactionDaily() {
   const sp = await getSearchParam<TransactionBreakdownFormSchema>();
   if (!sp.month || !sp.year) return <></>;
 
-  const { data: dailyData } = await grabData<ITransactionBreakdownResponse['daily'][]>(API_ROUTE.TRANSACTION.BREAKDOWN.DAILY, {
-    year: sp.year,
-    month: sp.month
-  });
+  const dailyData = await getData(sp.year, sp.month);
 
   // Echarts pie option for expense by category
   const dailyBarChartOption: EChartsOption = {

@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import Section from "@/components/common/paper/Section";
 import { API_ROUTE } from "@/constant/api-route";
 import { BREADCRUMBS } from "@/constant/breadcrumb";
@@ -17,6 +18,8 @@ export const metadata: Metadata = {
 const categoryGroupOrdering = ['BRT', 'Angkutan Pengumpan', 'Mikrotrans', 'Royaltrans', 'Rumah Susun', 'Layanan AMARI', 'Khusus', 'Transjabodetabek', 'Wisata', 'Tidak Beroperasi'];
 
 export default async function BazaarCrop() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ITransjakartaResponse['corridor'][]>(API_ROUTE.TRANSJAKARTA.CORRIDOR.BASE, {
     pageSize: 0,
   });

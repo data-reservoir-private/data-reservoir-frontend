@@ -15,7 +15,8 @@ interface SectionProps {
   caption?: string,
   children: React.ReactNode,
   className?: string,
-  breadcrumbs?: readonly IBreadcrumb[]
+  breadcrumbs?: readonly IBreadcrumb[],
+  side?: React.ReactNode
 }
 
 export default function Section(props: SectionProps) {
@@ -41,12 +42,21 @@ export default function Section(props: SectionProps) {
           </Box>
         )
       }
-      {
-        props.name instanceof String || typeof props.name === 'string' ? (
-          <Typography variant={props.variant} fontWeight='bold' id={props.textId}>{props.name}</Typography>
-        ) : props.name
-      }
-      {props.caption && <Typography variant='body2' className='text-xs italic'>{props.caption}</Typography>}
+      <Box className='flex justify-between items-center'>
+        <Box>
+          {
+            props.name instanceof String || typeof props.name === 'string' ? (
+              <Typography variant={props.variant} fontWeight='bold' id={props.textId}>{props.name}</Typography>
+            ) : props.name
+          }
+          {props.caption && <Typography variant='body2' className='text-xs italic'>{props.caption}</Typography>}
+        </Box>
+        {props.side && (
+          <Box>
+            {props.side}
+          </Box>
+        )}
+      </Box>
       <Divider />
       {props.children}
     </Box>

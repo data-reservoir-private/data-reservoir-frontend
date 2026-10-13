@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { ITheSimsResponse } from '@/model/response/the-sims';
 import { grabData } from '@/utilities/http';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreePCGemCut() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ITheSimsResponse['three-pc-gem-cut'][]>(API_ROUTE.THE_SIMS.THREE_PC_GEM_CUT.BASE, {
     pageSize: 50,
   });

@@ -7,12 +7,15 @@ import { DATASETS_AVAILABLE } from '@/constant/data';
 import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart';
 import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleRecordTableCards';
 import SimpleQuickLink from '@/components/common/simple-dashboard/SimpleQuickLink';
+import { cacheLife } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Pizza Frenzy - Data Reservoir'
 };
 
 export default async function Page() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.PIZZA_FRENZY);
 
   return (

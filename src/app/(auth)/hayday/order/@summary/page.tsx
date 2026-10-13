@@ -16,10 +16,11 @@ import Link from 'next/link';
 import { EChartsOption } from 'echarts';
 import { EChart } from '@/components/common/chart/Chart';
 import { round } from '@/utilities/general';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export default async function OrderSummary() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['summary']>(API_ROUTE.HAY_DAY.ORDER.SUMMARY, sp);
+  const { data } = await getData(sp);
 
   const voucherTotal = (
     (data?.voucher?.green ?? 0) +
@@ -84,7 +85,7 @@ export default async function OrderSummary() {
               <Paper className={classNames('flex justify-between p-1 px-3 items-center border-none bg-linear-to-r', x.className)} key={x.name}>
                 <Box className='flex flex-col'>
                   <Typography variant='h5' className='font-bold'>{x.total}</Typography>
-                  <Typography variant='subtitle2' className='text-xs font-light'>{voucherTotal == 0 ? 0 : round(x.total / voucherTotal * 100)}%</Typography>
+                  <Typography variant='subtitle2' className='text-xs font-light'>{voucherTotal === 0 ? 0 : round(x.total / voucherTotal * 100)}%</Typography>
                   <Typography variant='subtitle2' className='max-sm:hidden'>{x.name}</Typography>
                 </Box>
 
@@ -163,4 +164,11 @@ function PieVoucher({ green, blue, purple, gold }: { green: number, blue: number
   };
 
   return <EChart option={opt} className='w-full min-h-50'/>;
+}
+
+async function getData(params: HaydayOrderFormSchema) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
+  return grabData<IHaydayResponse['hayday-order']['summary']>(API_ROUTE.HAY_DAY.ORDER.SUMMARY, params);
 }

@@ -9,17 +9,26 @@ import { EChart } from '@/components/common/chart/Chart';
 import Paper from '@/components/common/paper/Paper';
 import Typography from '@mui/material/Typography';
 import { round } from '@/utilities/general';
+import { cacheLife, cacheTag } from 'next/cache';
+
+const getData = async (year?: number | null, month?: number | null) => {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('transaction');
+  const { data: categoryData } = await grabData<ITransactionBreakdownResponse['category'][]>(API_ROUTE.TRANSACTION.BREAKDOWN.CATEGORY, {
+    year: year,
+    month: month
+  });
+  const { data: incomeData } = await grabData<ITransactionBreakdownResponse['income'][]>(API_ROUTE.TRANSACTION.BREAKDOWN.INCOME, {
+    year: year,
+    month: month
+  });
+  return { categoryData, incomeData };
+};
 
 export default async function TransactionBreakdownSummary() {
   const sp = await getSearchParam<TransactionBreakdownFormSchema>();
-  const { data: categoryData } = await grabData<ITransactionBreakdownResponse['category'][]>(API_ROUTE.TRANSACTION.BREAKDOWN.CATEGORY, {
-    year: sp.year,
-    month: sp.month
-  });
-  const { data: incomeData } = await grabData<ITransactionBreakdownResponse['income'][]>(API_ROUTE.TRANSACTION.BREAKDOWN.INCOME, {
-    year: sp.year,
-    month: sp.month
-  });
+  const { categoryData, incomeData } = await getData(sp.year, sp.month);
 
   const hasData = categoryData.length > 0 || incomeData.length > 0;
 

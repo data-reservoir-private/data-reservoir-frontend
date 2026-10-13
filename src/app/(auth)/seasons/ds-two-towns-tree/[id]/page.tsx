@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
@@ -40,6 +41,8 @@ export async function generateMetadata(props: DSTwoTownsTreeDetailProps) {
 }
 
 export default async function DSTwoTownsTreeDetail(props: DSTwoTownsTreeDetailProps) {
+  'use cache';
+  cacheLife('days');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

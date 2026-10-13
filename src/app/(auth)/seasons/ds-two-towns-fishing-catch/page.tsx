@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import { Metadata } from 'next';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function DSTwoTownsFishingCatch() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ISeasonsResponse['ds-two-towns-fishing-catch'][]>(API_ROUTE.SEASONS.DS_TWO_TOWNS_FISHING_CATCH.BASE, { pageSize: 0 });
 
   return (

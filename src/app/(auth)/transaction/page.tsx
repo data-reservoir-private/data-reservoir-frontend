@@ -8,12 +8,17 @@ import SimpleRecordTableCards from '@/components/common/simple-dashboard/SimpleR
 import SimpleBarTableChart from '@/components/common/simple-dashboard/SimpleBarTableChart';
 import SimpleQuickLink from '@/components/common/simple-dashboard/SimpleQuickLink';
 import { IData } from '@/model/dto/export';
+import { cacheLife, cacheTag } from 'next/cache';
+import InvalidationButton from '@/components/common/invalidation-button/InvalidationButton';
 
 export const metadata: Metadata = {
   title: 'Transaction - Data Reservoir'
 };
 
 export default async function Page() {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('transaction');
   const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.TRANSACTION);
   const date = new Date();
   const sets = {
@@ -27,7 +32,7 @@ export default async function Page() {
   } as IData;
 
   return (
-    <Section name="Transaction" variant='h4'>
+    <Section name="Transaction" variant='h4' side={<InvalidationButton type='transaction'/>}>
       <SimpleRecordTableCards response={data}/>
       <SimpleBarTableChart response={data}/>
       <SimpleQuickLink quickLink={sets} columns={1}/>

@@ -3,10 +3,15 @@ import createMDX from '@next/mdx'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typedRoutes: true,
+  cacheComponents: true,
+  partialPrefetching: true,
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   experimental: {
     turbopackFileSystemCacheForDev: true,
+    turbopackRustReactCompiler: true,
+    turbopackGc: true,
+    turbopackLazyDynamicImports: true,
   },
   headers: async () => [
     {

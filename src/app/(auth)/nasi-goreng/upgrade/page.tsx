@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import Section from '@/components/common/paper/Section';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function NasiGorengUpgrade() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<INasiGorengResponse['upgrade'][]>(API_ROUTE.NASI_GORENG.UPGRADE.BASE, {
     pageSize: 0,
   });

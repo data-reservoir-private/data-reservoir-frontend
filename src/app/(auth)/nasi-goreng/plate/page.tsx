@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import Section from '@/components/common/paper/Section';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function NasiGorengPlate() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<INasiGorengResponse['plate'][]>(API_ROUTE.NASI_GORENG.PLATE.BASE);
 
   return (
