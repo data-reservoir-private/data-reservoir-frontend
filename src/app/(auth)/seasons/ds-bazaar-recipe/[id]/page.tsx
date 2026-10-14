@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import Paper from '@/components/common/paper/Paper';
@@ -25,6 +26,8 @@ export async function generateMetadata(props: DSBazaarRecipeDetailProps) {
 }
 
 export default async function DSBazaarRecipeDetail(props: DSBazaarRecipeDetailProps) {
+  'use cache';
+  cacheLife('days');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import { Metadata } from 'next';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function BazaarWindmill() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ISeasonsResponse['ds-bazaar-windmill-product'][]>(API_ROUTE.SEASONS.DS_BAZAAR_WINDMILL_PRODUCT.BASE, {
     pageSize: 0,
   });

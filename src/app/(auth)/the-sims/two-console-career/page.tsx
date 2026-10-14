@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import Section from '@/components/common/paper/Section';
 import { API_ROUTE } from '@/constant/api-route';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function TwoPetsConsoleCareer() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ITheSimsResponse['two-console-career'][]>(API_ROUTE.THE_SIMS.TWO_CONSOLE_CAREER, {
     pageSize: 0,
   });

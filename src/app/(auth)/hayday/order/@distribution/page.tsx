@@ -6,10 +6,11 @@ import { EChartsOption } from 'echarts';
 import { HaydayOrderFormSchema } from '../form';
 import { EChart } from '@/components/common/chart/Chart';
 import Typography from '@mui/material/Typography';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export default async function DistributionPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['distribution']>(API_ROUTE.HAY_DAY.ORDER.DISTRIBUTION, sp);
+  const { data } = await getData(sp);
 
   if (!data) {
     return (
@@ -66,4 +67,11 @@ export default async function DistributionPage() {
       <EChart option={opt} className='min-h-75 w-full' />
     </Paper>
   );
+}
+
+async function getData(params: HaydayOrderFormSchema) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
+  return grabData<IHaydayResponse['hayday-order']['distribution']>(API_ROUTE.HAY_DAY.ORDER.DISTRIBUTION, params);
 }

@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
 import { getStaticParams } from '@/utilities/static';
 import SimpleImage from '@/components/common/SimpleImage';
+import { cacheLife } from 'next/cache';
 
 interface ThreeProductDetailProps {
   params: Promise<{ id: string }>
@@ -28,6 +29,8 @@ export async function generateMetadata(props: ThreeProductDetailProps) {
 }
 
 export default async function ThreeProductDetail(props: ThreeProductDetailProps) {
+  'use cache';
+  cacheLife('days');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

@@ -8,6 +8,7 @@ import { API_ROUTE } from '@/constant/api-route';
 import ExportMasterDatasetClient from './client';
 import HaydayOrderExport from './hayday-order';
 import TransactionExpenseExport from './transaction-expense';
+import { cacheLife } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Export Data - Data Reservoir'
@@ -20,6 +21,8 @@ interface Dataset {
 }
 
 export default async function ExportPage() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IDashboardResponse[]>(API_ROUTE.DASHBOARD.BASE);
   const datasets = data.reduce((acc, curr) =>
     [...acc, ...curr.datasets.map(x => ({ name: `${curr.category} ${x.name}`, total: x.total, owner: curr.owner }))], [] as Dataset[]);

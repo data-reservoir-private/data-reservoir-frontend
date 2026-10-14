@@ -4,10 +4,15 @@ import { getSearchParam } from '@/utilities/http';
 
 export async function generateMetadata() {
   const post = await getSearchParam<TransactionBreakdownFormSchema>();
-  const m = MonthsArray.find(x => x.value === (post.month ?? new Date().getMonth() + 1))?.label;
+  let title;
+
+  if (!post.month && !post.year) title = "Overall";
+  else if (!!post.year && !post.month) title = `${post.year}`;
+  else if (!!post.year && !!post.month) title = `${post.year} ${MonthsArray.find(x => x.value === (post.month! + 1))?.label}`;
+  else title = "?";
 
   return {
-    title: `Transaction Breakdown - ${m ?? "Annual"} ${post.year ?? new Date().getFullYear()} - Data Reservoir`
+    title: `Transaction Breakdown - ${title} - Data Reservoir`
   };
 }
 

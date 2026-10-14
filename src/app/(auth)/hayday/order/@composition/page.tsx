@@ -7,14 +7,12 @@ import { Box, ButtonBase, Grid, Typography } from "@mui/material";
 import SimpleImage from "@/components/common/SimpleImage";
 import Link from "next/link";
 import { HAYDAY_COMPOSITION_MODE } from "@/constant/enums";
+import { cacheLife, cacheTag } from "next/cache";
 
 export default async function CompositionPage() { 
   const sp = await getSearchParam<HaydayOrderFormSchema>();
 
-  const { data } = await grabData<IHaydayResponse['hayday-order']['composition'][]>(API_ROUTE.HAY_DAY.ORDER.COMPOSITION, {
-    ...sp,
-    mode: HAYDAY_COMPOSITION_MODE.ADDITIONAL
-  });
+  const { data } = await getData(sp);
 
   if (!data || data.length === 0) {
     return (
@@ -49,4 +47,14 @@ export default async function CompositionPage() {
       </Grid>
     </Box>
   );
+}
+
+async function getData(params: HaydayOrderFormSchema) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
+  return grabData<IHaydayResponse['hayday-order']['composition'][]>(API_ROUTE.HAY_DAY.ORDER.COMPOSITION, {
+    ...params,
+    mode: HAYDAY_COMPOSITION_MODE.ADDITIONAL
+  });
 }

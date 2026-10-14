@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import Paper from '@/components/common/paper/Paper';
 import TableDetail from '@/components/common/table-detail/TableDetail';
 import Box from '@mui/material/Box';
@@ -25,6 +26,8 @@ export async function generateMetadata(props: FourPCCannedDishDetailProps) {
 }
 
 export default async function FourPCCannedDishDetail(props: FourPCCannedDishDetailProps) {
+  'use cache';
+  cacheLife('days');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

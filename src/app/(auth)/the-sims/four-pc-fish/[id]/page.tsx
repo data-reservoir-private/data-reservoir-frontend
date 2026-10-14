@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import Paper from '@/components/common/paper/Paper';
@@ -24,6 +25,8 @@ export async function generateMetadata(props: FourPCFishDetailProps) {
 }
 
 export default async function FourPCFishDetail(props: FourPCFishDetailProps) {
+  'use cache';
+  cacheLife('days');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

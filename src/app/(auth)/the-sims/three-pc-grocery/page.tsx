@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import Section from '@/components/common/paper/Section';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function ThreePCGrocery() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ITheSimsResponse['three-pc-grocery'][]>(API_ROUTE.THE_SIMS.THREE_PC_GROCERY.BASE, { pageSize: 0 });
 
   return (

@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { IDashboardResponse } from '@/model/response/dashboard';
 import { grabData } from '@/utilities/http';
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IDashboardResponse>(API_ROUTE.DASHBOARD.CYGNUS);
 
   return (

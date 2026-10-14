@@ -11,6 +11,7 @@ import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
 import SimpleImage from '@/components/common/SimpleImage';
 import { getStaticParams } from '@/utilities/static';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
+import { cacheLife } from 'next/cache';
 
 interface OneProductDetailProps {
   params: Promise<{ id: string }>
@@ -29,6 +30,8 @@ export async function generateMetadata(props: OneProductDetailProps) {
 }
 
 export default async function OneProductDetail(props: OneProductDetailProps) {
+  'use cache';
+  cacheLife('days');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

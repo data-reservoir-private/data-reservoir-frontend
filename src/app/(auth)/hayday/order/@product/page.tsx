@@ -9,13 +9,11 @@ import Box from '@mui/material/Box';
 import SimpleImage from '@/components/common/SimpleImage';
 import Paper from '@/components/common/paper/Paper';
 import Typography from '@mui/material/Typography';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export default async function ProductPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
-  const { data } = await grabData<IHaydayResponse['hayday-order']['product'][]>(API_ROUTE.HAY_DAY.ORDER.PRODUCT, {
-    month: sp.month,
-    year: sp.year,
-  });
+  const { data } = await getData(sp);
 
   if (!data || data.length === 0) {
     return (
@@ -45,4 +43,14 @@ export default async function ProductPage() {
       </Grid>
     </Box>
   );
+}
+
+async function getData(params: HaydayOrderFormSchema) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
+  return grabData<IHaydayResponse['hayday-order']['product'][]>(API_ROUTE.HAY_DAY.ORDER.PRODUCT, {
+    month: params.month,
+    year: params.year,
+  });
 }

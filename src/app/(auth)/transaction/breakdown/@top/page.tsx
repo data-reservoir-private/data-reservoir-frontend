@@ -7,15 +7,24 @@ import Box from "@mui/material/Box";
 import TopTable from "./table";
 import Typography from "@mui/material/Typography";
 import Paper from "@/components/common/paper/Paper";
+import { cacheLife, cacheTag } from "next/cache";
 
-export default async function TransactionTop() {
-  const sp = await getSearchParam<TransactionBreakdownFormSchema>();
+const getData = async (year?: number | null, month?: number | null) => {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('transaction');
   const { data: topData } = await grabData<
     ITransactionBreakdownResponse["top"][]
   >(API_ROUTE.TRANSACTION.BREAKDOWN.TOP, {
-    year: sp.year,
-    month: sp.month,
+    year: year,
+    month: month,
   });
+  return topData;
+};
+
+export default async function TransactionTop() {
+  const sp = await getSearchParam<TransactionBreakdownFormSchema>();
+  const topData = await getData(sp.year, sp.month);
 
   return (
     <Section name="Top Expenses" variant="h6">

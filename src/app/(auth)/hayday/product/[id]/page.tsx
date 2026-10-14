@@ -11,6 +11,7 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
+import { cacheLife, cacheTag } from 'next/cache';
 
 interface HaydayProductDetailProps {
   params: Promise<{ id: string }>
@@ -27,6 +28,9 @@ export async function generateMetadata(props: HaydayProductDetailProps) {
 }
 
 export default async function HaydayProductDetail(props: HaydayProductDetailProps) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

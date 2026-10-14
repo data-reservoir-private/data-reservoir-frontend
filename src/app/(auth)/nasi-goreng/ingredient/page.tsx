@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import NasiGorengIngredientClient from './client';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function NasiGorengIngredient() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<INasiGorengResponse['ingredient'][]>(API_ROUTE.NASI_GORENG.INGREDIENT.BASE, { pageSize: 0 });
 
   return (

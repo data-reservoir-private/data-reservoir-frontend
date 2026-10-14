@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import Section from '@/components/common/paper/Section';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function FourPCFish() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ITheSimsResponse['four-pc-fish'][]>(API_ROUTE.THE_SIMS.FOUR_PC_FISH.BASE, { pageSize: 0 });
 
   return (

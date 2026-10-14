@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import Paper from "@/components/common/paper/Paper";
 import Section from "@/components/common/paper/Section";
 import TableDetail from "@/components/common/table-detail/TableDetail";
@@ -26,6 +27,8 @@ export async function generateMetadata(props: TransjakartaCorridorPageProps) {
 }
 
 export default async function TransjakartaCorridorDetail(props: TransjakartaCorridorPageProps) {
+  'use cache';
+  cacheLife('days');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data || data.length === 0) return notFound();

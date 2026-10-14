@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { grabData } from '@/utilities/http';
 import { Metadata } from 'next';
@@ -11,6 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function TwoProduct() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<ISeasonsResponse['ds-mineral-recipe'][]>(API_ROUTE.SEASONS.DS_MINERAL_RECIPE.BASE, {
     pageSize: 0,
   });

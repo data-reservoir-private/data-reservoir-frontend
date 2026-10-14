@@ -6,12 +6,13 @@ import { EChartsOption } from 'echarts';
 import { HaydayOrderFormSchema } from '../form';
 import { EChart } from '@/components/common/chart/Chart';
 import Section from '@/components/common/paper/Section';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export default async function DistributionPage() {
   const sp = await getSearchParam<HaydayOrderFormSchema>();
   if (sp.month || sp.year) return null;
 
-  const { data } = await grabData<IHaydayResponse['hayday-order']['level'][]>(API_ROUTE.HAY_DAY.ORDER.LEVEL, sp);
+  const { data } = await getData(sp);
   if (!data) return null;
 
   const opt: EChartsOption = {
@@ -71,4 +72,11 @@ export default async function DistributionPage() {
       </Paper>
     </Section>
   );
+}
+
+async function getData(params: HaydayOrderFormSchema) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
+  return grabData<IHaydayResponse['hayday-order']['level'][]>(API_ROUTE.HAY_DAY.ORDER.LEVEL, params);
 }

@@ -4,7 +4,6 @@ import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ThemeProvider } from "@mui/material/styles";
 import { themeOptions } from "@/theme";
 import classNames from "classnames";
-import { ClerkProvider } from '@clerk/nextjs';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
@@ -19,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider>
+    <>
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossOrigin="anonymous"></link>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
@@ -34,6 +33,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SpeedInsights />
         </body>
       </html>
-    </ClerkProvider>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { IPeriodicTableElementResponse } from '@/model/response/periodic-table';
 import { grabData } from '@/utilities/http';
@@ -9,6 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default async function PeriodicTable() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IPeriodicTableElementResponse[]>(API_ROUTE.PERIODIC_TABLE_ELEMENT, {
     pageSize: 0,
   });

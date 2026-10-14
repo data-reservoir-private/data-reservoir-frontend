@@ -13,6 +13,7 @@ import SimpleImage from '@/components/common/SimpleImage';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { notFound } from 'next/navigation';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
+import { cacheLife, cacheTag } from 'next/cache';
 
 interface HaydayBuildingDetailProps {
   params: Promise<{ id: string }>
@@ -29,6 +30,9 @@ export async function generateMetadata(props: HaydayBuildingDetailProps) {
 }
 
 export default async function HaydayBuildingDetail(props: HaydayBuildingDetailProps) {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();

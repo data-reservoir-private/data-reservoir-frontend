@@ -5,12 +5,16 @@ import Section from '@/components/common/paper/Section';
 import { Metadata } from 'next';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import HaydayBuildingClient from './client';
+import { cacheLife, cacheTag } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Hayday Building - Data Reservoir'
 };
 
 export default async function HaydayBuilding() {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('hayday');
   const { data } = await grabData<IHaydayResponse['hayday-building'][]>(API_ROUTE.HAY_DAY.BUILDING.BASE, {
     pageSize: 0,
   });

@@ -5,12 +5,15 @@ import Section from '@/components/common/paper/Section';
 import SimpleGrid from '@/components/common/simple-grid/SimpleGrid';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import { IFarmFrenzyResponse } from '@/model/response/farm-frenzy';
+import { cacheLife } from 'next/cache';
 
 export const metadata: Metadata = {
   title: 'Farm Frenzy Two Pizza Product - Data Reservoir'
 };
 
 export default async function TwoPizzaProduct() {
+  'use cache';
+  cacheLife('days');
   const { data } = await grabData<IFarmFrenzyResponse['two-pizza'][]>(API_ROUTE.FARM_FRENZY.TWO_PIZZA_PRODUCT.BASE, {
     pageSize: 0,
   });

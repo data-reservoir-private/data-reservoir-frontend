@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import { API_ROUTE } from '@/constant/api-route';
 import { BREADCRUMBS } from '@/constant/breadcrumb';
 import DetailGrid from '@/components/common/detail-grid/DetailGrid';
@@ -25,6 +26,8 @@ export async function generateMetadata(props: ThreePCFishDetailProps) {
 }
 
 export default async function ThreePCFishDetail(props: ThreePCFishDetailProps) {
+  'use cache';
+  cacheLife('days');
   const { id } = await props.params;
   const { data } = await grabDetail(id);
   if (!data) return notFound();
