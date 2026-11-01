@@ -13,6 +13,17 @@ minimumReleaseAgeExclude:
   - '@typescript-eslint/utils@8.71.2'
   - '@typescript-eslint/visitor-keys@8.71.2'
   - typescript-eslint@8.71.2
+  - '@clerk/backend@3.26.4'
+  - '@clerk/nextjs@7.9.22'
+  - '@clerk/react@6.18.3'
+  - '@clerk/shared@4.43.0'
+  - '@clerk/testing@2.2.52'
 overrides:
   '@types/react': 19.3.0
   '@types/react-dom': 19.3.0
+  'brace-expansion': ^5.0.12
+  'picomatch': ^2.3.2
+  'yaml': ^2.8.3
+  'browserslist': ^4.28.7
+  'source-map-js': ^1.2.2
+  'follow-redirects': ^1.16.1

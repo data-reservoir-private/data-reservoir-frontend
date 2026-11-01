@@ -9,7 +9,7 @@ export const ExportTransactionExpenseClientSchema = z.object({
 });
 
 export const ExportTransactionExpenseServerSchema = z.object({
-  month: z.coerce.number().gte(1).lte(12).optional().default(undefined),
+  month: z.coerce.number().gte(1).lte(12).optional(),
   year: z.coerce.number().gte(2020).optional(),
   type: z.enum(ALL_EXPORTS_TRANSACTION)
 }).refine(d => d.month === undefined || d.year !== undefined, {

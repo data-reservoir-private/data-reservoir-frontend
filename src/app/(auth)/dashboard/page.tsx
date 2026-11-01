@@ -281,10 +281,10 @@ function SizeTreeChart({ data }: { data: IDashboardResponse[] }) {
         },
         zoom: 1.1,
         visibleMin: 300,
-        label: {
-          show: true,
-          formatter: '{b}'
-        },
+        // label: {
+        //   show: true,
+        //   formatter: '{b}'
+        // },
         data: data.map(category => ({
           name: category.prefix,
 
