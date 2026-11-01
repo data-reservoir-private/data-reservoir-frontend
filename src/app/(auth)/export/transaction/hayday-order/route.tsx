@@ -25,16 +25,13 @@ type HaydayExportFlattened = Omit<IHaydayResponse['hayday-order']['export'], 'de
   product4Quantity: number | null,
   product5Name: string | null,
   product5Price: number | null,
-  product5Quantity: number | null,
-  product6Name: string | null,
-  product6Price: number | null,
-  product6Quantity: number | null,
+  product5Quantity: number | null
 }
 
 // Validate please
 // Possible things are (year and month are null), (year is not null, month is null), (year is not null, month is not null)
 const ExportHaydayOrderSchema = z.object({
-  month: z.coerce.number().min(1).max(12).optional().default(undefined),
+  month: z.coerce.number().min(1).max(12).optional(),
   year: z.coerce.number().gte(2020).optional(),
   type: z.enum(ALL_EXPORTS_TRANSACTION),
   acceptedOnly: z.stringbool(),
@@ -116,10 +113,7 @@ export async function GET(req: NextRequest) {
       product4Quantity: d[3]?.quantity ?? null,
       product5Name: d[4]?.productName ?? null,
       product5Price: d[4]?.productPrice ?? null,
-      product5Quantity: d[4]?.quantity ?? null,
-      product6Name: d[5]?.productName ?? null,
-      product6Price: d[5]?.productPrice ?? null,
-      product6Quantity: d[5]?.quantity ?? null,
+      product5Quantity: d[4]?.quantity ?? null
     };
     return flattened;
   }) : data.map(x => {

@@ -1,10 +1,12 @@
-import { json2csv } from "json-2-csv"; import { js2xml } from "xml-js";
+import { json2csv } from "json-2-csv";
+import { js2xml } from "xml-js";
 import YAML from 'yaml';
 import { z } from "zod";
 import { ByteWriter, ColumnSource, parquetWrite } from 'hyparquet-writer';
-import ExcelJS from "exceljs";
 import { ExportType } from "@/model/dto/export";
+import { CellValue, writeXlsx } from "hucre";
 
+type AllowedType = string | number | bigint | boolean | null | object; 
 export class Converter {
   public static ToXML(input: object[]) {
     return js2xml({
@@ -12,9 +14,11 @@ export class Converter {
       content: { data: input }
     }, { spaces: 2, compact: true });
   }
+
   public static ToYAML(input: object[]) {
     return YAML.stringify(input, null, { indent: 2 });
   }
+
   public static ToCSV(input: object[]) {
     return json2csv(input, {
       delimiter: {
@@ -24,6 +28,7 @@ export class Converter {
       expandArrayObjects: false
     });
   }
+
   public static ToTSV(input: object[]) {
     return json2csv(input, {
       delimiter: {
@@ -33,6 +38,7 @@ export class Converter {
       expandArrayObjects: false
     });
   }
+
   public static async toHTMLTable(data: object[], pixelatedImage: boolean = false) {
     const ReactDOMServer = (await import('react-dom/server')).default;
 
@@ -121,6 +127,7 @@ export class Converter {
     );
     return comp;
   }
+
   public static async toParquet(input: object[], metadata: Record<string, string>) {
     const data = this._removeComplexProperty(input);
     const writer = new ByteWriter();
@@ -140,26 +147,21 @@ export class Converter {
 
     return writer.getBuffer();
   }
+
   public static async toExcel(input: object[]) {
     const data = this._removeComplexProperty(input);
-    const workbook = new ExcelJS.Workbook();
-    const sheet = workbook.addWorksheet('Data');
-
-    sheet.addTable({
-      name: 'Data',
-      ref: 'A1',
-      headerRow: true,
-      style: {
-        theme: 'TableStyleMedium2',
-        showRowStripes: true,
-      },
-      columns: Object.keys(data[0]).map(x => ({ name: x })),
-      rows: data.map(row => Object.values(row).map(x => {
-        if (typeof x === 'object' && x !== null) return JSON.stringify(x);
-        return x;
-      })),
-    }).commit();
-    return await workbook.xlsx.writeBuffer();
+    const buffer = await writeXlsx({
+      sheets: [
+        {
+          name: "Data",
+          columns: Object.keys(data[0]).map(x => ({ header: x, key: x })),
+          data: data.map(row => {
+            return row as Record<string, CellValue>;
+          })
+        }
+      ]
+    });
+    return new Uint8Array(buffer);
   }
 
   public static toDatabaseInsert(data: object[], flavour: Extract<ExportType, 'postgresql' | 'sql_server' | 'sqlite'>) {
@@ -244,9 +246,10 @@ export class Converter {
   // Only string | number | bigint | boolean | null are supported, complex object will be removed to simplify the data
   private static _removeComplexProperty(input: object[]) {
     return input.map(row => {
-      const newRow: Record<string, any> = {};
+      const newRow: Record<string, AllowedType> = {};
       Object.entries(row).forEach(([key, value]) => {
         if (typeof value !== 'object' || value === null) newRow[key] = value;
+        else if (value === null) newRow[key] = "";
       });
       return newRow;
     });
