@@ -104,19 +104,21 @@ export const API_ROUTE = Object.freeze({
       BASE: '/hayday/building',
       ID: (id: string) => `/hayday/building/${id}`
     },
-    ORDER: {
-      SUMMARY: '/hayday/order/summary',
-      CLIENT: '/hayday/order/client',
-      DISTRIBUTION: '/hayday/order/distribution',
-      LEVEL: '/hayday/order/level',
-      PRODUCT: '/hayday/order/product',
-      VALUABLE: '/hayday/order/valuable',
-      WEEKLY: '/hayday/order/weekly',
-      MONTHLY: '/hayday/order/monthly',
-      DAILY: '/hayday/order/daily',
-      EXPORT: '/hayday/order/export',
-      COMPOSITION: '/hayday/order/composition',
-    }
+    TRANSACTION: {
+      TRUCK: {
+        SUMMARY: '/hayday/truck/summary',
+        CLIENT: '/hayday/truck/client',
+        DISTRIBUTION: '/hayday/truck/distribution',
+        LEVEL: '/hayday/truck/level',
+        PRODUCT: '/hayday/truck/product',
+        VALUABLE: '/hayday/truck/valuable',
+        WEEKLY: '/hayday/truck/weekly',
+        MONTHLY: '/hayday/truck/monthly',
+        DAILY: '/hayday/truck/daily',
+        EXPORT: '/hayday/truck/export',
+        COMPOSITION: '/hayday/truck/composition',
+      }
+    },
   },
   FARM_FRENZY: {
     ONE_PRODUCT: {

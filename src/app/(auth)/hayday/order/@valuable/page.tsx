@@ -89,7 +89,7 @@ async function getData(params: HaydayOrderFormSchema) {
   cacheLife('hours');
   cacheTag('hayday');
   return grabData<IHaydayResponse["hayday-order"]["valuable"][]>(
-    API_ROUTE.HAY_DAY.ORDER.VALUABLE,
+    API_ROUTE.HAY_DAY.TRANSACTION.TRUCK.VALUABLE,
     params,
   );
 }

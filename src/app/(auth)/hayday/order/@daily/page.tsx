@@ -105,5 +105,5 @@ async function getData(params: HaydayOrderFormSchema) {
   'use cache';
   cacheLife('hours');
   cacheTag('hayday');
-  return grabData<IHaydayResponse['hayday-order']['daily'][]>(API_ROUTE.HAY_DAY.ORDER.DAILY, params);
+  return grabData<IHaydayResponse['hayday-order']['daily'][]>(API_ROUTE.HAY_DAY.TRANSACTION.TRUCK.DAILY, params);
 }

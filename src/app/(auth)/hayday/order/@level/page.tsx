@@ -78,5 +78,5 @@ async function getData(params: HaydayOrderFormSchema) {
   'use cache';
   cacheLife('hours');
   cacheTag('hayday');
-  return grabData<IHaydayResponse['hayday-order']['level'][]>(API_ROUTE.HAY_DAY.ORDER.LEVEL, params);
+  return grabData<IHaydayResponse['hayday-order']['level'][]>(API_ROUTE.HAY_DAY.TRANSACTION.TRUCK.LEVEL, params);
 }
